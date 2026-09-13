@@ -20,9 +20,9 @@ button:active{transform:scale(.95)}
 #screen-home .center-id{width:130px;height:130px;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background:#FFF5F9;border:3px solid #EC4899;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;font-weight:800;font-size:13px;color:#1A1A1A;z-index:15;cursor:pointer;padding:8px;box-sizing:border-box;overflow:hidden;position:relative}
 #screen-home .center-id .avatar{width:42px;height:42px;border-radius:50%;background:#EC4899;color:#FFF;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;margin-bottom:4px}
 #screen-home .center-id span{font-size:9px;font-weight:400;color:#6E6E73;margin-top:2px}
-.user-cell{position:absolute;width:62px;height:62px;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background-size:cover;background-position:center;border:2px solid #E5E5EA;box-shadow:0 4px 10px rgba(0,0,0,.08);cursor:pointer;transition:transform .2s,border-color .2s;z-index:5;transform:translate(-50%,-50%)}
+.user-cell{position:absolute;width:62px;height:62px;background-color:#FCE7F3;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background-size:cover;background-position:center;border:2px solid #E5E5EA;box-shadow:0 4px 10px rgba(0,0,0,.08);cursor:pointer;transition:transform .2s,border-color .2s;z-index:5;transform:translate(-50%,-50%)}
 .user-cell:hover{transform:translate(-50%,-50%) scale(1.15);border-color:#EC4899;z-index:50}
-.role-icon{position:absolute;bottom:8px;left:8px;font-size:12px;color:#FFF;background:rgba(0,0,0,.65);border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;z-index:3}
+.role-icon{position:absolute;bottom:8px;left:8px;font-size:12px;color:#FFF;background:rgba(0,0,0,.65);border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;z-index:3;line-height:1}
 .star-wrapper{position:absolute;top:8px;right:8px;width:16px;height:16px;z-index:3}
 .star-bg{position:absolute;inset:0;color:rgba(255,255,255,.55);font-size:14px}
 .star-fill{position:absolute;inset:0;color:#FFC107;font-size:14px;overflow:hidden;text-shadow:0 0 3px rgba(0,0,0,.8)}
@@ -30,17 +30,16 @@ button:active{transform:scale(.95)}
 .catalog-screen h1{font-size:24px;margin-bottom:20px;color:#1A1A1A}
 .search-bar{width:90%;max-width:400px;padding:15px;border:2px solid #E5E5EA;border-radius:30px;font-size:16px;margin-bottom:15px;background:#FFF;outline:none;text-align:center;box-sizing:border-box}
 .catalog-grid{display:grid;grid-template-columns:repeat(3,100px);gap:15px;justify-content:center}
-.catalog-cell{position:relative;width:100px;height:100px;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background-size:cover;background-position:center;border:2px solid #E5E5EA;background-color:#FFF;cursor:pointer;transition:transform .2s}
+.catalog-cell{position:relative;width:100px;height:100px;background-color:#FCE7F3;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background-size:cover;background-position:center;border:2px solid #E5E5EA;cursor:pointer;transition:transform .2s}
 .catalog-cell .label{position:absolute;top:42px;left:0;right:0;background:rgba(26,26,26,.85);color:#FFF;font-size:10px;text-align:center;padding:3px 2px;font-weight:600}
 .catalog-cell .role-icon{position:absolute;top:12px;left:12px;bottom:auto;width:22px;height:22px;font-size:13px}
 .catalog-cell:hover{transform:scale(1.05);border-color:#EC4899}
 .detail-screen{background:#F5F5F7;padding:20px;justify-content:flex-start !important}
-.detail-photo{width:180px;height:180px;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background-size:cover;background-position:center;border:4px solid #EC4899;margin-bottom:20px;background-color:#FFF;position:relative}
+.detail-photo{width:180px;height:180px;background-color:#FCE7F3;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background-size:cover;background-position:center;border:4px solid #EC4899;margin-bottom:20px;position:relative}
 .detail-photo .role-icon{bottom:20px;left:20px;width:28px;height:28px;font-size:16px}
 .detail-name{font-size:26px;font-weight:800;color:#1A1A1A;text-align:center}
 .detail-spec{font-size:15px;color:#6E6E73;margin-bottom:15px;text-align:center}
 .mini-calendar{width:100%;max-width:400px;background:#FFF;border-radius:15px;padding:15px;margin-bottom:20px;box-shadow:0 4px 10px rgba(0,0,0,.03)}
-.mini-calendar h3{text-align:center;margin-bottom:10px;font-size:14px}
 .days-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
 .day{height:28px;display:flex;justify-content:center;align-items:center;font-size:10px}
 .status-free{background:#4CAF50;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);color:#FFF;font-weight:bold;display:flex;justify-content:center;align-items:center}
@@ -76,7 +75,7 @@ button:active{transform:scale(.95)}
 #match-results{width:100%;max-width:400px;margin-top:25px}
 .match-card{background:#FFF;border-radius:15px;padding:12px;margin-bottom:12px;box-shadow:0 4px 10px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px;border-left:4px solid #EC4899;animation:slideIn .4s ease}
 @keyframes slideIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-.match-card .avatar{width:50px;height:50px;flex-shrink:0;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background-size:cover;background-position:center;border:2px solid #EC4899;background-color:#F5F5F7}
+.match-card .avatar{width:50px;height:50px;flex-shrink:0;background-color:#FCE7F3;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background-size:cover;background-position:center;border:2px solid #EC4899}
 .match-card .info{flex-grow:1;text-align:left;min-width:0}
 .match-card .name{font-weight:800;font-size:15px;margin-bottom:3px}
 .match-card .spec{font-size:11px;color:#6E6E73;margin-bottom:3px}
@@ -90,7 +89,7 @@ button:active{transform:scale(.95)}
 #venues-grid{display:grid;grid-template-columns:repeat(3,100px);gap:15px;justify-content:center}
 #screen-profile{background:#F5F5F7;padding:0;justify-content:flex-start !important;overflow-y:auto}
 .profile-header{width:100%;background:#FFF;padding:20px;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;border-bottom:1px solid #E5E5EA}
-.profile-header .avatar-lg{width:90px;height:90px;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background:#EC4899;color:#FFF;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:900;margin-bottom:12px;background-size:cover;background-position:center}
+.profile-header .avatar-lg{width:90px;height:90px;background-color:#FCE7F3;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background-size:cover;background-position:center;border:3px solid #EC4899;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:900;margin-bottom:12px;color:#EC4899}
 .profile-header .name{font-size:22px;font-weight:800}
 .profile-header .role{font-size:13px;color:#6E6E73;margin-top:4px}
 .profile-tabs{display:flex;width:100%;overflow-x:auto;background:#FFF;border-bottom:1px solid #E5E5EA;position:sticky;top:0;z-index:100}
@@ -222,11 +221,9 @@ if (window.Telegram && window.Telegram.WebApp) {
   tg.setHeaderColor('#F5F5F7'); tg.setBackgroundColor('#F5F5F7');
   tgUser = tg.initDataUnsafe && tg.initDataUnsafe.user ? tg.initDataUnsafe.user : null;
   console.log('Telegram user:', tgUser);
-} else {
-  console.log('Telegram SDK не загружен (открыто в браузере)');
 }
 
-const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbx5C0kdq70dktEHFoBp0DXqI4CbYadpdmLqGJS2GvWh-wo-Q2NJIfubatqg_scx6Cez/exec';
+const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycby4Kf6zFXRgX7eyeQaV9wEbqRA4tCW00Uv6QiLYH_KC63LzQWrYbNEeaiYooAGuaBEl/exec';
 
 const ROLE_ICONS = {
   dancer:'fa-person-running', ballet:'fa-child-reaching', singer:'fa-microphone',
@@ -310,7 +307,7 @@ function renderHome(){
     cell.className = 'user-cell';
     cell.style.left = `calc(50% + ${positions[i].x}px)`;
     cell.style.top  = `calc(50% + ${positions[i].y}px)`;
-    cell.style.backgroundImage = `url('${a.img||''}')`;
+    if(a.img) cell.style.backgroundImage = `url('${a.img}')`;
     const roleIcon = ROLE_ICONS[a.role] || 'fa-star';
     cell.innerHTML = `<i class="fa-solid ${roleIcon} role-icon"></i>`;
     const pct = Math.round(((a.rating||5)/5)*100);
@@ -331,7 +328,7 @@ function renderCatalog(q=''){
   list.forEach(a=>{
     const c=document.createElement('div');
     c.className='catalog-cell';
-    c.style.backgroundImage=`url('${a.img||''}')`;
+    if(a.img) c.style.backgroundImage=`url('${a.img}')`;
     c.innerHTML = `<div class="label">${a.name||'—'}</div><i class="fa-solid ${ROLE_ICONS[a.role]||'fa-star'} role-icon"></i>`;
     c.onclick=()=>openArtist(a.id);
     g.appendChild(c);
@@ -347,7 +344,7 @@ function openArtist(id){
   const dim = new Date(state.year, state.monthIndex+1, 0).getDate();
   for(let d=1; d<=dim; d++){
     const ds = `${state.year}-${String(state.monthIndex+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-    const ev = events.find(e=>e.date===ds && e.artistId===a.id);
+    const ev = events.find(e=>e.date===ds && String(e.artistId)===String(a.id));
     let cls='status-free', l='С';
     if(ev){
       if(ev.status==='busy'){cls='status-busy';l='З';}
@@ -360,7 +357,7 @@ function openArtist(id){
   const inProj = userProject.some(p=>p.id===a.id && p.type==='artist');
   const roleIcon = ROLE_ICONS[a.role]||'fa-star';
   c.innerHTML = `
-    <div class="detail-photo" style="background-image:url('${a.img||''}')">
+    <div class="detail-photo" ${a.img?`style="background-image:url('${a.img}')"`:''}>
       <i class="fa-solid ${roleIcon} role-icon"></i>
     </div>
     <div class="detail-name">${a.name||''}</div>
@@ -396,7 +393,7 @@ function renderVenues(q=''){
   list.forEach(v=>{
     const c=document.createElement('div');
     c.className='catalog-cell';
-    c.style.backgroundImage=`url('${v.img||''}')`;
+    if(v.img) c.style.backgroundImage=`url('${v.img}')`;
     c.innerHTML=`<div class="label">${v.name||'—'}</div>`;
     c.onclick=()=>openVenue(v.id);
     g.appendChild(c);
@@ -407,7 +404,7 @@ function openVenue(id){
   const v=venues.find(x=>x.id===id); if(!v) return;
   const c=document.getElementById('venue-detail-content');
   c.innerHTML=`
-    <div class="detail-photo" style="background-image:url('${v.img||''}')"></div>
+    <div class="detail-photo" ${v.img?`style="background-image:url('${v.img}')"`:''}></div>
     <div class="detail-name">${v.name||''}</div>
     <div class="detail-spec">${v.type||''} · ${v.city||''}</div>
     <div style="margin-bottom:20px;color:#6E6E73;text-align:center">Вместимость: ${v.capacity||'—'} · от ${(v.price||0).toLocaleString()} ₽</div>
@@ -508,7 +505,7 @@ function runAIMatch(){
       const card=document.createElement('div');
       card.className='match-card';
       card.innerHTML=`
-        <div class="avatar" style="background-image:url('${a.img||''}')"></div>
+        <div class="avatar" ${a.img?`style="background-image:url('${a.img}')"`:''}></div>
         <div class="info">
           <div class="name">${a.name}</div>
           <div class="spec">${ROLE_NAMES[a.role]||a.spec||''} · ${a.city||''}</div>
@@ -588,8 +585,9 @@ function renderProfile(){
   if(!currentArtist) return;
   const a = currentArtist;
   const icon = ROLE_ICONS[a.role]||'fa-star';
+  const initial = (a.name||'?')[0].toUpperCase();
   document.getElementById('profile-header').innerHTML = `
-    <div class="avatar-lg" style="background-image:url('${a.img||''}')"></div>
+    <div class="avatar-lg" ${a.img?`style="background-image:url('${a.img}')"`:''}>${a.img?'':initial}</div>
     <div class="name">${a.name||''}</div>
     <div class="role"><i class="fa-solid ${icon}"></i> ${ROLE_NAMES[a.role]||a.spec||''} · ${a.city||''}</div>
   `;
