@@ -1,681 +1,653 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>TourBuilder - Платформа</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: #F5F5F7;
-            color: #1A1A1A;
-            overflow: hidden;
-            height: 100dvh;
-            user-select: none;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* === НИЖНЯЯ НАВИГАЦИЯ (5 вкладок) === */
-        .bottom-nav {
-            position: fixed; bottom: 15px; left: 50%; transform: translateX(-50%);
-            display: flex; gap: 12px;
-            background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px);
-            padding: 10px 18px; border-radius: 40px; z-index: 1000;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08); border: 1px solid rgba(0,0,0,0.05);
-        }
-        .nav-icon { font-size: 22px; color: #6E6E73; cursor: pointer; transition: color 0.3s, transform 0.2s; }
-        .nav-icon.active { color: #EC4899; transform: translateY(-3px); }
-        .nav-icon:hover { color: #EC4899; }
-
-        /* === ЭКРАНЫ === */
-        .screen { display: none; width: 100%; height: calc(100vh - 80px); position: absolute; top: 0; left: 0; overflow-y: auto; padding-bottom: 80px; box-sizing: border-box;}
-        .screen.active { display: flex; justify-content: center; align-items: center; flex-direction: column; }
-
-        /* === КНОПКИ === */
-        button { background: #EC4899; color: white; border: none; padding: 12px 30px; border-radius: 30px; font-weight: bold; font-size: 16px; cursor: pointer; box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3); transition: transform 0.2s;}
-        button:active { transform: scale(0.95); }
-        .btn-secondary { background: #FFFFFF; color: #EC4899; border: 2px solid #EC4899; box-shadow: none; }
-
-        /* === ЭКРАН 1: ГЛАВНАЯ === */
-        #screen-home .honeycomb-frame {
-            position: relative; width: 96vw; height: 88dvh;
-            clip-path: polygon(25% 0%, 75% 0%, 100% 25%, 100% 75%, 75% 100%, 25% 100%, 0% 75%, 0% 25%);
-            background: #FFFFFF; border: 2px solid rgba(236, 72, 153, 0.2);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            display: flex; justify-content: center; align-items: center; z-index: 10;
-        }
-        #screen-home .center-id {
-            width: 160px; height: 160px;
-            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-            background: #F5F5F7; border: 3px solid #EC4899;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            text-align: center; font-weight: 800; font-size: 16px; color: #1A1A1A;
-            z-index: 15; cursor: pointer; padding: 10px; box-sizing: border-box;
-        }
-        #screen-home .center-id span { font-size: 11px; font-weight: 400; color: #6E6E73; margin-top: 5px; }
-        #screen-home .user-cell {
-            position: absolute; width: 60px; height: 60px;
-            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-            background-size: cover; background-position: center;
-            border: 2px solid #E5E5EA; box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            cursor: pointer; transition: transform 0.2s, border-color 0.2s; z-index: 5;
-        }
-        #screen-home .user-cell:hover { transform: scale(1.3); border-color: #EC4899; z-index: 50; }
-
-        /* === ЭКРАНЫ КАТАЛОГОВ (Артисты, Площадки) === */
-        .catalog-screen { background: #F5F5F7; padding-top: 20px; }
-        .catalog-screen h1 { font-size: 24px; margin-bottom: 20px; color: #1A1A1A; }
-        .search-bar {
-            width: 90%; max-width: 400px; padding: 15px;
-            border: 2px solid #E5E5EA; border-radius: 30px; font-size: 16px;
-            margin-bottom: 15px; background: #FFFFFF; outline: none;
-            text-align: center; box-sizing: border-box; color: #1A1A1A;
-        }
-        .filters { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; justify-content: center;}
-        .filter-btn { background: #FFFFFF; color: #6E6E73; border: 1px solid #E5E5EA; padding: 8px 15px; border-radius: 20px; cursor: pointer; font-size: 14px; }
-        .filter-btn.active { background: #EC4899; color: white; border: none; }
-        .catalog-grid { display: grid; grid-template-columns: repeat(3, 100px); gap: 15px; justify-content: center; }
-        .catalog-cell {
-            width: 100px; height: 100px;
-            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-            background-size: cover; background-position: center;
-            border: 2px solid #E5E5EA; background-color: #FFFFFF;
-            cursor: pointer; transition: transform 0.2s;
-            display: flex; align-items: flex-end; justify-content: center;
-        }
-        .catalog-cell span { background: rgba(26,26,26,0.7); color: #fff; font-size: 11px; width: 100%; text-align: center; padding: 2px 0; }
-        .catalog-cell:hover { transform: scale(1.05); border-color: #EC4899; }
-
-        /* === ДЕТАЛЬНЫЕ СТРАНИЦЫ === */
-        .detail-screen { background: #F5F5F7; padding: 20px; justify-content: flex-start !important; }
-        .detail-photo { width: 200px; height: 200px; clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); background-size: cover; background-position: center; border: 4px solid #EC4899; margin-bottom: 20px; background-color: #FFFFFF; }
-        .detail-name { font-size: 28px; font-weight: 800; color: #1A1A1A; text-align: center; }
-        .detail-spec { font-size: 16px; color: #6E6E73; margin-bottom: 20px; text-align: center;}
-        .mini-calendar { width: 100%; max-width: 400px; background: #FFFFFF; border-radius: 15px; padding: 15px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
-        .mini-calendar h3 { text-align: center; color: #1A1A1A; margin-bottom: 10px; }
-        .days-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; }
-        .day { height: 30px; display: flex; justify-content: center; align-items: center; font-size: 11px; }
-
-        /* === СТАТУСЫ === */
-        .status-free { background: #4CAF50; clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); display: flex; justify-content: center; align-items: center; color: white; font-weight: bold; font-size: 10px; }
-        .status-busy { background: #F44336; border-radius: 50%; display: flex; justify-content: center; align-items: center; color: white; font-weight: bold; font-size: 10px; }
-        .status-req { background: #FFEB3B; border-radius: 4px; display: flex; justify-content: center; align-items: center; color: black; font-weight: bold; font-size: 10px; }
-        .status-active { background: #2196F3; clip-path: polygon(50% 0%, 100% 100%, 0% 100%); display: flex; justify-content: center; align-items: center; color: white; font-weight: bold; font-size: 10px; }
-        .status-confirm { background: #9C27B0; clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); display: flex; justify-content: center; align-items: center; color: white; font-weight: bold; font-size: 10px; }
-
-        /* === ЭКРАН ЦИФЕРБЛАТА === */
-        #screen-calendar { background: #F5F5F7; padding: 20px; justify-content: flex-start !important; overflow-y: auto; }
-        #screen-calendar h1 { color: #1A1A1A; margin-bottom: 10px; }
-        #wheel-container { position: relative; width: 340px; height: 340px; margin: 20px auto; }
-        .month-sector {
-            position: absolute; top: 50%; left: 50%;
-            width: 60px; height: 160px;
-            margin-top: -160px; margin-left: -30px;
-            transform-origin: 50% 100%;
-            clip-path: polygon(20% 100%, 80% 100%, 100% 0, 0 0);
-            background: #FFFFFF; border: 2px solid #E5E5EA;
-            display: flex; flex-direction: column; align-items: center; justify-content: space-around;
-            padding: 4px; cursor: pointer;
-            transition: background 0.3s, transform 0.3s;
-        }
-        .month-sector:hover { background: rgba(236, 72, 153, 0.1); transform: scale(1.1); z-index: 10; }
-        .month-title { font-size: 11px; font-weight: bold; color: #EC4899; }
-        .inner-hexes { display: flex; flex-wrap: wrap; justify-content: center; gap: 2px; }
-        .inner-hex { width: 11px; height: 11px; font-size: 7px; line-height: 11px; text-align: center; }
-
-        /* === ЭКРАН ИИ-ПОДБОРА === */
-        #screen-match { background: #F5F5F7; padding: 20px; justify-content: flex-start !important; overflow-y: auto; }
-        #screen-match h1 { color: #1A1A1A; margin-bottom: 5px; font-size: 22px;}
-        #screen-match .subtitle { color: #6E6E73; font-size: 13px; margin-bottom: 20px; text-align: center;}
-        .form-group { width: 100%; max-width: 400px; margin-bottom: 12px; }
-        .form-group label { display: block; font-size: 12px; color: #6E6E73; margin-bottom: 5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;}
-        .form-group input, .form-group select {
-            width: 100%; padding: 12px; border: 1px solid #E5E5EA;
-            border-radius: 12px; font-size: 15px; box-sizing: border-box;
-            background: #FFFFFF; color: #1A1A1A; outline: none;
-        }
-        .form-group input:focus, .form-group select:focus { border-color: #EC4899; }
-        #match-results { width: 100%; max-width: 400px; margin-top: 25px; }
-        .match-card {
-            background: #FFFFFF; border-radius: 15px; padding: 12px;
-            margin-bottom: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.04);
-            display: flex; align-items: center; gap: 10px;
-            border-left: 4px solid #EC4899;
-            animation: slideIn 0.4s ease;
-        }
-        @keyframes slideIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .match-card .avatar {
-            width: 50px; height: 50px; flex-shrink: 0;
-            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-            background-size: cover; background-position: center;
-            border: 2px solid #EC4899; background-color: #F5F5F7;
-        }
-        .match-card .info { flex-grow: 1; text-align: left; min-width: 0;}
-        .match-card .name { font-weight: 800; font-size: 15px; color: #1A1A1A; margin-bottom: 3px;}
-        .match-card .spec { font-size: 11px; color: #6E6E73; margin-bottom: 3px;}
-        .match-card .reason { font-size: 10px; color: #999; line-height: 1.3;}
-        .match-card .right-block { display: flex; flex-direction: column; align-items: center; gap: 5px;}
-        .match-card .score { font-weight: 900; font-size: 18px; color: #EC4899; text-align: center; min-width: 45px; }
-        .match-card .score small { display: block; font-size: 8px; color: #999; font-weight: 400; }
-        .match-card .add-btn {
-            background: #EC4899; color: white; border: none;
-            padding: 6px 10px; border-radius: 15px; font-size: 10px;
-            cursor: pointer; font-weight: bold; white-space: nowrap;
-        }
-        .no-results { text-align: center; color: #6E6E73; padding: 30px 20px; font-size: 14px;}
-
-        /* === УВЕДОМЛЕНИЕ TOAST === */
-        .toast {
-            position: fixed; top: 30px; left: 50%; transform: translateX(-50%) translateY(-100px);
-            background: #1A1A1A; color: #fff; padding: 12px 25px; border-radius: 30px;
-            font-size: 14px; font-weight: 600; z-index: 9999;
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-        .toast.show { transform: translateX(-50%) translateY(0); }
-
-        /* === МОДАЛКА ДНЯ === */
-        #day-details-modal { display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #FFFFFF; border: 1px solid #E5E5EA; border-radius: 15px; padding: 20px; width: 90%; max-width: 400px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); z-index: 100; color: #1A1A1A; }
-        #day-details-modal h3 { color: #EC4899; margin-bottom: 10px; }
-        .back-btn { position: absolute; top: 20px; left: 20px; background: #FFFFFF; color: #1A1A1A; font-size: 24px; border-radius: 50%; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 200; border: 1px solid #E5E5EA; }
-        .hidden { display: none !important; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>TourBuilder</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#F5F5F7;color:#1A1A1A;overflow:hidden;height:100dvh;user-select:none;display:flex;flex-direction:column}
+.bottom-nav{position:fixed;bottom:15px;left:50%;transform:translateX(-50%);display:flex;gap:12px;background:rgba(255,255,255,.95);backdrop-filter:blur(10px);padding:10px 18px;border-radius:40px;z-index:1000;box-shadow:0 5px 20px rgba(0,0,0,.08);border:1px solid rgba(0,0,0,.05)}
+.nav-icon{font-size:22px;color:#6E6E73;cursor:pointer;transition:color .3s,transform .2s}
+.nav-icon.active{color:#EC4899;transform:translateY(-3px)}
+.screen{display:none;width:100%;height:calc(100vh - 80px);position:absolute;top:0;left:0;overflow-y:auto;padding-bottom:80px;box-sizing:border-box}
+.screen.active{display:flex;justify-content:center;align-items:center;flex-direction:column}
+button{background:#EC4899;color:#FFF;border:none;padding:12px 30px;border-radius:30px;font-weight:bold;font-size:16px;cursor:pointer;box-shadow:0 4px 15px rgba(236,72,153,.3);transition:transform .2s}
+button:active{transform:scale(.95)}
+.btn-secondary{background:#FFF;color:#EC4899;border:2px solid #EC4899;box-shadow:none}
+/* HOME */
+#screen-home .honeycomb-frame{position:relative;width:96vw;height:88dvh;clip-path:polygon(25% 0%,75% 0%,100% 25%,100% 75%,75% 100%,25% 100%,0% 75%,0% 25%);background:#FFF;border:2px solid rgba(236,72,153,.2);box-shadow:0 10px 30px rgba(0,0,0,.05);display:flex;justify-content:center;align-items:center}
+#screen-home .center-id{width:150px;height:150px;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background:#FFF5F9;border:3px solid #EC4899;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;font-weight:800;font-size:14px;color:#1A1A1A;z-index:15;cursor:pointer;padding:10px;box-sizing:border-box;overflow:hidden}
+#screen-home .center-id .avatar{width:45px;height:45px;border-radius:50%;background:#EC4899;color:#FFF;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;margin-bottom:5px}
+#screen-home .center-id span{font-size:10px;font-weight:400;color:#6E6E73;margin-top:3px}
+.user-cell{position:absolute;width:65px;height:65px;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background-size:cover;background-position:center;border:2px solid #E5E5EA;box-shadow:0 4px 10px rgba(0,0,0,.08);cursor:pointer;transition:transform .2s,border-color .2s;z-index:5;position:absolute}
+.user-cell:hover{transform:scale(1.15);border-color:#EC4899;z-index:50}
+.user-cell .role-icon{position:absolute;bottom:4px;left:4px;font-size:11px;color:#FFF;text-shadow:0 0 4px rgba(0,0,0,.9);z-index:3}
+.user-cell .rating-star{position:absolute;top:4px;right:4px;font-size:11px;color:#FFC107;text-shadow:0 0 4px rgba(0,0,0,.9);z-index:3;position:relative;display:inline-block}
+.star-wrapper{position:absolute;top:3px;right:3px;width:14px;height:14px;z-index:3}
+.star-bg{position:absolute;inset:0;color:rgba(255,255,255,.5);font-size:13px}
+.star-fill{position:absolute;inset:0;color:#FFC107;font-size:13px;overflow:hidden;text-shadow:0 0 4px rgba(0,0,0,.8)}
+/* CATALOG */
+.catalog-screen{background:#F5F5F7;padding-top:20px}
+.catalog-screen h1{font-size:24px;margin-bottom:20px;color:#1A1A1A}
+.search-bar{width:90%;max-width:400px;padding:15px;border:2px solid #E5E5EA;border-radius:30px;font-size:16px;margin-bottom:15px;background:#FFF;outline:none;text-align:center;box-sizing:border-box}
+.catalog-grid{display:grid;grid-template-columns:repeat(3,100px);gap:15px;justify-content:center}
+.catalog-cell{position:relative;width:100px;height:100px;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background-size:cover;background-position:center;border:2px solid #E5E5EA;background-color:#FFF;cursor:pointer;transition:transform .2s}
+.catalog-cell .label{position:absolute;top:42px;left:0;right:0;background:rgba(26,26,26,.85);color:#FFF;font-size:10px;text-align:center;padding:3px 2px;font-weight:600}
+.catalog-cell:hover{transform:scale(1.05);border-color:#EC4899}
+/* DETAILS */
+.detail-screen{background:#F5F5F7;padding:20px;justify-content:flex-start !important}
+.detail-photo{width:180px;height:180px;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background-size:cover;background-position:center;border:4px solid #EC4899;margin-bottom:20px;background-color:#FFF;position:relative}
+.detail-name{font-size:26px;font-weight:800;color:#1A1A1A;text-align:center}
+.detail-spec{font-size:15px;color:#6E6E73;margin-bottom:15px;text-align:center}
+.mini-calendar{width:100%;max-width:400px;background:#FFF;border-radius:15px;padding:15px;margin-bottom:20px;box-shadow:0 4px 10px rgba(0,0,0,.03)}
+.mini-calendar h3{text-align:center;margin-bottom:10px;font-size:14px}
+.days-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.day{height:28px;display:flex;justify-content:center;align-items:center;font-size:10px}
+.status-free{background:#4CAF50;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);color:#FFF;font-weight:bold;display:flex;justify-content:center;align-items:center}
+.status-busy{background:#F44336;border-radius:50%;color:#FFF;font-weight:bold;display:flex;justify-content:center;align-items:center}
+.status-req{background:#FFEB3B;border-radius:4px;color:#000;font-weight:bold;display:flex;justify-content:center;align-items:center}
+.status-active{background:#2196F3;clip-path:polygon(50% 0%,100% 100%,0% 100%);color:#FFF;font-weight:bold;display:flex;justify-content:center;align-items:center}
+.status-confirm{background:#9C27B0;clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);color:#FFF;font-weight:bold;display:flex;justify-content:center;align-items:center}
+/* CALENDAR */
+#screen-calendar{background:#F5F5F7;padding:20px;justify-content:flex-start !important;overflow-y:auto}
+#screen-calendar h1{color:#1A1A1A;margin-bottom:10px}
+#wheel-container{position:relative;width:340px;height:340px;margin:20px auto}
+.month-sector{position:absolute;top:50%;left:50%;width:66px;height:160px;margin-top:-160px;margin-left:-33px;transform-origin:50% 100%;clip-path:polygon(20% 100%,80% 100%,100% 0,0 0);background:#FFF;border:2px solid #E5E5EA;display:flex;flex-direction:column;align-items:center;justify-content:space-around;padding:4px;cursor:pointer;transition:background .3s,transform .3s}
+.month-sector:hover{background:rgba(236,72,153,.1);transform:scale(1.1);z-index:10}
+.month-title{font-size:11px;font-weight:bold;color:#EC4899}
+.inner-hexes{display:flex;flex-wrap:wrap;justify-content:center;gap:2px}
+.inner-hex{width:13px;height:13px;font-size:8px;line-height:13px;text-align:center}
+/* MATCH */
+#screen-match{background:#F5F5F7;padding:20px;justify-content:flex-start !important;overflow-y:auto}
+.form-group{width:100%;max-width:400px;margin-bottom:12px}
+.form-group label{display:block;font-size:11px;color:#6E6E73;margin-bottom:5px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:12px;border:1px solid #E5E5EA;border-radius:12px;font-size:15px;box-sizing:border-box;background:#FFF;outline:none;font-family:inherit}
+.form-group textarea{resize:vertical;min-height:60px}
+#match-results{width:100%;max-width:400px;margin-top:25px}
+.match-card{background:#FFF;border-radius:15px;padding:12px;margin-bottom:12px;box-shadow:0 4px 10px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px;border-left:4px solid #EC4899;animation:slideIn .4s ease}
+@keyframes slideIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.match-card .avatar{width:50px;height:50px;flex-shrink:0;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background-size:cover;background-position:center;border:2px solid #EC4899;background-color:#F5F5F7}
+.match-card .info{flex-grow:1;text-align:left;min-width:0}
+.match-card .name{font-weight:800;font-size:15px;margin-bottom:3px}
+.match-card .spec{font-size:11px;color:#6E6E73;margin-bottom:3px}
+.match-card .reason{font-size:10px;color:#999;line-height:1.3}
+.match-card .right-block{display:flex;flex-direction:column;align-items:center;gap:5px}
+.match-card .score{font-weight:900;font-size:18px;color:#EC4899;text-align:center;min-width:45px}
+.match-card .score small{display:block;font-size:8px;color:#999;font-weight:400}
+.match-card .add-btn{background:#EC4899;color:#FFF;border:none;padding:6px 10px;border-radius:15px;font-size:10px;cursor:pointer;font-weight:bold;white-space:nowrap}
+/* VENUES */
+#screen-venues{background:#F5F5F7;padding-top:20px}
+#screen-venues h1{font-size:24px;margin-bottom:20px;color:#1A1A1A}
+#venues-grid{display:grid;grid-template-columns:repeat(3,100px);gap:15px;justify-content:center}
+/* PROFILE */
+#screen-profile{background:#F5F5F7;padding:0;justify-content:flex-start !important;overflow-y:auto}
+.profile-header{width:100%;background:#FFF;padding:20px;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;border-bottom:1px solid #E5E5EA}
+.profile-header .avatar-lg{width:90px;height:90px;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background:#EC4899;color:#FFF;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:900;margin-bottom:12px}
+.profile-header .name{font-size:22px;font-weight:800}
+.profile-header .role{font-size:13px;color:#6E6E73;margin-top:4px}
+.profile-tabs{display:flex;width:100%;overflow-x:auto;background:#FFF;border-bottom:1px solid #E5E5EA;position:sticky;top:0;z-index:100}
+.profile-tab{padding:14px 18px;font-size:13px;color:#6E6E73;cursor:pointer;white-space:nowrap;border-bottom:3px solid transparent;transition:all .2s}
+.profile-tab.active{color:#EC4899;border-bottom-color:#EC4899;font-weight:700}
+.profile-content{width:100%;padding:20px;box-sizing:border-box;flex:1}
+.tab-panel{display:none}
+.tab-panel.active{display:block;animation:fadeIn .3s}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.field-row{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid #F0F0F0;font-size:14px}
+.field-row .lbl{color:#6E6E73}
+.field-row .val{color:#1A1A1A;font-weight:600;text-align:right;max-width:60%}
+.list-item{background:#FFF;border-radius:12px;padding:12px;margin-bottom:10px;box-shadow:0 2px 8px rgba(0,0,0,.03)}
+.list-item .li-title{font-weight:700;font-size:14px;margin-bottom:4px}
+.list-item .li-sub{font-size:12px;color:#6E6E73}
+.add-btn-full{width:100%;background:#FFF;color:#EC4899;border:2px dashed #EC4899;padding:12px;border-radius:12px;font-weight:700;margin-top:10px;cursor:pointer}
+.edit-section{display:flex;gap:8px;justify-content:center;margin-top:15px}
+.toast{position:fixed;top:30px;left:50%;transform:translateX(-50%) translateY(-100px);background:#1A1A1A;color:#FFF;padding:12px 25px;border-radius:30px;font-size:14px;font-weight:600;z-index:9999;transition:transform .4s cubic-bezier(.175,.885,.32,1.275);box-shadow:0 10px 30px rgba(0,0,0,.2)}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.back-btn{position:absolute;top:20px;left:20px;background:#FFF;color:#1A1A1A;font-size:24px;border-radius:50%;width:45px;height:45px;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:200;border:1px solid #E5E5EA}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:5000;justify-content:center;align-items:center}
+.modal-overlay.open{display:flex}
+.modal-content{background:#FFF;border-radius:20px;padding:20px;width:90%;max-width:400px;max-height:80vh;overflow-y:auto}
+.modal-content h3{margin:0 0 15px;color:#EC4899}
+</style>
 </head>
 <body>
 
-    <!-- ЭКРАН 1: ГЛАВНАЯ -->
-    <div id="screen-home" class="screen active">
-        <div class="honeycomb-frame">
-            <div class="center-id" id="user-id-block">KARL & BAND<span>ID: 001</span></div>
-            <div id="users-container"></div>
+<!-- HOME -->
+<div id="screen-home" class="screen active">
+  <div class="honeycomb-frame">
+    <div class="center-id" id="user-id-block" onclick="openProfileOrCreate()">
+      <div class="avatar">T</div>
+      TourBuilder
+      <span>Маркетплейс событий</span>
+    </div>
+    <div id="users-container"></div>
+  </div>
+</div>
+
+<!-- CATALOG -->
+<div id="screen-catalog" class="screen catalog-screen">
+  <button class="back-btn" onclick="navigateTo('screen-home')">←</button>
+  <h1>Артисты</h1>
+  <input type="text" class="search-bar" placeholder="Поиск по имени..." oninput="filterArtists(this.value)">
+  <div class="catalog-grid" id="artists-grid"></div>
+</div>
+
+<!-- ARTIST DETAIL -->
+<div id="screen-artist" class="screen detail-screen">
+  <button class="back-btn" onclick="navigateTo('screen-catalog')">←</button>
+  <div id="artist-detail-content"></div>
+</div>
+
+<!-- CALENDAR -->
+<div id="screen-calendar" class="screen">
+  <button class="back-btn" onclick="navigateTo('screen-home')">←</button>
+  <h1>Календарь</h1>
+  <div style="display:flex;gap:20px;margin-bottom:10px;align-items:center">
+    <button onclick="changeYear(-1)">←</button>
+    <span id="year-display" style="font-size:24px;font-weight:bold">2026</span>
+    <button onclick="changeYear(1)">→</button>
+  </div>
+  <div id="wheel-container"></div>
+</div>
+
+<!-- MATCH -->
+<div id="screen-match" class="screen">
+  <button class="back-btn" onclick="navigateTo('screen-home')">←</button>
+  <h1>🔍 ИИ-Подбор</h1>
+  <p style="color:#6E6E73;font-size:13px;margin-bottom:20px;text-align:center">Заполните ТЗ — подберём за 10 минут</p>
+  <div class="form-group"><label>Дата</label><input type="date" id="match-date" value="2026-09-12"></div>
+  <div class="form-group"><label>Жанр</label><select id="match-genre"><option value="any">Любой</option><option value="dance">Танцы</option><option value="music">Музыка</option><option value="show">Шоу</option></select></div>
+  <div class="form-group"><label>Бюджет, ₽</label><input type="text" id="match-budget" value="50000"></div>
+  <div class="form-group"><label>Город</label><input type="text" id="match-city" value="Москва"></div>
+  <button onclick="runAIMatch()" style="margin-top:10px;width:100%;max-width:400px">✨ Подобрать</button>
+  <div id="match-results"></div>
+</div>
+
+<!-- VENUES -->
+<div id="screen-venues" class="screen catalog-screen">
+  <button class="back-btn" onclick="navigateTo('screen-home')">←</button>
+  <h1>Площадки</h1>
+  <input type="text" class="search-bar" placeholder="Поиск..." oninput="filterVenues(this.value)">
+  <div id="venues-grid"></div>
+</div>
+
+<!-- VENUE DETAIL -->
+<div id="screen-venue" class="screen detail-screen">
+  <button class="back-btn" onclick="navigateTo('screen-venues')">←</button>
+  <div id="venue-detail-content"></div>
+</div>
+
+<!-- PROFILE (личный кабинет) -->
+<div id="screen-profile" class="screen">
+  <button class="back-btn" onclick="navigateTo('screen-home')">←</button>
+  <div class="profile-header" id="profile-header"></div>
+  <div class="profile-tabs" id="profile-tabs">
+    <div class="profile-tab active" onclick="switchTab(this,'tab-main')">Основное</div>
+    <div class="profile-tab" onclick="switchTab(this,'tab-media')">Медиа</div>
+    <div class="profile-tab" onclick="switchTab(this,'tab-experience')">Опыт</div>
+    <div class="profile-tab" onclick="switchTab(this,'tab-education')">Образование</div>
+    <div class="profile-tab" onclick="switchTab(this,'tab-params')">Параметры</div>
+    <div class="profile-tab" onclick="switchTab(this,'tab-inventory')">Инвентарь</div>
+    <div class="profile-tab" onclick="switchTab(this,'tab-costumes')">Костюмы</div>
+  </div>
+  <div class="profile-content">
+    <div id="tab-main" class="tab-panel active"></div>
+    <div id="tab-media" class="tab-panel"></div>
+    <div id="tab-experience" class="tab-panel"></div>
+    <div id="tab-education" class="tab-panel"></div>
+    <div id="tab-params" class="tab-panel"></div>
+    <div id="tab-inventory" class="tab-panel"></div>
+    <div id="tab-costumes" class="tab-panel"></div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal-overlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal-content" id="modal-content"></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- NAV -->
+<div class="bottom-nav">
+  <div class="nav-icon active" onclick="navigateTo('screen-home',this)"><i class="fa-solid fa-house"></i></div>
+  <div class="nav-icon" onclick="navigateTo('screen-catalog',this)"><i class="fa-solid fa-users"></i></div>
+  <div class="nav-icon" onclick="navigateTo('screen-venues',this)"><i class="fa-solid fa-landmark"></i></div>
+  <div class="nav-icon" onclick="navigateTo('screen-calendar',this)"><i class="fa-solid fa-calendar"></i></div>
+  <div class="nav-icon" onclick="navigateTo('screen-match',this)"><i class="fa-solid fa-magnifying-glass"></i></div>
+</div>
+
+<script>
+// Telegram SDK
+let tgUser = null;
+if (window.Telegram?.WebApp) {
+  const tg = window.Telegram.WebApp;
+  tg.ready(); tg.expand();
+  tg.setHeaderColor('#F5F5F7'); tg.setBackgroundColor('#F5F5F7');
+  tgUser = tg.initDataUnsafe?.user || null;
+}
+
+const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbyPxZIefmkAWkjY3rWc7I2JHNZuIZ9wvN9TQklTB_x7mH4bgbvgnEGnff3HBzObs09y/exec';
+
+// === ИКОНКИ РОЛЕЙ ===
+const ROLE_ICONS = {
+  dancer:'fa-person-running', ballet:'fa-shoe-prints', singer:'fa-microphone',
+  actor:'fa-masks-theater', host:'fa-microphone-lines', musician:'fa-music',
+  guitarist:'fa-guitar', drummer:'fa-drum', pianist:'fa-piano-keyboard',
+  dj:'fa-compact-disc', magician:'fa-hat-wizard', artist:'fa-paintbrush',
+  photographer:'fa-camera', choreographer:'fa-diagram-project',
+  soundEngineer:'fa-sliders', lightingEngineer:'fa-lightbulb',
+  director:'fa-clapperboard', violinist:'fa-music', saxophonist:'fa-music',
+  flutist:'fa-music', other:'fa-star'
+};
+const ROLE_NAMES = {
+  dancer:'Танцор', ballet:'Балет', singer:'Вокалист', actor:'Актёр',
+  host:'Ведущий', musician:'Музыкант', guitarist:'Гитарист', drummer:'Барабанщик',
+  pianist:'Пианист', dj:'Диджей', magician:'Фокусник', artist:'Художник',
+  photographer:'Фотограф', choreographer:'Хореограф', soundEngineer:'Звукорежиссёр',
+  lightingEngineer:'Художник по свету', director:'Режиссёр',
+  violinist:'Скрипач', saxophonist:'Саксофонист', flutist:'Флейтист', other:'Другое'
+};
+
+let artists = [], venues = [], events = [];
+let currentArtist = null;
+let userProject = JSON.parse(localStorage.getItem('userProject')||'[]');
+let state = { year:2026, monthIndex:8, day:1 };
+
+// === ЗАГРУЗКА ===
+async function loadData() {
+  try {
+    const [a,v,e] = await Promise.all([
+      fetch(SHEET_API_URL+'?action=artists').then(r=>r.json()).catch(()=>null),
+      fetch(SHEET_API_URL+'?action=venues').then(r=>r.json()).catch(()=>null),
+      fetch(SHEET_API_URL+'?action=events').then(r=>r.json()).catch(()=>null)
+    ]);
+    artists = a && a.length ? a : [];
+    venues = v && v.length ? v : [];
+    events = e && e.length ? e : [];
+  } catch(err) { console.log('err',err); }
+  renderHome();
+}
+
+function navigateTo(id, el) {
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.nav-icon').forEach(n=>n.classList.remove('active'));
+  if(el) el.classList.add('active');
+  if(id==='screen-home') renderHome();
+  if(id==='screen-catalog') renderCatalog();
+  if(id==='screen-venues') renderVenues();
+  if(id==='screen-calendar') renderWheel();
+  if(id==='screen-profile') renderProfile();
+}
+
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.innerText=msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2500);
+}
+function openModal(html){
+  document.getElementById('modal-content').innerHTML=html;
+  document.getElementById('modal-overlay').classList.add('open');
+}
+function closeModal(){ document.getElementById('modal-overlay').classList.remove('open'); }
+
+// === HOME ===
+function renderHome(){
+  const blk = document.getElementById('user-id-block');
+  if(tgUser?.first_name){
+    blk.innerHTML = `<div class="avatar">${(tgUser.first_name[0]||'?').toUpperCase()}</div>${tgUser.first_name}<span>ID: ${tgUser.id}</span>`;
+  } else {
+    blk.innerHTML = `<div class="avatar">T</div>TourBuilder<span>Маркетплейс событий</span>`;
+  }
+  const c = document.getElementById('users-container');
+  c.innerHTML = '';
+  const positions = [
+    {x:"18%",y:"22%"},{x:"50%",y:"12%"},{x:"80%",y:"22%"},
+    {x:"10%",y:"48%"},{x:"90%",y:"48%"},
+    {x:"18%",y:"75%"},{x:"50%",y:"85%"},{x:"80%",y:"75%"},
+    {x:"35%",y:"55%"}
+  ];
+  artists.slice(0,9).forEach((a,i)=>{
+    if(!positions[i]) return;
+    const cell = document.createElement('div');
+    cell.className = 'user-cell';
+    cell.style.left = positions[i].x;
+    cell.style.top = positions[i].y;
+    cell.style.backgroundImage = `url('${a.img||''}')`;
+    // Иконка роли
+    const roleIcon = ROLE_ICONS[a.role] || 'fa-star';
+    cell.innerHTML = `<i class="fa-solid ${roleIcon} role-icon"></i>`;
+    // Звезда рейтинга (gradient by percent)
+    const pct = Math.round(((a.rating||5)/5)*100);
+    const starWrap = document.createElement('div');
+    starWrap.className = 'star-wrapper';
+    starWrap.innerHTML = `<i class="fa-solid fa-star star-bg"></i><div class="star-fill" style="width:${pct}%"><i class="fa-solid fa-star"></i></div>`;
+    cell.appendChild(starWrap);
+    cell.onclick = ()=>openArtist(a.id);
+    c.appendChild(cell);
+  });
+}
+
+// === CATALOG ===
+function filterArtists(q){ renderCatalog(q); }
+function renderCatalog(q=''){
+  const g=document.getElementById('artists-grid'); g.innerHTML='';
+  let list = artists;
+  if(q) list = list.filter(a=>(a.name||'').toLowerCase().includes(q.toLowerCase()));
+  list.forEach(a=>{
+    const c=document.createElement('div');
+    c.className='catalog-cell';
+    c.style.backgroundImage=`url('${a.img||''}')`;
+    c.innerHTML = `<div class="label">${a.name||'—'}</div><i class="fa-solid ${ROLE_ICONS[a.role]||'fa-star'} role-icon" style="position:absolute;top:5px;left:5px;color:#FFF;text-shadow:0 0 4px #000;font-size:12px"></i>`;
+    c.onclick=()=>openArtist(a.id);
+    g.appendChild(c);
+  });
+  if(!list.length) g.innerHTML='<p style="color:#6E6E73;grid-column:1/-1">Никого не найдено</p>';
+}
+
+// === ARTIST ===
+function openArtist(id){
+  const a = artists.find(x=>x.id===id);
+  if(!a) return;
+  const c = document.getElementById('artist-detail-content');
+  let daysHTML = '';
+  const dim = new Date(state.year, state.monthIndex+1, 0).getDate();
+  for(let d=1; d<=dim; d++){
+    const ds = `${state.year}-${String(state.monthIndex+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const ev = events.find(e=>e.date===ds && e.artistId===a.id);
+    let cls='status-free', l='С';
+    if(ev){
+      if(ev.status==='busy'){cls='status-busy';l='З';}
+      else if(ev.status==='req'){cls='status-req';l='?';}
+      else if(ev.status==='active'){cls='status-active';l='А';}
+      else if(ev.status==='confirm'){cls='status-confirm';l='П';}
+    }
+    daysHTML += `<div class="day ${cls}">${l}</div>`;
+  }
+  const inProj = userProject.some(p=>p.id===a.id && p.type==='artist');
+  const roleIcon = ROLE_ICONS[a.role]||'fa-star';
+  c.innerHTML = `
+    <div class="detail-photo" style="background-image:url('${a.img||''}')">
+      <i class="fa-solid ${roleIcon}" style="position:absolute;bottom:8px;left:8px;color:#FFF;font-size:22px;text-shadow:0 0 8px #000"></i>
+    </div>
+    <div class="detail-name">${a.name||''}</div>
+    <div class="detail-spec">${ROLE_NAMES[a.role]||a.spec||''} · ${a.city||''}</div>
+    <div style="margin-bottom:20px;color:#6E6E73;text-align:center">⭐ ${a.rating||0} · от ${(a.price||0).toLocaleString()} ₽</div>
+    <h3 style="color:#1A1A1A;font-size:15px">Занятость на ${['Янв','Фев','Мар','Апр','Май','Июн','Июл','Авг','Сен','Окт','Ноя','Дек'][state.monthIndex]}</h3>
+    <div class="mini-calendar"><div class="days-grid">${daysHTML}</div></div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+      <button onclick="alert('Запрос отправлен!')">Пригласить</button>
+      <button class="${inProj?'btn-secondary':''}" onclick='toggleProject(${JSON.stringify(a).replace(/'/g,"&#39;")},"artist",this)'>${inProj?'✓ В проекте':'+ В проект'}</button>
+    </div>
+  `;
+  navigateTo('screen-artist');
+}
+
+function toggleProject(item,type,btn){
+  const i = userProject.findIndex(p=>p.id===item.id&&p.type===type);
+  if(i>-1){
+    userProject.splice(i,1); btn.innerText='+ В проект'; btn.classList.remove('btn-secondary');
+    showToast('Удалён из проекта');
+  } else {
+    userProject.push({...item,type}); btn.innerText='✓ В проекте'; btn.classList.add('btn-secondary');
+    showToast(`"${item.name}" добавлен!`);
+  }
+  localStorage.setItem('userProject', JSON.stringify(userProject));
+}
+
+// === VENUES ===
+function filterVenues(q){ renderVenues(q); }
+function renderVenues(q=''){
+  const g=document.getElementById('venues-grid'); g.innerHTML='';
+  let list = venues;
+  if(q) list = list.filter(v=>(v.name||'').toLowerCase().includes(q.toLowerCase()));
+  list.forEach(v=>{
+    const c=document.createElement('div');
+    c.className='catalog-cell';
+    c.style.backgroundImage=`url('${v.img||''}')`;
+    c.innerHTML=`<div class="label">${v.name||'—'}</div>`;
+    c.onclick=()=>openVenue(v.id);
+    g.appendChild(c);
+  });
+  if(!list.length) g.innerHTML='<p style="color:#6E6E73;grid-column:1/-1">Пока нет площадок</p>';
+}
+function openVenue(id){
+  const v=venues.find(x=>x.id===id); if(!v) return;
+  const c=document.getElementById('venue-detail-content');
+  c.innerHTML=`
+    <div class="detail-photo" style="background-image:url('${v.img||''}')"></div>
+    <div class="detail-name">${v.name||''}</div>
+    <div class="detail-spec">${v.type||''} · ${v.city||''}</div>
+    <div style="margin-bottom:20px;color:#6E6E73;text-align:center">Вместимость: ${v.capacity||'—'} · от ${(v.price||0).toLocaleString()} ₽</div>
+    <button onclick="alert('Запрос брони!')">Запросить бронь</button>
+  `;
+  navigateTo('screen-venue');
+}
+
+// === CALENDAR ===
+const months = ['Янв','Фев','Мар','Апр','Май','Июн','Июл','Авг','Сен','Окт','Ноя','Дек'];
+function changeYear(d){ state.year+=d; document.getElementById('year-display').innerText=state.year; renderWheel(); }
+function renderWheel(){
+  const c=document.getElementById('wheel-container'); c.innerHTML='';
+  const keyDays=[1,3,5,7,10,12,14,16,18,20,25,28];
+  for(let m=0;m<12;m++){
+    const sec=document.createElement('div');
+    sec.className='month-sector';
+    sec.style.transform=`rotate(${m*30}deg)`;
+    let dh='';
+    const dim=new Date(state.year,m+1,0).getDate();
+    keyDays.forEach(d=>{
+      if(d>dim) return;
+      let cls='status-free',l='С';
+      const ds=`${state.year}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+      const ev=events.find(e=>e.date===ds);
+      if(ev){
+        if(ev.status==='busy'){cls='status-busy';l='З';}
+        else if(ev.status==='req'){cls='status-req';l='?';}
+        else if(ev.status==='active'){cls='status-active';l='А';}
+        else if(ev.status==='confirm'){cls='status-confirm';l='П';}
+      }
+      dh+=`<div class="inner-hex ${cls}">${l}</div>`;
+    });
+    sec.innerHTML=`<div class="month-title">${months[m]}</div><div class="inner-hexes">${dh}</div>`;
+    c.appendChild(sec);
+  }
+}
+
+// === MATCH ===
+function runAIMatch(){
+  const date=document.getElementById('match-date').value;
+  const genre=document.getElementById('match-genre').value;
+  const budget=parseInt(document.getElementById('match-budget').value)||0;
+  const city=document.getElementById('match-city').value.trim().toLowerCase();
+  const rc=document.getElementById('match-results');
+  rc.innerHTML='<div style="text-align:center;padding:30px;color:#6E6E73">⏳ Анализируем...</div>';
+  setTimeout(()=>{
+    const res = artists.map(a=>{
+      let s=0; const reasons=[];
+      const fd=a.freeDates||[];
+      if(date && fd.length>0 && !fd.includes(date)) return null;
+      if(genre==='any'||a.genre===genre){s+=30;reasons.push(`Жанр: ${a.genre||'—'}`);}
+      if((a.city||'').toLowerCase().includes(city)){s+=25;reasons.push(`Город: ${a.city}`);}
+      if(budget>0 && a.price<=budget){s+=Math.round(20*(a.price/budget));reasons.push(`${(a.price||0).toLocaleString()} ₽`);}
+      s+=Math.round(((a.rating||0)/5)*15);
+      if(a.verified){s+=10;reasons.push('✓');}
+      return {...a,score:s,reasons};
+    }).filter(a=>a&&a.score>0).sort((a,b)=>b.score-a.score).slice(0,10);
+    if(!res.length){ rc.innerHTML='<div style="text-align:center;padding:30px;color:#6E6E73">😔 Никого не найдено</div>'; return; }
+    rc.innerHTML=`<h3 style="margin-bottom:12px;font-size:16px">Найдено ${res.length}:</h3>`;
+    res.forEach(a=>{
+      const inP=userProject.some(p=>p.id===a.id&&p.type==='artist');
+      const card=document.createElement('div');
+      card.className='match-card';
+      card.innerHTML=`
+        <div class="avatar" style="background-image:url('${a.img||''}')"></div>
+        <div class="info">
+          <div class="name">${a.name}</div>
+          <div class="spec">${ROLE_NAMES[a.role]||a.spec||''} · ${a.city||''}</div>
+          <div class="reason">${a.reasons.join(' · ')}</div>
         </div>
+        <div class="right-block">
+          <div class="score">${a.score}%<small>матч</small></div>
+          <button class="add-btn">${inP?'✓':'+'}</button>
+        </div>`;
+      card.onclick=e=>{ if(!e.target.classList.contains('add-btn')) openArtist(a.id); };
+      card.querySelector('.add-btn').onclick=e=>{e.stopPropagation();toggleProject(a,'artist',e.target);};
+      rc.appendChild(card);
+    });
+  },800);
+}
+
+// === ПРОФИЛЬ / ЛИЧНЫЙ КАБИНЕТ ===
+function openProfileOrCreate(){
+  if(!tgUser){ showToast('Откройте через Telegram для создания профиля'); return; }
+  const me = artists.find(a=>String(a.telegramId)===String(tgUser.id));
+  if(me){ currentArtist = me; navigateTo('screen-profile'); }
+  else { openCreateForm(); }
+}
+
+function openCreateForm(){
+  openModal(`
+    <h3>Создать профиль</h3>
+    <div class="form-group"><label>Имя</label><input id="cf-name" value="${tgUser?.first_name||''}"></div>
+    <div class="form-group"><label>Роль</label>
+      <select id="cf-role">
+        ${Object.keys(ROLE_NAMES).map(k=>`<option value="${k}">${ROLE_NAMES[k]}</option>`).join('')}
+      </select>
     </div>
+    <div class="form-group"><label>Город</label><input id="cf-city" placeholder="Москва"></div>
+    <div class="form-group"><label>Гонорар, ₽</label><input id="cf-price" type="number" value="15000"></div>
+    <div class="form-group"><label>Контакты</label><input id="cf-contacts" placeholder="@username"></div>
+    <button onclick="submitCreateProfile()" style="width:100%">Создать</button>
+  `);
+}
 
-    <!-- ЭКРАН 2: КАТАЛОГ АРТИСТОВ -->
-    <div id="screen-catalog" class="screen catalog-screen">
-        <button class="back-btn" onclick="navigateTo('screen-home')">←</button>
-        <h1>Артисты</h1>
-        <input type="text" class="search-bar" placeholder="Поиск по имени..." oninput="filterArtists(this.value)">
-        <div class="filters">
-            <button class="filter-btn active" onclick="setFilter(this, 'all')">Все</button>
-            <button class="filter-btn" onclick="setFilter(this, 'dance')">Танцы</button>
-            <button class="filter-btn" onclick="setFilter(this, 'music')">Музыка</button>
-            <button class="filter-btn" onclick="setFilter(this, 'show')">Шоу</button>
-        </div>
-        <div class="catalog-grid" id="artists-grid"></div>
+async function submitCreateProfile(){
+  const body = {
+    action:'createArtist',
+    telegramId: tgUser.id,
+    name: document.getElementById('cf-name').value,
+    role: document.getElementById('cf-role').value,
+    city: document.getElementById('cf-city').value,
+    price: document.getElementById('cf-price').value,
+    contacts: document.getElementById('cf-contacts').value,
+    img: `https://mikhaileryom-sketch.github.io/tourbuilder/photos/placeholder.jpg`,
+    spec: ROLE_NAMES[document.getElementById('cf-role').value],
+    specialty:'dance', genre:'dance',
+    readyToTravel:false, countries:''
+  };
+  try {
+    const r = await fetch(SHEET_API_URL, { method:'POST', body:JSON.stringify(body) });
+    const res = await r.json();
+    if(res.success){ showToast('Профиль создан!'); closeModal(); loadData(); }
+    else showToast('Ошибка: '+res.error);
+  } catch(e){ showToast('Ошибка сети'); }
+}
+
+function renderProfile(){
+  if(!currentArtist) return;
+  const a = currentArtist;
+  const icon = ROLE_ICONS[a.role]||'fa-star';
+  document.getElementById('profile-header').innerHTML = `
+    <div class="avatar-lg" style="background-image:url('${a.img||''}');background-size:cover;background-position:center"></div>
+    <div class="name">${a.name||''}</div>
+    <div class="role"><i class="fa-solid ${icon}"></i> ${ROLE_NAMES[a.role]||a.spec||''} · ${a.city||''}</div>
+  `;
+  // Основное
+  document.getElementById('tab-main').innerHTML = `
+    <div class="field-row"><span class="lbl">Имя</span><span class="val">${a.name||'—'}</span></div>
+    <div class="field-row"><span class="lbl">Роль</span><span class="val">${ROLE_NAMES[a.role]||'—'}</span></div>
+    <div class="field-row"><span class="lbl">Специализация</span><span class="val">${a.spec||'—'}</span></div>
+    <div class="field-row"><span class="lbl">Жанры</span><span class="val">${a.genre||'—'}</span></div>
+    <div class="field-row"><span class="lbl">Город</span><span class="val">${a.city||'—'}</span></div>
+    <div class="field-row"><span class="lbl">Телефон/контакт</span><span class="val">${a.contacts||'—'}</span></div>
+    <div class="field-row"><span class="lbl">Готов к выезду</span><span class="val">${a.readyToTravel?'Да':'Нет'}</span></div>
+    <div class="field-row"><span class="lbl">Страны</span><span class="val">${a.countries||'—'}</span></div>
+    <div class="edit-section">
+      <button onclick="editMain()">Редактировать</button>
     </div>
+  `;
+  ['media','experience','education','params','inventory','costumes'].forEach(t=>{
+    document.getElementById('tab-'+t).innerHTML = `
+      <div class="list-item"><div class="li-title">Пока нет данных</div><div class="li-sub">Добавьте информацию о себе</div></div>
+      <button class="add-btn-full" onclick="addItem('${t}')">+ Добавить</button>
+    `;
+  });
+}
 
-    <!-- ЭКРАН 3: ДЕТАЛИ АРТИСТА -->
-    <div id="screen-artist" class="screen detail-screen">
-        <button class="back-btn" onclick="navigateTo('screen-catalog')">←</button>
-        <div id="artist-detail-content"></div>
-    </div>
+function switchTab(el,panel){
+  document.querySelectorAll('.profile-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById(panel).classList.add('active');
+}
 
-    <!-- ЭКРАН 4: ЦИФЕРБЛАТ -->
-    <div id="screen-calendar" class="screen">
-        <button class="back-btn" onclick="navigateTo('screen-home')">←</button>
-        <h1>Календарь</h1>
-        <div class="nav-arrows" style="display:flex; gap:20px; margin-bottom:10px; align-items:center;">
-            <button onclick="changeYear(-1)">←</button>
-            <span id="year-display" style="font-size:24px; font-weight:bold;">2026</span>
-            <button onclick="changeYear(1)">→</button>
-        </div>
-        <div id="wheel-container"></div>
-    </div>
+function editMain(){
+  const a = currentArtist;
+  openModal(`
+    <h3>Редактировать основное</h3>
+    <div class="form-group"><label>Имя</label><input id="e-name" value="${a.name||''}"></div>
+    <div class="form-group"><label>Роль</label><select id="e-role">
+      ${Object.keys(ROLE_NAMES).map(k=>`<option value="${k}" ${a.role===k?'selected':''}>${ROLE_NAMES[k]}</option>`).join('')}
+    </select></div>
+    <div class="form-group"><label>Специализация</label><input id="e-spec" value="${a.spec||''}"></div>
+    <div class="form-group"><label>Жанры</label><input id="e-genre" value="${a.genre||''}"></div>
+    <div class="form-group"><label>Город</label><input id="e-city" value="${a.city||''}"></div>
+    <div class="form-group"><label>Контакты</label><input id="e-contacts" value="${a.contacts||''}"></div>
+    <div class="form-group"><label>Готов к выезду</label><select id="e-ready"><option value="true" ${a.readyToTravel?'selected':''}>Да</option><option value="false" ${!a.readyToTravel?'selected':''}>Нет</option></select></div>
+    <div class="form-group"><label>Страны</label><input id="e-countries" value="${a.countries||''}"></div>
+    <button onclick="saveMain()" style="width:100%">Сохранить</button>
+  `);
+}
 
-    <!-- ЭКРАН 5: ИИ-ПОДБОР -->
-    <div id="screen-match" class="screen">
-        <button class="back-btn" onclick="navigateTo('screen-home')">←</button>
-        <h1>🔍 ИИ-Подбор</h1>
-        <div class="subtitle">Заполните ТЗ — подберём лучших за 10 минут</div>
+async function saveMain(){
+  const fields = {
+    name: document.getElementById('e-name').value,
+    role: document.getElementById('e-role').value,
+    spec: document.getElementById('e-spec').value,
+    genre: document.getElementById('e-genre').value,
+    city: document.getElementById('e-city').value,
+    contacts: document.getElementById('e-contacts').value,
+    readyToTravel: document.getElementById('e-ready').value === 'true',
+    countries: document.getElementById('e-countries').value
+  };
+  try {
+    const r = await fetch(SHEET_API_URL, { method:'POST', body:JSON.stringify({action:'updateArtist',artistId:currentArtist.id,fields}) });
+    const res = await r.json();
+    if(res.success){
+      Object.assign(currentArtist, fields);
+      showToast('Профиль обновлён');
+      closeModal();
+      renderProfile();
+      loadData();
+    } else showToast('Ошибка: '+res.error);
+  } catch(e){ showToast('Ошибка сети'); }
+}
 
-        <div class="form-group"><label>Дата / период</label><input type="date" id="match-date" value="2026-09-12"></div>
-        <div class="form-group"><label>Жанр / тип</label>
-            <select id="match-genre">
-                <option value="any">Любой</option>
-                <option value="dance">Танцы</option>
-                <option value="music">Музыка</option>
-                <option value="show">Шоу</option>
-            </select>
-        </div>
-        <div class="form-group"><label>Бюджет, ₽</label><input type="text" id="match-budget" placeholder="например, 50000" value="50000"></div>
-        <div class="form-group"><label>Город</label><input type="text" id="match-city" placeholder="например, Москва" value="Москва"></div>
-        <div class="form-group"><label>Дополнительно (по желанию)</label><input type="text" id="match-extra" placeholder="Свет, звук, костюмы..."></div>
+function addItem(type){
+  const title = {media:'Медиа',experience:'Опыт',education:'Образование',params:'Параметры',inventory:'Инвентарь',costumes:'Костюмы'}[type];
+  openModal(`<h3>Добавить: ${title}</h3>
+    <div class="form-group"><label>Название/значение</label><input id="add-val" placeholder="..."></div>
+    <div class="form-group"><label>Описание (необязательно)</label><textarea id="add-desc"></textarea></div>
+    <button onclick="saveItem('${type}')" style="width:100%">Добавить</button>
+  `);
+}
+async function saveItem(type){
+  const val = document.getElementById('add-val').value;
+  const desc = document.getElementById('add-desc').value;
+  if(!val) return showToast('Введите значение');
+  const actionMap = {media:'addMedia',experience:'addExperience',education:'addEducation',inventory:'addInventory',costumes:'addCostume'};
+  const action = actionMap[type] || 'addMedia';
+  try {
+    const r = await fetch(SHEET_API_URL, { method:'POST', body:JSON.stringify({action,artistId:currentArtist.id,name:val,description:desc,type:'photo',url:val}) });
+    const res = await r.json();
+    if(res.success){ showToast('Добавлено'); closeModal(); }
+    else showToast('Ошибка');
+  } catch(e){ showToast('Ошибка сети'); }
+}
 
-        <button onclick="runAIMatch()" style="margin-top:10px; width:100%; max-width:400px;">✨ Подобрать артистов</button>
-        <div id="match-results"></div>
-    </div>
-
-    <!-- ЭКРАН 6: КАТАЛОГ ПЛОЩАДОК -->
-    <div id="screen-venues" class="screen catalog-screen">
-        <button class="back-btn" onclick="navigateTo('screen-home')">←</button>
-        <h1>Площадки</h1>
-        <input type="text" class="search-bar" placeholder="Поиск по названию..." oninput="filterVenues(this.value)">
-        <div class="catalog-grid" id="venues-grid"></div>
-    </div>
-
-    <!-- ЭКРАН 7: ДЕТАЛИ ПЛОЩАДКИ -->
-    <div id="screen-venue" class="screen detail-screen">
-        <button class="back-btn" onclick="navigateTo('screen-venues')">←</button>
-        <div id="venue-detail-content"></div>
-    </div>
-
-    <!-- МОДАЛКА ДНЯ -->
-    <div id="day-details-modal">
-        <h3 id="modal-date"></h3>
-        <div id="modal-body"></div>
-        <button style="margin-top:15px;" onclick="closeModal()">Закрыть</button>
-    </div>
-
-    <!-- TOAST -->
-    <div class="toast" id="toast"></div>
-
-    <!-- НИЖНЯЯ НАВИГАЦИЯ (5 вкладок) -->
-    <div class="bottom-nav">
-        <div class="nav-icon active" onclick="navigateTo('screen-home', this)" title="Главная">🏠</div>
-        <div class="nav-icon" onclick="navigateTo('screen-catalog', this)" title="Артисты">👥</div>
-        <div class="nav-icon" onclick="navigateTo('screen-venues', this)" title="Площадки">🏛️</div>
-        <div class="nav-icon" onclick="navigateTo('screen-calendar', this)" title="Календарь">📅</div>
-        <div class="nav-icon" onclick="navigateTo('screen-match', this)" title="ИИ-Подбор">🔍</div>
-    </div>
-
-    <script>
-        // === TELEGRAM SDK ===
-        let tgUser = null;
-        if (window.Telegram && window.Telegram.WebApp) {
-            const tg = window.Telegram.WebApp;
-            tg.ready();
-            tg.expand();
-            tg.setHeaderColor('#F5F5F7');
-            tg.setBackgroundColor('#F5F5F7');
-            tgUser = tg.initDataUnsafe?.user || null;
-        }
-
-        // === КОНФИГ API ===
-        // ⚠️ Вставьте сюда вашу ссылку /exec из Google Apps Script
-        const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbzC9pzxBXRfIvgyXb5J8AWmepaak7YJHNA46TbGTgfLJPYD_BJnX-YqLhRc0N0lPrXJ/exec';
-
-        // === ГЛОБАЛЬНЫЕ ДАННЫЕ ===
-        let artists = [];
-        let venues = [];
-        let events = []; // Мероприятия для календаря
-        let userProject = JSON.parse(localStorage.getItem('userProject') || '[]');
-        let state = { year: 2026, monthIndex: 8, day: 1 };
-
-        // === FALLBACK (Mock) данные если API не доступен ===
-        const MOCK_ARTISTS = [
-            { id: 1, name: "Ivan", spec: "Танцор", genre: "dance", img: "https://i.pravatar.cc/150?img=11", price: 40000, city: "Москва", rating: 4.9, verified: true, freeDates: ["2026-09-12", "2026-09-15"] },
-            { id: 2, name: "Mila", spec: "Вокалистка", genre: "music", img: "https://i.pravatar.cc/150?img=5", price: 60000, city: "Москва", rating: 5.0, verified: true, freeDates: ["2026-09-12", "2026-09-13"] },
-            { id: 3, name: "DJ Oleg", spec: "Диджей", genre: "music", img: "https://i.pravatar.cc/150?img=12", price: 35000, city: "СПб", rating: 4.7, verified: false, freeDates: ["2026-09-12"] },
-            { id: 4, name: "Anna", spec: "Ведущая", genre: "show", img: "https://i.pravatar.cc/150?img=9", price: 45000, city: "Москва", rating: 4.8, verified: true, freeDates: ["2026-09-12", "2026-09-14"] },
-            { id: 5, name: "Max", spec: "Шоу-балет", genre: "dance", img: "https://i.pravatar.cc/150?img=13", price: 80000, city: "Москва", rating: 4.9, verified: true, freeDates: ["2026-09-10"] },
-            { id: 6, name: "Lena", spec: "Музыкант", genre: "music", img: "https://i.pravatar.cc/150?img=16", price: 30000, city: "Казань", rating: 4.6, verified: false, freeDates: ["2026-09-12"] },
-            { id: 7, name: "Rock Band", spec: "Группа", genre: "music", img: "https://i.pravatar.cc/150?img=60", price: 120000, city: "Москва", rating: 4.9, verified: true, freeDates: ["2026-09-12"] },
-            { id: 8, name: "Solo", spec: "Фокусник", genre: "show", img: "https://i.pravatar.cc/150?img=15", price: 55000, city: "Москва", rating: 4.5, verified: false, freeDates: ["2026-09-12"] }
-        ];
-
-        const MOCK_VENUES = [
-            { id: 1, name: "Клуб Москва", city: "Москва", type: "Клуб", capacity: 500, price: 80000, img: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=300" },
-            { id: 2, name: "Театр Сцена", city: "СПб", type: "Театр", capacity: 300, price: 60000, img: "https://images.unsplash.com/photo-1503095396549-807759245b35?w=300" },
-            { id: 3, name: "Усадьба Архангельское", city: "Москва", type: "Усадьба", capacity: 200, price: 150000, img: "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=300" },
-            { id: 4, name: "Отель Ритц", city: "Москва", type: "Отель", capacity: 150, price: 120000, img: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=300" },
-            { id: 5, name: "ДК Ленсовета", city: "СПб", type: "ДК", capacity: 800, price: 90000, img: "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=300" },
-            { id: 6, name: "Лофт Красный", city: "Москва", type: "Лофт", capacity: 250, price: 70000, img: "https://images.unsplash.com/photo-1554189097-ffe88e998a2b?w=300" }
-        ];
-
-        // === ЗАГРУЗКА ДАННЫХ ===
-        async function loadData() {
-            try {
-                // Пробуем загрузить реальные данные
-                const [aRes, vRes, eRes] = await Promise.all([
-                    fetch(SHEET_API_URL + '?action=artists').then(r => r.json()).catch(() => null),
-                    fetch(SHEET_API_URL + '?action=venues').then(r => r.json()).catch(() => null),
-                    fetch(SHEET_API_URL + '?action=events').then(r => r.json()).catch(() => null)
-                ]);
-
-                artists = aRes && aRes.length ? aRes : MOCK_ARTISTS;
-                venues = vRes && vRes.length ? vRes : MOCK_VENUES;
-                events = eRes && eRes.length ? eRes : [];
-            } catch (err) {
-                console.log('API недоступен, используем demo-данные:', err);
-                artists = MOCK_ARTISTS;
-                venues = MOCK_VENUES;
-            }
-            renderHome();
-        }
-
-        // === НАВИГАЦИЯ ===
-        function navigateTo(screenId, navEl) {
-            document.querySelectorAll('.screen').forEach(el => el.classList.remove('active'));
-            document.getElementById(screenId).classList.add('active');
-
-            document.querySelectorAll('.nav-icon').forEach(el => el.classList.remove('active'));
-            if (navEl) navEl.classList.add('active');
-
-            if (screenId === 'screen-home') renderHome();
-            if (screenId === 'screen-catalog') renderCatalog();
-            if (screenId === 'screen-venues') renderVenues();
-            if (screenId === 'screen-calendar') renderWheel();
-        }
-
-        // === TOAST уведомление ===
-        function showToast(msg) {
-            const toast = document.getElementById('toast');
-            toast.innerText = msg;
-            toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), 2500);
-        }
-
-        // === ГЛАВНАЯ ===
-        function renderHome() {
-            // Показываем имя пользователя из Telegram
-            const userBlock = document.getElementById('user-id-block');
-            if (tgUser && tgUser.first_name) {
-                userBlock.innerHTML = `${tgUser.first_name}${tgUser.last_name ? ' ' + tgUser.last_name : ''}<span>ID: ${tgUser.id || 'guest'}</span>`;
-            } else {
-                userBlock.innerHTML = `KARL & BAND<span>ID: 001 (гость)</span>`;
-            }
-
-            const container = document.getElementById('users-container');
-            container.innerHTML = '';
-            const users = artists.slice(0, 6);
-            const positions = [
-                { x: "20%", y: "25%" }, { x: "75%", y: "20%" },
-                { x: "15%", y: "70%" }, { x: "80%", y: "65%" },
-                { x: "8%", y: "48%" },  { x: "87%", y: "45%" }
-            ];
-            users.forEach((user, i) => {
-                let cell = document.createElement('div');
-                cell.className = 'user-cell';
-                cell.style.left = positions[i].x;
-                cell.style.top = positions[i].y;
-                cell.style.backgroundImage = `url('${user.img}')`;
-                cell.onclick = () => openArtist(user.id);
-                container.appendChild(cell);
-            });
-        }
-
-        // === КАТАЛОГ АРТИСТОВ ===
-        let currentFilter = 'all';
-        function setFilter(btn, filter) {
-            currentFilter = filter;
-            document.querySelectorAll('#screen-catalog .filter-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            renderCatalog();
-        }
-        function filterArtists(query) { renderCatalog(query); }
-
-        function renderCatalog(query = '') {
-            const grid = document.getElementById('artists-grid');
-            if (!grid) return;
-            grid.innerHTML = '';
-            let filtered = artists;
-            if (currentFilter !== 'all') filtered = filtered.filter(a => a.genre === currentFilter);
-            if (query) filtered = filtered.filter(a => a.name.toLowerCase().includes(query.toLowerCase()));
-
-            filtered.forEach(artist => {
-                let cell = document.createElement('div');
-                cell.className = 'catalog-cell';
-                cell.style.backgroundImage = `url('${artist.img}')`;
-                cell.innerHTML = `<span>${artist.name}</span>`;
-                cell.onclick = () => openArtist(artist.id);
-                grid.appendChild(cell);
-            });
-            if (filtered.length === 0) grid.innerHTML = '<p style="color:#6E6E73; grid-column: 1/-1;">Никого не найдено</p>';
-        }
-
-        // === ДЕТАЛИ АРТИСТА ===
-        function openArtist(id) {
-            const artist = artists.find(a => a.id === id);
-            if (!artist) return;
-            const container = document.getElementById('artist-detail-content');
-            
-            // Мини-календарь со всеми днями месяца
-            let daysHTML = '';
-            const daysInMonth = new Date(state.year, state.monthIndex + 1, 0).getDate();
-            for (let d = 1; d <= daysInMonth; d++) {
-                const dateStr = `${state.year}-${String(state.monthIndex + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
-                const ev = events.find(e => e.date === dateStr && e.artistId === artist.id);
-                let statusClass = 'status-free'; // По умолчанию свободен (зеленый шестиугольник)
-                let letter = 'С';
-                if (ev) {
-                    if (ev.status === 'busy') { statusClass = 'status-busy'; letter = 'З'; }
-                    else if (ev.status === 'req') { statusClass = 'status-req'; letter = '?'; }
-                    else if (ev.status === 'active') { statusClass = 'status-active'; letter = 'А'; }
-                    else if (ev.status === 'confirm') { statusClass = 'status-confirm'; letter = 'П'; }
-                }
-                daysHTML += `<div class="day ${statusClass}" title="${dateStr}">${letter}</div>`;
-            }
-
-            const isInProject = userProject.some(p => p.id === artist.id && p.type === 'artist');
-            container.innerHTML = `
-                <div class="detail-photo" style="background-image: url('${artist.img}')"></div>
-                <div class="detail-name">${artist.name}</div>
-                <div class="detail-spec">${artist.spec} · ${artist.city}</div>
-                <div style="margin-bottom:20px; color:#6E6E73; text-align:center;">Рейтинг: ⭐ ${artist.rating} · Гонорар: от ${artist.price.toLocaleString()} ₽</div>
-                
-                <h3 style="color:#1A1A1A;">Занятость на месяц</h3>
-                <div class="mini-calendar">
-                    <h3>${['Янв','Фев','Мар','Апр','Май','Июн','Июл','Авг','Сен','Окт','Ноя','Дек'][state.monthIndex]} ${state.year}</h3>
-                    <div class="days-grid">${daysHTML}</div>
-                    <div style="margin-top: 10px; font-size:11px; color:#6E6E73;">
-                        <span style="margin-right:8px;"><span class="status-free" style="display:inline-block;width:12px;height:12px;"></span> Свободен</span>
-                        <span style="margin-right:8px;"><span class="status-busy" style="display:inline-block;width:12px;height:12px;"></span> Занят</span>
-                        <span style="margin-right:8px;"><span class="status-req" style="display:inline-block;width:12px;height:12px;"></span> Запрос</span>
-                        <span><span class="status-active" style="display:inline-block;width:12px;height:12px;"></span> Актив</span>
-                    </div>
-                </div>
-                
-                <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center;">
-                    <button onclick="alert('Запрос на бронирование отправлен!')">Пригласить</button>
-                    <button class="${isInProject ? 'btn-secondary' : ''}" onclick='toggleProject(${JSON.stringify(artist).replace(/'/g, "&#39;")}, "artist", this)'>
-                        ${isInProject ? '✓ В проекте' : '+ В проект'}
-                    </button>
-                </div>
-            `;
-            navigateTo('screen-artist');
-        }
-
-        // === ДОБАВЛЕНИЕ В ПРОЕКТ ===
-        function toggleProject(item, type, btn) {
-            const idx = userProject.findIndex(p => p.id === item.id && p.type === type);
-            if (idx > -1) {
-                userProject.splice(idx, 1);
-                btn.innerText = '+ В проект';
-                btn.classList.remove('btn-secondary');
-                showToast('Удалён из проекта');
-            } else {
-                userProject.push({ ...item, type });
-                btn.innerText = '✓ В проекте';
-                btn.classList.add('btn-secondary');
-                showToast(`"${item.name}" добавлен в проект!`);
-            }
-            localStorage.setItem('userProject', JSON.stringify(userProject));
-        }
-
-        // === КАТАЛОГ ПЛОЩАДОК ===
-        function filterVenues(query) { renderVenues(query); }
-
-        function renderVenues(query = '') {
-            const grid = document.getElementById('venues-grid');
-            if (!grid) return;
-            grid.innerHTML = '';
-            let filtered = venues;
-            if (query) filtered = filtered.filter(v => v.name.toLowerCase().includes(query.toLowerCase()));
-
-            filtered.forEach(venue => {
-                let cell = document.createElement('div');
-                cell.className = 'catalog-cell';
-                cell.style.backgroundImage = `url('${venue.img}')`;
-                cell.innerHTML = `<span>${venue.name}</span>`;
-                cell.onclick = () => openVenue(venue.id);
-                grid.appendChild(cell);
-            });
-            if (filtered.length === 0) grid.innerHTML = '<p style="color:#6E6E73; grid-column: 1/-1;">Ничего не найдено</p>';
-        }
-
-        // === ДЕТАЛИ ПЛОЩАДКИ ===
-        function openVenue(id) {
-            const venue = venues.find(v => v.id === id);
-            if (!venue) return;
-            const container = document.getElementById('venue-detail-content');
-            const isInProject = userProject.some(p => p.id === venue.id && p.type === 'venue');
-            
-            container.innerHTML = `
-                <div class="detail-photo" style="background-image: url('${venue.img}')"></div>
-                <div class="detail-name">${venue.name}</div>
-                <div class="detail-spec">${venue.type} · ${venue.city}</div>
-                <div style="margin-bottom:20px; color:#6E6E73; text-align:center;">
-                    Вместимость: ${venue.capacity} чел · Аренда: от ${venue.price.toLocaleString()} ₽
-                </div>
-                
-                <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center;">
-                    <button onclick="alert('Запрос брони отправлен!')">Запросить бронь</button>
-                    <button class="${isInProject ? 'btn-secondary' : ''}" onclick='toggleProject(${JSON.stringify(venue).replace(/'/g, "&#39;")}, "venue", this)'>
-                        ${isInProject ? '✓ В проекте' : '+ В проект'}
-                    </button>
-                </div>
-            `;
-            navigateTo('screen-venue');
-        }
-
-        // === ЦИФЕРБЛАТ (Календарь) ===
-        const months = ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'];
-        function changeYear(delta) {
-            state.year += delta;
-            document.getElementById('year-display').innerText = state.year;
-            renderWheel();
-        }
-        function renderWheel() {
-            const container = document.getElementById('wheel-container');
-            if (!container) return;
-            container.innerHTML = '';
-            for (let m = 0; m < 12; m++) {
-                let angle = m * 30;
-                let sector = document.createElement('div');
-                sector.className = 'month-sector';
-                sector.style.transform = `rotate(${angle}deg)`;
-                let daysHTML = '';
-                const daysInMonth = new Date(state.year, m + 1, 0).getDate();
-                // Показываем все дни месяца
-                for (let d = 1; d <= daysInMonth; d++) {
-                    let statusClass = 'status-free';
-                    let letter = 'С';
-                    const dateStr = `${state.year}-${String(m + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
-                    const ev = events.find(e => e.date === dateStr);
-                    if (ev) {
-                        if (ev.status === 'busy') { statusClass = 'status-busy'; letter = 'З'; }
-                        else if (ev.status === 'req') { statusClass = 'status-req'; letter = '?'; }
-                        else if (ev.status === 'active') { statusClass = 'status-active'; letter = 'А'; }
-                        else if (ev.status === 'confirm') { statusClass = 'status-confirm'; letter = 'П'; }
-                    }
-                    daysHTML += `<div class="inner-hex ${statusClass}">${letter}</div>`;
-                }
-                sector.innerHTML = `<div class="month-title">${months[m]}</div><div class="inner-hexes">${daysHTML}</div>`;
-                sector.onclick = () => openMonth(m);
-                container.appendChild(sector);
-            }
-        }
-        function openMonth(m) {
-            document.getElementById('modal-date').innerText = `${months[m]} ${state.year}`;
-            // Собираем события месяца
-            let monthEvents = '';
-            const daysInMonth = new Date(state.year, m + 1, 0).getDate();
-            for (let d = 1; d <= daysInMonth; d++) {
-                const dateStr = `${state.year}-${String(m + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
-                const dayEvents = events.filter(e => e.date === dateStr);
-                if (dayEvents.length) {
-                    dayEvents.forEach(ev => {
-                        monthEvents += `<p style="font-size:13px;"><b>${d} ${months[m]}:</b> ${ev.time} — ${ev.type || 'Событие'}</p>`;
-                    });
-                }
-            }
-            document.getElementById('modal-body').innerHTML = monthEvents || '<p style="color:#6E6E73;">Событий в этом месяце нет</p>';
-            document.getElementById('day-details-modal').style.display = 'block';
-        }
-        function closeModal() { document.getElementById('day-details-modal').style.display = 'none'; }
-
-        // === ИИ-ПОДБОР ===
-        function runAIMatch() {
-            const date = document.getElementById('match-date').value;
-            const genre = document.getElementById('match-genre').value;
-            const budget = parseInt(document.getElementById('match-budget').value) || 0;
-            const city = document.getElementById('match-city').value.trim().toLowerCase();
-
-            const resultsContainer = document.getElementById('match-results');
-            resultsContainer.innerHTML = '<div class="no-results">⏳ Анализируем базу...</div>';
-
-            setTimeout(() => {
-                const scored = artists.map(artist => {
-                    let score = 0;
-                    const reasons = [];
-
-                    // Жёсткий фильтр: свободен ли в дату
-                    if (date && !artist.freeDates.includes(date)) {
-                        return { ...artist, score: 0, reasons: ['Занят в эту дату'], filtered: true };
-                    }
-
-                    if (genre === 'any' || artist.genre === genre) { score += 30; reasons.push(`Жанр: ${artist.genre}`); }
-                    if (artist.city.toLowerCase().includes(city) || city.includes(artist.city.toLowerCase())) { score += 25; reasons.push(`Город: ${artist.city}`); }
-                    if (budget > 0 && artist.price <= budget) {
-                        score += Math.round(20 * (artist.price / budget));
-                        reasons.push(`В бюджет: ${artist.price.toLocaleString()} ₽`);
-                    } else if (budget > 0 && artist.price > budget) {
-                        reasons.push('Дороже бюджета');
-                    }
-                    score += Math.round((artist.rating / 5) * 15);
-                    reasons.push(`Рейтинг: ${artist.rating}`);
-                    if (artist.verified) { score += 10; reasons.push('Верифицирован'); }
-                    if (date && artist.freeDates.includes(date)) reasons.push(`Свободен ${date}`);
-
-                    return { ...artist, score, reasons };
-                })
-                .filter(a => !a.filtered && a.score > 0)
-                .sort((a, b) => b.score - a.score)
-                .slice(0, 10);
-
-                if (scored.length === 0) {
-                    resultsContainer.innerHTML = '<div class="no-results">😔 Никого не найдено. Попробуйте изменить параметры.</div>';
-                    return;
-                }
-
-                resultsContainer.innerHTML = `<h3 style="color:#1A1A1A; margin-bottom:12px; font-size:16px;">Найдено ${scored.length} кандидатов:</h3>`;
-                
-                scored.forEach(artist => {
-                    const isInProject = userProject.some(p => p.id === artist.id && p.type === 'artist');
-                    const card = document.createElement('div');
-                    card.className = 'match-card';
-                    card.innerHTML = `
-                        <div class="avatar" style="background-image: url('${artist.img}')"></div>
-                        <div class="info">
-                            <div class="name">${artist.name}</div>
-                            <div class="spec">${artist.spec} · ${artist.city}</div>
-                            <div class="reason">${artist.reasons.join(' · ')}</div>
-                        </div>
-                        <div class="right-block">
-                            <div class="score">${artist.score}%<small>матч</small></div>
-                            <button class="add-btn">${isInProject ? '✓ Добавлен' : '+ В проект'}</button>
-                        </div>
-                    `;
-                    // Клик по карточке (кроме кнопки) открывает профиль
-                    card.onclick = (e) => {
-                        if (e.target.classList.contains('add-btn')) return;
-                        openArtist(artist.id);
-                    };
-                    // Кнопка "Добавить в проект"
-                    card.querySelector('.add-btn').onclick = (e) => {
-                        e.stopPropagation();
-                        toggleProject(artist, 'artist', e.target);
-                    };
-                    resultsContainer.appendChild(card);
-                });
-            }, 800);
-        }
-
-        // === СТАРТ ===
-        loadData();
-    </script>
+loadData();
+</script>
 </body>
 </html>
