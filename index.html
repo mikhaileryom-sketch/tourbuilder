@@ -17,15 +17,15 @@ button:active{transform:scale(.95)}
 .btn-secondary{background:#FFF;color:#EC4899;border:2px solid #EC4899;box-shadow:none}
 /* HOME */
 #screen-home .honeycomb-frame{position:relative;width:96vw;height:88dvh;clip-path:polygon(25% 0%,75% 0%,100% 25%,100% 75%,75% 100%,25% 100%,0% 75%,0% 25%);background:#FFF;border:2px solid rgba(236,72,153,.2);box-shadow:0 10px 30px rgba(0,0,0,.05);display:flex;justify-content:center;align-items:center}
-#screen-home .center-id{width:150px;height:150px;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background:#FFF5F9;border:3px solid #EC4899;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;font-weight:800;font-size:14px;color:#1A1A1A;z-index:15;cursor:pointer;padding:10px;box-sizing:border-box;overflow:hidden}
-#screen-home .center-id .avatar{width:45px;height:45px;border-radius:50%;background:#EC4899;color:#FFF;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;margin-bottom:5px}
-#screen-home .center-id span{font-size:10px;font-weight:400;color:#6E6E73;margin-top:3px}
-.user-cell{position:absolute;width:65px;height:65px;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background-size:cover;background-position:center;border:2px solid #E5E5EA;box-shadow:0 4px 10px rgba(0,0,0,.08);cursor:pointer;transition:transform .2s,border-color .2s;z-index:5}
-.user-cell:hover{transform:scale(1.15);border-color:#EC4899;z-index:50}
-.user-cell .role-icon{position:absolute;bottom:15px;left:15px;font-size:11px;color:#FFF;text-shadow:0 0 4px rgba(0,0,0,.9);z-index:3}
-.star-wrapper{position:absolute;top:15px;right:15px;width:14px;height:14px;z-index:3}
-.star-bg{position:absolute;inset:0;color:rgba(255,255,255,.5);font-size:13px}
-.star-fill{position:absolute;inset:0;color:#FFC107;font-size:13px;overflow:hidden;text-shadow:0 0 4px rgba(0,0,0,.8)}
+#screen-home .center-id{width:130px;height:130px;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background:#FFF5F9;border:3px solid #EC4899;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;font-weight:800;font-size:13px;color:#1A1A1A;z-index:15;cursor:pointer;padding:8px;box-sizing:border-box;overflow:hidden;position:relative}
+#screen-home .center-id .avatar{width:42px;height:42px;border-radius:50%;background:#EC4899;color:#FFF;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;margin-bottom:4px}
+#screen-home .center-id span{font-size:9px;font-weight:400;color:#6E6E73;margin-top:2px}
+.user-cell{position:absolute;width:62px;height:62px;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background-size:cover;background-position:center;border:2px solid #E5E5EA;box-shadow:0 4px 10px rgba(0,0,0,.08);cursor:pointer;transition:transform .2s,border-color .2s;z-index:5;transform:translate(-50%,-50%)}
+.user-cell:hover{transform:translate(-50%,-50%) scale(1.15);border-color:#EC4899;z-index:50}
+.role-icon{position:absolute;bottom:8px;left:8px;font-size:12px;color:#FFF;background:rgba(0,0,0,.65);border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;z-index:3}
+.star-wrapper{position:absolute;top:8px;right:8px;width:16px;height:16px;z-index:3}
+.star-bg{position:absolute;inset:0;color:rgba(255,255,255,.55);font-size:14px}
+.star-fill{position:absolute;inset:0;color:#FFC107;font-size:14px;overflow:hidden;text-shadow:0 0 3px rgba(0,0,0,.8)}
 /* CATALOG */
 .catalog-screen{background:#F5F5F7;padding-top:20px}
 .catalog-screen h1{font-size:24px;margin-bottom:20px;color:#1A1A1A}
@@ -33,12 +33,12 @@ button:active{transform:scale(.95)}
 .catalog-grid{display:grid;grid-template-columns:repeat(3,100px);gap:15px;justify-content:center}
 .catalog-cell{position:relative;width:100px;height:100px;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background-size:cover;background-position:center;border:2px solid #E5E5EA;background-color:#FFF;cursor:pointer;transition:transform .2s}
 .catalog-cell .label{position:absolute;top:42px;left:0;right:0;background:rgba(26,26,26,.85);color:#FFF;font-size:10px;text-align:center;padding:3px 2px;font-weight:600}
-.catalog-cell .role-icon{position:absolute;top:14px;left:14px;color:#FFF;text-shadow:0 0 4px #000;font-size:12px;z-index:3}
+.catalog-cell .role-icon{position:absolute;top:12px;left:12px;bottom:auto;width:22px;height:22px;font-size:13px}
 .catalog-cell:hover{transform:scale(1.05);border-color:#EC4899}
 /* DETAILS */
 .detail-screen{background:#F5F5F7;padding:20px;justify-content:flex-start !important}
 .detail-photo{width:180px;height:180px;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background-size:cover;background-position:center;border:4px solid #EC4899;margin-bottom:20px;background-color:#FFF;position:relative}
-.detail-photo .role-icon{position:absolute;bottom:25px;left:25px;color:#FFF;font-size:22px;text-shadow:0 0 8px #000;z-index:3}
+.detail-photo .role-icon{bottom:20px;left:20px;width:28px;height:28px;font-size:16px}
 .detail-name{font-size:26px;font-weight:800;color:#1A1A1A;text-align:center}
 .detail-spec{font-size:15px;color:#6E6E73;margin-bottom:15px;text-align:center}
 .mini-calendar{width:100%;max-width:400px;background:#FFF;border-radius:15px;padding:15px;margin-bottom:20px;box-shadow:0 4px 10px rgba(0,0,0,.03)}
@@ -50,15 +50,27 @@ button:active{transform:scale(.95)}
 .status-req{background:#FFEB3B;border-radius:4px;color:#000;font-weight:bold;display:flex;justify-content:center;align-items:center}
 .status-active{background:#2196F3;clip-path:polygon(50% 0%,100% 100%,0% 100%);color:#FFF;font-weight:bold;display:flex;justify-content:center;align-items:center}
 .status-confirm{background:#9C27B0;clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);color:#FFF;font-weight:bold;display:flex;justify-content:center;align-items:center}
-/* CALENDAR */
+/* CALENDAR — 3 key months */
 #screen-calendar{background:#F5F5F7;padding:20px;justify-content:flex-start !important;overflow-y:auto}
-#screen-calendar h1{color:#1A1A1A;margin-bottom:10px}
-#wheel-container{position:relative;width:340px;height:340px;margin:20px auto}
-.month-sector{position:absolute;top:50%;left:50%;width:66px;height:160px;margin-top:-160px;margin-left:-33px;transform-origin:50% 100%;clip-path:polygon(20% 100%,80% 100%,100% 0,0 0);background:#FFF;border:2px solid #E5E5EA;display:flex;flex-direction:column;align-items:center;justify-content:space-around;padding:4px;cursor:pointer;transition:background .3s,transform .3s}
-.month-sector:hover{background:rgba(236,72,153,.1);transform:scale(1.1);z-index:10}
-.month-title{font-size:11px;font-weight:bold;color:#EC4899}
-.inner-hexes{display:flex;flex-wrap:wrap;justify-content:center;gap:2px}
-.inner-hex{width:13px;height:13px;font-size:8px;line-height:13px;text-align:center}
+#screen-calendar h1{color:#1A1A1A;margin-bottom:10px;text-align:center}
+.year-nav{display:flex;gap:20px;margin-bottom:15px;align-items:center;justify-content:center}
+.month-cards{display:flex;flex-direction:column;gap:20px;width:100%;max-width:400px}
+.month-card{background:#FFF;border-radius:16px;padding:16px;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+.month-card h3{text-align:center;color:#EC4899;font-size:16px;margin-bottom:12px;font-weight:800}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:10px}
+.cal-dow{text-align:center;font-size:10px;color:#6E6E73;font-weight:600;padding:4px 0}
+.cal-cell{aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:8px;font-size:12px;font-weight:600;color:#1A1A1A;cursor:pointer;position:relative}
+.cal-cell.empty{color:transparent;pointer-events:none}
+.cal-cell .dot{position:absolute;bottom:3px;width:6px;height:6px;border-radius:50%}
+.cal-cell.free .dot{background:#4CAF50}
+.cal-cell.busy .dot{background:#F44336}
+.cal-cell.req .dot{background:#FFEB3B}
+.cal-cell.active .dot{background:#2196F3}
+.cal-cell.confirm .dot{background:#9C27B0}
+.cal-cell.today{border:2px solid #EC4899}
+.cal-legend{display:flex;flex-wrap:wrap;gap:10px;font-size:10px;color:#6E6E73;justify-content:center;margin-top:8px}
+.cal-legend span{display:flex;align-items:center;gap:4px}
+.cal-legend i{width:8px;height:8px;border-radius:50%;display:inline-block}
 /* MATCH */
 #screen-match{background:#F5F5F7;padding:20px;justify-content:flex-start !important;overflow-y:auto}
 .form-group{width:100%;max-width:400px;margin-bottom:12px}
@@ -105,27 +117,25 @@ button:active{transform:scale(.95)}
 .toast{position:fixed;top:30px;left:50%;transform:translateX(-50%) translateY(-100px);background:#1A1A1A;color:#FFF;padding:12px 25px;border-radius:30px;font-size:14px;font-weight:600;z-index:9999;transition:transform .4s cubic-bezier(.175,.885,.32,1.275);box-shadow:0 10px 30px rgba(0,0,0,.2)}
 .toast.show{transform:translateX(-50%) translateY(0)}
 .back-btn{position:absolute;top:20px;left:20px;background:#FFF;color:#1A1A1A;font-size:24px;border-radius:50%;width:45px;height:45px;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:200;border:1px solid #E5E5EA}
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:5000;justify-content:center;align-items:center}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:5000;justify-content:center;align-items:center;padding:20px;box-sizing:border-box}
 .modal-overlay.open{display:flex}
-.modal-content{background:#FFF;border-radius:20px;padding:20px;width:90%;max-width:400px;max-height:80vh;overflow-y:auto}
+.modal-content{background:#FFF;border-radius:20px;padding:20px;width:100%;max-width:400px;max-height:85vh;overflow-y:auto}
 .modal-content h3{margin:0 0 15px;color:#EC4899}
 </style>
 </head>
 <body>
 
-<!-- HOME -->
 <div id="screen-home" class="screen active">
   <div class="honeycomb-frame">
     <div class="center-id" id="user-id-block" onclick="openProfileOrCreate()">
       <div class="avatar">T</div>
       TourBuilder
-      <span>Маркетплейс событий</span>
+      <span>Маркетплейс</span>
     </div>
     <div id="users-container"></div>
   </div>
 </div>
 
-<!-- CATALOG -->
 <div id="screen-catalog" class="screen catalog-screen">
   <button class="back-btn" onclick="navigateTo('screen-home')">←</button>
   <h1>Артисты</h1>
@@ -133,25 +143,22 @@ button:active{transform:scale(.95)}
   <div class="catalog-grid" id="artists-grid"></div>
 </div>
 
-<!-- ARTIST DETAIL -->
 <div id="screen-artist" class="screen detail-screen">
   <button class="back-btn" onclick="navigateTo('screen-catalog')">←</button>
   <div id="artist-detail-content"></div>
 </div>
 
-<!-- CALENDAR -->
 <div id="screen-calendar" class="screen">
   <button class="back-btn" onclick="navigateTo('screen-home')">←</button>
   <h1>Календарь</h1>
-  <div style="display:flex;gap:20px;margin-bottom:10px;align-items:center">
+  <div class="year-nav">
     <button onclick="changeYear(-1)">←</button>
     <span id="year-display" style="font-size:24px;font-weight:bold">2026</span>
     <button onclick="changeYear(1)">→</button>
   </div>
-  <div id="wheel-container"></div>
+  <div class="month-cards" id="month-cards"></div>
 </div>
 
-<!-- MATCH -->
 <div id="screen-match" class="screen">
   <button class="back-btn" onclick="navigateTo('screen-home')">←</button>
   <h1>🔍 ИИ-Подбор</h1>
@@ -164,7 +171,6 @@ button:active{transform:scale(.95)}
   <div id="match-results"></div>
 </div>
 
-<!-- VENUES -->
 <div id="screen-venues" class="screen catalog-screen">
   <button class="back-btn" onclick="navigateTo('screen-home')">←</button>
   <h1>Площадки</h1>
@@ -172,17 +178,15 @@ button:active{transform:scale(.95)}
   <div id="venues-grid"></div>
 </div>
 
-<!-- VENUE DETAIL -->
 <div id="screen-venue" class="screen detail-screen">
   <button class="back-btn" onclick="navigateTo('screen-venues')">←</button>
   <div id="venue-detail-content"></div>
 </div>
 
-<!-- PROFILE -->
 <div id="screen-profile" class="screen">
   <button class="back-btn" onclick="navigateTo('screen-home')">←</button>
   <div class="profile-header" id="profile-header"></div>
-  <div class="profile-tabs" id="profile-tabs">
+  <div class="profile-tabs">
     <div class="profile-tab active" onclick="switchTab(this,'tab-main')">Основное</div>
     <div class="profile-tab" onclick="switchTab(this,'tab-media')">Медиа</div>
     <div class="profile-tab" onclick="switchTab(this,'tab-experience')">Опыт</div>
@@ -202,14 +206,12 @@ button:active{transform:scale(.95)}
   </div>
 </div>
 
-<!-- MODAL -->
 <div class="modal-overlay" id="modal-overlay" onclick="if(event.target===this)closeModal()">
   <div class="modal-content" id="modal-content"></div>
 </div>
 
 <div class="toast" id="toast"></div>
 
-<!-- NAV -->
 <div class="bottom-nav">
   <div class="nav-icon active" onclick="navigateTo('screen-home',this)"><i class="fa-solid fa-house"></i></div>
   <div class="nav-icon" onclick="navigateTo('screen-catalog',this)"><i class="fa-solid fa-users"></i></div>
@@ -219,7 +221,6 @@ button:active{transform:scale(.95)}
 </div>
 
 <script>
-// Telegram SDK
 let tgUser = null;
 if (window.Telegram?.WebApp) {
   const tg = window.Telegram.WebApp;
@@ -228,11 +229,10 @@ if (window.Telegram?.WebApp) {
   tgUser = tg.initDataUnsafe?.user || null;
 }
 
-const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbyPxZIefmkAWkjY3rWc7I2JHNZuIZ9wvN9TQklTB_x7mH4bgbvgnEGnff3HBzObs09y/exec';
+const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbx5C0kdq70dktEHFoBp0DXqI4CbYadpdmLqGJS2GvWh-wo-Q2NJIfubatqg_scx6Cez/exec';
 
-// === ИКОНКИ РОЛЕЙ ===
 const ROLE_ICONS = {
-  dancer:'fa-person-running', ballet:'fa-shoe-prints', singer:'fa-microphone',
+  dancer:'fa-person-running', ballet:'fa-child-reaching', singer:'fa-microphone',
   actor:'fa-masks-theater', host:'fa-microphone-lines', musician:'fa-music',
   guitarist:'fa-guitar', drummer:'fa-drum', pianist:'fa-piano-keyboard',
   dj:'fa-compact-disc', magician:'fa-hat-wizard', artist:'fa-paintbrush',
@@ -252,10 +252,10 @@ const ROLE_NAMES = {
 
 let artists = [], venues = [], events = [];
 let currentArtist = null;
+let profileData = { media:[], experience:[], education:[], inventory:[], costumes:[] };
 let userProject = JSON.parse(localStorage.getItem('userProject')||'[]');
-let state = { year:2026, monthIndex:8, day:1 };
+let state = { year: new Date().getFullYear(), monthIndex: new Date().getMonth() };
 
-// === ЗАГРУЗКА ===
 async function loadData() {
   try {
     const [a,v,e] = await Promise.all([
@@ -263,10 +263,10 @@ async function loadData() {
       fetch(SHEET_API_URL+'?action=venues').then(r=>r.json()).catch(()=>null),
       fetch(SHEET_API_URL+'?action=events').then(r=>r.json()).catch(()=>null)
     ]);
-    artists = a && a.length ? a : [];
-    venues = v && v.length ? v : [];
-    events = e && e.length ? e : [];
-  } catch(err) { console.log('err',err); }
+    artists = Array.isArray(a) ? a : [];
+    venues = Array.isArray(v) ? v : [];
+    events = Array.isArray(e) ? e : [];
+  } catch(err) { console.log('loadData err', err); }
   renderHome();
 }
 
@@ -278,7 +278,7 @@ function navigateTo(id, el) {
   if(id==='screen-home') renderHome();
   if(id==='screen-catalog') renderCatalog();
   if(id==='screen-venues') renderVenues();
-  if(id==='screen-calendar') renderWheel();
+  if(id==='screen-calendar') renderCalendar();
   if(id==='screen-profile') renderProfile();
 }
 
@@ -293,28 +293,28 @@ function openModal(html){
 }
 function closeModal(){ document.getElementById('modal-overlay').classList.remove('open'); }
 
-// === HOME ===
+// === HOME: 8 positions around center using calc(50% + Xpx) ===
 function renderHome(){
   const blk = document.getElementById('user-id-block');
   if(tgUser?.first_name){
     blk.innerHTML = `<div class="avatar">${(tgUser.first_name[0]||'?').toUpperCase()}</div>${tgUser.first_name}<span>ID: ${tgUser.id}</span>`;
   } else {
-    blk.innerHTML = `<div class="avatar">T</div>TourBuilder<span>Маркетплейс событий</span>`;
+    blk.innerHTML = `<div class="avatar">T</div>TourBuilder<span>Маркетплейс</span>`;
   }
   const c = document.getElementById('users-container');
   c.innerHTML = '';
+  // Позиции относительно центра контейнера (X, Y в пикселях)
   const positions = [
-    {x:"18%",y:"22%"},{x:"50%",y:"12%"},{x:"80%",y:"22%"},
-    {x:"10%",y:"48%"},{x:"90%",y:"48%"},
-    {x:"18%",y:"75%"},{x:"50%",y:"85%"},{x:"80%",y:"75%"},
-    {x:"35%",y:"55%"}
+    {x:-100, y:-165}, {x:0, y:-190}, {x:100, y:-165},   // верхний ряд (3)
+    {x:-130, y:-15},  {x:130, y:-15},                     // средний ряд (2)
+    {x:-100, y:150},  {x:0, y:170},   {x:100, y:150}      // нижний ряд (3)
   ];
-  artists.slice(0,9).forEach((a,i)=>{
+  artists.slice(0,8).forEach((a,i)=>{
     if(!positions[i]) return;
     const cell = document.createElement('div');
     cell.className = 'user-cell';
-    cell.style.left = positions[i].x;
-    cell.style.top = positions[i].y;
+    cell.style.left = `calc(50% + ${positions[i].x}px)`;
+    cell.style.top  = `calc(50% + ${positions[i].y}px)`;
     cell.style.backgroundImage = `url('${a.img||''}')`;
     const roleIcon = ROLE_ICONS[a.role] || 'fa-star';
     cell.innerHTML = `<i class="fa-solid ${roleIcon} role-icon"></i>`;
@@ -328,7 +328,6 @@ function renderHome(){
   });
 }
 
-// === CATALOG ===
 function filterArtists(q){ renderCatalog(q); }
 function renderCatalog(q=''){
   const g=document.getElementById('artists-grid'); g.innerHTML='';
@@ -342,10 +341,9 @@ function renderCatalog(q=''){
     c.onclick=()=>openArtist(a.id);
     g.appendChild(c);
   });
-  if(!list.length) g.innerHTML='<p style="color:#6E6E73;grid-column:1/-1">Никого не найдено</p>';
+  if(!list.length) g.innerHTML='<p style="color:#6E6E73;grid-column:1/-1;text-align:center">Никого не найдено</p>';
 }
 
-// === ARTIST ===
 function openArtist(id){
   const a = artists.find(x=>x.id===id);
   if(!a) return;
@@ -373,7 +371,7 @@ function openArtist(id){
     <div class="detail-name">${a.name||''}</div>
     <div class="detail-spec">${ROLE_NAMES[a.role]||a.spec||''} · ${a.city||''}</div>
     <div style="margin-bottom:20px;color:#6E6E73;text-align:center">⭐ ${a.rating||0} · от ${(a.price||0).toLocaleString()} ₽</div>
-    <h3 style="color:#1A1A1A;font-size:15px">Занятость на ${['Янв','Фев','Мар','Апр','Май','Июн','Июл','Авг','Сен','Окт','Ноя','Дек'][state.monthIndex]}</h3>
+    <h3 style="color:#1A1A1A;font-size:15px;text-align:center">Занятость на ${['Янв','Фев','Мар','Апр','Май','Июн','Июл','Авг','Сен','Окт','Ноя','Дек'][state.monthIndex]}</h3>
     <div class="mini-calendar"><div class="days-grid">${daysHTML}</div></div>
     <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
       <button onclick="alert('Запрос отправлен!')">Пригласить</button>
@@ -395,7 +393,6 @@ function toggleProject(item,type,btn){
   localStorage.setItem('userProject', JSON.stringify(userProject));
 }
 
-// === VENUES ===
 function filterVenues(q){ renderVenues(q); }
 function renderVenues(q=''){
   const g=document.getElementById('venues-grid'); g.innerHTML='';
@@ -409,7 +406,7 @@ function renderVenues(q=''){
     c.onclick=()=>openVenue(v.id);
     g.appendChild(c);
   });
-  if(!list.length) g.innerHTML='<p style="color:#6E6E73;grid-column:1/-1">Пока нет площадок</p>';
+  if(!list.length) g.innerHTML='<p style="color:#6E6E73;grid-column:1/-1;text-align:center">Пока нет площадок.<br><small>Добавьте лист Venues в Google Sheets.</small></p>';
 }
 function openVenue(id){
   const v=venues.find(x=>x.id===id); if(!v) return;
@@ -424,37 +421,78 @@ function openVenue(id){
   navigateTo('screen-venue');
 }
 
-// === CALENDAR ===
-const months = ['Янв','Фев','Мар','Апр','Май','Июн','Июл','Авг','Сен','Окт','Ноя','Дек'];
-function changeYear(d){ state.year+=d; document.getElementById('year-display').innerText=state.year; renderWheel(); }
-function renderWheel(){
-  const c=document.getElementById('wheel-container'); c.innerHTML='';
-  const keyDays=[1,3,5,7,10,12,14,16,18,20,25,28];
-  for(let m=0;m<12;m++){
-    const sec=document.createElement('div');
-    sec.className='month-sector';
-    sec.style.transform=`rotate(${m*30}deg)`;
-    let dh='';
-    const dim=new Date(state.year,m+1,0).getDate();
-    keyDays.forEach(d=>{
-      if(d>dim) return;
-      let cls='status-free',l='С';
-      const ds=`${state.year}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-      const ev=events.find(e=>e.date===ds);
-      if(ev){
-        if(ev.status==='busy'){cls='status-busy';l='З';}
-        else if(ev.status==='req'){cls='status-req';l='?';}
-        else if(ev.status==='active'){cls='status-active';l='А';}
-        else if(ev.status==='confirm'){cls='status-confirm';l='П';}
-      }
-      dh+=`<div class="inner-hex ${cls}">${l}</div>`;
-    });
-    sec.innerHTML=`<div class="month-title">${months[m]}</div><div class="inner-hexes">${dh}</div>`;
-    c.appendChild(sec);
-  }
+// === CALENDAR: 3 key month cards (prev / current / next) ===
+const months = ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
+const monthsShort = ['Янв','Фев','Мар','Апр','Май','Июн','Июл','Авг','Сен','Окт','Ноя','Дек'];
+const daysOfWeek = ['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];
+
+function changeYear(d){ state.year += d; document.getElementById('year-display').innerText = state.year; renderCalendar(); }
+
+function renderCalendar(){
+  document.getElementById('year-display').innerText = state.year;
+  const c = document.getElementById('month-cards');
+  c.innerHTML = '';
+  // показываем 3 карточки-месяца: предыдущий, текущий, следующий от выбранного месяца
+  const baseMonth = state.monthIndex;
+  const showMonths = [baseMonth - 1, baseMonth, baseMonth + 1].map(m => {
+    let mm = m, yy = state.year;
+    if(mm < 0){ mm = 11; yy--; }
+    if(mm > 11){ mm = 0; yy++; }
+    return { m: mm, y: yy };
+  });
+  showMonths.forEach(({m, y}) => {
+    c.appendChild(buildMonthCard(m, y));
+  });
 }
 
-// === MATCH ===
+function buildMonthCard(m, y){
+  const wrap = document.createElement('div');
+  wrap.className = 'month-card';
+  const dim = new Date(y, m+1, 0).getDate();
+  const firstDow = (new Date(y, m, 1).getDay() + 6) % 7; // Пн=0
+  const todayStr = new Date().toISOString().split('T')[0];
+
+  let html = `<h3>${months[m]} ${y}</h3><div class="cal-grid">`;
+  daysOfWeek.forEach(d => html += `<div class="cal-dow">${d}</div>`);
+  for(let i=0; i<firstDow; i++) html += `<div class="cal-cell empty"></div>`;
+  for(let d=1; d<=dim; d++){
+    const ds = `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const ev = events.find(e => e.date === ds);
+    let cls = 'free';
+    if(ev){
+      if(ev.status==='busy') cls='busy';
+      else if(ev.status==='req') cls='req';
+      else if(ev.status==='active') cls='active';
+      else if(ev.status==='confirm') cls='confirm';
+    }
+    const isToday = ds === todayStr ? ' today' : '';
+    html += `<div class="cal-cell ${cls}${isToday}" onclick="openDay('${ds}')"><span>${d}</span><span class="dot"></span></div>`;
+  }
+  html += `</div>`;
+  html += `<div class="cal-legend">
+    <span><i style="background:#4CAF50"></i>Свободен</span>
+    <span><i style="background:#F44336"></i>Занят</span>
+    <span><i style="background:#FFEB3B"></i>Запрос</span>
+    <span><i style="background:#2196F3"></i>Актив</span>
+    <span><i style="background:#9C27B0"></i>Подтв.</span>
+  </div>`;
+  wrap.innerHTML = html;
+  return wrap;
+}
+
+function openDay(ds){
+  const list = events.filter(e => e.date === ds);
+  let body = '';
+  if(!list.length){
+    body = '<p style="color:#6E6E73">Свободен весь день</p>';
+  } else {
+    list.forEach(e => {
+      body += `<div class="list-item"><div class="li-title">${e.time||''} — ${e.type||'Событие'}</div><div class="li-sub">${e.venue||''}</div></div>`;
+    });
+  }
+  openModal(`<h3>${ds}</h3>${body}<button onclick="closeModal()" style="width:100%;margin-top:15px">Закрыть</button>`);
+}
+
 function runAIMatch(){
   const date=document.getElementById('match-date').value;
   const genre=document.getElementById('match-genre').value;
@@ -498,12 +536,31 @@ function runAIMatch(){
   },800);
 }
 
-// === ПРОФИЛЬ / ЛИЧНЫЙ КАБИНЕТ ===
-function openProfileOrCreate(){
-  if(!tgUser){ showToast('Откройте через Telegram для создания профиля'); return; }
+// === PROFILE ===
+async function openProfileOrCreate(){
+  if(!tgUser){ showToast('Откройте через Telegram для профиля'); return; }
   const me = artists.find(a=>String(a.telegramId)===String(tgUser.id));
-  if(me){ currentArtist = me; navigateTo('screen-profile'); }
+  if(me){ currentArtist = me; await loadProfileExtras(); navigateTo('screen-profile'); }
   else { openCreateForm(); }
+}
+
+async function loadProfileExtras(){
+  if(!currentArtist) return;
+  try {
+    const [m,e,ed,inv,cost] = await Promise.all([
+      fetch(SHEET_API_URL+'?action=media').then(r=>r.json()).catch(()=>[]),
+      fetch(SHEET_API_URL+'?action=experience').then(r=>r.json()).catch(()=>[]),
+      fetch(SHEET_API_URL+'?action=education').then(r=>r.json()).catch(()=>[]),
+      fetch(SHEET_API_URL+'?action=inventory').then(r=>r.json()).catch(()=>[]),
+      fetch(SHEET_API_URL+'?action=costumes').then(r=>r.json()).catch(()=>[])
+    ]);
+    const id = String(currentArtist.id);
+    profileData.media = (Array.isArray(m)?m:[]).filter(x=>String(x.artistId)===id);
+    profileData.experience = (Array.isArray(e)?e:[]).filter(x=>String(x.artistId)===id);
+    profileData.education = (Array.isArray(ed)?ed:[]).filter(x=>String(x.artistId)===id);
+    profileData.inventory = (Array.isArray(inv)?inv:[]).filter(x=>String(x.artistId)===id);
+    profileData.costumes = (Array.isArray(cost)?cost:[]).filter(x=>String(x.artistId)===id);
+  } catch(err){ console.log('profile extras err', err); }
 }
 
 function openCreateForm(){
@@ -511,9 +568,7 @@ function openCreateForm(){
     <h3>Создать профиль</h3>
     <div class="form-group"><label>Имя</label><input id="cf-name" value="${tgUser?.first_name||''}"></div>
     <div class="form-group"><label>Роль</label>
-      <select id="cf-role">
-        ${Object.keys(ROLE_NAMES).map(k=>`<option value="${k}">${ROLE_NAMES[k]}</option>`).join('')}
-      </select>
+      <select id="cf-role">${Object.keys(ROLE_NAMES).map(k=>`<option value="${k}">${ROLE_NAMES[k]}</option>`).join('')}</select>
     </div>
     <div class="form-group"><label>Город</label><input id="cf-city" placeholder="Москва"></div>
     <div class="form-group"><label>Гонорар, ₽</label><input id="cf-price" type="number" value="15000"></div>
@@ -523,24 +578,21 @@ function openCreateForm(){
 }
 
 async function submitCreateProfile(){
+  const role = document.getElementById('cf-role').value;
   const body = {
-    action:'createArtist',
-    telegramId: tgUser.id,
+    action:'createArtist', telegramId: tgUser.id,
     name: document.getElementById('cf-name').value,
-    role: document.getElementById('cf-role').value,
-    city: document.getElementById('cf-city').value,
+    role, city: document.getElementById('cf-city').value,
     price: document.getElementById('cf-price').value,
     contacts: document.getElementById('cf-contacts').value,
-    img: 'https://mikhaileryom-sketch.github.io/tourbuilder/photos/placeholder.jpg',
-    spec: ROLE_NAMES[document.getElementById('cf-role').value],
-    specialty:'dance', genre:'dance',
+    img:'', spec: ROLE_NAMES[role], specialty:'dance', genre:'dance',
     readyToTravel:false, countries:''
   };
   try {
     const r = await fetch(SHEET_API_URL, { method:'POST', body:JSON.stringify(body) });
     const res = await r.json();
-    if(res.success){ showToast('Профиль создан!'); closeModal(); loadData(); }
-    else showToast('Ошибка: '+res.error);
+    if(res.success){ showToast('Профиль создан!'); closeModal(); await loadData(); }
+    else showToast('Ошибка: '+(res.error||''));
   } catch(e){ showToast('Ошибка сети'); }
 }
 
@@ -559,19 +611,41 @@ function renderProfile(){
     <div class="field-row"><span class="lbl">Специализация</span><span class="val">${a.spec||'—'}</span></div>
     <div class="field-row"><span class="lbl">Жанры</span><span class="val">${a.genre||'—'}</span></div>
     <div class="field-row"><span class="lbl">Город</span><span class="val">${a.city||'—'}</span></div>
-    <div class="field-row"><span class="lbl">Телефон/контакт</span><span class="val">${a.contacts||'—'}</span></div>
+    <div class="field-row"><span class="lbl">Контакты</span><span class="val">${a.contacts||'—'}</span></div>
     <div class="field-row"><span class="lbl">Готов к выезду</span><span class="val">${a.readyToTravel?'Да':'Нет'}</span></div>
     <div class="field-row"><span class="lbl">Страны</span><span class="val">${a.countries||'—'}</span></div>
-    <div class="edit-section">
-      <button onclick="editMain()">Редактировать</button>
-    </div>
+    <div class="edit-section"><button onclick="editMain()">Редактировать</button></div>
   `;
-  ['media','experience','education','params','inventory','costumes'].forEach(t=>{
-    document.getElementById('tab-'+t).innerHTML = `
-      <div class="list-item"><div class="li-title">Пока нет данных</div><div class="li-sub">Добавьте информацию о себе</div></div>
-      <button class="add-btn-full" onclick="addItem('${t}')">+ Добавить</button>
-    `;
+  renderList('media','Медиа');
+  renderList('experience','Опыт');
+  renderList('education','Образование');
+  renderList('inventory','Инвентарь');
+  renderList('costumes','Костюмы');
+  document.getElementById('tab-params').innerHTML = `
+    <div class="field-row"><span class="lbl">Рост</span><span class="val">${a.height||'—'}</span></div>
+    <div class="field-row"><span class="lbl">Вес</span><span class="val">${a.weight||'—'}</span></div>
+    <div class="field-row"><span class="lbl">Размер одежды</span><span class="val">${a.clothingSize||'—'}</span></div>
+    <div class="field-row"><span class="lbl">Размер обуви</span><span class="val">${a.shoeSize||'—'}</span></div>
+    <div class="field-row"><span class="lbl">Цвет волос</span><span class="val">${a.hairColor||'—'}</span></div>
+    <div class="field-row"><span class="lbl">Цвет глаз</span><span class="val">${a.eyeColor||'—'}</span></div>
+  `;
+}
+
+function renderList(key, title){
+  const el = document.getElementById('tab-'+key);
+  const arr = profileData[key]||[];
+  if(!arr.length){
+    el.innerHTML = `<div class="list-item"><div class="li-title">Пока нет данных</div><div class="li-sub">Добавьте информацию</div></div><button class="add-btn-full" onclick="addItem('${key}')">+ Добавить</button>`;
+    return;
+  }
+  let html = '';
+  arr.forEach(item=>{
+    const t = item.name||item.project||item.institution||item.url||'—';
+    const sub = item.description||item.specialty||item.year||item.city||'';
+    html += `<div class="list-item"><div class="li-title">${t}</div><div class="li-sub">${sub}</div></div>`;
   });
+  html += `<button class="add-btn-full" onclick="addItem('${key}')">+ Добавить</button>`;
+  el.innerHTML = html;
 }
 
 function switchTab(el,panel){
@@ -616,32 +690,35 @@ async function saveMain(){
     if(res.success){
       Object.assign(currentArtist, fields);
       showToast('Профиль обновлён');
-      closeModal();
-      renderProfile();
-      loadData();
-    } else showToast('Ошибка: '+res.error);
+      closeModal(); renderProfile(); loadData();
+    } else showToast('Ошибка: '+(res.error||''));
   } catch(e){ showToast('Ошибка сети'); }
 }
 
 function addItem(type){
-  const title = {media:'Медиа',experience:'Опыт',education:'Образование',params:'Параметры',inventory:'Инвентарь',costumes:'Костюмы'}[type];
+  const title = {media:'Медиа',experience:'Опыт',education:'Образование',inventory:'Инвентарь',costumes:'Костюмы'}[type]||type;
   openModal(`<h3>Добавить: ${title}</h3>
-    <div class="form-group"><label>Название/значение</label><input id="add-val" placeholder="..."></div>
-    <div class="form-group"><label>Описание (необязательно)</label><textarea id="add-desc"></textarea></div>
+    <div class="form-group"><label>Название / ссылка</label><input id="add-val" placeholder="..."></div>
+    <div class="form-group"><label>Описание</label><textarea id="add-desc"></textarea></div>
     <button onclick="saveItem('${type}')" style="width:100%">Добавить</button>
   `);
 }
+
 async function saveItem(type){
   const val = document.getElementById('add-val').value;
   const desc = document.getElementById('add-desc').value;
   if(!val) return showToast('Введите значение');
-  const actionMap = {media:'addMedia',experience:'addExperience',education:'addEducation',inventory:'addInventory',costumes:'addCostume'};
-  const action = actionMap[type] || 'addMedia';
+  const map = {media:'addMedia',experience:'addExperience',education:'addEducation',inventory:'addInventory',costumes:'addCostume'};
+  const action = map[type] || 'addMedia';
+  const payload = { action, artistId: currentArtist.id, name: val, description: desc, url: val };
   try {
-    const r = await fetch(SHEET_API_URL, { method:'POST', body:JSON.stringify({action,artistId:currentArtist.id,name:val,description:desc,type:'photo',url:val}) });
+    const r = await fetch(SHEET_API_URL, { method:'POST', body:JSON.stringify(payload) });
     const res = await r.json();
-    if(res.success){ showToast('Добавлено'); closeModal(); }
-    else showToast('Ошибка');
+    if(res.success){
+      showToast('Добавлено'); closeModal();
+      await loadProfileExtras();
+      renderProfile();
+    } else showToast('Ошибка');
   } catch(e){ showToast('Ошибка сети'); }
 }
 
