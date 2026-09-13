@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>TourBuilder</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
 <style>
 body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#F5F5F7;color:#1A1A1A;overflow:hidden;height:100dvh;user-select:none;display:flex;flex-direction:column}
 .bottom-nav{position:fixed;bottom:15px;left:50%;transform:translateX(-50%);display:flex;gap:12px;background:rgba(255,255,255,.95);backdrop-filter:blur(10px);padding:10px 18px;border-radius:40px;z-index:1000;box-shadow:0 5px 20px rgba(0,0,0,.08);border:1px solid rgba(0,0,0,.05)}
@@ -15,7 +16,6 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,san
 button{background:#EC4899;color:#FFF;border:none;padding:12px 30px;border-radius:30px;font-weight:bold;font-size:16px;cursor:pointer;box-shadow:0 4px 15px rgba(236,72,153,.3);transition:transform .2s}
 button:active{transform:scale(.95)}
 .btn-secondary{background:#FFF;color:#EC4899;border:2px solid #EC4899;box-shadow:none}
-/* HOME */
 #screen-home .honeycomb-frame{position:relative;width:96vw;height:88dvh;clip-path:polygon(25% 0%,75% 0%,100% 25%,100% 75%,75% 100%,25% 100%,0% 75%,0% 25%);background:#FFF;border:2px solid rgba(236,72,153,.2);box-shadow:0 10px 30px rgba(0,0,0,.05);display:flex;justify-content:center;align-items:center}
 #screen-home .center-id{width:130px;height:130px;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background:#FFF5F9;border:3px solid #EC4899;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;font-weight:800;font-size:13px;color:#1A1A1A;z-index:15;cursor:pointer;padding:8px;box-sizing:border-box;overflow:hidden;position:relative}
 #screen-home .center-id .avatar{width:42px;height:42px;border-radius:50%;background:#EC4899;color:#FFF;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;margin-bottom:4px}
@@ -26,7 +26,6 @@ button:active{transform:scale(.95)}
 .star-wrapper{position:absolute;top:8px;right:8px;width:16px;height:16px;z-index:3}
 .star-bg{position:absolute;inset:0;color:rgba(255,255,255,.55);font-size:14px}
 .star-fill{position:absolute;inset:0;color:#FFC107;font-size:14px;overflow:hidden;text-shadow:0 0 3px rgba(0,0,0,.8)}
-/* CATALOG */
 .catalog-screen{background:#F5F5F7;padding-top:20px}
 .catalog-screen h1{font-size:24px;margin-bottom:20px;color:#1A1A1A}
 .search-bar{width:90%;max-width:400px;padding:15px;border:2px solid #E5E5EA;border-radius:30px;font-size:16px;margin-bottom:15px;background:#FFF;outline:none;text-align:center;box-sizing:border-box}
@@ -35,7 +34,6 @@ button:active{transform:scale(.95)}
 .catalog-cell .label{position:absolute;top:42px;left:0;right:0;background:rgba(26,26,26,.85);color:#FFF;font-size:10px;text-align:center;padding:3px 2px;font-weight:600}
 .catalog-cell .role-icon{position:absolute;top:12px;left:12px;bottom:auto;width:22px;height:22px;font-size:13px}
 .catalog-cell:hover{transform:scale(1.05);border-color:#EC4899}
-/* DETAILS */
 .detail-screen{background:#F5F5F7;padding:20px;justify-content:flex-start !important}
 .detail-photo{width:180px;height:180px;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background-size:cover;background-position:center;border:4px solid #EC4899;margin-bottom:20px;background-color:#FFF;position:relative}
 .detail-photo .role-icon{bottom:20px;left:20px;width:28px;height:28px;font-size:16px}
@@ -50,7 +48,6 @@ button:active{transform:scale(.95)}
 .status-req{background:#FFEB3B;border-radius:4px;color:#000;font-weight:bold;display:flex;justify-content:center;align-items:center}
 .status-active{background:#2196F3;clip-path:polygon(50% 0%,100% 100%,0% 100%);color:#FFF;font-weight:bold;display:flex;justify-content:center;align-items:center}
 .status-confirm{background:#9C27B0;clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);color:#FFF;font-weight:bold;display:flex;justify-content:center;align-items:center}
-/* CALENDAR — 3 key months */
 #screen-calendar{background:#F5F5F7;padding:20px;justify-content:flex-start !important;overflow-y:auto}
 #screen-calendar h1{color:#1A1A1A;margin-bottom:10px;text-align:center}
 .year-nav{display:flex;gap:20px;margin-bottom:15px;align-items:center;justify-content:center}
@@ -71,7 +68,6 @@ button:active{transform:scale(.95)}
 .cal-legend{display:flex;flex-wrap:wrap;gap:10px;font-size:10px;color:#6E6E73;justify-content:center;margin-top:8px}
 .cal-legend span{display:flex;align-items:center;gap:4px}
 .cal-legend i{width:8px;height:8px;border-radius:50%;display:inline-block}
-/* MATCH */
 #screen-match{background:#F5F5F7;padding:20px;justify-content:flex-start !important;overflow-y:auto}
 .form-group{width:100%;max-width:400px;margin-bottom:12px}
 .form-group label{display:block;font-size:11px;color:#6E6E73;margin-bottom:5px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
@@ -89,11 +85,9 @@ button:active{transform:scale(.95)}
 .match-card .score{font-weight:900;font-size:18px;color:#EC4899;text-align:center;min-width:45px}
 .match-card .score small{display:block;font-size:8px;color:#999;font-weight:400}
 .match-card .add-btn{background:#EC4899;color:#FFF;border:none;padding:6px 10px;border-radius:15px;font-size:10px;cursor:pointer;font-weight:bold;white-space:nowrap}
-/* VENUES */
 #screen-venues{background:#F5F5F7;padding-top:20px}
 #screen-venues h1{font-size:24px;margin-bottom:20px;color:#1A1A1A}
 #venues-grid{display:grid;grid-template-columns:repeat(3,100px);gap:15px;justify-content:center}
-/* PROFILE */
 #screen-profile{background:#F5F5F7;padding:0;justify-content:flex-start !important;overflow-y:auto}
 .profile-header{width:100%;background:#FFF;padding:20px;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;border-bottom:1px solid #E5E5EA}
 .profile-header .avatar-lg{width:90px;height:90px;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background:#EC4899;color:#FFF;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:900;margin-bottom:12px;background-size:cover;background-position:center}
@@ -222,11 +216,14 @@ button:active{transform:scale(.95)}
 
 <script>
 let tgUser = null;
-if (window.Telegram?.WebApp) {
+if (window.Telegram && window.Telegram.WebApp) {
   const tg = window.Telegram.WebApp;
   tg.ready(); tg.expand();
   tg.setHeaderColor('#F5F5F7'); tg.setBackgroundColor('#F5F5F7');
-  tgUser = tg.initDataUnsafe?.user || null;
+  tgUser = tg.initDataUnsafe && tg.initDataUnsafe.user ? tg.initDataUnsafe.user : null;
+  console.log('Telegram user:', tgUser);
+} else {
+  console.log('Telegram SDK не загружен (открыто в браузере)');
 }
 
 const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbx5C0kdq70dktEHFoBp0DXqI4CbYadpdmLqGJS2GvWh-wo-Q2NJIfubatqg_scx6Cez/exec';
@@ -293,21 +290,19 @@ function openModal(html){
 }
 function closeModal(){ document.getElementById('modal-overlay').classList.remove('open'); }
 
-// === HOME: 8 positions around center using calc(50% + Xpx) ===
 function renderHome(){
   const blk = document.getElementById('user-id-block');
-  if(tgUser?.first_name){
+  if(tgUser && tgUser.first_name){
     blk.innerHTML = `<div class="avatar">${(tgUser.first_name[0]||'?').toUpperCase()}</div>${tgUser.first_name}<span>ID: ${tgUser.id}</span>`;
   } else {
     blk.innerHTML = `<div class="avatar">T</div>TourBuilder<span>Маркетплейс</span>`;
   }
   const c = document.getElementById('users-container');
   c.innerHTML = '';
-  // Позиции относительно центра контейнера (X, Y в пикселях)
   const positions = [
-    {x:-100, y:-165}, {x:0, y:-190}, {x:100, y:-165},   // верхний ряд (3)
-    {x:-130, y:-15},  {x:130, y:-15},                     // средний ряд (2)
-    {x:-100, y:150},  {x:0, y:170},   {x:100, y:150}      // нижний ряд (3)
+    {x:-100, y:-165}, {x:0, y:-190}, {x:100, y:-165},
+    {x:-130, y:-15},  {x:130, y:-15},
+    {x:-100, y:150},  {x:0, y:170},   {x:100, y:150}
   ];
   artists.slice(0,8).forEach((a,i)=>{
     if(!positions[i]) return;
@@ -406,7 +401,7 @@ function renderVenues(q=''){
     c.onclick=()=>openVenue(v.id);
     g.appendChild(c);
   });
-  if(!list.length) g.innerHTML='<p style="color:#6E6E73;grid-column:1/-1;text-align:center">Пока нет площадок.<br><small>Добавьте лист Venues в Google Sheets.</small></p>';
+  if(!list.length) g.innerHTML='<p style="color:#6E6E73;grid-column:1/-1;text-align:center">Пока нет площадок</p>';
 }
 function openVenue(id){
   const v=venues.find(x=>x.id===id); if(!v) return;
@@ -421,9 +416,7 @@ function openVenue(id){
   navigateTo('screen-venue');
 }
 
-// === CALENDAR: 3 key month cards (prev / current / next) ===
 const months = ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
-const monthsShort = ['Янв','Фев','Мар','Апр','Май','Июн','Июл','Авг','Сен','Окт','Ноя','Дек'];
 const daysOfWeek = ['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];
 
 function changeYear(d){ state.year += d; document.getElementById('year-display').innerText = state.year; renderCalendar(); }
@@ -432,7 +425,6 @@ function renderCalendar(){
   document.getElementById('year-display').innerText = state.year;
   const c = document.getElementById('month-cards');
   c.innerHTML = '';
-  // показываем 3 карточки-месяца: предыдущий, текущий, следующий от выбранного месяца
   const baseMonth = state.monthIndex;
   const showMonths = [baseMonth - 1, baseMonth, baseMonth + 1].map(m => {
     let mm = m, yy = state.year;
@@ -440,18 +432,15 @@ function renderCalendar(){
     if(mm > 11){ mm = 0; yy++; }
     return { m: mm, y: yy };
   });
-  showMonths.forEach(({m, y}) => {
-    c.appendChild(buildMonthCard(m, y));
-  });
+  showMonths.forEach(({m, y}) => c.appendChild(buildMonthCard(m, y)));
 }
 
 function buildMonthCard(m, y){
   const wrap = document.createElement('div');
   wrap.className = 'month-card';
   const dim = new Date(y, m+1, 0).getDate();
-  const firstDow = (new Date(y, m, 1).getDay() + 6) % 7; // Пн=0
+  const firstDow = (new Date(y, m, 1).getDay() + 6) % 7;
   const todayStr = new Date().toISOString().split('T')[0];
-
   let html = `<h3>${months[m]} ${y}</h3><div class="cal-grid">`;
   daysOfWeek.forEach(d => html += `<div class="cal-dow">${d}</div>`);
   for(let i=0; i<firstDow; i++) html += `<div class="cal-cell empty"></div>`;
@@ -536,7 +525,6 @@ function runAIMatch(){
   },800);
 }
 
-// === PROFILE ===
 async function openProfileOrCreate(){
   if(!tgUser){ showToast('Откройте через Telegram для профиля'); return; }
   const me = artists.find(a=>String(a.telegramId)===String(tgUser.id));
@@ -566,7 +554,7 @@ async function loadProfileExtras(){
 function openCreateForm(){
   openModal(`
     <h3>Создать профиль</h3>
-    <div class="form-group"><label>Имя</label><input id="cf-name" value="${tgUser?.first_name||''}"></div>
+    <div class="form-group"><label>Имя</label><input id="cf-name" value="${tgUser && tgUser.first_name ? tgUser.first_name : ''}"></div>
     <div class="form-group"><label>Роль</label>
       <select id="cf-role">${Object.keys(ROLE_NAMES).map(k=>`<option value="${k}">${ROLE_NAMES[k]}</option>`).join('')}</select>
     </div>
