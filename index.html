@@ -16,12 +16,17 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,san
 button{background:#EC4899;color:#FFF;border:none;padding:12px 30px;border-radius:30px;font-weight:bold;font-size:16px;cursor:pointer;box-shadow:0 4px 15px rgba(236,72,153,.3);transition:transform .2s}
 button:active{transform:scale(.95)}
 .btn-secondary{background:#FFF;color:#EC4899;border:2px solid #EC4899;box-shadow:none}
+/* ROLE SWITCHER */
+.role-switch{position:fixed;top:15px;right:15px;z-index:1500;background:#FFF;border:2px solid #EC4899;border-radius:30px;padding:8px 16px;display:flex;align-items:center;gap:8px;cursor:pointer;box-shadow:0 4px 12px rgba(236,72,153,.25);font-weight:700;font-size:13px;color:#EC4899}
+.role-switch i{font-size:16px}
+/* HOME */
 #screen-home .honeycomb-frame{position:relative;width:96vw;height:88dvh;clip-path:polygon(25% 0%,75% 0%,100% 25%,100% 75%,75% 100%,25% 100%,0% 75%,0% 25%);background:#FFF;border:2px solid rgba(236,72,153,.2);box-shadow:0 10px 30px rgba(0,0,0,.05);display:flex;justify-content:center;align-items:center}
 #screen-home .center-id{width:130px;height:130px;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background:#FFF5F9;border:3px solid #EC4899;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;font-weight:800;font-size:13px;color:#1A1A1A;z-index:15;cursor:pointer;padding:8px;box-sizing:border-box;overflow:hidden;position:relative}
 #screen-home .center-id .avatar{width:42px;height:42px;border-radius:50%;background:#EC4899;color:#FFF;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;margin-bottom:4px}
 #screen-home .center-id span{font-size:9px;font-weight:400;color:#6E6E73;margin-top:2px}
 .user-cell{position:absolute;width:62px;height:62px;background-color:#FCE7F3;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background-size:cover;background-position:center;border:2px solid #E5E5EA;box-shadow:0 4px 10px rgba(0,0,0,.08);cursor:pointer;transition:transform .2s,border-color .2s;z-index:5;transform:translate(-50%,-50%)}
 .user-cell:hover{transform:translate(-50%,-50%) scale(1.15);border-color:#EC4899;z-index:50}
+.user-cell .badge-bottom{position:absolute;bottom:0;left:0;right:0;background:rgba(26,26,26,.85);color:#FFF;font-size:9px;text-align:center;padding:2px;font-weight:600;line-height:1.1}
 .role-icon{position:absolute;bottom:8px;left:8px;font-size:12px;color:#FFF;background:rgba(0,0,0,.65);border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;z-index:3;line-height:1}
 .star-wrapper{position:absolute;top:8px;right:8px;width:16px;height:16px;z-index:3}
 .star-bg{position:absolute;inset:0;color:rgba(255,255,255,.55);font-size:14px}
@@ -73,8 +78,7 @@ button:active{transform:scale(.95)}
 .form-group input,.form-group select,.form-group textarea{width:100%;padding:12px;border:1px solid #E5E5EA;border-radius:12px;font-size:15px;box-sizing:border-box;background:#FFF;outline:none;font-family:inherit}
 .form-group textarea{resize:vertical;min-height:60px}
 #match-results{width:100%;max-width:400px;margin-top:25px}
-.match-card{background:#FFF;border-radius:15px;padding:12px;margin-bottom:12px;box-shadow:0 4px 10px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px;border-left:4px solid #EC4899;animation:slideIn .4s ease}
-@keyframes slideIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.match-card{background:#FFF;border-radius:15px;padding:12px;margin-bottom:12px;box-shadow:0 4px 10px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px;border-left:4px solid #EC4899}
 .match-card .avatar{width:50px;height:50px;flex-shrink:0;background-color:#FCE7F3;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background-size:cover;background-position:center;border:2px solid #EC4899}
 .match-card .info{flex-grow:1;text-align:left;min-width:0}
 .match-card .name{font-weight:800;font-size:15px;margin-bottom:3px}
@@ -83,7 +87,7 @@ button:active{transform:scale(.95)}
 .match-card .right-block{display:flex;flex-direction:column;align-items:center;gap:5px}
 .match-card .score{font-weight:900;font-size:18px;color:#EC4899;text-align:center;min-width:45px}
 .match-card .score small{display:block;font-size:8px;color:#999;font-weight:400}
-.match-card .add-btn{background:#EC4899;color:#FFF;border:none;padding:6px 10px;border-radius:15px;font-size:10px;cursor:pointer;font-weight:bold;white-space:nowrap}
+.match-card .add-btn{background:#EC4899;color:#FFF;border:none;padding:6px 10px;border-radius:15px;font-size:10px;cursor:pointer;font-weight:bold}
 #screen-venues{background:#F5F5F7;padding-top:20px}
 #screen-venues h1{font-size:24px;margin-bottom:20px;color:#1A1A1A}
 #venues-grid{display:grid;grid-template-columns:repeat(3,100px);gap:15px;justify-content:center}
@@ -93,12 +97,11 @@ button:active{transform:scale(.95)}
 .profile-header .name{font-size:22px;font-weight:800}
 .profile-header .role{font-size:13px;color:#6E6E73;margin-top:4px}
 .profile-tabs{display:flex;width:100%;overflow-x:auto;background:#FFF;border-bottom:1px solid #E5E5EA;position:sticky;top:0;z-index:100}
-.profile-tab{padding:14px 18px;font-size:13px;color:#6E6E73;cursor:pointer;white-space:nowrap;border-bottom:3px solid transparent;transition:all .2s}
+.profile-tab{padding:14px 18px;font-size:13px;color:#6E6E73;cursor:pointer;white-space:nowrap;border-bottom:3px solid transparent}
 .profile-tab.active{color:#EC4899;border-bottom-color:#EC4899;font-weight:700}
 .profile-content{width:100%;padding:20px;box-sizing:border-box;flex:1}
 .tab-panel{display:none}
-.tab-panel.active{display:block;animation:fadeIn .3s}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.tab-panel.active{display:block}
 .field-row{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid #F0F0F0;font-size:14px}
 .field-row .lbl{color:#6E6E73}
 .field-row .val{color:#1A1A1A;font-weight:600;text-align:right;max-width:60%}
@@ -106,7 +109,6 @@ button:active{transform:scale(.95)}
 .list-item .li-title{font-weight:700;font-size:14px;margin-bottom:4px}
 .list-item .li-sub{font-size:12px;color:#6E6E73}
 .add-btn-full{width:100%;background:#FFF;color:#EC4899;border:2px dashed #EC4899;padding:12px;border-radius:12px;font-weight:700;margin-top:10px;cursor:pointer}
-.edit-section{display:flex;gap:8px;justify-content:center;margin-top:15px}
 .toast{position:fixed;top:30px;left:50%;transform:translateX(-50%) translateY(-100px);background:#1A1A1A;color:#FFF;padding:12px 25px;border-radius:30px;font-size:14px;font-weight:600;z-index:9999;transition:transform .4s cubic-bezier(.175,.885,.32,1.275);box-shadow:0 10px 30px rgba(0,0,0,.2)}
 .toast.show{transform:translateX(-50%) translateY(0)}
 .back-btn{position:absolute;top:20px;left:20px;background:#FFF;color:#1A1A1A;font-size:24px;border-radius:50%;width:45px;height:45px;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:200;border:1px solid #E5E5EA}
@@ -114,9 +116,27 @@ button:active{transform:scale(.95)}
 .modal-overlay.open{display:flex}
 .modal-content{background:#FFF;border-radius:20px;padding:20px;width:100%;max-width:400px;max-height:85vh;overflow-y:auto}
 .modal-content h3{margin:0 0 15px;color:#EC4899}
+.role-option{display:flex;align-items:center;gap:12px;padding:14px;border-radius:12px;border:2px solid #E5E5EA;margin-bottom:10px;cursor:pointer;transition:all .2s}
+.role-option:hover{border-color:#EC4899;background:#FFF5F9}
+.role-option.active{border-color:#EC4899;background:#FFF5F9}
+.role-option i{font-size:22px;color:#EC4899;width:30px;text-align:center}
+.role-option .ro-name{font-weight:700;font-size:15px}
+.role-option .ro-desc{font-size:11px;color:#6E6E73;margin-top:2px}
+/* Events list for organizer */
+.events-list{width:100%;max-width:400px;padding:0 20px;box-sizing:border-box}
+.event-card{background:#FFF;border-radius:14px;padding:14px;margin-bottom:12px;box-shadow:0 4px 10px rgba(0,0,0,.04);border-left:4px solid #EC4899}
+.event-card .ec-date{font-size:11px;color:#EC4899;font-weight:700;text-transform:uppercase;margin-bottom:4px}
+.event-card .ec-title{font-weight:800;font-size:16px;margin-bottom:6px}
+.event-card .ec-sub{font-size:12px;color:#6E6E73}
 </style>
 </head>
 <body>
+
+<div class="role-switch" id="role-switch" onclick="openRolePicker()">
+  <i class="fa-solid fa-user"></i>
+  <span id="role-label">Артист</span>
+  <i class="fa-solid fa-chevron-down" style="font-size:11px"></i>
+</div>
 
 <div id="screen-home" class="screen active">
   <div class="honeycomb-frame">
@@ -126,6 +146,17 @@ button:active{transform:scale(.95)}
       <span>Маркетплейс</span>
     </div>
     <div id="users-container"></div>
+  </div>
+</div>
+
+<div id="screen-organizer-home" class="screen">
+  <div style="padding:20px;width:100%;box-sizing:border-box;display:flex;flex-direction:column;align-items:center">
+    <h1 style="color:#1A1A1A;font-size:22px;margin:0 0 5px 0">Мои проекты</h1>
+    <p style="color:#6E6E73;font-size:12px;margin-bottom:20px">Управляйте мероприятиями</p>
+    <button onclick="alert('Конструктор мероприятий в разработке')" style="margin-bottom:20px">
+      <i class="fa-solid fa-plus"></i> Создать мероприятие
+    </button>
+    <div class="events-list" id="organizer-events"></div>
   </div>
 </div>
 
@@ -205,13 +236,7 @@ button:active{transform:scale(.95)}
 
 <div class="toast" id="toast"></div>
 
-<div class="bottom-nav">
-  <div class="nav-icon active" onclick="navigateTo('screen-home',this)"><i class="fa-solid fa-house"></i></div>
-  <div class="nav-icon" onclick="navigateTo('screen-catalog',this)"><i class="fa-solid fa-users"></i></div>
-  <div class="nav-icon" onclick="navigateTo('screen-venues',this)"><i class="fa-solid fa-landmark"></i></div>
-  <div class="nav-icon" onclick="navigateTo('screen-calendar',this)"><i class="fa-solid fa-calendar"></i></div>
-  <div class="nav-icon" onclick="navigateTo('screen-match',this)"><i class="fa-solid fa-magnifying-glass"></i></div>
-</div>
+<div class="bottom-nav" id="bottom-nav"></div>
 
 <script>
 let tgUser = null;
@@ -220,10 +245,9 @@ if (window.Telegram && window.Telegram.WebApp) {
   tg.ready(); tg.expand();
   tg.setHeaderColor('#F5F5F7'); tg.setBackgroundColor('#F5F5F7');
   tgUser = tg.initDataUnsafe && tg.initDataUnsafe.user ? tg.initDataUnsafe.user : null;
-  console.log('Telegram user:', tgUser);
 }
 
-const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycby4Kf6zFXRgX7eyeQaV9wEbqRA4tCW00Uv6QiLYH_KC63LzQWrYbNEeaiYooAGuaBEl/exec';
+const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbysYx1lNqYIjharTDLrhf2BVqnO_hunE4hnkkOhFjrzyZ-8D2i4w4MOOmbedq_o6VM-/exec';
 
 const ROLE_ICONS = {
   dancer:'fa-person-running', ballet:'fa-child-reaching', singer:'fa-microphone',
@@ -244,24 +268,155 @@ const ROLE_NAMES = {
   violinist:'Скрипач', saxophonist:'Саксофонист', flutist:'Флейтист', other:'Другое'
 };
 
-let artists = [], venues = [], events = [];
+// === Роли пользователя (главные роли в приложении) ===
+const USER_ROLES = {
+  artist: { name:'Артист', icon:'fa-microphone', desc:'Показываю себя, бронирую площадки' },
+  organizer: { name:'Организатор', icon:'fa-briefcase', desc:'Создаю мероприятия, ищу артистов' },
+  venue: { name:'Площадка', icon:'fa-landmark', desc:'Сдаю пространство в аренду' },
+  viewer: { name:'Зритель', icon:'fa-eye', desc:'Смотрю афишу, посещаю события' }
+};
+
+let artists = [], venues = [], events = [], persons = [];
 let currentArtist = null;
+let currentPerson = null;
+let activeRole = 'artist'; // по умолчанию
 let profileData = { media:[], experience:[], education:[], inventory:[], costumes:[] };
 let userProject = JSON.parse(localStorage.getItem('userProject')||'[]');
 let state = { year: new Date().getFullYear(), monthIndex: new Date().getMonth() };
 
 async function loadData() {
   try {
-    const [a,v,e] = await Promise.all([
+    const [a,v,e,p] = await Promise.all([
       fetch(SHEET_API_URL+'?action=artists').then(r=>r.json()).catch(()=>null),
       fetch(SHEET_API_URL+'?action=venues').then(r=>r.json()).catch(()=>null),
-      fetch(SHEET_API_URL+'?action=events').then(r=>r.json()).catch(()=>null)
+      fetch(SHEET_API_URL+'?action=events').then(r=>r.json()).catch(()=>null),
+      fetch(SHEET_API_URL+'?action=persons').then(r=>r.json()).catch(()=>null)
     ]);
     artists = Array.isArray(a) ? a : [];
     venues = Array.isArray(v) ? v : [];
     events = Array.isArray(e) ? e : [];
+    persons = Array.isArray(p) ? p : [];
   } catch(err) { console.log('loadData err', err); }
+  
+  // Определяем текущего пользователя и роль
+  if(tgUser){
+    // 1. Ищем в Persons
+    currentPerson = persons.find(p => String(p.telegramId) === String(tgUser.id));
+    
+    // 2. Если нет в Persons — создаём
+    if(!currentPerson){
+      currentPerson = await createPersonRecord();
+    }
+    
+    // 3. Устанавливаем активную роль
+    if(currentPerson){
+      activeRole = localStorage.getItem('activeRole') || currentPerson.activeRole || 'viewer';
+    }
+    
+    // 4. Ищем артиста по telegramId
+    currentArtist = artists.find(a => String(a.telegramId) === String(tgUser.id)) || null;
+  }
+  
+  updateRoleUI();
   renderHome();
+}
+
+async function createPersonRecord(){
+  try {
+    const body = {
+      action: 'createPerson',
+      telegramId: tgUser.id,
+      name: (tgUser.first_name || '') + (tgUser.last_name ? ' ' + tgUser.last_name : ''),
+      photoUrl: tgUser.photo_url || '',
+      activeRole: 'organizer',
+      roles: 'organizer,artist,viewer'
+    };
+    const r = await fetch(SHEET_API_URL, { method:'POST', body:JSON.stringify(body) });
+    const res = await r.json();
+    if(res.success) return res.person;
+  } catch(err){ console.log('createPerson err', err); }
+  return null;
+}
+
+function updateRoleUI(){
+  const label = document.getElementById('role-label');
+  const role = USER_ROLES[activeRole] || USER_ROLES.artist;
+  label.innerText = role.name;
+  
+  // Навигация
+  const nav = document.getElementById('bottom-nav');
+  if(activeRole === 'organizer'){
+    nav.innerHTML = `
+      <div class="nav-icon active" onclick="navigateTo('screen-organizer-home',this)" title="Проекты"><i class="fa-solid fa-briefcase"></i></div>
+      <div class="nav-icon" onclick="navigateTo('screen-catalog',this)" title="Артисты"><i class="fa-solid fa-users"></i></div>
+      <div class="nav-icon" onclick="navigateTo('screen-venues',this)" title="Площадки"><i class="fa-solid fa-landmark"></i></div>
+      <div class="nav-icon" onclick="navigateTo('screen-calendar',this)" title="Календарь"><i class="fa-solid fa-calendar"></i></div>
+      <div class="nav-icon" onclick="navigateTo('screen-match',this)" title="ИИ-Подбор"><i class="fa-solid fa-magnifying-glass"></i></div>
+    `;
+  } else {
+    // artist (по умолчанию)
+    nav.innerHTML = `
+      <div class="nav-icon active" onclick="navigateTo('screen-home',this)" title="Главная"><i class="fa-solid fa-house"></i></div>
+      <div class="nav-icon" onclick="navigateTo('screen-catalog',this)" title="Артисты"><i class="fa-solid fa-users"></i></div>
+      <div class="nav-icon" onclick="navigateTo('screen-venues',this)" title="Площадки"><i class="fa-solid fa-landmark"></i></div>
+      <div class="nav-icon" onclick="navigateTo('screen-calendar',this)" title="Календарь"><i class="fa-solid fa-calendar"></i></div>
+      <div class="nav-icon" onclick="navigateTo('screen-match',this)" title="ИИ-Подбор"><i class="fa-solid fa-magnifying-glass"></i></div>
+    `;
+  }
+}
+
+function openRolePicker(){
+  if(!currentPerson){
+    showToast('Откройте через Telegram');
+    return;
+  }
+  const roles = currentPerson.roles || ['organizer','artist'];
+  let html = '<h3>Выберите роль</h3>';
+  roles.forEach(r => {
+    const role = USER_ROLES[r];
+    if(!role) return;
+    const isActive = r === activeRole;
+    html += `
+      <div class="role-option ${isActive?'active':''}" onclick="switchRole('${r}')">
+        <i class="fa-solid ${role.icon}"></i>
+        <div>
+          <div class="ro-name">${role.name} ${isActive?'✓':''}</div>
+          <div class="ro-desc">${role.desc}</div>
+        </div>
+      </div>
+    `;
+  });
+  if(roles.length < Object.keys(USER_ROLES).length){
+    html += `<button class="add-btn-full" onclick="alert('Расширение ролей — в следующей итерации')" style="margin-top:10px">+ Стать артистом / организатором</button>`;
+  }
+  openModal(html);
+}
+
+async function switchRole(newRole){
+  activeRole = newRole;
+  localStorage.setItem('activeRole', newRole);
+  closeModal();
+  updateRoleUI();
+  
+  // Переходим на домашний экран активной роли
+  if(newRole === 'organizer'){
+    navigateTo('screen-organizer-home');
+  } else if(newRole === 'viewer'){
+    navigateTo('screen-home');
+  } else {
+    navigateTo('screen-home');
+  }
+  
+  // Обновляем активную роль на сервере
+  if(tgUser){
+    try {
+      await fetch(SHEET_API_URL, { method:'POST', body:JSON.stringify({
+        action:'setActiveRole', telegramId: tgUser.id, activeRole: newRole
+      }) });
+    } catch(e){}
+  }
+  
+  showToast('Роль: ' + (USER_ROLES[newRole]?.name || newRole));
 }
 
 function navigateTo(id, el) {
@@ -270,6 +425,7 @@ function navigateTo(id, el) {
   document.querySelectorAll('.nav-icon').forEach(n=>n.classList.remove('active'));
   if(el) el.classList.add('active');
   if(id==='screen-home') renderHome();
+  if(id==='screen-organizer-home') renderOrganizerHome();
   if(id==='screen-catalog') renderCatalog();
   if(id==='screen-venues') renderVenues();
   if(id==='screen-calendar') renderCalendar();
@@ -290,7 +446,7 @@ function closeModal(){ document.getElementById('modal-overlay').classList.remove
 function renderHome(){
   const blk = document.getElementById('user-id-block');
   if(tgUser && tgUser.first_name){
-    blk.innerHTML = `<div class="avatar">${(tgUser.first_name[0]||'?').toUpperCase()}</div>${tgUser.first_name}<span>ID: ${tgUser.id}</span>`;
+    blk.innerHTML = `<div class="avatar">${(tgUser.first_name[0]||'?').toUpperCase()}</div>${tgUser.first_name}<span>${USER_ROLES[activeRole].name}</span>`;
   } else {
     blk.innerHTML = `<div class="avatar">T</div>TourBuilder<span>Маркетплейс</span>`;
   }
@@ -311,12 +467,34 @@ function renderHome(){
     const roleIcon = ROLE_ICONS[a.role] || 'fa-star';
     cell.innerHTML = `<i class="fa-solid ${roleIcon} role-icon"></i>`;
     const pct = Math.round(((a.rating||5)/5)*100);
-    const starWrap = document.createElement('div');
-    starWrap.className = 'star-wrapper';
-    starWrap.innerHTML = `<i class="fa-solid fa-star star-bg"></i><div class="star-fill" style="width:${pct}%"><i class="fa-solid fa-star"></i></div>`;
-    cell.appendChild(starWrap);
+    const sw = document.createElement('div');
+    sw.className = 'star-wrapper';
+    sw.innerHTML = `<i class="fa-solid fa-star star-bg"></i><div class="star-fill" style="width:${pct}%"><i class="fa-solid fa-star"></i></div>`;
+    cell.appendChild(sw);
     cell.onclick = ()=>openArtist(a.id);
     c.appendChild(cell);
+  });
+}
+
+function renderOrganizerHome(){
+  const list = document.getElementById('organizer-events');
+  if(!list) return;
+  // Показываем мероприятия организатора (по organizerId = tgUser.id)
+  const myEvents = tgUser ? events.filter(e => String(e.organizerId) === String(tgUser.id)) : [];
+  if(!myEvents.length){
+    list.innerHTML = '<p style="color:#6E6E73;text-align:center;padding:30px">Пока нет мероприятий. Создайте первое!</p>';
+    return;
+  }
+  list.innerHTML = '';
+  myEvents.forEach(ev => {
+    const card = document.createElement('div');
+    card.className = 'event-card';
+    card.innerHTML = `
+      <div class="ec-date">${ev.date || ''}</div>
+      <div class="ec-title">${ev.title || ev.type || 'Мероприятие'}</div>
+      <div class="ec-sub">${ev.venue || ''} ${ev.time ? '· ' + ev.time : ''}</div>
+    `;
+    list.appendChild(card);
   });
 }
 
@@ -403,11 +581,26 @@ function renderVenues(q=''){
 function openVenue(id){
   const v=venues.find(x=>x.id===id); if(!v) return;
   const c=document.getElementById('venue-detail-content');
+  // Расчёт цены с множителями
+  const basePrice = v.basePrice || v.price || 0;
+  const now = new Date();
+  const month = now.getMonth();
+  const isHighSeason = (month >= 5 && month <= 8); // июнь-сентябрь
+  const isWeekend = [0,6].includes(now.getDay());
+  const seasonM = isHighSeason ? (v.seasonMultiplier || 1) : 1;
+  const weekendM = isWeekend ? (v.weekendMultiplier || 1) : 1;
+  const finalPrice = Math.round(basePrice * seasonM * weekendM);
+  
   c.innerHTML=`
     <div class="detail-photo" ${v.img?`style="background-image:url('${v.img}')"`:''}></div>
     <div class="detail-name">${v.name||''}</div>
     <div class="detail-spec">${v.type||''} · ${v.city||''}</div>
-    <div style="margin-bottom:20px;color:#6E6E73;text-align:center">Вместимость: ${v.capacity||'—'} · от ${(v.price||0).toLocaleString()} ₽</div>
+    <div style="margin-bottom:10px;color:#6E6E73;text-align:center">Вместимость: ${v.capacity||'—'} чел</div>
+    <div style="background:#FFF5F9;border-radius:12px;padding:12px;margin-bottom:20px;max-width:400px">
+      <div style="font-size:11px;color:#6E6E73;margin-bottom:6px">Цена аренды:</div>
+      <div style="font-size:20px;font-weight:800;color:#EC4899">${finalPrice.toLocaleString()} ₽</div>
+      ${seasonM>1||weekendM>1 ? `<div style="font-size:10px;color:#6E6E73;margin-top:4px">базовая ${basePrice.toLocaleString()} ₽ ${isHighSeason?'· сезон ×'+seasonM:''} ${isWeekend?'· выходной ×'+weekendM:''}</div>` : ''}
+    </div>
     <button onclick="alert('Запрос брони!')">Запросить бронь</button>
   `;
   navigateTo('screen-venue');
@@ -415,7 +608,6 @@ function openVenue(id){
 
 const months = ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
 const daysOfWeek = ['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];
-
 function changeYear(d){ state.year += d; document.getElementById('year-display').innerText = state.year; renderCalendar(); }
 
 function renderCalendar(){
@@ -454,8 +646,7 @@ function buildMonthCard(m, y){
     const isToday = ds === todayStr ? ' today' : '';
     html += `<div class="cal-cell ${cls}${isToday}" onclick="openDay('${ds}')"><span>${d}</span><span class="dot"></span></div>`;
   }
-  html += `</div>`;
-  html += `<div class="cal-legend">
+  html += `</div><div class="cal-legend">
     <span><i style="background:#4CAF50"></i>Свободен</span>
     <span><i style="background:#F44336"></i>Занят</span>
     <span><i style="background:#FFEB3B"></i>Запрос</span>
@@ -469,13 +660,8 @@ function buildMonthCard(m, y){
 function openDay(ds){
   const list = events.filter(e => e.date === ds);
   let body = '';
-  if(!list.length){
-    body = '<p style="color:#6E6E73">Свободен весь день</p>';
-  } else {
-    list.forEach(e => {
-      body += `<div class="list-item"><div class="li-title">${e.time||''} — ${e.type||'Событие'}</div><div class="li-sub">${e.venue||''}</div></div>`;
-    });
-  }
+  if(!list.length){ body = '<p style="color:#6E6E73">Свободен весь день</p>'; }
+  else { list.forEach(e => { body += `<div class="list-item"><div class="li-title">${e.time||''} — ${e.type||'Событие'}</div><div class="li-sub">${e.venue||''}</div></div>`; }); }
   openModal(`<h3>${ds}</h3>${body}<button onclick="closeModal()" style="width:100%;margin-top:15px">Закрыть</button>`);
 }
 
@@ -501,7 +687,6 @@ function runAIMatch(){
     if(!res.length){ rc.innerHTML='<div style="text-align:center;padding:30px;color:#6E6E73">😔 Никого не найдено</div>'; return; }
     rc.innerHTML=`<h3 style="margin-bottom:12px;font-size:16px">Найдено ${res.length}:</h3>`;
     res.forEach(a=>{
-      const inP=userProject.some(p=>p.id===a.id&&p.type==='artist');
       const card=document.createElement('div');
       card.className='match-card';
       card.innerHTML=`
@@ -513,20 +698,18 @@ function runAIMatch(){
         </div>
         <div class="right-block">
           <div class="score">${a.score}%<small>матч</small></div>
-          <button class="add-btn">${inP?'✓':'+'}</button>
         </div>`;
-      card.onclick=e=>{ if(!e.target.classList.contains('add-btn')) openArtist(a.id); };
-      card.querySelector('.add-btn').onclick=e=>{e.stopPropagation();toggleProject(a,'artist',e.target);};
+      card.onclick=()=>openArtist(a.id);
       rc.appendChild(card);
     });
   },800);
 }
 
 async function openProfileOrCreate(){
-  if(!tgUser){ showToast('Откройте через Telegram для профиля'); return; }
-  const me = artists.find(a=>String(a.telegramId)===String(tgUser.id));
-  if(me){ currentArtist = me; await loadProfileExtras(); navigateTo('screen-profile'); }
-  else { openCreateForm(); }
+  if(!tgUser){ showToast('Откройте через Telegram'); return; }
+  if(!currentArtist){ openCreateForm(); return; }
+  await loadProfileExtras();
+  navigateTo('screen-profile');
 }
 
 async function loadProfileExtras(){
@@ -545,16 +728,14 @@ async function loadProfileExtras(){
     profileData.education = (Array.isArray(ed)?ed:[]).filter(x=>String(x.artistId)===id);
     profileData.inventory = (Array.isArray(inv)?inv:[]).filter(x=>String(x.artistId)===id);
     profileData.costumes = (Array.isArray(cost)?cost:[]).filter(x=>String(x.artistId)===id);
-  } catch(err){ console.log('profile extras err', err); }
+  } catch(err){ console.log(err); }
 }
 
 function openCreateForm(){
   openModal(`
-    <h3>Создать профиль</h3>
-    <div class="form-group"><label>Имя</label><input id="cf-name" value="${tgUser && tgUser.first_name ? tgUser.first_name : ''}"></div>
-    <div class="form-group"><label>Роль</label>
-      <select id="cf-role">${Object.keys(ROLE_NAMES).map(k=>`<option value="${k}">${ROLE_NAMES[k]}</option>`).join('')}</select>
-    </div>
+    <h3>Создать профиль артиста</h3>
+    <div class="form-group"><label>Имя</label><input id="cf-name" value="${tgUser.first_name||''}"></div>
+    <div class="form-group"><label>Роль</label><select id="cf-role">${Object.keys(ROLE_NAMES).map(k=>`<option value="${k}">${ROLE_NAMES[k]}</option>`).join('')}</select></div>
     <div class="form-group"><label>Город</label><input id="cf-city" placeholder="Москва"></div>
     <div class="form-group"><label>Гонорар, ₽</label><input id="cf-price" type="number" value="15000"></div>
     <div class="form-group"><label>Контакты</label><input id="cf-contacts" placeholder="@username"></div>
@@ -595,12 +776,11 @@ function renderProfile(){
     <div class="field-row"><span class="lbl">Имя</span><span class="val">${a.name||'—'}</span></div>
     <div class="field-row"><span class="lbl">Роль</span><span class="val">${ROLE_NAMES[a.role]||'—'}</span></div>
     <div class="field-row"><span class="lbl">Специализация</span><span class="val">${a.spec||'—'}</span></div>
-    <div class="field-row"><span class="lbl">Жанры</span><span class="val">${a.genre||'—'}</span></div>
     <div class="field-row"><span class="lbl">Город</span><span class="val">${a.city||'—'}</span></div>
     <div class="field-row"><span class="lbl">Контакты</span><span class="val">${a.contacts||'—'}</span></div>
     <div class="field-row"><span class="lbl">Готов к выезду</span><span class="val">${a.readyToTravel?'Да':'Нет'}</span></div>
     <div class="field-row"><span class="lbl">Страны</span><span class="val">${a.countries||'—'}</span></div>
-    <div class="edit-section"><button onclick="editMain()">Редактировать</button></div>
+    <div style="display:flex;justify-content:center;margin-top:15px"><button onclick="editMain()">Редактировать</button></div>
   `;
   renderList('media','Медиа');
   renderList('experience','Опыт');
@@ -646,15 +826,10 @@ function editMain(){
   openModal(`
     <h3>Редактировать основное</h3>
     <div class="form-group"><label>Имя</label><input id="e-name" value="${a.name||''}"></div>
-    <div class="form-group"><label>Роль</label><select id="e-role">
-      ${Object.keys(ROLE_NAMES).map(k=>`<option value="${k}" ${a.role===k?'selected':''}>${ROLE_NAMES[k]}</option>`).join('')}
-    </select></div>
+    <div class="form-group"><label>Роль</label><select id="e-role">${Object.keys(ROLE_NAMES).map(k=>`<option value="${k}" ${a.role===k?'selected':''}>${ROLE_NAMES[k]}</option>`).join('')}</select></div>
     <div class="form-group"><label>Специализация</label><input id="e-spec" value="${a.spec||''}"></div>
-    <div class="form-group"><label>Жанры</label><input id="e-genre" value="${a.genre||''}"></div>
     <div class="form-group"><label>Город</label><input id="e-city" value="${a.city||''}"></div>
     <div class="form-group"><label>Контакты</label><input id="e-contacts" value="${a.contacts||''}"></div>
-    <div class="form-group"><label>Готов к выезду</label><select id="e-ready"><option value="true" ${a.readyToTravel?'selected':''}>Да</option><option value="false" ${!a.readyToTravel?'selected':''}>Нет</option></select></div>
-    <div class="form-group"><label>Страны</label><input id="e-countries" value="${a.countries||''}"></div>
     <button onclick="saveMain()" style="width:100%">Сохранить</button>
   `);
 }
@@ -664,47 +839,35 @@ async function saveMain(){
     name: document.getElementById('e-name').value,
     role: document.getElementById('e-role').value,
     spec: document.getElementById('e-spec').value,
-    genre: document.getElementById('e-genre').value,
     city: document.getElementById('e-city').value,
-    contacts: document.getElementById('e-contacts').value,
-    readyToTravel: document.getElementById('e-ready').value === 'true',
-    countries: document.getElementById('e-countries').value
+    contacts: document.getElementById('e-contacts').value
   };
   try {
     const r = await fetch(SHEET_API_URL, { method:'POST', body:JSON.stringify({action:'updateArtist',artistId:currentArtist.id,fields}) });
     const res = await r.json();
-    if(res.success){
-      Object.assign(currentArtist, fields);
-      showToast('Профиль обновлён');
-      closeModal(); renderProfile(); loadData();
-    } else showToast('Ошибка: '+(res.error||''));
+    if(res.success){ Object.assign(currentArtist, fields); showToast('Сохранено'); closeModal(); renderProfile(); loadData(); }
+    else showToast('Ошибка');
   } catch(e){ showToast('Ошибка сети'); }
 }
 
 function addItem(type){
   const title = {media:'Медиа',experience:'Опыт',education:'Образование',inventory:'Инвентарь',costumes:'Костюмы'}[type]||type;
   openModal(`<h3>Добавить: ${title}</h3>
-    <div class="form-group"><label>Название / ссылка</label><input id="add-val" placeholder="..."></div>
+    <div class="form-group"><label>Название / ссылка</label><input id="add-val"></div>
     <div class="form-group"><label>Описание</label><textarea id="add-desc"></textarea></div>
     <button onclick="saveItem('${type}')" style="width:100%">Добавить</button>
   `);
 }
-
 async function saveItem(type){
   const val = document.getElementById('add-val').value;
   const desc = document.getElementById('add-desc').value;
   if(!val) return showToast('Введите значение');
   const map = {media:'addMedia',experience:'addExperience',education:'addEducation',inventory:'addInventory',costumes:'addCostume'};
-  const action = map[type] || 'addMedia';
-  const payload = { action, artistId: currentArtist.id, name: val, description: desc, url: val };
   try {
-    const r = await fetch(SHEET_API_URL, { method:'POST', body:JSON.stringify(payload) });
+    const r = await fetch(SHEET_API_URL, { method:'POST', body:JSON.stringify({action:map[type]||'addMedia',artistId:currentArtist.id,name:val,description:desc,url:val}) });
     const res = await r.json();
-    if(res.success){
-      showToast('Добавлено'); closeModal();
-      await loadProfileExtras();
-      renderProfile();
-    } else showToast('Ошибка');
+    if(res.success){ showToast('Добавлено'); closeModal(); await loadProfileExtras(); renderProfile(); }
+    else showToast('Ошибка');
   } catch(e){ showToast('Ошибка сети'); }
 }
 
