@@ -16,21 +16,18 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,san
 button{background:#EC4899;color:#FFF;border:none;padding:12px 30px;border-radius:30px;font-weight:bold;font-size:16px;cursor:pointer;box-shadow:0 4px 15px rgba(236,72,153,.3);transition:transform .2s}
 button:active{transform:scale(.95)}
 .btn-secondary{background:#FFF;color:#EC4899;border:2px solid #EC4899;box-shadow:none}
-/* ROLE SWITCHER */
 .role-switch{position:fixed;top:15px;right:15px;z-index:1500;background:#FFF;border:2px solid #EC4899;border-radius:30px;padding:8px 16px;display:flex;align-items:center;gap:8px;cursor:pointer;box-shadow:0 4px 12px rgba(236,72,153,.25);font-weight:700;font-size:13px;color:#EC4899}
-.role-switch i{font-size:16px}
-/* HOME */
 #screen-home .honeycomb-frame{position:relative;width:96vw;height:88dvh;clip-path:polygon(25% 0%,75% 0%,100% 25%,100% 75%,75% 100%,25% 100%,0% 75%,0% 25%);background:#FFF;border:2px solid rgba(236,72,153,.2);box-shadow:0 10px 30px rgba(0,0,0,.05);display:flex;justify-content:center;align-items:center}
 #screen-home .center-id{width:130px;height:130px;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background:#FFF5F9;border:3px solid #EC4899;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;font-weight:800;font-size:13px;color:#1A1A1A;z-index:15;cursor:pointer;padding:8px;box-sizing:border-box;overflow:hidden;position:relative}
 #screen-home .center-id .avatar{width:42px;height:42px;border-radius:50%;background:#EC4899;color:#FFF;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;margin-bottom:4px}
 #screen-home .center-id span{font-size:9px;font-weight:400;color:#6E6E73;margin-top:2px}
 .user-cell{position:absolute;width:62px;height:62px;background-color:#FCE7F3;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background-size:cover;background-position:center;border:2px solid #E5E5EA;box-shadow:0 4px 10px rgba(0,0,0,.08);cursor:pointer;transition:transform .2s,border-color .2s;z-index:5;transform:translate(-50%,-50%)}
 .user-cell:hover{transform:translate(-50%,-50%) scale(1.15);border-color:#EC4899;z-index:50}
-.user-cell .badge-bottom{position:absolute;bottom:0;left:0;right:0;background:rgba(26,26,26,.85);color:#FFF;font-size:9px;text-align:center;padding:2px;font-weight:600;line-height:1.1}
 .role-icon{position:absolute;bottom:8px;left:8px;font-size:12px;color:#FFF;background:rgba(0,0,0,.65);border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;z-index:3;line-height:1}
 .star-wrapper{position:absolute;top:8px;right:8px;width:16px;height:16px;z-index:3}
 .star-bg{position:absolute;inset:0;color:rgba(255,255,255,.55);font-size:14px}
 .star-fill{position:absolute;inset:0;color:#FFC107;font-size:14px;overflow:hidden;text-shadow:0 0 3px rgba(0,0,0,.8)}
+.visa-badge{position:absolute;top:-6px;left:-6px;background:#FF9800;color:#FFF;font-size:9px;padding:2px 5px;border-radius:8px;font-weight:700;z-index:4}
 .catalog-screen{background:#F5F5F7;padding-top:20px}
 .catalog-screen h1{font-size:24px;margin-bottom:20px;color:#1A1A1A}
 .search-bar{width:90%;max-width:400px;padding:15px;border:2px solid #E5E5EA;border-radius:30px;font-size:16px;margin-bottom:15px;background:#FFF;outline:none;text-align:center;box-sizing:border-box}
@@ -52,9 +49,15 @@ button:active{transform:scale(.95)}
 .status-req{background:#FFEB3B;border-radius:4px;color:#000;font-weight:bold;display:flex;justify-content:center;align-items:center}
 .status-active{background:#2196F3;clip-path:polygon(50% 0%,100% 100%,0% 100%);color:#FFF;font-weight:bold;display:flex;justify-content:center;align-items:center}
 .status-confirm{background:#9C27B0;clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);color:#FFF;font-weight:bold;display:flex;justify-content:center;align-items:center}
+.visa-info{width:100%;max-width:400px;background:#FFF;border-radius:15px;padding:15px;margin-bottom:20px;box-shadow:0 4px 10px rgba(0,0,0,.03)}
+.visa-info .vi-row{display:flex;justify-content:space-between;padding:8px 0;font-size:13px;border-bottom:1px solid #F0F0F0}
+.visa-info .vi-row:last-child{border-bottom:none}
+.visa-info .vi-lbl{color:#6E6E73}
+.visa-info .vi-val{color:#1A1A1A;font-weight:600}
+.visa-warn{background:#FFF5F9;color:#EC4899;padding:10px;border-radius:10px;font-size:12px;font-weight:600;text-align:center;margin-top:8px}
 #screen-calendar{background:#F5F5F7;padding:20px;justify-content:flex-start !important;overflow-y:auto}
 #screen-calendar h1{color:#1A1A1A;margin-bottom:10px;text-align:center}
-.year-nav{display:flex;gap:20px;margin-bottom:15px;align-items:center;justify-content:center}
+.year-nav{display:flex;gap:30px;margin-bottom:15px;align-items:center;justify-content:center}
 .month-cards{display:flex;flex-direction:column;gap:20px;width:100%;max-width:400px}
 .month-card{background:#FFF;border-radius:16px;padding:16px;box-shadow:0 4px 12px rgba(0,0,0,.05)}
 .month-card h3{text-align:center;color:#EC4899;font-size:16px;margin-bottom:12px;font-weight:800}
@@ -87,7 +90,6 @@ button:active{transform:scale(.95)}
 .match-card .right-block{display:flex;flex-direction:column;align-items:center;gap:5px}
 .match-card .score{font-weight:900;font-size:18px;color:#EC4899;text-align:center;min-width:45px}
 .match-card .score small{display:block;font-size:8px;color:#999;font-weight:400}
-.match-card .add-btn{background:#EC4899;color:#FFF;border:none;padding:6px 10px;border-radius:15px;font-size:10px;cursor:pointer;font-weight:bold}
 #screen-venues{background:#F5F5F7;padding-top:20px}
 #screen-venues h1{font-size:24px;margin-bottom:20px;color:#1A1A1A}
 #venues-grid{display:grid;grid-template-columns:repeat(3,100px);gap:15px;justify-content:center}
@@ -109,6 +111,8 @@ button:active{transform:scale(.95)}
 .list-item .li-title{font-weight:700;font-size:14px;margin-bottom:4px}
 .list-item .li-sub{font-size:12px;color:#6E6E73}
 .add-btn-full{width:100%;background:#FFF;color:#EC4899;border:2px dashed #EC4899;padding:12px;border-radius:12px;font-weight:700;margin-top:10px;cursor:pointer}
+.skeleton{background:linear-gradient(90deg,#F0F0F0 25%,#E0E0E0 50%,#F0F0F0 75%);background-size:200% 100%;animation:skel 1.5s infinite;border-radius:12px;height:60px;margin-bottom:10px}
+@keyframes skel{0%{background-position:200% 0}100%{background-position:-200% 0}}
 .toast{position:fixed;top:30px;left:50%;transform:translateX(-50%) translateY(-100px);background:#1A1A1A;color:#FFF;padding:12px 25px;border-radius:30px;font-size:14px;font-weight:600;z-index:9999;transition:transform .4s cubic-bezier(.175,.885,.32,1.275);box-shadow:0 10px 30px rgba(0,0,0,.2)}
 .toast.show{transform:translateX(-50%) translateY(0)}
 .back-btn{position:absolute;top:20px;left:20px;background:#FFF;color:#1A1A1A;font-size:24px;border-radius:50%;width:45px;height:45px;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:200;border:1px solid #E5E5EA}
@@ -116,13 +120,11 @@ button:active{transform:scale(.95)}
 .modal-overlay.open{display:flex}
 .modal-content{background:#FFF;border-radius:20px;padding:20px;width:100%;max-width:400px;max-height:85vh;overflow-y:auto}
 .modal-content h3{margin:0 0 15px;color:#EC4899}
-.role-option{display:flex;align-items:center;gap:12px;padding:14px;border-radius:12px;border:2px solid #E5E5EA;margin-bottom:10px;cursor:pointer;transition:all .2s}
-.role-option:hover{border-color:#EC4899;background:#FFF5F9}
+.role-option{display:flex;align-items:center;gap:12px;padding:14px;border-radius:12px;border:2px solid #E5E5EA;margin-bottom:10px;cursor:pointer}
 .role-option.active{border-color:#EC4899;background:#FFF5F9}
 .role-option i{font-size:22px;color:#EC4899;width:30px;text-align:center}
 .role-option .ro-name{font-weight:700;font-size:15px}
 .role-option .ro-desc{font-size:11px;color:#6E6E73;margin-top:2px}
-/* Events list for organizer */
 .events-list{width:100%;max-width:400px;padding:0 20px;box-sizing:border-box}
 .event-card{background:#FFF;border-radius:14px;padding:14px;margin-bottom:12px;box-shadow:0 4px 10px rgba(0,0,0,.04);border-left:4px solid #EC4899}
 .event-card .ec-date{font-size:11px;color:#EC4899;font-weight:700;text-transform:uppercase;margin-bottom:4px}
@@ -176,9 +178,8 @@ button:active{transform:scale(.95)}
   <button class="back-btn" onclick="navigateTo('screen-home')">←</button>
   <h1>Календарь</h1>
   <div class="year-nav">
-    <button onclick="changeYear(-1)">←</button>
-    <span id="year-display" style="font-size:24px;font-weight:bold">2026</span>
-    <button onclick="changeYear(1)">→</button>
+    <button onclick="changeMonth(-1)">←</button>
+    <button onclick="changeMonth(1)">→</button>
   </div>
   <div class="month-cards" id="month-cards"></div>
 </div>
@@ -247,7 +248,7 @@ if (window.Telegram && window.Telegram.WebApp) {
   tgUser = tg.initDataUnsafe && tg.initDataUnsafe.user ? tg.initDataUnsafe.user : null;
 }
 
-const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbysYx1lNqYIjharTDLrhf2BVqnO_hunE4hnkkOhFjrzyZ-8D2i4w4MOOmbedq_o6VM-/exec';
+const SHEET_API_URL = 'https://script.google.com/macros/library/d/1Id6vB8_OyuLJiwRs3hLOyEFHMiD_JkBtHzC1U_jLsouVbfsnc7OexGVH/14';
 
 const ROLE_ICONS = {
   dancer:'fa-person-running', ballet:'fa-child-reaching', singer:'fa-microphone',
@@ -267,8 +268,13 @@ const ROLE_NAMES = {
   lightingEngineer:'Художник по свету', director:'Режиссёр',
   violinist:'Скрипач', saxophonist:'Саксофонист', flutist:'Флейтист', other:'Другое'
 };
-
-// === Роли пользователя (главные роли в приложении) ===
+const TRAVEL_NAMES = {
+  russia:'Россия', cis:'СНГ', europe:'Европа', world:'Мир', none:'Не выезжает'
+};
+const VISA_NAMES = {
+  schengen:'Шенген', usa:'США', uk:'Великобритания', uae:'ОАЭ',
+  multiple:'Мультивиза', none:'Нет визы'
+};
 const USER_ROLES = {
   artist: { name:'Артист', icon:'fa-microphone', desc:'Показываю себя, бронирую площадки' },
   organizer: { name:'Организатор', icon:'fa-briefcase', desc:'Создаю мероприятия, ищу артистов' },
@@ -276,47 +282,40 @@ const USER_ROLES = {
   viewer: { name:'Зритель', icon:'fa-eye', desc:'Смотрю афишу, посещаю события' }
 };
 
-let artists = [], venues = [], events = [], persons = [];
+let artists = [], venues = [], events = [], persons = [], pricing = [];
 let currentArtist = null;
 let currentPerson = null;
-let activeRole = 'artist'; // по умолчанию
+let activeRole = 'artist';
 let profileData = { media:[], experience:[], education:[], inventory:[], costumes:[] };
+let profileLoading = false;
 let userProject = JSON.parse(localStorage.getItem('userProject')||'[]');
 let state = { year: new Date().getFullYear(), monthIndex: new Date().getMonth() };
 
 async function loadData() {
   try {
-    const [a,v,e,p] = await Promise.all([
+    const [a,v,e,p,pr] = await Promise.all([
       fetch(SHEET_API_URL+'?action=artists').then(r=>r.json()).catch(()=>null),
       fetch(SHEET_API_URL+'?action=venues').then(r=>r.json()).catch(()=>null),
       fetch(SHEET_API_URL+'?action=events').then(r=>r.json()).catch(()=>null),
-      fetch(SHEET_API_URL+'?action=persons').then(r=>r.json()).catch(()=>null)
+      fetch(SHEET_API_URL+'?action=persons').then(r=>r.json()).catch(()=>null),
+      fetch(SHEET_API_URL+'?action=pricing').then(r=>r.json()).catch(()=>null)
     ]);
     artists = Array.isArray(a) ? a : [];
     venues = Array.isArray(v) ? v : [];
     events = Array.isArray(e) ? e : [];
     persons = Array.isArray(p) ? p : [];
-  } catch(err) { console.log('loadData err', err); }
+    pricing = Array.isArray(pr) ? pr : [];
+  } catch(err){ console.log('loadData err', err); }
   
-  // Определяем текущего пользователя и роль
   if(tgUser){
-    // 1. Ищем в Persons
-    currentPerson = persons.find(p => String(p.telegramId) === String(tgUser.id));
-    
-    // 2. Если нет в Persons — создаём
-    if(!currentPerson){
-      currentPerson = await createPersonRecord();
-    }
-    
-    // 3. Устанавливаем активную роль
+    const tgId = String(tgUser.id);
+    currentPerson = persons.find(p => String(p.telegramId) === tgId);
+    if(!currentPerson) currentPerson = await createPersonRecord();
     if(currentPerson){
-      activeRole = localStorage.getItem('activeRole') || currentPerson.activeRole || 'viewer';
+      activeRole = localStorage.getItem('activeRole') || currentPerson.activeRole || 'organizer';
     }
-    
-    // 4. Ищем артиста по telegramId
-    currentArtist = artists.find(a => String(a.telegramId) === String(tgUser.id)) || null;
+    currentArtist = artists.find(a => String(a.telegramId) === tgId) || null;
   }
-  
   updateRoleUI();
   renderHome();
 }
@@ -324,12 +323,10 @@ async function loadData() {
 async function createPersonRecord(){
   try {
     const body = {
-      action: 'createPerson',
-      telegramId: tgUser.id,
-      name: (tgUser.first_name || '') + (tgUser.last_name ? ' ' + tgUser.last_name : ''),
+      action:'createPerson', telegramId: String(tgUser.id),
+      name: (tgUser.first_name||'') + (tgUser.last_name ? ' '+tgUser.last_name : ''),
       photoUrl: tgUser.photo_url || '',
-      activeRole: 'organizer',
-      roles: 'organizer,artist,viewer'
+      activeRole: 'organizer', roles: 'organizer,artist,viewer'
     };
     const r = await fetch(SHEET_API_URL, { method:'POST', body:JSON.stringify(body) });
     const res = await r.json();
@@ -340,55 +337,37 @@ async function createPersonRecord(){
 
 function updateRoleUI(){
   const label = document.getElementById('role-label');
-  const role = USER_ROLES[activeRole] || USER_ROLES.artist;
-  label.innerText = role.name;
-  
-  // Навигация
+  label.innerText = (USER_ROLES[activeRole] || USER_ROLES.artist).name;
   const nav = document.getElementById('bottom-nav');
   if(activeRole === 'organizer'){
     nav.innerHTML = `
-      <div class="nav-icon active" onclick="navigateTo('screen-organizer-home',this)" title="Проекты"><i class="fa-solid fa-briefcase"></i></div>
-      <div class="nav-icon" onclick="navigateTo('screen-catalog',this)" title="Артисты"><i class="fa-solid fa-users"></i></div>
-      <div class="nav-icon" onclick="navigateTo('screen-venues',this)" title="Площадки"><i class="fa-solid fa-landmark"></i></div>
-      <div class="nav-icon" onclick="navigateTo('screen-calendar',this)" title="Календарь"><i class="fa-solid fa-calendar"></i></div>
-      <div class="nav-icon" onclick="navigateTo('screen-match',this)" title="ИИ-Подбор"><i class="fa-solid fa-magnifying-glass"></i></div>
-    `;
+      <div class="nav-icon active" onclick="navigateTo('screen-organizer-home',this)"><i class="fa-solid fa-briefcase"></i></div>
+      <div class="nav-icon" onclick="navigateTo('screen-catalog',this)"><i class="fa-solid fa-users"></i></div>
+      <div class="nav-icon" onclick="navigateTo('screen-venues',this)"><i class="fa-solid fa-landmark"></i></div>
+      <div class="nav-icon" onclick="navigateTo('screen-calendar',this)"><i class="fa-solid fa-calendar"></i></div>
+      <div class="nav-icon" onclick="navigateTo('screen-match',this)"><i class="fa-solid fa-magnifying-glass"></i></div>`;
   } else {
-    // artist (по умолчанию)
     nav.innerHTML = `
-      <div class="nav-icon active" onclick="navigateTo('screen-home',this)" title="Главная"><i class="fa-solid fa-house"></i></div>
-      <div class="nav-icon" onclick="navigateTo('screen-catalog',this)" title="Артисты"><i class="fa-solid fa-users"></i></div>
-      <div class="nav-icon" onclick="navigateTo('screen-venues',this)" title="Площадки"><i class="fa-solid fa-landmark"></i></div>
-      <div class="nav-icon" onclick="navigateTo('screen-calendar',this)" title="Календарь"><i class="fa-solid fa-calendar"></i></div>
-      <div class="nav-icon" onclick="navigateTo('screen-match',this)" title="ИИ-Подбор"><i class="fa-solid fa-magnifying-glass"></i></div>
-    `;
+      <div class="nav-icon active" onclick="navigateTo('screen-home',this)"><i class="fa-solid fa-house"></i></div>
+      <div class="nav-icon" onclick="navigateTo('screen-catalog',this)"><i class="fa-solid fa-users"></i></div>
+      <div class="nav-icon" onclick="navigateTo('screen-venues',this)"><i class="fa-solid fa-landmark"></i></div>
+      <div class="nav-icon" onclick="navigateTo('screen-calendar',this)"><i class="fa-solid fa-calendar"></i></div>
+      <div class="nav-icon" onclick="navigateTo('screen-match',this)"><i class="fa-solid fa-magnifying-glass"></i></div>`;
   }
 }
 
 function openRolePicker(){
-  if(!currentPerson){
-    showToast('Откройте через Telegram');
-    return;
-  }
+  if(!currentPerson){ showToast('Откройте через Telegram'); return; }
   const roles = currentPerson.roles || ['organizer','artist'];
   let html = '<h3>Выберите роль</h3>';
   roles.forEach(r => {
-    const role = USER_ROLES[r];
-    if(!role) return;
+    const role = USER_ROLES[r]; if(!role) return;
     const isActive = r === activeRole;
-    html += `
-      <div class="role-option ${isActive?'active':''}" onclick="switchRole('${r}')">
-        <i class="fa-solid ${role.icon}"></i>
-        <div>
-          <div class="ro-name">${role.name} ${isActive?'✓':''}</div>
-          <div class="ro-desc">${role.desc}</div>
-        </div>
-      </div>
-    `;
+    html += `<div class="role-option ${isActive?'active':''}" onclick="switchRole('${r}')">
+      <i class="fa-solid ${role.icon}"></i>
+      <div><div class="ro-name">${role.name} ${isActive?'✓':''}</div><div class="ro-desc">${role.desc}</div></div>
+    </div>`;
   });
-  if(roles.length < Object.keys(USER_ROLES).length){
-    html += `<button class="add-btn-full" onclick="alert('Расширение ролей — в следующей итерации')" style="margin-top:10px">+ Стать артистом / организатором</button>`;
-  }
   openModal(html);
 }
 
@@ -397,25 +376,15 @@ async function switchRole(newRole){
   localStorage.setItem('activeRole', newRole);
   closeModal();
   updateRoleUI();
-  
-  // Переходим на домашний экран активной роли
-  if(newRole === 'organizer'){
-    navigateTo('screen-organizer-home');
-  } else if(newRole === 'viewer'){
-    navigateTo('screen-home');
-  } else {
-    navigateTo('screen-home');
-  }
-  
-  // Обновляем активную роль на сервере
+  if(newRole === 'organizer') navigateTo('screen-organizer-home');
+  else navigateTo('screen-home');
   if(tgUser){
     try {
       await fetch(SHEET_API_URL, { method:'POST', body:JSON.stringify({
-        action:'setActiveRole', telegramId: tgUser.id, activeRole: newRole
+        action:'setActiveRole', telegramId: String(tgUser.id), activeRole: newRole
       }) });
     } catch(e){}
   }
-  
   showToast('Роль: ' + (USER_ROLES[newRole]?.name || newRole));
 }
 
@@ -437,10 +406,7 @@ function showToast(msg){
   t.innerText=msg; t.classList.add('show');
   setTimeout(()=>t.classList.remove('show'),2500);
 }
-function openModal(html){
-  document.getElementById('modal-content').innerHTML=html;
-  document.getElementById('modal-overlay').classList.add('open');
-}
+function openModal(html){ document.getElementById('modal-content').innerHTML=html; document.getElementById('modal-overlay').classList.add('open'); }
 function closeModal(){ document.getElementById('modal-overlay').classList.remove('open'); }
 
 function renderHome(){
@@ -450,22 +416,22 @@ function renderHome(){
   } else {
     blk.innerHTML = `<div class="avatar">T</div>TourBuilder<span>Маркетплейс</span>`;
   }
-  const c = document.getElementById('users-container');
-  c.innerHTML = '';
+  const c = document.getElementById('users-container'); c.innerHTML = '';
   const positions = [
-    {x:-100, y:-165}, {x:0, y:-190}, {x:100, y:-165},
-    {x:-130, y:-15},  {x:130, y:-15},
-    {x:-100, y:150},  {x:0, y:170},   {x:100, y:150}
+    {x:-100,y:-165},{x:0,y:-190},{x:100,y:-165},
+    {x:-130,y:-15},{x:130,y:-15},
+    {x:-100,y:150},{x:0,y:170},{x:100,y:150}
   ];
   artists.slice(0,8).forEach((a,i)=>{
     if(!positions[i]) return;
     const cell = document.createElement('div');
     cell.className = 'user-cell';
     cell.style.left = `calc(50% + ${positions[i].x}px)`;
-    cell.style.top  = `calc(50% + ${positions[i].y}px)`;
+    cell.style.top = `calc(50% + ${positions[i].y}px)`;
     if(a.img) cell.style.backgroundImage = `url('${a.img}')`;
     const roleIcon = ROLE_ICONS[a.role] || 'fa-star';
     cell.innerHTML = `<i class="fa-solid ${roleIcon} role-icon"></i>`;
+    if(a.needsVisaSupport) cell.innerHTML += `<div class="visa-badge">VISA</div>`;
     const pct = Math.round(((a.rating||5)/5)*100);
     const sw = document.createElement('div');
     sw.className = 'star-wrapper';
@@ -479,7 +445,6 @@ function renderHome(){
 function renderOrganizerHome(){
   const list = document.getElementById('organizer-events');
   if(!list) return;
-  // Показываем мероприятия организатора (по organizerId = tgUser.id)
   const myEvents = tgUser ? events.filter(e => String(e.organizerId) === String(tgUser.id)) : [];
   if(!myEvents.length){
     list.innerHTML = '<p style="color:#6E6E73;text-align:center;padding:30px">Пока нет мероприятий. Создайте первое!</p>';
@@ -492,8 +457,7 @@ function renderOrganizerHome(){
     card.innerHTML = `
       <div class="ec-date">${ev.date || ''}</div>
       <div class="ec-title">${ev.title || ev.type || 'Мероприятие'}</div>
-      <div class="ec-sub">${ev.venue || ''} ${ev.time ? '· ' + ev.time : ''}</div>
-    `;
+      <div class="ec-sub">${ev.venue || ''} ${ev.time ? '· ' + ev.time : ''}</div>`;
     list.appendChild(card);
   });
 }
@@ -504,8 +468,7 @@ function renderCatalog(q=''){
   let list = artists;
   if(q) list = list.filter(a=>(a.name||'').toLowerCase().includes(q.toLowerCase()));
   list.forEach(a=>{
-    const c=document.createElement('div');
-    c.className='catalog-cell';
+    const c=document.createElement('div'); c.className='catalog-cell';
     if(a.img) c.style.backgroundImage=`url('${a.img}')`;
     c.innerHTML = `<div class="label">${a.name||'—'}</div><i class="fa-solid ${ROLE_ICONS[a.role]||'fa-star'} role-icon"></i>`;
     c.onclick=()=>openArtist(a.id);
@@ -515,8 +478,7 @@ function renderCatalog(q=''){
 }
 
 function openArtist(id){
-  const a = artists.find(x=>x.id===id);
-  if(!a) return;
+  const a = artists.find(x=>x.id===id); if(!a) return;
   const c = document.getElementById('artist-detail-content');
   let daysHTML = '';
   const dim = new Date(state.year, state.monthIndex+1, 0).getDate();
@@ -534,6 +496,17 @@ function openArtist(id){
   }
   const inProj = userProject.some(p=>p.id===a.id && p.type==='artist');
   const roleIcon = ROLE_ICONS[a.role]||'fa-star';
+  
+  let visaHTML = '';
+  if(a.travelScope || a.visaType || a.needsVisaSupport){
+    visaHTML = `<div class="visa-info">
+      ${a.travelScope ? `<div class="vi-row"><span class="vi-lbl">Готов к выезду</span><span class="vi-val">${TRAVEL_NAMES[a.travelScope]||a.travelScope}</span></div>` : ''}
+      ${a.visaType && a.visaType !== 'none' ? `<div class="vi-row"><span class="vi-lbl">Виза</span><span class="vi-val">${VISA_NAMES[a.visaType]||a.visaType}</span></div>` : ''}
+      ${a.visaValidUntil ? `<div class="vi-row"><span class="vi-lbl">Действует до</span><span class="vi-val">${a.visaValidUntil}</span></div>` : ''}
+      ${a.needsVisaSupport ? `<div class="visa-warn">⚠️ Нужна помощь с визой</div>` : ''}
+    </div>`;
+  }
+  
   c.innerHTML = `
     <div class="detail-photo" ${a.img?`style="background-image:url('${a.img}')"`:''}>
       <i class="fa-solid ${roleIcon} role-icon"></i>
@@ -541,13 +514,13 @@ function openArtist(id){
     <div class="detail-name">${a.name||''}</div>
     <div class="detail-spec">${ROLE_NAMES[a.role]||a.spec||''} · ${a.city||''}</div>
     <div style="margin-bottom:20px;color:#6E6E73;text-align:center">⭐ ${a.rating||0} · от ${(a.price||0).toLocaleString()} ₽</div>
+    ${visaHTML}
     <h3 style="color:#1A1A1A;font-size:15px;text-align:center">Занятость на ${['Янв','Фев','Мар','Апр','Май','Июн','Июл','Авг','Сен','Окт','Ноя','Дек'][state.monthIndex]}</h3>
     <div class="mini-calendar"><div class="days-grid">${daysHTML}</div></div>
     <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
       <button onclick="alert('Запрос отправлен!')">Пригласить</button>
       <button class="${inProj?'btn-secondary':''}" onclick='toggleProject(${JSON.stringify(a).replace(/'/g,"&#39;")},"artist",this)'>${inProj?'✓ В проекте':'+ В проект'}</button>
-    </div>
-  `;
+    </div>`;
   navigateTo('screen-artist');
 }
 
@@ -569,8 +542,7 @@ function renderVenues(q=''){
   let list = venues;
   if(q) list = list.filter(v=>(v.name||'').toLowerCase().includes(q.toLowerCase()));
   list.forEach(v=>{
-    const c=document.createElement('div');
-    c.className='catalog-cell';
+    const c=document.createElement('div'); c.className='catalog-cell';
     if(v.img) c.style.backgroundImage=`url('${v.img}')`;
     c.innerHTML=`<div class="label">${v.name||'—'}</div>`;
     c.onclick=()=>openVenue(v.id);
@@ -581,16 +553,13 @@ function renderVenues(q=''){
 function openVenue(id){
   const v=venues.find(x=>x.id===id); if(!v) return;
   const c=document.getElementById('venue-detail-content');
-  // Расчёт цены с множителями
   const basePrice = v.basePrice || v.price || 0;
   const now = new Date();
-  const month = now.getMonth();
-  const isHighSeason = (month >= 5 && month <= 8); // июнь-сентябрь
+  const isHighSeason = (now.getMonth() >= 5 && now.getMonth() <= 8);
   const isWeekend = [0,6].includes(now.getDay());
   const seasonM = isHighSeason ? (v.seasonMultiplier || 1) : 1;
   const weekendM = isWeekend ? (v.weekendMultiplier || 1) : 1;
   const finalPrice = Math.round(basePrice * seasonM * weekendM);
-  
   c.innerHTML=`
     <div class="detail-photo" ${v.img?`style="background-image:url('${v.img}')"`:''}></div>
     <div class="detail-name">${v.name||''}</div>
@@ -601,21 +570,26 @@ function openVenue(id){
       <div style="font-size:20px;font-weight:800;color:#EC4899">${finalPrice.toLocaleString()} ₽</div>
       ${seasonM>1||weekendM>1 ? `<div style="font-size:10px;color:#6E6E73;margin-top:4px">базовая ${basePrice.toLocaleString()} ₽ ${isHighSeason?'· сезон ×'+seasonM:''} ${isWeekend?'· выходной ×'+weekendM:''}</div>` : ''}
     </div>
-    <button onclick="alert('Запрос брони!')">Запросить бронь</button>
-  `;
+    <button onclick="alert('Запрос брони!')">Запросить бронь</button>`;
   navigateTo('screen-venue');
 }
 
 const months = ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
 const daysOfWeek = ['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];
-function changeYear(d){ state.year += d; document.getElementById('year-display').innerText = state.year; renderCalendar(); }
+
+// ✅ ФИКС: теперь листаем месяц, а не год
+function changeMonth(delta){
+  state.monthIndex += delta;
+  if(state.monthIndex < 0){ state.monthIndex = 11; state.year--; }
+  if(state.monthIndex > 11){ state.monthIndex = 0; state.year++; }
+  renderCalendar();
+}
 
 function renderCalendar(){
-  document.getElementById('year-display').innerText = state.year;
   const c = document.getElementById('month-cards');
   c.innerHTML = '';
   const baseMonth = state.monthIndex;
-  const showMonths = [baseMonth - 1, baseMonth, baseMonth + 1].map(m => {
+  const showMonths = [baseMonth-1, baseMonth, baseMonth+1].map(m => {
     let mm = m, yy = state.year;
     if(mm < 0){ mm = 11; yy--; }
     if(mm > 11){ mm = 0; yy++; }
@@ -687,8 +661,7 @@ function runAIMatch(){
     if(!res.length){ rc.innerHTML='<div style="text-align:center;padding:30px;color:#6E6E73">😔 Никого не найдено</div>'; return; }
     rc.innerHTML=`<h3 style="margin-bottom:12px;font-size:16px">Найдено ${res.length}:</h3>`;
     res.forEach(a=>{
-      const card=document.createElement('div');
-      card.className='match-card';
+      const card=document.createElement('div'); card.className='match-card';
       card.innerHTML=`
         <div class="avatar" ${a.img?`style="background-image:url('${a.img}')"`:''}></div>
         <div class="info">
@@ -696,9 +669,7 @@ function runAIMatch(){
           <div class="spec">${ROLE_NAMES[a.role]||a.spec||''} · ${a.city||''}</div>
           <div class="reason">${a.reasons.join(' · ')}</div>
         </div>
-        <div class="right-block">
-          <div class="score">${a.score}%<small>матч</small></div>
-        </div>`;
+        <div class="right-block"><div class="score">${a.score}%<small>матч</small></div></div>`;
       card.onclick=()=>openArtist(a.id);
       rc.appendChild(card);
     });
@@ -708,8 +679,16 @@ function runAIMatch(){
 async function openProfileOrCreate(){
   if(!tgUser){ showToast('Откройте через Telegram'); return; }
   if(!currentArtist){ openCreateForm(); return; }
-  await loadProfileExtras();
   navigateTo('screen-profile');
+  // Скелетон пока грузим
+  ['media','experience','education','inventory','costumes','params'].forEach(t=>{
+    const el = document.getElementById('tab-'+t);
+    if(el) el.innerHTML = '<div class="skeleton"></div><div class="skeleton"></div>';
+  });
+  profileLoading = true;
+  await loadProfileExtras();
+  profileLoading = false;
+  renderProfile();
 }
 
 async function loadProfileExtras(){
@@ -739,6 +718,17 @@ function openCreateForm(){
     <div class="form-group"><label>Город</label><input id="cf-city" placeholder="Москва"></div>
     <div class="form-group"><label>Гонорар, ₽</label><input id="cf-price" type="number" value="15000"></div>
     <div class="form-group"><label>Контакты</label><input id="cf-contacts" placeholder="@username"></div>
+    <div class="form-group"><label>Готов к выезду</label><select id="cf-travel">
+      <option value="russia">Россия</option><option value="cis">СНГ</option>
+      <option value="europe">Европа</option><option value="world">Мир</option><option value="none">Не выезжаю</option>
+    </select></div>
+    <div class="form-group"><label>Виза</label><select id="cf-visa">
+      <option value="none">Нет</option><option value="schengen">Шенген</option>
+      <option value="usa">США</option><option value="uk">Великобритания</option>
+      <option value="uae">ОАЭ</option><option value="multiple">Мультивиза</option>
+    </select></div>
+    <div class="form-group"><label>Действует до (ГГГГ-ММ-ДД)</label><input id="cf-visaUntil" placeholder="2027-12-31"></div>
+    <div class="form-group"><label>Нужна помощь с визой</label><select id="cf-visaHelp"><option value="false">Нет</option><option value="true">Да</option></select></div>
     <button onclick="submitCreateProfile()" style="width:100%">Создать</button>
   `);
 }
@@ -746,13 +736,17 @@ function openCreateForm(){
 async function submitCreateProfile(){
   const role = document.getElementById('cf-role').value;
   const body = {
-    action:'createArtist', telegramId: tgUser.id,
+    action:'createArtist', telegramId: String(tgUser.id),
     name: document.getElementById('cf-name').value,
     role, city: document.getElementById('cf-city').value,
     price: document.getElementById('cf-price').value,
     contacts: document.getElementById('cf-contacts').value,
     img:'', spec: ROLE_NAMES[role], specialty:'dance', genre:'dance',
-    readyToTravel:false, countries:''
+    readyToTravel:false, countries:'',
+    travelScope: document.getElementById('cf-travel').value,
+    visaType: document.getElementById('cf-visa').value,
+    visaValidUntil: document.getElementById('cf-visaUntil').value,
+    needsVisaSupport: document.getElementById('cf-visaHelp').value === 'true'
   };
   try {
     const r = await fetch(SHEET_API_URL, { method:'POST', body:JSON.stringify(body) });
@@ -778,15 +772,18 @@ function renderProfile(){
     <div class="field-row"><span class="lbl">Специализация</span><span class="val">${a.spec||'—'}</span></div>
     <div class="field-row"><span class="lbl">Город</span><span class="val">${a.city||'—'}</span></div>
     <div class="field-row"><span class="lbl">Контакты</span><span class="val">${a.contacts||'—'}</span></div>
-    <div class="field-row"><span class="lbl">Готов к выезду</span><span class="val">${a.readyToTravel?'Да':'Нет'}</span></div>
-    <div class="field-row"><span class="lbl">Страны</span><span class="val">${a.countries||'—'}</span></div>
+    <div class="field-row"><span class="lbl">Готов к выезду</span><span class="val">${TRAVEL_NAMES[a.travelScope]||'—'}</span></div>
+    <div class="field-row"><span class="lbl">Виза</span><span class="val">${VISA_NAMES[a.visaType]||'—'}${a.visaValidUntil?' до '+a.visaValidUntil:''}</span></div>
+    ${a.needsVisaSupport?'<div class="visa-warn" style="margin-top:10px">⚠️ Нужна помощь с визой</div>':''}
     <div style="display:flex;justify-content:center;margin-top:15px"><button onclick="editMain()">Редактировать</button></div>
   `;
-  renderList('media','Медиа');
-  renderList('experience','Опыт');
-  renderList('education','Образование');
-  renderList('inventory','Инвентарь');
-  renderList('costumes','Костюмы');
+  if(!profileLoading){
+    renderList('media','Медиа');
+    renderList('experience','Опыт');
+    renderList('education','Образование');
+    renderList('inventory','Инвентарь');
+    renderList('costumes','Костюмы');
+  }
   document.getElementById('tab-params').innerHTML = `
     <div class="field-row"><span class="lbl">Рост</span><span class="val">${a.height||'—'}</span></div>
     <div class="field-row"><span class="lbl">Вес</span><span class="val">${a.weight||'—'}</span></div>
@@ -799,6 +796,7 @@ function renderProfile(){
 
 function renderList(key, title){
   const el = document.getElementById('tab-'+key);
+  if(!el) return;
   const arr = profileData[key]||[];
   if(!arr.length){
     el.innerHTML = `<div class="list-item"><div class="li-title">Пока нет данных</div><div class="li-sub">Добавьте информацию</div></div><button class="add-btn-full" onclick="addItem('${key}')">+ Добавить</button>`;
@@ -830,6 +828,14 @@ function editMain(){
     <div class="form-group"><label>Специализация</label><input id="e-spec" value="${a.spec||''}"></div>
     <div class="form-group"><label>Город</label><input id="e-city" value="${a.city||''}"></div>
     <div class="form-group"><label>Контакты</label><input id="e-contacts" value="${a.contacts||''}"></div>
+    <div class="form-group"><label>Выезд</label><select id="e-travel">
+      ${Object.keys(TRAVEL_NAMES).map(k=>`<option value="${k}" ${a.travelScope===k?'selected':''}>${TRAVEL_NAMES[k]}</option>`).join('')}
+    </select></div>
+    <div class="form-group"><label>Виза</label><select id="e-visa">
+      ${Object.keys(VISA_NAMES).map(k=>`<option value="${k}" ${a.visaType===k?'selected':''}>${VISA_NAMES[k]}</option>`).join('')}
+    </select></div>
+    <div class="form-group"><label>Действует до</label><input id="e-visaUntil" value="${a.visaValidUntil||''}"></div>
+    <div class="form-group"><label>Помощь с визой</label><select id="e-visaHelp"><option value="false" ${!a.needsVisaSupport?'selected':''}>Нет</option><option value="true" ${a.needsVisaSupport?'selected':''}>Да</option></select></div>
     <button onclick="saveMain()" style="width:100%">Сохранить</button>
   `);
 }
@@ -840,7 +846,11 @@ async function saveMain(){
     role: document.getElementById('e-role').value,
     spec: document.getElementById('e-spec').value,
     city: document.getElementById('e-city').value,
-    contacts: document.getElementById('e-contacts').value
+    contacts: document.getElementById('e-contacts').value,
+    travelScope: document.getElementById('e-travel').value,
+    visaType: document.getElementById('e-visa').value,
+    visaValidUntil: document.getElementById('e-visaUntil').value,
+    needsVisaSupport: document.getElementById('e-visaHelp').value === 'true'
   };
   try {
     const r = await fetch(SHEET_API_URL, { method:'POST', body:JSON.stringify({action:'updateArtist',artistId:currentArtist.id,fields}) });
