@@ -13,8 +13,9 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,san
 .nav-icon.active{color:#EC4899;transform:translateY(-3px)}
 .screen{display:none;width:100%;height:calc(100vh - 80px);position:absolute;top:0;left:0;overflow-y:auto;padding-bottom:80px;box-sizing:border-box}
 .screen.active{display:flex;justify-content:center;align-items:center;flex-direction:column}
-button{background:#EC4899;color:#FFF;border:none;padding:12px 30px;border-radius:30px;font-weight:bold;font-size:16px;cursor:pointer;box-shadow:0 4px 15px rgba(236,72,153,.3);transition:transform .2s}
+button{background:#EC4899;color:#FFF;border:none;padding:12px 30px;border-radius:30px;font-weight:bold;font-size:16px;cursor:pointer;box-shadow:0 4px 15px rgba(236,72,153,.3);transition:transform .2s;font-family:inherit}
 button:active{transform:scale(.95)}
+button:disabled{opacity:.5;cursor:not-allowed}
 .btn-secondary{background:#FFF;color:#EC4899;border:2px solid #EC4899;box-shadow:none}
 .btn-ghost{background:transparent;color:#EC4899;border:1px solid #EC4899;box-shadow:none;padding:8px 16px;font-size:13px}
 .role-switch{position:fixed;top:15px;right:15px;z-index:1500;background:#FFF;border:2px solid #EC4899;border-radius:30px;padding:8px 16px;display:flex;align-items:center;gap:8px;cursor:pointer;box-shadow:0 4px 12px rgba(236,72,153,.25);font-weight:700;font-size:13px;color:#EC4899}
@@ -30,10 +31,10 @@ button:active{transform:scale(.95)}
 .star-bg{position:absolute;inset:0;color:rgba(255,255,255,.55);font-size:14px}
 .star-fill{position:absolute;inset:0;color:#FFC107;font-size:14px;overflow:hidden;text-shadow:0 0 3px rgba(0,0,0,.8)}
 .visa-badge{position:absolute;top:-6px;left:-6px;background:#FF9800;color:#FFF;font-size:9px;padding:2px 5px;border-radius:8px;font-weight:700;z-index:4}
-/* CATALOG / DETAILS */
+/* CATALOG */
 .catalog-screen{background:#F5F5F7;padding-top:20px}
 .catalog-screen h1{font-size:24px;margin-bottom:20px;color:#1A1A1A}
-.search-bar{width:90%;max-width:400px;padding:15px;border:2px solid #E5E5EA;border-radius:30px;font-size:16px;margin-bottom:15px;background:#FFF;outline:none;text-align:center;box-sizing:border-box}
+.search-bar{width:90%;max-width:400px;padding:15px;border:2px solid #E5E5EA;border-radius:30px;font-size:16px;margin-bottom:15px;background:#FFF;outline:none;text-align:center;box-sizing:border-box;font-family:inherit}
 .catalog-grid{display:grid;grid-template-columns:repeat(3,100px);gap:15px;justify-content:center}
 .catalog-cell{position:relative;width:100px;height:100px;background-color:#FCE7F3;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background-size:cover;background-position:center;border:2px solid #E5E5EA;cursor:pointer;transition:transform .2s}
 .catalog-cell .label{position:absolute;top:42px;left:0;right:0;background:rgba(26,26,26,.85);color:#FFF;font-size:10px;text-align:center;padding:3px 2px;font-weight:600}
@@ -66,16 +67,40 @@ button:active{transform:scale(.95)}
 .cal-legend span{display:flex;align-items:center;gap:4px}
 /* WIZARD */
 #screen-wizard{background:#F5F5F7;padding:20px;justify-content:flex-start !important;overflow-y:auto}
-.wizard-progress{width:100%;max-width:400px;background:#E5E5EA;border-radius:30px;height:8px;margin-bottom:20px;overflow:hidden}
-.wizard-progress-bar{background:#EC4899;height:100%;transition:width .3s}
-.wizard-step{width:100%;max-width:400px;background:#FFF;border-radius:20px;padding:24px;box-shadow:0 6px 20px rgba(0,0,0,.05);box-sizing:border-box}
-.wizard-step h2{color:#1A1A1A;font-size:20px;margin:0 0 20px}
-.wizard-options{display:flex;flex-direction:column;gap:10px}
-.wizard-option{padding:16px;border:2px solid #E5E5EA;border-radius:14px;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:12px;font-weight:600}
+.wizard-progress{width:100%;max-width:400px;background:#E5E5EA;border-radius:30px;height:8px;margin-bottom:10px;overflow:hidden}
+.wizard-progress-bar{background:linear-gradient(90deg,#EC4899,#F472B6);height:100%;transition:width .4s ease;border-radius:30px}
+.wizard-step-label{font-size:11px;color:#6E6E73;margin-bottom:15px;text-align:center;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.wizard-step{width:100%;max-width:400px;background:#FFF;border-radius:20px;padding:22px;box-shadow:0 6px 20px rgba(0,0,0,.05);box-sizing:border-box}
+.wizard-step h2{color:#1A1A1A;font-size:19px;margin:0 0 6px;font-weight:800}
+.wizard-step .wiz-sub{color:#6E6E73;font-size:12px;margin-bottom:18px}
+.wizard-step h3{font-size:13px;color:#6E6E73;font-weight:700;margin:16px 0 8px}
+.wizard-options{display:flex;flex-direction:column;gap:8px}
+.wizard-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.wizard-chip{padding:10px 16px;border:2px solid #E5E5EA;border-radius:24px;background:#FFF;font-size:13px;font-weight:600;color:#6E6E73;cursor:pointer;transition:all .2s}
+.wizard-chip:hover{border-color:#EC4899}
+.wizard-chip.selected{background:#EC4899;border-color:#EC4899;color:#FFF}
+.wizard-option{padding:14px;border:2px solid #E5E5EA;border-radius:14px;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:12px;font-weight:600;font-size:14px;background:#FFF}
 .wizard-option:hover{border-color:#EC4899;background:#FFF5F9}
 .wizard-option.selected{border-color:#EC4899;background:#FFF5F9}
-.wizard-option i{color:#EC4899;font-size:20px;width:28px;text-align:center}
-.wizard-nav{display:flex;justify-content:space-between;margin-top:20px;max-width:400px;width:100%}
+.wizard-option i{color:#EC4899;font-size:18px;width:26px;text-align:center}
+.wizard-custom-input{margin-top:10px;display:flex;gap:8px}
+.wizard-custom-input input{flex:1;padding:12px 16px;border:2px solid #E5E5EA;border-radius:12px;font-size:15px;outline:none;font-family:inherit;box-sizing:border-box}
+.wizard-custom-input input:focus{border-color:#EC4899}
+.wizard-nav{display:flex;justify-content:space-between;margin-top:20px;max-width:400px;width:100%;gap:10px}
+.wizard-nav button{flex:1;padding:14px 20px;font-size:15px}
+/* RESULT CARDS */
+.result-cards{display:flex;flex-direction:column;gap:12px;margin-bottom:15px}
+.result-card{background:#FFF;border-radius:16px;padding:14px;box-shadow:0 4px 14px rgba(0,0,0,.06);display:flex;gap:12px;align-items:center;border:1px solid #F0F0F0;transition:box-shadow .2s;position:relative}
+.result-card:hover{box-shadow:0 6px 20px rgba(236,72,153,.15);border-color:#EC4899}
+.result-card .rc-avatar{width:60px;height:60px;flex-shrink:0;background-color:#FCE7F3;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background-size:cover;background-position:center;border:2px solid #EC4899}
+.result-card .rc-info{flex:1;min-width:0}
+.result-card .rc-name{font-weight:800;font-size:15px;margin-bottom:3px;color:#1A1A1A}
+.result-card .rc-spec{font-size:12px;color:#6E6E73;margin-bottom:4px}
+.result-card .rc-meta{font-size:11px;color:#6E6E73;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.result-card .rc-meta .rc-price{color:#EC4899;font-weight:800;font-size:13px}
+.result-card .rc-match{position:absolute;top:8px;right:8px;background:#EC4899;color:#FFF;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:700}
+.result-card .rc-quote{background:#EC4899;color:#FFF;border:none;padding:8px 12px;border-radius:20px;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;box-shadow:none}
+.result-card .rc-quote.sent{background:#4CAF50}
 /* HOW IT WORKS */
 #screen-howto{background:#F5F5F7;padding:20px;justify-content:flex-start !important;overflow-y:auto}
 .howto-card{width:100%;max-width:400px;background:#FFF;border-radius:20px;padding:20px;margin-bottom:12px;box-shadow:0 4px 12px rgba(0,0,0,.04);display:flex;align-items:flex-start;gap:14px}
@@ -88,8 +113,9 @@ button:active{transform:scale(.95)}
 .profile-header .avatar-lg{width:90px;height:90px;background-color:#FCE7F3;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background-size:cover;background-position:center;border:3px solid #EC4899;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:900;margin-bottom:12px;color:#EC4899}
 .profile-header .name{font-size:22px;font-weight:800}
 .profile-header .role{font-size:13px;color:#6E6E73;margin-top:4px}
-.profile-tabs{display:flex;width:100%;overflow-x:auto;background:#FFF;border-bottom:1px solid #E5E5EA;position:sticky;top:0;z-index:100}
-.profile-tab{padding:14px 16px;font-size:12px;color:#6E6E73;cursor:pointer;white-space:nowrap;border-bottom:3px solid transparent}
+.profile-tabs{display:flex;width:100%;overflow-x:auto;background:#FFF;border-bottom:1px solid #E5E5EA;position:sticky;top:0;z-index:100;-webkit-overflow-scrolling:touch}
+.profile-tabs::-webkit-scrollbar{display:none}
+.profile-tab{padding:14px 14px;font-size:12px;color:#6E6E73;cursor:pointer;white-space:nowrap;border-bottom:3px solid transparent;flex-shrink:0}
 .profile-tab.active{color:#EC4899;border-bottom-color:#EC4899;font-weight:700}
 .profile-content{width:100%;padding:16px;box-sizing:border-box;flex:1}
 .tab-panel{display:none}
@@ -100,7 +126,7 @@ button:active{transform:scale(.95)}
 .list-item{background:#FFF;border-radius:12px;padding:12px;margin-bottom:10px;box-shadow:0 2px 8px rgba(0,0,0,.03)}
 .list-item .li-title{font-weight:700;font-size:14px;margin-bottom:4px}
 .list-item .li-sub{font-size:12px;color:#6E6E73}
-.add-btn-full{width:100%;background:#FFF;color:#EC4899;border:2px dashed #EC4899;padding:12px;border-radius:12px;font-weight:700;margin-top:10px;cursor:pointer}
+.add-btn-full{width:100%;background:#FFF;color:#EC4899;border:2px dashed #EC4899;padding:12px;border-radius:12px;font-weight:700;margin-top:10px;cursor:pointer;font-family:inherit;font-size:14px}
 .portfolio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
 .portfolio-grid .pg-item{aspect-ratio:1;background-size:cover;background-position:center;border-radius:8px;background-color:#FCE7F3;cursor:pointer;position:relative}
 .portfolio-grid .pg-item.video::after{content:'▶';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#FFF;font-size:20px;text-shadow:0 0 6px #000;background:rgba(0,0,0,.3)}
@@ -108,6 +134,16 @@ button:active{transform:scale(.95)}
 .rating-stars{color:#FFC107;font-size:20px;text-align:center;margin-bottom:15px}
 .skeleton{background:linear-gradient(90deg,#F0F0F0 25%,#E0E0E0 50%,#F0F0F0 75%);background-size:200% 100%;animation:skel 1.5s infinite;border-radius:12px;height:60px;margin-bottom:10px}
 @keyframes skel{0%{background-position:200% 0}100%{background-position:-200% 0}}
+/* APPLICATIONS */
+.app-card{background:#FFF;border-radius:14px;padding:14px;margin-bottom:10px;box-shadow:0 4px 12px rgba(0,0,0,.05);border-left:4px solid #EC4899}
+.app-card .ac-status{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.app-card .ac-status.new{color:#EC4899}
+.app-card .ac-status.accepted{color:#4CAF50}
+.app-card .ac-status.declined{color:#F44336}
+.app-card .ac-title{font-weight:800;font-size:15px;margin-bottom:4px}
+.app-card .ac-meta{font-size:12px;color:#6E6E73;margin-bottom:4px}
+.app-card .ac-actions{display:flex;gap:8px;margin-top:10px}
+.app-card .ac-actions button{flex:1;padding:8px;font-size:12px;box-shadow:none}
 /* VENUES */
 #screen-venues{background:#F5F5F7;padding-top:20px}
 #screen-venues h1{font-size:24px;margin-bottom:20px;color:#1A1A1A}
@@ -146,11 +182,6 @@ button:active{transform:scale(.95)}
 .role-option i{font-size:22px;color:#EC4899;width:30px;text-align:center}
 .role-option .ro-name{font-weight:700;font-size:15px}
 .role-option .ro-desc{font-size:11px;color:#6E6E73;margin-top:2px}
-.status-free{background:#4CAF50;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);color:#FFF;font-weight:bold;display:flex;justify-content:center;align-items:center}
-.status-busy{background:#F44336;border-radius:50%;color:#FFF;font-weight:bold;display:flex;justify-content:center;align-items:center}
-.status-req{background:#FFEB3B;border-radius:4px;color:#000;font-weight:bold;display:flex;justify-content:center;align-items:center}
-.status-active{background:#2196F3;clip-path:polygon(50% 0%,100% 100%,0% 100%);color:#FFF;font-weight:bold;display:flex;justify-content:center;align-items:center}
-.status-confirm{background:#9C27B0;clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);color:#FFF;font-weight:bold;display:flex;justify-content:center;align-items:center}
 .mini-calendar{width:100%;background:#FFF;border-radius:15px;padding:15px;margin-bottom:20px;box-shadow:0 4px 10px rgba(0,0,0,.03);box-sizing:border-box}
 .days-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
 .day{height:32px;display:flex;justify-content:center;align-items:center;font-size:10px;flex-direction:column;gap:1px}
@@ -177,9 +208,12 @@ button:active{transform:scale(.95)}
 <!-- ORGANIZER HOME -->
 <div id="screen-organizer-home" class="screen">
   <h1 style="color:#1A1A1A;font-size:22px;margin:0 0 5px 0">Мои проекты</h1>
-  <p style="color:#6E6E73;font-size:12px;margin-bottom:20px">Управляйте мероприятиями</p>
-  <button onclick="navigateTo('screen-wizard')" style="margin-bottom:20px"><i class="fa-solid fa-plus"></i> Создать мероприятие</button>
+  <p style="color:#6E6E73;font-size:12px;margin-bottom:20px">Управляйте мероприятиями и заявками</p>
+  <button onclick="openWizard()" style="margin-bottom:20px"><i class="fa-solid fa-plus"></i> Создать мероприятие</button>
+  <h3 style="color:#1A1A1A;font-size:15px;width:100%;max-width:400px;margin-bottom:10px">📋 Мои мероприятия</h3>
   <div class="events-list" id="organizer-events"></div>
+  <h3 style="color:#1A1A1A;font-size:15px;width:100%;max-width:400px;margin:20px 0 10px">✉️ Отправленные заявки</h3>
+  <div class="events-list" id="organizer-applications"></div>
 </div>
 
 <!-- CATALOG -->
@@ -214,27 +248,27 @@ button:active{transform:scale(.95)}
   </div>
 </div>
 
-<!-- WIZARD (Мастер подбора) -->
+<!-- WIZARD -->
 <div id="screen-wizard" class="screen">
   <button class="back-btn" onclick="closeWizard()">←</button>
-  <h1 style="color:#1A1A1A;font-size:22px;margin:0 0 15px 0">Мастер подбора</h1>
   <div class="wizard-progress"><div class="wizard-progress-bar" id="wiz-progress" style="width:20%"></div></div>
+  <div class="wizard-step-label" id="wiz-step-label">Шаг 1 из 5</div>
   <div class="wizard-step" id="wiz-step"></div>
   <div class="wizard-nav">
-    <button class="btn-secondary" onclick="wizPrev()">← Назад</button>
-    <button onclick="wizNext()">Далее →</button>
+    <button class="btn-secondary" id="wiz-prev-btn" onclick="wizPrev()">← Назад</button>
+    <button id="wiz-next-btn" onclick="wizNext()">Далее →</button>
   </div>
 </div>
 
-<!-- HOW IT WORKS -->
+<!-- HOW TO -->
 <div id="screen-howto" class="screen">
   <button class="back-btn" onclick="navigateTo('screen-home')">←</button>
   <h1 style="color:#1A1A1A;font-size:22px;margin:0 0 20px 0">Как это работает</h1>
-  <div class="howto-card"><div class="howto-num">1</div><div class="howto-content"><h3>Создай профиль</h3><p>Заполни анкету: имя, роль, город, контакты, портфолио, медиа.</p></div></div>
+  <div class="howto-card"><div class="howto-num">1</div><div class="howto-content"><h3>Создай профиль</h3><p>Заполни анкету: имя, роль, город, контакты, портфолио.</p></div></div>
   <div class="howto-card"><div class="howto-num">2</div><div class="howto-content"><h3>Укажи занятость</h3><p>Отметь свободные дни в календаре. Управляй ценой по датам.</p></div></div>
   <div class="howto-card"><div class="howto-num">3</div><div class="howto-content"><h3>Получай заявки</h3><p>Организаторы находят тебя и присылают приглашения.</p></div></div>
-  <div class="howto-card"><div class="howto-num">4</div><div class="howto-content"><h3>Договаривайся</h3><p>Общайтесь напрямую, согласовывайте условия и бюджет.</p></div></div>
-  <div class="howto-card"><div class="howto-num">5</div><div class="howto-content"><h3>Получай отзывы</h3><p>После мероприятия — оценка и отзыв, чтобы поднять рейтинг.</p></div></div>
+  <div class="howto-card"><div class="howto-num">4</div><div class="howto-content"><h3>Договаривайся</h3><p>Общайтесь напрямую, согласовывайте условия.</p></div></div>
+  <div class="howto-card"><div class="howto-num">5</div><div class="howto-content"><h3>Получай отзывы</h3><p>После мероприятия — оценка и отзыв для рейтинга.</p></div></div>
 </div>
 
 <!-- PROFILE -->
@@ -243,6 +277,7 @@ button:active{transform:scale(.95)}
   <div class="profile-header" id="profile-header"></div>
   <div class="profile-tabs">
     <div class="profile-tab active" onclick="switchTab(this,'tab-main')">Основное</div>
+    <div class="profile-tab" onclick="switchTab(this,'tab-applications')">Заявки</div>
     <div class="profile-tab" onclick="switchTab(this,'tab-portfolio')">Портфолио</div>
     <div class="profile-tab" onclick="switchTab(this,'tab-expedu')">Опыт</div>
     <div class="profile-tab" onclick="switchTab(this,'tab-params')">Параметры</div>
@@ -251,6 +286,7 @@ button:active{transform:scale(.95)}
   </div>
   <div class="profile-content">
     <div id="tab-main" class="tab-panel active"></div>
+    <div id="tab-applications" class="tab-panel"></div>
     <div id="tab-portfolio" class="tab-panel"></div>
     <div id="tab-expedu" class="tab-panel"></div>
     <div id="tab-params" class="tab-panel"></div>
@@ -272,12 +308,12 @@ button:active{transform:scale(.95)}
   <div id="venue-detail-content"></div>
 </div>
 
-<!-- MATCH (простой) -->
+<!-- QUICK MATCH -->
 <div id="screen-match" class="screen">
   <button class="back-btn" onclick="navigateTo('screen-home')">←</button>
   <h1>🔍 ИИ-Подбор</h1>
   <p style="color:#6E6E73;font-size:13px;margin-bottom:20px;text-align:center">Быстрый подбор за 10 минут</p>
-  <div class="form-group"><label>Дата</label><input type="date" id="match-date" value="2026-09-12"></div>
+  <div class="form-group"><label>Дата</label><input type="date" id="match-date"></div>
   <div class="form-group"><label>Жанр</label><select id="match-genre"><option value="any">Любой</option><option value="dance">Танцы</option><option value="music">Музыка</option><option value="show">Шоу</option></select></div>
   <div class="form-group"><label>Бюджет, ₽</label><input type="text" id="match-budget" value="50000"></div>
   <div class="form-group"><label>Город</label><input type="text" id="match-city" value="Москва"></div>
@@ -301,7 +337,7 @@ if (window.Telegram && window.Telegram.WebApp) {
   tgUser = tg.initDataUnsafe && tg.initDataUnsafe.user ? tg.initDataUnsafe.user : null;
 }
 
-const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbyhcfPwZ8vbz5dK3zJIXsr2QT-bCP2UTZf_CcRn-zzPO2a1FP8bxE1Urf2H9ISEvn35/exec';
+const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycby21iwsOkoxAlSXc1_u0oMdkQ8QMlZGUaCuU23yUsxVQ4Ca6b9yFOGitIW_57-zivZu/exec';
 
 const ROLE_ICONS = {
   dancer:'fa-person-running', ballet:'fa-child-reaching', singer:'fa-microphone',
@@ -330,6 +366,10 @@ const STATUS_ICONS = {
   active:{ icon:'fa-play', color:'#2196F3', label:'Актив' },
   confirm:{ icon:'fa-diamond', color:'#9C27B0', label:'Подтверждение' }
 };
+const EVENT_TYPE_NAMES = {
+  wedding:'Свадьба', anniversary:'Юбилей', corporate:'Корпоратив',
+  concert:'Концерт', ball:'Бал', kids:'Детский праздник', other:'Другое'
+};
 const USER_ROLES = {
   artist: { name:'Артист', icon:'fa-microphone', desc:'Показываю себя' },
   organizer: { name:'Организатор', icon:'fa-briefcase', desc:'Создаю мероприятия' },
@@ -337,29 +377,23 @@ const USER_ROLES = {
   viewer: { name:'Зритель', icon:'fa-eye', desc:'Смотрю афишу' }
 };
 
-let artists = [], venues = [], events = [], persons = [], pricing = [], reviews = [];
+let artists = [], venues = [], events = [], persons = [], pricing = [], reviews = [], applications = [];
 let currentArtist = null, currentPerson = null, activeRole = 'artist';
 let profileData = { media:[], experience:[], education:[], inventory:[], costumes:[] };
 let profileLoading = false;
 let userProject = JSON.parse(localStorage.getItem('userProject')||'[]');
 let state = { year: new Date().getFullYear(), monthIndex: new Date().getMonth() };
 
-let wizardState = {
-  step: 0,
-  data: { category:'', type:'', equipment:[], guests:0, city:'', result:[] }
-};
-const WIZ_STEPS = ['category','type','equipment','guests','city','result'];
-const WIZ_TITLES = { category:'Категория', type:'Тип', equipment:'Оборудование', guests:'Гостей', city:'Место', result:'Результат' };
-
 async function loadData() {
   try {
-    const [a,v,e,p,pr,rv] = await Promise.all([
+    const [a,v,e,p,pr,rv,ap] = await Promise.all([
       fetch(SHEET_API_URL+'?action=artists').then(r=>r.json()).catch(()=>null),
       fetch(SHEET_API_URL+'?action=venues').then(r=>r.json()).catch(()=>null),
       fetch(SHEET_API_URL+'?action=events').then(r=>r.json()).catch(()=>null),
       fetch(SHEET_API_URL+'?action=persons').then(r=>r.json()).catch(()=>null),
       fetch(SHEET_API_URL+'?action=pricing').then(r=>r.json()).catch(()=>null),
-      fetch(SHEET_API_URL+'?action=reviews').then(r=>r.json()).catch(()=>null)
+      fetch(SHEET_API_URL+'?action=reviews').then(r=>r.json()).catch(()=>null),
+      fetch(SHEET_API_URL+'?action=applications').then(r=>r.json()).catch(()=>null)
     ]);
     artists = Array.isArray(a) ? a : [];
     venues = Array.isArray(v) ? v : [];
@@ -367,6 +401,7 @@ async function loadData() {
     persons = Array.isArray(p) ? p : [];
     pricing = Array.isArray(pr) ? pr : [];
     reviews = Array.isArray(rv) ? rv : [];
+    applications = Array.isArray(ap) ? ap : [];
   } catch(err){ console.log('loadData err', err); }
 
   if(tgUser){
@@ -496,21 +531,41 @@ function renderHome(){
 
 function renderOrganizerHome(){
   const list = document.getElementById('organizer-events');
+  const appList = document.getElementById('organizer-applications');
+  if(!list || !appList) return;
   const myEvents = tgUser ? events.filter(e => String(e.organizerId) === String(tgUser.id)) : [];
   if(!myEvents.length){
-    list.innerHTML = '<p style="color:#6E6E73;text-align:center;padding:30px">Пока нет мероприятий. Создайте первое!</p>';
-    return;
+    list.innerHTML = '<p style="color:#6E6E73;text-align:center;padding:20px;font-size:13px">Пока нет мероприятий</p>';
+  } else {
+    list.innerHTML = '';
+    myEvents.forEach(ev => {
+      const card = document.createElement('div');
+      card.className = 'event-card';
+      card.innerHTML = `
+        <div class="ec-date">${ev.date || ''}</div>
+        <div class="ec-title">${ev.title || ev.type || 'Мероприятие'}</div>
+        <div class="ec-sub">${ev.venue || ''} ${ev.time ? '· ' + ev.time : ''}</div>`;
+      list.appendChild(card);
+    });
   }
-  list.innerHTML = '';
-  myEvents.forEach(ev => {
-    const card = document.createElement('div');
-    card.className = 'event-card';
-    card.innerHTML = `
-      <div class="ec-date">${ev.date || ''}</div>
-      <div class="ec-title">${ev.title || ev.type || 'Мероприятие'}</div>
-      <div class="ec-sub">${ev.venue || ''} ${ev.time ? '· ' + ev.time : ''}</div>`;
-    list.appendChild(card);
-  });
+  const myApps = tgUser ? applications.filter(a => String(a.organizerId) === String(tgUser.id)) : [];
+  if(!myApps.length){
+    appList.innerHTML = '<p style="color:#6E6E73;text-align:center;padding:20px;font-size:13px">Нет отправленных заявок</p>';
+  } else {
+    appList.innerHTML = '';
+    myApps.slice().reverse().forEach(app => {
+      const card = document.createElement('div');
+      card.className = 'app-card';
+      const status = app.status || 'new';
+      const statusLabel = { new:'Отправлена', accepted:'Принята', declined:'Отклонена' }[status] || status;
+      card.innerHTML = `
+        <div class="ac-status ${status}">${statusLabel}</div>
+        <div class="ac-title">${app.artistName || 'Артист'}</div>
+        <div class="ac-meta">${EVENT_TYPE_NAMES[app.eventType]||app.eventType||''} · ${app.date||''} · ${app.city||''}</div>
+        <div class="ac-meta">${app.guests?app.guests+' гостей · ':''}${app.budget?app.budget.toLocaleString()+' ₽':''}</div>`;
+      appList.appendChild(card);
+    });
+  }
 }
 
 function filterArtists(q){ renderCatalog(q); }
@@ -538,7 +593,7 @@ function openArtist(id){
     const ev = events.find(e=>e.date===ds && String(e.artistId)===String(a.id));
     let st = 'free';
     if(ev && ev.status) st = ev.status;
-    const icon = STATUS_ICONS[st];
+    const icon = STATUS_ICONS[st] || STATUS_ICONS.free;
     daysHTML += `<div class="day"><span style="font-size:11px">${d}</span><i class="fa-solid ${icon.icon}" style="font-size:8px;color:${icon.color}"></i></div>`;
   }
   const inProj = userProject.some(p=>p.id===a.id && p.type==='artist');
@@ -565,10 +620,14 @@ function openArtist(id){
     <h3 style="color:#1A1A1A;font-size:15px;text-align:center">Занятость</h3>
     <div class="mini-calendar"><div class="days-grid">${daysHTML}</div></div>
     <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
-      <button onclick="alert('Запрос отправлен!')">Пригласить</button>
+      <button onclick="openWizardWithArtist(${a.id})">Пригласить</button>
       <button class="${inProj?'btn-secondary':''}" onclick='toggleProject(${JSON.stringify(a).replace(/'/g,"&#39;")},"artist",this)'>${inProj?'✓ В проекте':'+ В проект'}</button>
     </div>`;
   navigateTo('screen-artist');
+}
+
+function openWizardWithArtist(artistId){
+  openWizard();
 }
 
 function toggleProject(item,type,btn){
@@ -645,8 +704,6 @@ function renderCalendar(){
     return { m: mm, y: yy };
   });
   showMonths.forEach(({m, y}) => c.appendChild(buildMonthCard(m, y)));
-
-  // Свайпы
   let sx=0, sy=0;
   c.ontouchstart = e => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; };
   c.ontouchend = e => {
@@ -735,8 +792,35 @@ function runAIMatch(){
 }
 
 // ============ WIZARD ============
+const WIZ_STEPS = ['event','date','place','details','result'];
+const EVENT_TYPES = [
+  { id:'wedding', name:'Свадьба', icon:'fa-ring' },
+  { id:'anniversary', name:'Юбилей', icon:'fa-cake-candles' },
+  { id:'corporate', name:'Корпоратив', icon:'fa-briefcase' },
+  { id:'concert', name:'Концерт', icon:'fa-music' },
+  { id:'ball', name:'Бал', icon:'fa-mask' },
+  { id:'kids', name:'Детский праздник', icon:'fa-child' },
+  { id:'other', name:'Другое', icon:'fa-star' }
+];
+const ARTIST_TYPES = [
+  { id:'any', name:'Любой' },
+  { id:'solo', name:'Сольный номер' },
+  { id:'duo', name:'Коллектив' },
+  { id:'band', name:'Группа' }
+];
+const EQUIPMENT_LIST = [
+  { id:'sound', name:'Звук', icon:'fa-volume-high' },
+  { id:'light', name:'Свет', icon:'fa-lightbulb' },
+  { id:'stage', name:'Сцена', icon:'fa-masks-theater' },
+  { id:'projector', name:'Проектор', icon:'fa-video' },
+  { id:'mics', name:'Микрофоны', icon:'fa-microphone' }
+];
+const GUEST_PRESETS = [50,100,300,500,1000];
+
+let wizardState = { step:0, data:{ event:'', artistType:'any', date:'', city:'', guests:0, customGuests:'', equipment:[], budget:50000 } };
+
 function openWizard(){
-  wizardState = { step:0, data:{ category:'', type:'', equipment:[], guests:0, city:'', result:[] } };
+  wizardState = { step:0, data:{ event:'', artistType:'any', date:'', city:'', guests:0, customGuests:'', equipment:[], budget:50000 } };
   navigateTo('screen-wizard');
   renderWizard();
 }
@@ -746,87 +830,119 @@ function renderWizard(){
   const step = WIZ_STEPS[wizardState.step];
   const pct = Math.round(((wizardState.step+1) / WIZ_STEPS.length) * 100);
   document.getElementById('wiz-progress').style.width = pct + '%';
+  document.getElementById('wiz-step-label').innerText = `Шаг ${wizardState.step+1} из ${WIZ_STEPS.length}`;
   const el = document.getElementById('wiz-step');
-  let html = `<h2>${WIZ_TITLES[step]}</h2>`;
+  const prevBtn = document.getElementById('wiz-prev-btn');
+  const nextBtn = document.getElementById('wiz-next-btn');
+  prevBtn.disabled = wizardState.step === 0;
+  nextBtn.innerText = wizardState.step === WIZ_STEPS.length - 1 ? 'Отправить заявку' : 'Далее →';
 
-  if(step === 'category'){
-    const cats = [
-      { id:'music', name:'Музыка', icon:'fa-music' },
-      { id:'dance', name:'Танцы', icon:'fa-person-running' },
-      { id:'show', name:'Шоу', icon:'fa-masks-theater' },
-      { id:'host', name:'Ведущий', icon:'fa-microphone-lines' }
-    ];
+  let html = '';
+
+  if(step === 'event'){
+    html = `<h2>Какое событие?</h2><p class="wiz-sub">Выберите тип — подберём артистов под формат</p>`;
     html += '<div class="wizard-options">';
-    cats.forEach(c => {
-      const sel = wizardState.data.category === c.id ? 'selected' : '';
-      html += `<div class="wizard-option ${sel}" onclick="wizSelect('category','${c.id}')"><i class="fa-solid ${c.icon}"></i>${c.name}</div>`;
+    EVENT_TYPES.forEach(ev => {
+      const sel = wizardState.data.event === ev.id ? 'selected' : '';
+      html += `<div class="wizard-option ${sel}" onclick="wizSelect('event','${ev.id}')"><i class="fa-solid ${ev.icon}"></i>${ev.name}</div>`;
+    });
+    html += '</div>';
+    html += `<h3>Тип артиста</h3>`;
+    html += '<div class="wizard-chips">';
+    ARTIST_TYPES.forEach(at => {
+      const sel = wizardState.data.artistType === at.id ? 'selected' : '';
+      html += `<div class="wizard-chip ${sel}" onclick="wizSelect('artistType','${at.id}')">${at.name}</div>`;
     });
     html += '</div>';
   }
-  else if(step === 'type'){
-    const types = {
-      music:['Группа','Соло','DJ','Оркестр'],
-      dance:['Современные','Народные','Балет','Фламенко'],
-      show:['Фокусы','Театр','Цирк','Стендап'],
-      host:['Свадьба','Корпоратив','Концерт','Детский']
-    };
-    const list = types[wizardState.data.category] || ['Любой'];
+  else if(step === 'date'){
+    html = `<h2>Когда?</h2><p class="wiz-sub">Выберите дату мероприятия</p>`;
+    html += `<div class="wizard-custom-input">
+      <input type="date" value="${wizardState.data.date||''}" onchange="wizSelect('date',this.value)">
+    </div>`;
+    if(wizardState.data.date){
+      html += `<div style="margin-top:14px;background:#FFF5F9;padding:12px;border-radius:12px;font-size:13px;color:#EC4899;font-weight:600;text-align:center">📅 ${wizardState.data.date}</div>`;
+    }
+  }
+  else if(step === 'place'){
+    html = `<h2>Где провести?</h2><p class="wiz-sub">Укажите город</p>`;
     html += '<div class="wizard-options">';
-    list.forEach(t => {
-      const sel = wizardState.data.type === t ? 'selected' : '';
-      html += `<div class="wizard-option ${sel}" onclick="wizSelect('type','${t}')"><i class="fa-solid fa-tag"></i>${t}</div>`;
+    ['Москва','СПб','Казань','Сочи','Екатеринбург'].forEach(c => {
+      const sel = wizardState.data.city === c ? 'selected' : '';
+      html += `<div class="wizard-option ${sel}" onclick="wizSelect('city','${c}')"><i class="fa-solid fa-location-dot"></i>${c}</div>`;
     });
     html += '</div>';
-  }
-  else if(step === 'equipment'){
-    const eq = ['Звук','Свет','Сцена','Проектор','Микрофоны'];
-    html += '<div class="wizard-options">';
-    eq.forEach(e => {
-      const sel = wizardState.data.equipment.includes(e) ? 'selected' : '';
-      html += `<div class="wizard-option ${sel}" onclick="wizToggle('equipment','${e}')"><i class="fa-solid fa-plug"></i>${e}</div>`;
-    });
-    html += '</div>';
-  }
-  else if(step === 'guests'){
-    html += `<div class="wizard-options">
-      ${[50,100,300,500,1000].map(g => {
-        const sel = wizardState.data.guests === g ? 'selected' : '';
-        return `<div class="wizard-option ${sel}" onclick="wizSelect('guests',${g})"><i class="fa-solid fa-users"></i>${g} гостей</div>`;
-      }).join('')}
+    html += `<div class="wizard-custom-input">
+      <input type="text" placeholder="Другой город..." value="${wizardState.data.city && !['Москва','СПб','Казань','Сочи','Екатеринбург'].includes(wizardState.data.city) ? wizardState.data.city : ''}" onchange="wizSelect('city', this.value)">
     </div>`;
   }
-  else if(step === 'city'){
-    html += `<div class="wizard-options">
-      ${['Москва','СПб','Казань','Сочи','Екатеринбург'].map(c => {
-        const sel = wizardState.data.city === c ? 'selected' : '';
-        return `<div class="wizard-option ${sel}" onclick="wizSelect('city','${c}')"><i class="fa-solid fa-location-dot"></i>${c}</div>`;
-      }).join('')}
+  else if(step === 'details'){
+    html = `<h2>Гости и оборудование</h2><p class="wiz-sub">Помогите подобрать точнее</p>`;
+    html += `<h3 style="margin-top:0">Количество гостей</h3>`;
+    html += '<div class="wizard-chips">';
+    GUEST_PRESETS.forEach(g => {
+      const sel = wizardState.data.guests === g && !wizardState.data.customGuests ? 'selected' : '';
+      html += `<div class="wizard-chip ${sel}" onclick="wizSelect('guests', ${g})">${g}</div>`;
+    });
+    html += '</div>';
+    html += `<div class="wizard-custom-input">
+      <input type="number" placeholder="Своё число..." value="${wizardState.data.customGuests||''}" onchange="wizCustomGuests(this.value)">
     </div>`;
+    html += `<h3>Оборудование</h3>`;
+    html += '<div class="wizard-chips">';
+    EQUIPMENT_LIST.forEach(eq => {
+      const sel = wizardState.data.equipment.includes(eq.id) ? 'selected' : '';
+      html += `<div class="wizard-chip ${sel}" onclick="wizToggle('equipment','${eq.id}')"><i class="fa-solid ${eq.icon}" style="margin-right:5px"></i>${eq.name}</div>`;
+    });
+    html += '</div>';
   }
   else if(step === 'result'){
-    const matched = artists.map(a => {
-      let score = 0;
-      if(a.city && a.city.toLowerCase().includes(wizardState.data.city.toLowerCase())) score += 30;
-      if(a.genre === wizardState.data.category) score += 40;
-      if(a.price <= 100000) score += 20;
-      score += Math.round((a.rating||5) * 2);
-      return { ...a, score: Math.min(score, 100) };
-    }).sort((a,b) => b.score - a.score).slice(0, 5);
-    html += `<div style="display:flex;flex-direction:column;gap:8px">`;
-    matched.forEach(a => {
-      html += `<div class="match-card" onclick="openArtist(${a.id})">
-        <div class="avatar" ${a.img?`style="background-image:url('${a.img}')"`:''}></div>
-        <div class="info"><div class="name">${a.name}</div><div class="spec">${ROLE_NAMES[a.role]||''} · ${a.city||''}</div></div>
-        <div class="score">${a.score}%</div>
-      </div>`;
-    });
-    html += `</div>`;
+    const matched = matchWizardArtists();
+    if(!matched.length){
+      html = `<h2>Пока никого не нашли</h2><p class="wiz-sub">Попробуйте изменить параметры — город, дату или тип артиста</p>`;
+    } else {
+      const w = plural(matched.length,'вариант','варианта','вариантов');
+      html = `<h2>${matched.length} ${w} для вас</h2><p class="wiz-sub">Отсортировано по совпадению · до 5 карточек</p>`;
+      html += '<div class="result-cards">';
+      matched.slice(0,5).forEach(a => {
+        html += `<div class="result-card">
+          <div class="rc-avatar" ${a.img?`style="background-image:url('${a.img}')"`:''}></div>
+          <div class="rc-info">
+            <div class="rc-name">${a.name}</div>
+            <div class="rc-spec">${ROLE_NAMES[a.role]||a.spec||''} · ${a.city||''}</div>
+            <div class="rc-meta">
+              <span class="rc-price">от ${(a.price||0).toLocaleString()} ₽</span>
+              <span>⭐ ${a.rating||0}</span>
+            </div>
+          </div>
+          <button class="rc-quote" onclick='sendQuote(${JSON.stringify(a).replace(/'/g,"&#39;")}, this)'>Запросить цену</button>
+          <div class="rc-match">${a.matchScore}%</div>
+        </div>`;
+      });
+      html += '</div>';
+      html += `<p style="font-size:11px;color:#6E6E73;text-align:center;margin-top:10px">Заявка отправится через ваш Telegram — контакты заполнять не нужно</p>`;
+    }
   }
   el.innerHTML = html;
 }
 
+function plural(n, one, few, many){
+  const m = n % 100;
+  if(m >= 11 && m <= 19) return many;
+  const k = m % 10;
+  if(k === 1) return one;
+  if(k >= 2 && k <= 4) return few;
+  return many;
+}
+
+function wizCustomGuests(val){
+  wizardState.data.customGuests = val;
+  if(val) wizardState.data.guests = 0;
+  renderWizard();
+}
 function wizSelect(key, val){
   wizardState.data[key] = val;
+  if(key === 'guests') wizardState.data.customGuests = '';
   renderWizard();
 }
 function wizToggle(key, val){
@@ -835,20 +951,89 @@ function wizToggle(key, val){
   if(i > -1) arr.splice(i,1); else arr.push(val);
   renderWizard();
 }
+
 function wizNext(){
   if(wizardState.step < WIZ_STEPS.length - 1){
+    const step = WIZ_STEPS[wizardState.step];
+    if(step === 'event' && !wizardState.data.event){ showToast('Выберите тип события'); return; }
+    if(step === 'date' && !wizardState.data.date){ showToast('Выберите дату'); return; }
+    if(step === 'place' && !wizardState.data.city){ showToast('Укажите город'); return; }
     wizardState.step++;
     renderWizard();
   } else {
-    showToast('Заявка отправлена!');
-    closeWizard();
+    submitWizardApplication();
   }
 }
-function wizPrev(){
-  if(wizardState.step > 0){
-    wizardState.step--;
-    renderWizard();
+function wizPrev(){ if(wizardState.step > 0){ wizardState.step--; renderWizard(); } }
+
+function matchWizardArtists(){
+  const d = wizardState.data;
+  return artists.map(a => {
+    let score = 0;
+    if(d.city && (a.city||'').toLowerCase().includes(d.city.toLowerCase())) score += 30;
+    if(d.artistType === 'any') score += 5;
+    else if((a.spec||'').toLowerCase().includes(d.artistType)) score += 10;
+    if(['wedding','anniversary','corporate'].includes(d.event)) score += 10;
+    score += Math.round((a.rating||5) * 6);
+    if(a.price <= d.budget) score += 15;
+    if(a.verified) score += 8;
+    return { ...a, matchScore: Math.min(score, 100) };
+  }).sort((a,b) => b.matchScore - a.matchScore).filter(a => a.matchScore >= 40);
+}
+
+async function sendQuote(artist, btn){
+  if(!tgUser){ showToast('Откройте через Telegram'); return; }
+  btn.disabled = true;
+  btn.innerText = 'Отправка...';
+  const d = wizardState.data;
+  const guests = Number(d.customGuests) || d.guests || 0;
+  const application = {
+    action:'submitApplication',
+    organizerId: String(tgUser.id),
+    organizerName: (tgUser.first_name||'') + (tgUser.last_name ? ' '+tgUser.last_name : ''),
+    artistId: artist.id, artistName: artist.name,
+    eventType: d.event, date: d.date, city: d.city,
+    guests: guests, equipment: d.equipment.join(', '), budget: d.budget
+  };
+  try {
+    const r = await fetch(SHEET_API_URL, { method:'POST', body:JSON.stringify(application) });
+    const res = await r.json();
+    if(res.success){
+      btn.classList.add('sent');
+      btn.innerText = '✓ Отправлено';
+      showToast(`Заявка для ${artist.name} отправлена!`);
+      await loadData();
+    } else {
+      btn.disabled = false; btn.innerText = 'Запросить цену';
+      showToast('Ошибка отправки');
+    }
+  } catch(e){
+    btn.disabled = false; btn.innerText = 'Запросить цену';
+    showToast('Ошибка сети');
   }
+}
+
+async function submitWizardApplication(){
+  if(!tgUser){ showToast('Откройте через Telegram'); return; }
+  const d = wizardState.data;
+  const guests = Number(d.customGuests) || d.guests || 0;
+  const application = {
+    action:'submitApplication',
+    organizerId: String(tgUser.id),
+    organizerName: (tgUser.first_name||'') + (tgUser.last_name ? ' '+tgUser.last_name : ''),
+    artistId: 'any', artistName: 'Автоподбор',
+    eventType: d.event, date: d.date, city: d.city,
+    guests: guests, equipment: d.equipment.join(', '), budget: d.budget
+  };
+  try {
+    const r = await fetch(SHEET_API_URL, { method:'POST', body:JSON.stringify(application) });
+    const res = await r.json();
+    if(res.success){
+      showToast('Заявка отправлена!');
+      await loadData();
+      closeWizard();
+    } else showToast('Ошибка');
+  } catch(e){ showToast('Ошибка сети'); }
 }
 
 // ============ PROFILE ============
@@ -856,7 +1041,7 @@ async function openProfileOrCreate(){
   if(!tgUser){ showToast('Откройте через Telegram'); return; }
   if(!currentArtist){ openCreateForm(); return; }
   navigateTo('screen-profile');
-  ['portfolio','expedu','params','busy','reviews'].forEach(t=>{
+  ['applications','portfolio','expedu','params','busy','reviews'].forEach(t=>{
     const el = document.getElementById('tab-'+t);
     if(el) el.innerHTML = '<div class="skeleton"></div><div class="skeleton"></div>';
   });
@@ -942,7 +1127,6 @@ function renderProfile(){
     <div class="role"><i class="fa-solid ${icon}"></i> ${ROLE_NAMES[a.role]||a.spec||''} · ${a.city||''}</div>
   `;
 
-  // Основное
   document.getElementById('tab-main').innerHTML = `
     ${a.bio ? `<div style="background:#FFF;border-radius:12px;padding:12px;margin-bottom:12px;font-size:13px;color:#6E6E73">${a.bio}</div>` : ''}
     <div class="field-row"><span class="lbl">Имя</span><span class="val">${a.name||'—'}</span></div>
@@ -955,37 +1139,62 @@ function renderProfile(){
     ${a.needsVisaSupport?'<div style="background:#FFF5F9;color:#EC4899;padding:10px;border-radius:10px;font-size:12px;font-weight:600;text-align:center;margin-top:10px">⚠️ Нужна помощь с визой</div>':''}
     <div style="display:flex;gap:8px;justify-content:center;margin-top:15px">
       <button class="btn-ghost" onclick="editMain()">Редактировать</button>
-      <button class="btn-ghost" onclick="alert('Приглашение отправлено')">Пригласить</button>
     </div>
   `;
 
-  // Портфолио
+  renderApplicationsTab();
   renderPortfolio();
-
-  // Опыт и образование
   renderExpEdu();
-
-  // Параметры
-  document.getElementById('tab-params').innerHTML = `
-    <div class="field-row"><span class="lbl">Рост</span><span class="val">${a.height||'—'}</span></div>
-    <div class="field-row"><span class="lbl">Вес</span><span class="val">${a.weight||'—'}</span></div>
-    <div class="field-row"><span class="lbl">Размер одежды</span><span class="val">${a.clothingSize||'—'}</span></div>
-    <div class="field-row"><span class="lbl">Размер обуви</span><span class="val">${a.shoeSize||'—'}</span></div>
-    <div class="field-row"><span class="lbl">Цвет волос</span><span class="val">${a.hairColor||'—'}</span></div>
-    <div class="field-row"><span class="lbl">Цвет глаз</span><span class="val">${a.eyeColor||'—'}</span></div>
-    <h4 style="margin-top:15px;font-size:13px;color:#6E6E73">Инвентарь</h4>
-    ${(profileData.inventory||[]).map(x=>`<div class="list-item"><div class="li-title">${x.name||'—'}</div><div class="li-sub">${x.description||''}</div></div>`).join('')}
-    <button class="add-btn-full" onclick="addItem('inventory')">+ Добавить инвентарь</button>
-    <h4 style="margin-top:15px;font-size:13px;color:#6E6E73">Костюмы</h4>
-    ${(profileData.costumes||[]).map(x=>`<div class="list-item"><div class="li-title">${x.name||'—'}</div><div class="li-sub">${x.size||''} ${x.description||''}</div></div>`).join('')}
-    <button class="add-btn-full" onclick="addItem('costumes')">+ Добавить костюм</button>
-  `;
-
-  // Занятость
+  renderParamsTab();
   renderBusyTab();
-
-  // Отзывы
   renderReviews();
+}
+
+function renderApplicationsTab(){
+  const el = document.getElementById('tab-applications');
+  if(!el) return;
+  const my = applications.filter(a => String(a.artistId) === String(currentArtist.id));
+  if(!my.length){
+    el.innerHTML = '<div class="list-item"><div class="li-title">Пока нет заявок</div><div class="li-sub">Организаторы найдут вас через каталог или ИИ-подбор</div></div>';
+    return;
+  }
+  let html = '';
+  my.slice().reverse().forEach(app => {
+    const status = app.status || 'new';
+    const statusLabel = { new:'Новая', accepted:'Принята', declined:'Отклонена' }[status] || status;
+    const statusColor = { new:'#EC4899', accepted:'#4CAF50', declined:'#F44336' }[status] || '#6E6E73';
+    html += `<div class="app-card">
+      <div class="ac-status" style="color:${statusColor}">${statusLabel}</div>
+      <div class="ac-title">${EVENT_TYPE_NAMES[app.eventType]||app.eventType||'Мероприятие'}</div>
+      <div class="ac-meta">📅 ${app.date||''} · 📍 ${app.city||''}</div>
+      ${app.guests?`<div class="ac-meta">👥 ${app.guests} гостей</div>`:''}
+      ${app.equipment?`<div class="ac-meta">🎛️ ${app.equipment}</div>`:''}
+      ${app.budget?`<div class="ac-meta">💰 ${Number(app.budget).toLocaleString()} ₽</div>`:''}
+      <div class="ac-meta" style="margin-top:6px;color:#999">От: ${app.organizerName||'Организатор'}</div>
+      ${status === 'new' ? `
+        <div class="ac-actions">
+          <button class="btn-secondary" onclick="updateAppStatus(${app.id},'declined',this)">Отклонить</button>
+          <button onclick="updateAppStatus(${app.id},'accepted',this)">Принять</button>
+        </div>
+      ` : ''}
+    </div>`;
+  });
+  el.innerHTML = html;
+}
+
+async function updateAppStatus(appId, status, btn){
+  try {
+    const r = await fetch(SHEET_API_URL, { method:'POST', body:JSON.stringify({
+      action:'updateApplicationStatus', applicationId: appId, status
+    })});
+    const res = await r.json();
+    if(res.success){
+      showToast(status === 'accepted' ? 'Заявка принята' : 'Заявка отклонена');
+      const app = applications.find(a => Number(a.id) === appId);
+      if(app) app.status = status;
+      renderApplicationsTab();
+    } else showToast('Ошибка');
+  } catch(e){ showToast('Ошибка сети'); }
 }
 
 function renderPortfolio(){
@@ -1027,6 +1236,25 @@ function renderExpEdu(){
   el.innerHTML = html;
 }
 
+function renderParamsTab(){
+  const el = document.getElementById('tab-params');
+  const a = currentArtist;
+  el.innerHTML = `
+    <div class="field-row"><span class="lbl">Рост</span><span class="val">${a.height||'—'}</span></div>
+    <div class="field-row"><span class="lbl">Вес</span><span class="val">${a.weight||'—'}</span></div>
+    <div class="field-row"><span class="lbl">Размер одежды</span><span class="val">${a.clothingSize||'—'}</span></div>
+    <div class="field-row"><span class="lbl">Размер обуви</span><span class="val">${a.shoeSize||'—'}</span></div>
+    <div class="field-row"><span class="lbl">Цвет волос</span><span class="val">${a.hairColor||'—'}</span></div>
+    <div class="field-row"><span class="lbl">Цвет глаз</span><span class="val">${a.eyeColor||'—'}</span></div>
+    <h4 style="margin-top:15px;font-size:13px;color:#6E6E73">Инвентарь</h4>
+    ${(profileData.inventory||[]).map(x=>`<div class="list-item"><div class="li-title">${x.name||'—'}</div><div class="li-sub">${x.description||''}</div></div>`).join('')}
+    <button class="add-btn-full" onclick="addItem('inventory')">+ Добавить инвентарь</button>
+    <h4 style="margin-top:15px;font-size:13px;color:#6E6E73">Костюмы</h4>
+    ${(profileData.costumes||[]).map(x=>`<div class="list-item"><div class="li-title">${x.name||'—'}</div><div class="li-sub">${x.size||''} ${x.description||''}</div></div>`).join('')}
+    <button class="add-btn-full" onclick="addItem('costumes')">+ Добавить костюм</button>
+  `;
+}
+
 function renderBusyTab(){
   const el = document.getElementById('tab-busy');
   const a = currentArtist;
@@ -1037,7 +1265,7 @@ function renderBusyTab(){
     const ev = events.find(e=>e.date===ds && String(e.artistId)===String(a.id));
     let st = 'free';
     if(ev && ev.status) st = ev.status;
-    const icon = STATUS_ICONS[st];
+    const icon = STATUS_ICONS[st] || STATUS_ICONS.free;
     daysHTML += `<div class="day" onclick="openPricing('${ds}')" style="cursor:pointer;background:#FFF;border-radius:6px"><span style="font-size:11px">${d}</span><i class="fa-solid ${icon.icon}" style="font-size:8px;color:${icon.color}"></i></div>`;
   }
   el.innerHTML = `
