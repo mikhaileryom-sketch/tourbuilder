@@ -41,14 +41,22 @@ button:disabled{opacity:.5;cursor:not-allowed}
 .catalog-cell .role-icon{position:absolute;top:12px;left:12px;bottom:auto;width:22px;height:22px;font-size:13px}
 .catalog-cell:hover{transform:scale(1.05);border-color:#EC4899}
 .detail-screen{background:#F5F5F7;padding:20px;justify-content:flex-start !important}
-.detail-photo{width:180px;height:180px;background-color:#FCE7F3;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background-size:cover;background-position:center;border:4px solid #EC4899;margin-bottom:20px;position:relative}
+.detail-photo{width:180px;height:180px;background-color:#FCE7F3;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background-size:cover;background-position:center;border:4px solid #EC4899;margin-bottom:20px;position:relative;transition:transform .2s}
+.detail-photo:hover{transform:scale(1.03)}
 .detail-photo .role-icon{bottom:20px;left:20px;width:28px;height:28px;font-size:16px}
 .detail-name{font-size:26px;font-weight:800;color:#1A1A1A;text-align:center}
 .detail-spec{font-size:15px;color:#6E6E73;margin-bottom:15px;text-align:center}
+/* PHOTO MODAL */
+.photo-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:9999;justify-content:center;align-items:center;animation:fadeIn 0.3s ease}
+.photo-modal.open{display:flex}
+.photo-modal img{max-width:95vw;max-height:90vh;object-fit:contain;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,0.5)}
+.photo-modal .close-x{position:absolute;top:20px;right:20px;color:#FFF;font-size:28px;cursor:pointer;width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.15);border-radius:50%;z-index:10}
+.photo-modal .close-x:hover{background:rgba(255,255,255,0.25)}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
 /* CALENDAR */
 #screen-calendar{background:#F5F5F7;padding:20px;justify-content:flex-start !important;overflow-y:auto}
 #screen-calendar h1{color:#1A1A1A;margin-bottom:10px;text-align:center}
-.year-nav{display:flex;gap:30px;margin-bottom:15px;align-items:center;justify-content:center}
+.year-nav{display:flex;gap:12px;margin-bottom:15px;align-items:center;justify-content:center}
 .month-cards{display:flex;flex-direction:column;gap:20px;width:100%;max-width:400px}
 .month-card{background:#FFF;border-radius:16px;padding:16px;box-shadow:0 4px 12px rgba(0,0,0,.05)}
 .month-card h3{text-align:center;color:#EC4899;font-size:16px;margin-bottom:12px;font-weight:800}
@@ -170,7 +178,7 @@ button:disabled{opacity:.5;cursor:not-allowed}
 .event-card .ec-title{font-weight:800;font-size:16px;margin-bottom:6px}
 .event-card .ec-sub{font-size:12px;color:#6E6E73}
 /* MISC */
-.toast{position:fixed;top:30px;left:50%;transform:translateX(-50%) translateY(-100px);background:#1A1A1A;color:#FFF;padding:12px 25px;border-radius:30px;font-size:14px;font-weight:600;z-index:9999;transition:transform .4s cubic-bezier(.175,.885,.32,1.275);box-shadow:0 10px 30px rgba(0,0,0,.2)}
+.toast{position:fixed;top:30px;left:50%;transform:translateX(-50%) translateY(-100px);background:#1A1A1A;color:#FFF;padding:12px 25px;border-radius:30px;font-size:14px;font-weight:600;z-index:9999;transition:transform .4s cubic-bezier(.175,.885,.32,1.275);box-shadow:0 10px 30px rgba(0,0,0,.2);max-width:90vw;text-align:center;box-sizing:border-box}
 .toast.show{transform:translateX(-50%) translateY(0)}
 .back-btn{position:absolute;top:20px;left:20px;background:#FFF;color:#1A1A1A;font-size:24px;border-radius:50%;width:45px;height:45px;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:200;border:1px solid #E5E5EA}
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:5000;justify-content:center;align-items:center;padding:20px;box-sizing:border-box}
@@ -236,6 +244,7 @@ button:disabled{opacity:.5;cursor:not-allowed}
   <h1>Календарь</h1>
   <div class="year-nav">
     <button onclick="changeMonth(-1)">←</button>
+    <button onclick="goToToday()" style="font-size:12px;padding:8px 14px">Сегодня</button>
     <button onclick="changeMonth(1)">→</button>
   </div>
   <div class="month-cards" id="month-cards"></div>
@@ -321,6 +330,12 @@ button:disabled{opacity:.5;cursor:not-allowed}
   <div id="match-results"></div>
 </div>
 
+<!-- PHOTO MODAL -->
+<div class="photo-modal" id="photo-modal" onclick="if(event.target===this)closePhotoModal()">
+  <div class="close-x" onclick="closePhotoModal()">✕</div>
+  <img id="photo-modal-img" src="" alt="">
+</div>
+
 <div class="modal-overlay" id="modal-overlay" onclick="if(event.target===this)closeModal()">
   <div class="modal-content" id="modal-content"></div>
 </div>
@@ -337,7 +352,7 @@ if (window.Telegram && window.Telegram.WebApp) {
   tgUser = tg.initDataUnsafe && tg.initDataUnsafe.user ? tg.initDataUnsafe.user : null;
 }
 
-const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycby21iwsOkoxAlSXc1_u0oMdkQ8QMlZGUaCuU23yUsxVQ4Ca6b9yFOGitIW_57-zivZu/exec';
+const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbyV9RmRNJPpCq71XxFbi1H8VcRgynT4ZAbg-8NLXfmYeTCXxI6a21YMxaBS880eU5k/exec';
 
 const ROLE_ICONS = {
   dancer:'fa-person-running', ballet:'fa-child-reaching', singer:'fa-microphone',
@@ -382,7 +397,8 @@ let currentArtist = null, currentPerson = null, activeRole = 'artist';
 let profileData = { media:[], experience:[], education:[], inventory:[], costumes:[] };
 let profileLoading = false;
 let userProject = JSON.parse(localStorage.getItem('userProject')||'[]');
-let state = { year: new Date().getFullYear(), monthIndex: new Date().getMonth() };
+const _now = new Date();
+let state = { year: _now.getFullYear(), monthIndex: _now.getMonth() };
 
 async function loadData() {
   try {
@@ -484,7 +500,11 @@ function navigateTo(id, el) {
   if(id==='screen-organizer-home') renderOrganizerHome();
   if(id==='screen-catalog') renderCatalog();
   if(id==='screen-venues') renderVenues();
-  if(id==='screen-calendar') renderCalendar();
+  if(id==='screen-calendar'){
+    renderCalendar();
+    const calEl = document.getElementById('screen-calendar');
+    if(calEl) calEl.scrollTop = 0;
+  }
   if(id==='screen-profile') renderProfile();
 }
 
@@ -495,6 +515,16 @@ function showToast(msg){
 }
 function openModal(html){ document.getElementById('modal-content').innerHTML=html; document.getElementById('modal-overlay').classList.add('open'); }
 function closeModal(){ document.getElementById('modal-overlay').classList.remove('open'); }
+
+/* === PHOTO MODAL === */
+function openPhotoModal(url){
+  if(!url) return;
+  document.getElementById('photo-modal-img').src = url;
+  document.getElementById('photo-modal').classList.add('open');
+}
+function closePhotoModal(){
+  document.getElementById('photo-modal').classList.remove('open');
+}
 
 function renderHome(){
   const blk = document.getElementById('user-id-block');
@@ -601,7 +631,7 @@ function openArtist(id){
 
   let visaHTML = '';
   if(a.travelScope || a.visaType || a.needsVisaSupport){
-    visaHTML = `<div style="width:100%;background:#FFF;border-radius:15px;padding:15px;margin-bottom:20px;box-shadow:0 4px 10px rgba(0,0,0,.03)">
+    visaHTML = `<div style="width:100%;background:#FFF;border-radius:15px;padding:15px;margin-bottom:20px;box-shadow:0 4px 10px rgba(0,0,0,.03);box-sizing:border-box">
       ${a.travelScope ? `<div class="field-row"><span class="lbl">Готов к выезду</span><span class="val">${TRAVEL_NAMES[a.travelScope]||a.travelScope}</span></div>` : ''}
       ${a.visaType && a.visaType !== 'none' ? `<div class="field-row"><span class="lbl">Виза</span><span class="val">${VISA_NAMES[a.visaType]||a.visaType}</span></div>` : ''}
       ${a.visaValidUntil ? `<div class="field-row"><span class="lbl">Действует до</span><span class="val">${a.visaValidUntil}</span></div>` : ''}
@@ -609,8 +639,12 @@ function openArtist(id){
     </div>`;
   }
 
+  const photoAttrs = a.img
+    ? `style="background-image:url('${a.img}');cursor:pointer" onclick="openPhotoModal('${a.img}')"`
+    : `style="cursor:default"`;
+
   c.innerHTML = `
-    <div class="detail-photo" ${a.img?`style="background-image:url('${a.img}')"`:''}>
+    <div class="detail-photo" ${photoAttrs}>
       <i class="fa-solid ${roleIcon} role-icon"></i>
     </div>
     <div class="detail-name">${a.name||''}</div>
@@ -626,9 +660,7 @@ function openArtist(id){
   navigateTo('screen-artist');
 }
 
-function openWizardWithArtist(artistId){
-  openWizard();
-}
+function openWizardWithArtist(artistId){ openWizard(); }
 
 function toggleProject(item,type,btn){
   const i = userProject.findIndex(p=>p.id===item.id&&p.type===type);
@@ -669,8 +701,11 @@ function openVenue(id){
   const isHighSeason = (now.getMonth() >= 5 && now.getMonth() <= 8);
   const isWeekend = [0,6].includes(now.getDay());
   const finalPrice = Math.round(basePrice * (isHighSeason ? seasonM : 1) * (isWeekend ? weekendM : 1));
+  const photoAttrs = v.img
+    ? `style="background-image:url('${v.img}');cursor:pointer" onclick="openPhotoModal('${v.img}')"`
+    : '';
   c.innerHTML=`
-    <div class="detail-photo" ${v.img?`style="background-image:url('${v.img}')"`:''}></div>
+    <div class="detail-photo" ${photoAttrs}></div>
     <div class="detail-name">${v.name||''}</div>
     <div class="detail-spec">${v.type||''} · ${v.city||''}</div>
     <div style="margin-bottom:10px;color:#6E6E73;text-align:center">Вместимость: ${v.capacity||'—'} чел</div>
@@ -692,15 +727,22 @@ function changeMonth(delta){
   if(state.monthIndex > 11){ state.monthIndex = 0; state.year++; }
   renderCalendar();
 }
+function goToToday(){
+  const now = new Date();
+  state.year = now.getFullYear();
+  state.monthIndex = now.getMonth();
+  renderCalendar();
+  const calEl = document.getElementById('screen-calendar');
+  if(calEl) calEl.scrollTop = 0;
+}
 
 function renderCalendar(){
   const c = document.getElementById('month-cards');
   c.innerHTML = '';
   const baseMonth = state.monthIndex;
-  const showMonths = [baseMonth-1, baseMonth, baseMonth+1].map(m => {
+  const showMonths = [baseMonth, baseMonth+1, baseMonth+2].map(m => {
     let mm = m, yy = state.year;
-    if(mm < 0){ mm = 11; yy--; }
-    if(mm > 11){ mm = 0; yy++; }
+    if(mm > 11){ mm -= 12; yy++; }
     return { m: mm, y: yy };
   });
   showMonths.forEach(({m, y}) => c.appendChild(buildMonthCard(m, y)));
@@ -791,7 +833,7 @@ function runAIMatch(){
   },600);
 }
 
-// ============ WIZARD ============
+/* ============ WIZARD ============ */
 const WIZ_STEPS = ['event','date','place','details','result'];
 const EVENT_TYPES = [
   { id:'wedding', name:'Свадьба', icon:'fa-ring' },
@@ -1036,7 +1078,7 @@ async function submitWizardApplication(){
   } catch(e){ showToast('Ошибка сети'); }
 }
 
-// ============ PROFILE ============
+/* ============ PROFILE ============ */
 async function openProfileOrCreate(){
   if(!tgUser){ showToast('Откройте через Telegram'); return; }
   if(!currentArtist){ openCreateForm(); return; }
@@ -1073,9 +1115,27 @@ async function loadProfileExtras(){
 function openCreateForm(){
   openModal(`
     <h3>Создать профиль артиста</h3>
-    <div class="form-group"><label>Имя</label><input id="cf-name" value="${tgUser.first_name||''}"></div>
-    <div class="form-group"><label>Роль</label><select id="cf-role">${Object.keys(ROLE_NAMES).map(k=>`<option value="${k}">${ROLE_NAMES[k]}</option>`).join('')}</select></div>
-    <div class="form-group"><label>Город</label><input id="cf-city" placeholder="Москва"></div>
+    <div class="form-group"><label>Имя *</label><input id="cf-name" value="${tgUser.first_name||''}"></div>
+    <div class="form-group">
+      <label>Фото профиля</label>
+      <div style="display:flex;align-items:center;gap:12px">
+        <div id="cf-photo-preview" style="width:64px;height:64px;background:#FCE7F3;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;color:#EC4899;font-size:11px;text-align:center;flex-shrink:0">Нет</div>
+        <input id="cf-img" type="url" placeholder="Ссылка на фото" style="flex:1;padding:12px;border:1px solid #E5E5EA;border-radius:12px;font-size:14px;outline:none;font-family:inherit;box-sizing:border-box" oninput="previewPhoto(this.value)">
+      </div>
+      <div style="font-size:11px;color:#6E6E73;margin-top:5px">
+        Загрузите фото на <a href="https://imgur.com" target="_blank" style="color:#EC4899">Imgur</a> и вставьте прямую ссылку
+      </div>
+    </div>
+    <div class="form-group"><label>Роль *</label><select id="cf-role">${Object.keys(ROLE_NAMES).map(k=>`<option value="${k}">${ROLE_NAMES[k]}</option>`).join('')}</select></div>
+    <div class="form-group"><label>Специализация</label><input id="cf-spec" placeholder="Фламенко, Балет, Фольклор"></div>
+    <div class="form-group"><label>Город *</label><input id="cf-city" placeholder="Москва"></div>
+    <div class="form-group">
+      <label>Учебное заведение</label>
+      <input id="cf-institution" placeholder="МГАХ, ГИТИС, консерватория">
+      <div style="font-size:11px;color:#6E6E73;margin-top:4px">Образование видно организаторам — подтверждает квалификацию</div>
+    </div>
+    <div class="form-group"><label>Год окончания</label><input id="cf-year" type="number" placeholder="2020" min="1950" max="2030"></div>
+    <div class="form-group"><label>Специальность</label><input id="cf-specialty" placeholder="Артист балета, Вокалист, Режиссёр"></div>
     <div class="form-group"><label>Гонорар, ₽</label><input id="cf-price" type="number" value="15000"></div>
     <div class="form-group"><label>Контакты</label><input id="cf-contacts" placeholder="@username"></div>
     <div class="form-group"><label>Выезд</label><select id="cf-travel">
@@ -1093,26 +1153,52 @@ function openCreateForm(){
   `);
 }
 
+function previewPhoto(url){
+  const el = document.getElementById('cf-photo-preview');
+  if(!el) return;
+  if(url && url.startsWith('http')){
+    el.style.backgroundImage = `url('${url}')`;
+    el.innerText = '';
+  } else {
+    el.style.backgroundImage = '';
+    el.innerText = 'Нет';
+  }
+}
+
 async function submitCreateProfile(){
   const role = document.getElementById('cf-role').value;
+  const name = document.getElementById('cf-name').value;
+  const city = document.getElementById('cf-city').value;
+  if(!name){ showToast('Введите имя'); return; }
+  if(!city){ showToast('Укажите город'); return; }
+
   const body = {
     action:'createArtist', telegramId: String(tgUser.id),
-    name: document.getElementById('cf-name').value,
-    role, city: document.getElementById('cf-city').value,
+    name: name,
+    role: role,
+    spec: document.getElementById('cf-spec').value || ROLE_NAMES[role],
+    city: city,
     price: document.getElementById('cf-price').value,
     contacts: document.getElementById('cf-contacts').value,
-    img:'', spec: ROLE_NAMES[role], specialty:'dance', genre:'dance',
+    img: document.getElementById('cf-img').value || '',
+    specialty:'dance', genre:'dance',
     readyToTravel:false, countries:'',
     travelScope: document.getElementById('cf-travel').value,
     visaType: document.getElementById('cf-visa').value,
     visaValidUntil: document.getElementById('cf-visaUntil').value,
-    needsVisaSupport: document.getElementById('cf-visaHelp').value === 'true'
+    needsVisaSupport: document.getElementById('cf-visaHelp').value === 'true',
+    institution: document.getElementById('cf-institution').value || '',
+    educationYear: document.getElementById('cf-year').value || '',
+    educationSpecialty: document.getElementById('cf-specialty').value || ''
   };
   try {
     const r = await fetch(SHEET_API_URL, { method:'POST', body:JSON.stringify(body) });
     const res = await r.json();
-    if(res.success){ showToast('Профиль создан!'); closeModal(); await loadData(); }
-    else showToast('Ошибка: '+(res.error||''));
+    if(res.success){
+      showToast('Профиль создан. Добавьте фото для лучшего отклика');
+      closeModal();
+      await loadData();
+    } else showToast('Ошибка: '+(res.error||''));
   } catch(e){ showToast('Ошибка сети'); }
 }
 
@@ -1121,8 +1207,11 @@ function renderProfile(){
   const a = currentArtist;
   const icon = ROLE_ICONS[a.role]||'fa-star';
   const initial = (a.name||'?')[0].toUpperCase();
+  const photoStyle = a.img
+    ? `style="background-image:url('${a.img}');cursor:pointer" onclick="openPhotoModal('${a.img}')"`
+    : '';
   document.getElementById('profile-header').innerHTML = `
-    <div class="avatar-lg" ${a.img?`style="background-image:url('${a.img}')"`:''}>${a.img?'':initial}</div>
+    <div class="avatar-lg" ${photoStyle}>${a.img?'':initial}</div>
     <div class="name">${a.name||''}</div>
     <div class="role"><i class="fa-solid ${icon}"></i> ${ROLE_NAMES[a.role]||a.spec||''} · ${a.city||''}</div>
   `;
@@ -1336,6 +1425,7 @@ function editMain(){
   openModal(`
     <h3>Редактировать основное</h3>
     <div class="form-group"><label>Имя</label><input id="e-name" value="${a.name||''}"></div>
+    <div class="form-group"><label>Фото (URL)</label><input id="e-img" value="${a.img||''}" placeholder="https://..."></div>
     <div class="form-group"><label>Bio</label><textarea id="e-bio" style="min-height:80px">${a.bio||''}</textarea></div>
     <div class="form-group"><label>Роль</label><select id="e-role">${Object.keys(ROLE_NAMES).map(k=>`<option value="${k}" ${a.role===k?'selected':''}>${ROLE_NAMES[k]}</option>`).join('')}</select></div>
     <div class="form-group"><label>Специализация</label><input id="e-spec" value="${a.spec||''}"></div>
@@ -1356,6 +1446,7 @@ function editMain(){
 async function saveMain(){
   const fields = {
     name: document.getElementById('e-name').value,
+    img: document.getElementById('e-img').value,
     bio: document.getElementById('e-bio').value,
     role: document.getElementById('e-role').value,
     spec: document.getElementById('e-spec').value,
