@@ -18,9 +18,7 @@ button:active{transform:scale(.95)}
 button:disabled{opacity:.5;cursor:not-allowed}
 .btn-secondary{background:#FFF;color:#EC4899;border:2px solid #EC4899;box-shadow:none}
 .btn-ghost{background:transparent;color:#EC4899;border:1px solid #EC4899;box-shadow:none;padding:8px 16px;font-size:13px}
-.btn-danger{background:#F44336;box-shadow:0 4px 15px rgba(244,67,54,.3)}
 .role-switch{position:fixed;top:15px;right:15px;z-index:1500;background:#FFF;border:2px solid #EC4899;border-radius:30px;padding:8px 16px;display:flex;align-items:center;gap:8px;cursor:pointer;box-shadow:0 4px 12px rgba(236,72,153,.25);font-weight:700;font-size:13px;color:#EC4899}
-/* HOME */
 #screen-home .honeycomb-frame{position:relative;width:96vw;height:88dvh;clip-path:polygon(25% 0%,75% 0%,100% 25%,100% 75%,75% 100%,25% 100%,0% 75%,0% 25%);background:#FFF;border:2px solid rgba(236,72,153,.2);box-shadow:0 10px 30px rgba(0,0,0,.05);display:flex;justify-content:center;align-items:center}
 #screen-home .center-id{width:130px;height:130px;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background:#FFF5F9;border:3px solid #EC4899;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;font-weight:800;font-size:13px;color:#1A1A1A;z-index:15;cursor:pointer;padding:8px;box-sizing:border-box;overflow:hidden;position:relative}
 #screen-home .center-id .avatar{width:42px;height:42px;border-radius:50%;background:#EC4899;color:#FFF;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;margin-bottom:4px}
@@ -32,7 +30,6 @@ button:disabled{opacity:.5;cursor:not-allowed}
 .star-bg{position:absolute;inset:0;color:rgba(255,255,255,.55);font-size:14px}
 .star-fill{position:absolute;inset:0;color:#FFC107;font-size:14px;overflow:hidden;text-shadow:0 0 3px rgba(0,0,0,.8)}
 .visa-badge{position:absolute;top:-6px;left:-6px;background:#FF9800;color:#FFF;font-size:9px;padding:2px 5px;border-radius:8px;font-weight:700;z-index:4}
-/* CATALOG */
 .catalog-screen{background:#F5F5F7;padding-top:20px}
 .catalog-screen h1{font-size:24px;margin-bottom:20px;color:#1A1A1A}
 .search-bar{width:90%;max-width:400px;padding:15px;border:2px solid #E5E5EA;border-radius:30px;font-size:16px;margin-bottom:15px;background:#FFF;outline:none;text-align:center;box-sizing:border-box;font-family:inherit}
@@ -41,20 +38,16 @@ button:disabled{opacity:.5;cursor:not-allowed}
 .catalog-cell .label{position:absolute;top:42px;left:0;right:0;background:rgba(26,26,26,.85);color:#FFF;font-size:10px;text-align:center;padding:3px 2px;font-weight:600}
 .catalog-cell .role-icon{position:absolute;top:12px;left:12px;bottom:auto;width:22px;height:22px;font-size:13px}
 .catalog-cell:hover{transform:scale(1.05);border-color:#EC4899}
-/* DETAILS */
 .detail-screen{background:#F5F5F7;padding:20px;justify-content:flex-start !important}
 .detail-photo{width:180px;height:180px;background-color:#FCE7F3;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background-size:cover;background-position:center;border:4px solid #EC4899;margin-bottom:20px;position:relative;transition:transform .2s}
-.detail-photo:hover{transform:scale(1.03)}
 .detail-photo .role-icon{bottom:20px;left:20px;width:28px;height:28px;font-size:16px}
 .detail-name{font-size:26px;font-weight:800;color:#1A1A1A;text-align:center}
 .detail-spec{font-size:15px;color:#6E6E73;margin-bottom:15px;text-align:center}
-/* PHOTO MODAL */
 .photo-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:9999;justify-content:center;align-items:center;animation:fadeIn 0.3s ease}
 .photo-modal.open{display:flex}
-.photo-modal img{max-width:95vw;max-height:90vh;object-fit:contain;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,0.5)}
+.photo-modal img{max-width:95vw;max-height:90vh;object-fit:contain;border-radius:12px}
 .photo-modal .close-x{position:absolute;top:20px;right:20px;color:#FFF;font-size:28px;cursor:pointer;width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.15);border-radius:50%;z-index:10}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-/* CALENDAR */
 #screen-calendar{background:#F5F5F7;padding:20px;justify-content:flex-start !important;overflow-y:auto}
 #screen-calendar h1{color:#1A1A1A;margin-bottom:10px;text-align:center}
 .year-nav{display:flex;gap:12px;margin-bottom:15px;align-items:center;justify-content:center}
@@ -63,7 +56,7 @@ button:disabled{opacity:.5;cursor:not-allowed}
 .month-card h3{text-align:center;color:#EC4899;font-size:16px;margin-bottom:12px;font-weight:800}
 .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:10px}
 .cal-dow{text-align:center;font-size:10px;color:#6E6E73;font-weight:600;padding:4px 0}
-.cal-cell{aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:8px;font-size:12px;font-weight:600;color:#1A1A1A;cursor:pointer;position:relative;user-select:none}
+.cal-cell{aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:8px;font-size:12px;font-weight:600;color:#1A1A1A;cursor:pointer;position:relative}
 .cal-cell.empty{color:transparent;pointer-events:none}
 .cal-cell .status-icon{font-size:11px;margin-top:2px;line-height:1}
 .cal-cell.free .status-icon{color:#4CAF50}
@@ -72,10 +65,8 @@ button:disabled{opacity:.5;cursor:not-allowed}
 .cal-cell.active .status-icon{color:#2196F3}
 .cal-cell.confirm .status-icon{color:#9C27B0}
 .cal-cell.today{border:2px solid #EC4899}
-.cal-cell.selected{background:#FFF5F9;border:2px solid #EC4899}
 .cal-legend{display:flex;flex-wrap:wrap;gap:8px;font-size:10px;color:#6E6E73;justify-content:center;margin-top:8px}
 .cal-legend span{display:flex;align-items:center;gap:4px}
-/* WIZARD */
 #screen-wizard{background:#F5F5F7;padding:20px;justify-content:flex-start !important;overflow-y:auto}
 .wizard-progress{width:100%;max-width:400px;background:#E5E5EA;border-radius:30px;height:8px;margin-bottom:10px;overflow:hidden}
 .wizard-progress-bar{background:linear-gradient(90deg,#EC4899,#F472B6);height:100%;transition:width .4s ease;border-radius:30px}
@@ -87,48 +78,43 @@ button:disabled{opacity:.5;cursor:not-allowed}
 .wizard-options{display:flex;flex-direction:column;gap:8px}
 .wizard-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
 .wizard-chip{padding:10px 16px;border:2px solid #E5E5EA;border-radius:24px;background:#FFF;font-size:13px;font-weight:600;color:#6E6E73;cursor:pointer;transition:all .2s}
-.wizard-chip:hover{border-color:#EC4899}
 .wizard-chip.selected{background:#EC4899;border-color:#EC4899;color:#FFF}
 .wizard-option{padding:14px;border:2px solid #E5E5EA;border-radius:14px;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:12px;font-weight:600;font-size:14px;background:#FFF}
-.wizard-option:hover{border-color:#EC4899;background:#FFF5F9}
 .wizard-option.selected{border-color:#EC4899;background:#FFF5F9}
 .wizard-option i{color:#EC4899;font-size:18px;width:26px;text-align:center}
 .wizard-custom-input{margin-top:10px;display:flex;gap:8px}
 .wizard-custom-input input{flex:1;padding:12px 16px;border:2px solid #E5E5EA;border-radius:12px;font-size:15px;outline:none;font-family:inherit;box-sizing:border-box}
-.wizard-custom-input input:focus{border-color:#EC4899}
 .wizard-nav{display:flex;justify-content:space-between;margin-top:20px;max-width:400px;width:100%;gap:10px}
 .wizard-nav button{flex:1;padding:14px 20px;font-size:15px}
-/* RESULT CARDS */
 .result-cards{display:flex;flex-direction:column;gap:12px;margin-bottom:15px}
-.result-card{background:#FFF;border-radius:16px;padding:14px;box-shadow:0 4px 14px rgba(0,0,0,.06);display:flex;gap:12px;align-items:center;border:1px solid #F0F0F0;transition:box-shadow .2s;position:relative}
-.result-card:hover{box-shadow:0 6px 20px rgba(236,72,153,.15);border-color:#EC4899}
+.result-card{background:#FFF;border-radius:16px;padding:14px;box-shadow:0 4px 14px rgba(0,0,0,.06);display:flex;gap:12px;align-items:center;position:relative}
 .result-card .rc-avatar{width:60px;height:60px;flex-shrink:0;background-color:#FCE7F3;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background-size:cover;background-position:center;border:2px solid #EC4899}
 .result-card .rc-info{flex:1;min-width:0}
-.result-card .rc-name{font-weight:800;font-size:15px;margin-bottom:3px;color:#1A1A1A}
+.result-card .rc-name{font-weight:800;font-size:15px;margin-bottom:3px}
 .result-card .rc-spec{font-size:12px;color:#6E6E73;margin-bottom:4px}
 .result-card .rc-meta{font-size:11px;color:#6E6E73;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
 .result-card .rc-meta .rc-price{color:#EC4899;font-weight:800;font-size:13px}
 .result-card .rc-match{position:absolute;top:8px;right:8px;background:#EC4899;color:#FFF;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:700}
 .result-card .rc-quote{background:#EC4899;color:#FFF;border:none;padding:8px 12px;border-radius:20px;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;box-shadow:none}
 .result-card .rc-quote.sent{background:#4CAF50}
-/* HOW IT WORKS */
 #screen-howto{background:#F5F5F7;padding:20px;justify-content:flex-start !important;overflow-y:auto}
 .howto-card{width:100%;max-width:400px;background:#FFF;border-radius:20px;padding:20px;margin-bottom:12px;box-shadow:0 4px 12px rgba(0,0,0,.04);display:flex;align-items:flex-start;gap:14px}
 .howto-num{width:36px;height:36px;background:#EC4899;color:#FFF;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0;font-size:16px}
-.howto-content h3{margin:0 0 4px;font-size:16px;color:#1A1A1A}
+.howto-content h3{margin:0 0 4px;font-size:16px}
 .howto-content p{margin:0;font-size:13px;color:#6E6E73;line-height:1.4}
-/* PROFILE */
-#screen-profile{background:#F5F5F7;padding:0;overflow-y:auto;-webkit-overflow-scrolling:touch}
+#screen-profile{background:#F5F5F7;padding:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;height:calc(100vh - 80px)}
 #screen-profile.active{display:block !important}
+#screen-venue-profile{background:#F5F5F7;padding:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;height:calc(100vh - 80px)}
+#screen-venue-profile.active{display:block !important}
 .profile-header{width:100%;background:#FFF;padding:20px;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;border-bottom:1px solid #E5E5EA}
 .profile-header .avatar-lg{width:90px;height:90px;background-color:#FCE7F3;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background-size:cover;background-position:center;border:3px solid #EC4899;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:900;margin-bottom:12px;color:#EC4899}
 .profile-header .name{font-size:22px;font-weight:800}
 .profile-header .role{font-size:13px;color:#6E6E73;margin-top:4px}
-.profile-tabs{display:flex;width:100%;overflow-x:auto;background:#FFF;border-bottom:1px solid #E5E5EA;position:sticky;top:0;z-index:100;-webkit-overflow-scrolling:touch;scroll-behavior:smooth}
+.profile-tabs{display:flex;width:100%;overflow-x:auto;background:#FFF;border-bottom:1px solid #E5E5EA;position:sticky;top:0;z-index:200;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .profile-tabs::-webkit-scrollbar{display:none}
 .profile-tab{padding:14px 14px;font-size:12px;color:#6E6E73;cursor:pointer;white-space:nowrap;border-bottom:3px solid transparent;flex-shrink:0}
 .profile-tab.active{color:#EC4899;border-bottom-color:#EC4899;font-weight:700}
-.profile-content{width:100%;padding:16px;box-sizing:border-box;flex:1}
+.profile-content{width:100%;padding:16px 16px 100px 16px;box-sizing:border-box}
 .tab-panel{display:none}
 .tab-panel.active{display:block}
 .field-row{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid #F0F0F0;font-size:14px}
@@ -145,7 +131,6 @@ button:disabled{opacity:.5;cursor:not-allowed}
 .rating-stars{color:#FFC107;font-size:20px;text-align:center;margin-bottom:15px}
 .skeleton{background:linear-gradient(90deg,#F0F0F0 25%,#E0E0E0 50%,#F0F0F0 75%);background-size:200% 100%;animation:skel 1.5s infinite;border-radius:12px;height:60px;margin-bottom:10px}
 @keyframes skel{0%{background-position:200% 0}100%{background-position:-200% 0}}
-/* APPLICATIONS / CARDS */
 .app-card{background:#FFF;border-radius:14px;padding:14px;margin-bottom:10px;box-shadow:0 4px 12px rgba(0,0,0,.05);border-left:4px solid #EC4899}
 .app-card .ac-status{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
 .app-card .ac-status.new{color:#EC4899}
@@ -156,11 +141,9 @@ button:disabled{opacity:.5;cursor:not-allowed}
 .app-card .ac-meta{font-size:12px;color:#6E6E73;margin-bottom:4px}
 .app-card .ac-actions{display:flex;gap:8px;margin-top:10px}
 .app-card .ac-actions button{flex:1;padding:8px;font-size:12px;box-shadow:none}
-/* VENUES */
 #screen-venues{background:#F5F5F7;padding-top:20px}
 #screen-venues h1{font-size:24px;margin-bottom:20px;color:#1A1A1A}
 #venues-grid{display:grid;grid-template-columns:repeat(3,100px);gap:15px;justify-content:center}
-/* MATCH */
 #screen-match{background:#F5F5F7;padding:20px;justify-content:flex-start !important;overflow-y:auto}
 .form-group{width:100%;max-width:400px;margin-bottom:12px}
 .form-group label{display:block;font-size:11px;color:#6E6E73;margin-bottom:5px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
@@ -173,14 +156,12 @@ button:disabled{opacity:.5;cursor:not-allowed}
 .match-card .spec{font-size:11px;color:#6E6E73;margin-bottom:3px}
 .match-card .reason{font-size:10px;color:#999}
 .match-card .score{font-weight:900;font-size:18px;color:#EC4899;text-align:center;min-width:45px}
-/* ORGANIZER */
 #screen-organizer-home{background:#F5F5F7;justify-content:flex-start !important;padding:20px;overflow-y:auto}
 .events-list{width:100%;max-width:400px}
 .event-card{background:#FFF;border-radius:14px;padding:14px;margin-bottom:12px;box-shadow:0 4px 10px rgba(0,0,0,.04);border-left:4px solid #EC4899}
 .event-card .ec-date{font-size:11px;color:#EC4899;font-weight:700;text-transform:uppercase;margin-bottom:4px}
 .event-card .ec-title{font-weight:800;font-size:16px;margin-bottom:6px}
 .event-card .ec-sub{font-size:12px;color:#6E6E73}
-/* PROJECTS */
 .project-card{background:#FFF;border-radius:14px;padding:14px;margin-bottom:12px;box-shadow:0 4px 10px rgba(0,0,0,.04);border-left:4px solid #2196F3;cursor:pointer}
 .project-card.open-type{border-left-color:#4CAF50}
 .project-card .pc-title{font-weight:800;font-size:16px;margin-bottom:4px}
@@ -188,18 +169,14 @@ button:disabled{opacity:.5;cursor:not-allowed}
 .project-card .pc-type.open-type{color:#4CAF50}
 .project-card .pc-type.closed-type{color:#2196F3}
 .project-card .pc-meta{font-size:12px;color:#6E6E73;line-height:1.5}
-/* VENUE PROFILE / TABS */
-#screen-venue-profile{background:#F5F5F7;padding:0;overflow-y:auto;-webkit-overflow-scrolling:touch}
-#screen-venue-profile.active{display:block !important}
-.venue-tabs{display:flex;width:100%;overflow-x:auto;background:#FFF;border-bottom:1px solid #E5E5EA;position:sticky;top:0;z-index:100;-webkit-overflow-scrolling:touch;scroll-behavior:smooth}
+.venue-tabs{display:flex;width:100%;overflow-x:auto;background:#FFF;border-bottom:1px solid #E5E5EA;position:sticky;top:0;z-index:200;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .venue-tabs::-webkit-scrollbar{display:none}
 .venue-tab{padding:14px 18px;font-size:13px;color:#6E6E73;cursor:pointer;white-space:nowrap;border-bottom:3px solid transparent;flex-shrink:0}
 .venue-tab.active{color:#EC4899;border-bottom-color:#EC4899;font-weight:700}
-.venue-content{width:100%;padding:16px;box-sizing:border-box}
+.venue-content{width:100%;padding:16px 16px 100px 16px;box-sizing:border-box}
 .price-slider{width:100%;margin:10px 0}
 .price-slider input[type=range]{width:100%;-webkit-appearance:none;height:6px;border-radius:3px;background:#E5E5EA;outline:none}
 .price-slider input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:#EC4899;cursor:pointer;box-shadow:0 2px 8px rgba(236,72,153,.4)}
-/* MISC */
 .toast{position:fixed;top:30px;left:50%;transform:translateX(-50%) translateY(-100px);background:#1A1A1A;color:#FFF;padding:12px 25px;border-radius:30px;font-size:14px;font-weight:600;z-index:9999;transition:transform .4s cubic-bezier(.175,.885,.32,1.275);box-shadow:0 10px 30px rgba(0,0,0,.2);max-width:90vw;text-align:center;box-sizing:border-box}
 .toast.show{transform:translateX(-50%) translateY(0)}
 .back-btn{position:absolute;top:20px;left:20px;background:#FFF;color:#1A1A1A;font-size:24px;border-radius:50%;width:45px;height:45px;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:200;border:1px solid #E5E5EA}
@@ -237,7 +214,6 @@ input:checked + .slider-sw:before{transform:translateX(22px)}
   <i class="fa-solid fa-chevron-down" style="font-size:11px"></i>
 </div>
 
-<!-- HOME -->
 <div id="screen-home" class="screen active">
   <div class="honeycomb-frame">
     <div class="center-id" id="user-id-block" onclick="openProfileOrCreate()">
@@ -247,7 +223,6 @@ input:checked + .slider-sw:before{transform:translateX(22px)}
   </div>
 </div>
 
-<!-- ORGANIZER HOME -->
 <div id="screen-organizer-home" class="screen">
   <h1 style="color:#1A1A1A;font-size:22px;margin:0 0 5px 0">Мои проекты</h1>
   <p style="color:#6E6E73;font-size:12px;margin-bottom:20px">Проекты, заявки и мероприятия</p>
@@ -263,7 +238,6 @@ input:checked + .slider-sw:before{transform:translateX(22px)}
   <div class="events-list" id="organizer-applications"></div>
 </div>
 
-<!-- CATALOG -->
 <div id="screen-catalog" class="screen catalog-screen">
   <button class="back-btn" onclick="navigateTo('screen-home')">←</button>
   <h1>Артисты</h1>
@@ -271,13 +245,11 @@ input:checked + .slider-sw:before{transform:translateX(22px)}
   <div class="catalog-grid" id="artists-grid"></div>
 </div>
 
-<!-- ARTIST DETAIL -->
 <div id="screen-artist" class="screen detail-screen">
   <button class="back-btn" onclick="navigateTo('screen-catalog')">←</button>
   <div id="artist-detail-content"></div>
 </div>
 
-<!-- CALENDAR -->
 <div id="screen-calendar" class="screen">
   <button class="back-btn" onclick="navigateTo('screen-home')">←</button>
   <h1>Календарь</h1>
@@ -296,7 +268,6 @@ input:checked + .slider-sw:before{transform:translateX(22px)}
   </div>
 </div>
 
-<!-- WIZARD -->
 <div id="screen-wizard" class="screen">
   <button class="back-btn" onclick="closeWizard()">←</button>
   <div class="wizard-progress"><div class="wizard-progress-bar" id="wiz-progress" style="width:20%"></div></div>
@@ -308,18 +279,16 @@ input:checked + .slider-sw:before{transform:translateX(22px)}
   </div>
 </div>
 
-<!-- HOW TO -->
 <div id="screen-howto" class="screen">
   <button class="back-btn" onclick="navigateTo('screen-home')">←</button>
   <h1 style="color:#1A1A1A;font-size:22px;margin:0 0 20px 0">Как это работает</h1>
   <div class="howto-card"><div class="howto-num">1</div><div class="howto-content"><h3>Создай профиль</h3><p>Заполни анкету: имя, роль, город, контакты, портфолио.</p></div></div>
-  <div class="howto-card"><div class="howto-num">2</div><div class="howto-content"><h3>Укажи занятость</h3><p>Отметь свободные дни в календаре. Управляй ценой по датам.</p></div></div>
-  <div class="howto-card"><div class="howto-num">3</div><div class="howto-content"><h3>Получай заявки</h3><p>Организаторы находят тебя и присылают приглашения. Или откликайся на проекты.</p></div></div>
+  <div class="howto-card"><div class="howto-num">2</div><div class="howto-content"><h3>Укажи занятость</h3><p>Отметь свободные дни в календаре. Управляй ценой.</p></div></div>
+  <div class="howto-card"><div class="howto-num">3</div><div class="howto-content"><h3>Получай заявки</h3><p>Организаторы находят тебя и присылают приглашения.</p></div></div>
   <div class="howto-card"><div class="howto-num">4</div><div class="howto-content"><h3>Договаривайся</h3><p>Общайтесь напрямую, согласовывайте условия и цены.</p></div></div>
   <div class="howto-card"><div class="howto-num">5</div><div class="howto-content"><h3>Получай отзывы</h3><p>После мероприятия — оценка и отзыв для рейтинга.</p></div></div>
 </div>
 
-<!-- PROFILE (ARTIST) -->
 <div id="screen-profile" class="screen">
   <button class="back-btn" onclick="navigateTo('screen-home')">←</button>
   <div class="profile-header" id="profile-header"></div>
@@ -345,7 +314,6 @@ input:checked + .slider-sw:before{transform:translateX(22px)}
   </div>
 </div>
 
-<!-- VENUES -->
 <div id="screen-venues" class="screen catalog-screen">
   <button class="back-btn" onclick="navigateTo('screen-home')">←</button>
   <h1>Площадки</h1>
@@ -358,7 +326,6 @@ input:checked + .slider-sw:before{transform:translateX(22px)}
   <div id="venue-detail-content"></div>
 </div>
 
-<!-- VENUE PROFILE (кабинет владельца) -->
 <div id="screen-venue-profile" class="screen">
   <button class="back-btn" onclick="navigateTo('screen-home')">←</button>
   <div class="profile-header" id="venue-profile-header"></div>
@@ -374,7 +341,6 @@ input:checked + .slider-sw:before{transform:translateX(22px)}
   </div>
 </div>
 
-<!-- QUICK MATCH -->
 <div id="screen-match" class="screen">
   <button class="back-btn" onclick="navigateTo('screen-home')">←</button>
   <h1>🔍 ИИ-Подбор</h1>
@@ -387,7 +353,6 @@ input:checked + .slider-sw:before{transform:translateX(22px)}
   <div id="match-results"></div>
 </div>
 
-<!-- PHOTO MODAL -->
 <div class="photo-modal" id="photo-modal" onclick="if(event.target===this)closePhotoModal()">
   <div class="close-x" onclick="closePhotoModal()">✕</div>
   <img id="photo-modal-img" src="" alt="">
@@ -401,67 +366,30 @@ input:checked + .slider-sw:before{transform:translateX(22px)}
 <div class="bottom-nav" id="bottom-nav"></div>
 
 <script>
-/* ============ SETUP ============ */
-let tgUser = null;
-if (window.Telegram && window.Telegram.WebApp) {
-  const tg = window.Telegram.WebApp;
-  tg.ready(); tg.expand();
-  tg.setHeaderColor('#F5F5F7'); tg.setBackgroundColor('#F5F5F7');
-  tgUser = tg.initDataUnsafe && tg.initDataUnsafe.user ? tg.initDataUnsafe.user : null;
-}
+let tgUser=null;
+if(window.Telegram&&window.Telegram.WebApp){const tg=window.Telegram.WebApp;tg.ready();tg.expand();tg.setHeaderColor('#F5F5F7');tg.setBackgroundColor('#F5F5F7');tgUser=tg.initDataUnsafe&&tg.initDataUnsafe.user?tg.initDataUnsafe.user:null;}
 
-const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbyU4gIFXop6c88N2tiLpYmXwh06ViZbtdS9RGZtKCWBL3L9i62cLps8V4P3ERycguah/exec';
+const SHEET_API_URL='https://script.google.com/macros/s/AKfycbzF3ksSqgDkLOE9UsjCvY_uwvLSkQXT0GXLMSoDHtwNLZ7obkv4nFUTSu7jXbc8YpAi/exec';
 
-const ROLE_ICONS = {
-  dancer:'fa-person-running', ballet:'fa-child-reaching', singer:'fa-microphone',
-  actor:'fa-masks-theater', host:'fa-microphone-lines', musician:'fa-music',
-  guitarist:'fa-guitar', drummer:'fa-drum', pianist:'fa-piano-keyboard',
-  dj:'fa-compact-disc', magician:'fa-hat-wizard', artist:'fa-paintbrush',
-  photographer:'fa-camera', choreographer:'fa-diagram-project',
-  soundEngineer:'fa-sliders', lightingEngineer:'fa-lightbulb',
-  director:'fa-clapperboard', violinist:'fa-music', saxophonist:'fa-music',
-  flutist:'fa-music', other:'fa-star'
-};
-const ROLE_NAMES = {
-  dancer:'Танцор', ballet:'Балет', singer:'Вокалист', actor:'Актёр',
-  host:'Ведущий', musician:'Музыкант', guitarist:'Гитарист', drummer:'Барабанщик',
-  pianist:'Пианист', dj:'Диджей', magician:'Фокусник', artist:'Художник',
-  photographer:'Фотограф', choreographer:'Хореограф', soundEngineer:'Звукорежиссёр',
-  lightingEngineer:'Художник по свету', director:'Режиссёр',
-  violinist:'Скрипач', saxophonist:'Саксофонист', flutist:'Флейтист', other:'Другое'
-};
-const TRAVEL_NAMES = { russia:'Россия', cis:'СНГ', europe:'Европа', world:'Мир', none:'Не выезжает' };
-const VISA_NAMES = { schengen:'Шенген', usa:'США', uk:'Великобритания', uae:'ОАЭ', multiple:'Мультивиза', none:'Нет визы' };
-const STATUS_ICONS = {
-  free:{ icon:'fa-sun', color:'#4CAF50', label:'Свободен' },
-  busy:{ icon:'fa-circle', color:'#F44336', label:'Занят' },
-  req:{ icon:'fa-square', color:'#FFC107', label:'Запрос' },
-  active:{ icon:'fa-play', color:'#2196F3', label:'Актив' },
-  confirm:{ icon:'fa-diamond', color:'#9C27B0', label:'Подтверждение' }
-};
-const EVENT_TYPE_NAMES = {
-  wedding:'Свадьба', anniversary:'Юбилей', corporate:'Корпоратив',
-  concert:'Концерт', ball:'Бал', kids:'Детский праздник', other:'Другое'
-};
-const USER_ROLES = {
-  artist: { name:'Артист', icon:'fa-microphone', desc:'Показываю себя' },
-  organizer: { name:'Организатор', icon:'fa-briefcase', desc:'Создаю мероприятия' },
-  venue: { name:'Площадка', icon:'fa-landmark', desc:'Сдаю в аренду' },
-  viewer: { name:'Зритель', icon:'fa-eye', desc:'Смотрю афишу' }
-};
+const ROLE_ICONS={dancer:'fa-person-running',ballet:'fa-child-reaching',singer:'fa-microphone',actor:'fa-masks-theater',host:'fa-microphone-lines',musician:'fa-music',guitarist:'fa-guitar',drummer:'fa-drum',pianist:'fa-piano-keyboard',dj:'fa-compact-disc',magician:'fa-hat-wizard',artist:'fa-paintbrush',photographer:'fa-camera',choreographer:'fa-diagram-project',soundEngineer:'fa-sliders',lightingEngineer:'fa-lightbulb',director:'fa-clapperboard',violinist:'fa-music',saxophonist:'fa-music',flutist:'fa-music',other:'fa-star'};
+const ROLE_NAMES={dancer:'Танцор',ballet:'Балет',singer:'Вокалист',actor:'Актёр',host:'Ведущий',musician:'Музыкант',guitarist:'Гитарист',drummer:'Барабанщик',pianist:'Пианист',dj:'Диджей',magician:'Фокусник',artist:'Художник',photographer:'Фотограф',choreographer:'Хореограф',soundEngineer:'Звукорежиссёр',lightingEngineer:'Художник по свету',director:'Режиссёр',violinist:'Скрипач',saxophonist:'Саксофонист',flutist:'Флейтист',other:'Другое'};
+const TRAVEL_NAMES={russia:'Россия',cis:'СНГ',europe:'Европа',world:'Мир',none:'Не выезжает'};
+const VISA_NAMES={schengen:'Шенген',usa:'США',uk:'Великобритания',uae:'ОАЭ',multiple:'Мультивиза',none:'Нет визы'};
+const STATUS_ICONS={free:{icon:'fa-sun',color:'#4CAF50',label:'Свободен'},busy:{icon:'fa-circle',color:'#F44336',label:'Занят'},req:{icon:'fa-square',color:'#FFC107',label:'Запрос'},active:{icon:'fa-play',color:'#2196F3',label:'Актив'},confirm:{icon:'fa-diamond',color:'#9C27B0',label:'Подтверждение'}};
+const EVENT_TYPE_NAMES={wedding:'Свадьба',anniversary:'Юбилей',corporate:'Корпоратив',concert:'Концерт',ball:'Бал',kids:'Детский праздник',other:'Другое'};
+const USER_ROLES={artist:{name:'Артист',icon:'fa-microphone',desc:'Показываю себя'},organizer:{name:'Организатор',icon:'fa-briefcase',desc:'Создаю мероприятия'},venue:{name:'Площадка',icon:'fa-landmark',desc:'Сдаю в аренду'},viewer:{name:'Зритель',icon:'fa-eye',desc:'Смотрю афишу'}};
 
-let artists = [], venues = [], events = [], persons = [], pricing = [], reviews = [], applications = [], projects = [], projectResponses = [], venuePricing = [], venueCategoryPricing = [];
-let currentArtist = null, currentPerson = null, currentVenue = null, activeRole = 'artist';
-let profileData = { media:[], experience:[], education:[], inventory:[], costumes:[] };
-let profileLoading = false;
-let userProject = JSON.parse(localStorage.getItem('userProject')||'[]');
-const _now = new Date();
-let state = { year: _now.getFullYear(), monthIndex: _now.getMonth() };
+let artists=[],venues=[],events=[],persons=[],pricing=[],reviews=[],applications=[],projects=[],projectResponses=[],venuePricing=[],venueCategoryPricing=[];
+let currentArtist=null,currentPerson=null,currentVenue=null,activeRole='artist';
+let profileData={media:[],experience:[],education:[],inventory:[],costumes:[]};
+let profileLoading=false;
+let userProject=JSON.parse(localStorage.getItem('userProject')||'[]');
+const _now=new Date();
+let state={year:_now.getFullYear(),monthIndex:_now.getMonth()};
 
-/* ============ DATA LOADING ============ */
-async function loadData() {
-  try {
-    const [a,v,e,p,pr,rv,ap,pj,prR,vp,vcp] = await Promise.all([
+async function loadData(){
+  try{
+    const [a,v,e,p,pr,rv,ap,pj,prR,vp,vcp]=await Promise.all([
       fetch(SHEET_API_URL+'?action=artists').then(r=>r.json()).catch(()=>null),
       fetch(SHEET_API_URL+'?action=venues').then(r=>r.json()).catch(()=>null),
       fetch(SHEET_API_URL+'?action=events').then(r=>r.json()).catch(()=>null),
@@ -474,546 +402,286 @@ async function loadData() {
       fetch(SHEET_API_URL+'?action=venuePricing').then(r=>r.json()).catch(()=>null),
       fetch(SHEET_API_URL+'?action=venueCategoryPricing').then(r=>r.json()).catch(()=>null)
     ]);
-    artists = Array.isArray(a) ? a : [];
-    venues = Array.isArray(v) ? v : [];
-    events = Array.isArray(e) ? e : [];
-    persons = Array.isArray(p) ? p : [];
-    pricing = Array.isArray(pr) ? pr : [];
-    reviews = Array.isArray(rv) ? rv : [];
-    applications = Array.isArray(ap) ? ap : [];
-    projects = Array.isArray(pj) ? pj : [];
-    projectResponses = Array.isArray(prR) ? prR : [];
-    venuePricing = Array.isArray(vp) ? vp : [];
-    venueCategoryPricing = Array.isArray(vcp) ? vcp : [];
-  } catch(err){ console.log('loadData err', err); }
-
+    artists=Array.isArray(a)?a:[];
+    venues=Array.isArray(v)?v:[];
+    events=Array.isArray(e)?e:[];
+    persons=Array.isArray(p)?p:[];
+    pricing=Array.isArray(pr)?pr:[];
+    reviews=Array.isArray(rv)?rv:[];
+    applications=Array.isArray(ap)?ap:[];
+    projects=Array.isArray(pj)?pj:[];
+    projectResponses=Array.isArray(prR)?prR:[];
+    venuePricing=Array.isArray(vp)?vp:[];
+    venueCategoryPricing=Array.isArray(vcp)?vcp:[];
+  }catch(err){console.log('loadData err',err);}
   if(tgUser){
-    const tgId = String(tgUser.id);
-    currentPerson = persons.find(p => String(p.telegramId) === tgId);
-    if(!currentPerson) currentPerson = await createPersonRecord();
-    if(currentPerson){
-      activeRole = localStorage.getItem('activeRole') || currentPerson.activeRole || 'organizer';
-    }
-    currentArtist = artists.find(a => String(a.telegramId) === tgId) || null;
-    currentVenue = venues.find(v => String(v.ownerTelegramId) === tgId) || null;
+    const tgId=String(tgUser.id);
+    currentPerson=persons.find(p=>String(p.telegramId)===tgId);
+    if(!currentPerson)currentPerson=await createPersonRecord();
+    if(currentPerson){activeRole=localStorage.getItem('activeRole')||currentPerson.activeRole||'organizer';}
+    currentArtist=artists.find(a=>String(a.telegramId)===tgId)||null;
+    currentVenue=venues.find(v=>String(v.ownerTelegramId)===tgId)||null;
   }
   updateRoleUI();
   renderHome();
 }
 
 async function createPersonRecord(){
-  try {
-    const body = {
-      action:'createPerson', telegramId: String(tgUser.id),
-      name: (tgUser.first_name||'') + (tgUser.last_name ? ' '+tgUser.last_name : ''),
-      photoUrl: tgUser.photo_url || '', activeRole: 'organizer',
-      roles: 'organizer,artist,venue,viewer'
-    };
-    const r = await fetch(SHEET_API_URL, { method:'POST', body:JSON.stringify(body) });
-    const res = await r.json();
-    if(res.success) return res.person;
-  } catch(err){ console.log('createPerson err', err); }
+  try{
+    const body={action:'createPerson',telegramId:String(tgUser.id),name:(tgUser.first_name||'')+(tgUser.last_name?' '+tgUser.last_name:''),photoUrl:tgUser.photo_url||'',activeRole:'organizer',roles:'organizer,artist,venue,viewer'};
+    const r=await fetch(SHEET_API_URL,{method:'POST',body:JSON.stringify(body)});
+    const res=await r.json();
+    if(res.success)return res.person;
+  }catch(err){console.log('createPerson err',err);}
   return null;
 }
 
-/* ============ NAVIGATION ============ */
 function updateRoleUI(){
-  document.getElementById('role-label').innerText = (USER_ROLES[activeRole] || USER_ROLES.artist).name;
-  const nav = document.getElementById('bottom-nav');
-  nav.innerHTML = `
-    <div class="nav-icon active" onclick="navigateTo('${activeRole==='organizer'?'screen-organizer-home':activeRole==='venue'?'screen-venue-profile':'screen-home'}',this)"><i class="fa-solid fa-house"></i></div>
-    <div class="nav-icon" onclick="navigateTo('screen-catalog',this)"><i class="fa-solid fa-users"></i></div>
-    <div class="nav-icon" onclick="navigateTo('screen-venues',this)"><i class="fa-solid fa-landmark"></i></div>
-    <div class="nav-icon" onclick="navigateTo('screen-calendar',this)"><i class="fa-solid fa-calendar"></i></div>
-    <div class="nav-icon" onclick="navigateTo('screen-howto',this)"><i class="fa-solid fa-circle-question"></i></div>`;
+  document.getElementById('role-label').innerText=(USER_ROLES[activeRole]||USER_ROLES.artist).name;
+  const nav=document.getElementById('bottom-nav');
+  const homeScreen=activeRole==='organizer'?'screen-organizer-home':activeRole==='venue'?'screen-venue-profile':'screen-home';
+  nav.innerHTML=`<div class="nav-icon active" onclick="navigateTo('${homeScreen}',this)"><i class="fa-solid fa-house"></i></div><div class="nav-icon" onclick="navigateTo('screen-catalog',this)"><i class="fa-solid fa-users"></i></div><div class="nav-icon" onclick="navigateTo('screen-venues',this)"><i class="fa-solid fa-landmark"></i></div><div class="nav-icon" onclick="navigateTo('screen-calendar',this)"><i class="fa-solid fa-calendar"></i></div><div class="nav-icon" onclick="navigateTo('screen-howto',this)"><i class="fa-solid fa-circle-question"></i></div>`;
 }
 
-function navigateTo(id, el) {
+function navigateTo(id,el){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   document.querySelectorAll('.nav-icon').forEach(n=>n.classList.remove('active'));
-  if(el) el.classList.add('active');
-  if(id==='screen-home') renderHome();
-  if(id==='screen-organizer-home') renderOrganizerHome();
-  if(id==='screen-catalog') renderCatalog();
-  if(id==='screen-venues') renderVenues();
-  if(id==='screen-calendar'){
-    renderCalendar();
-    const calEl = document.getElementById('screen-calendar');
-    if(calEl) calEl.scrollTop = 0;
-  }
-  if(id==='screen-profile') renderProfile();
-  if(id==='screen-venue-profile') renderVenueProfile();
+  if(el)el.classList.add('active');
+  if(id==='screen-home')renderHome();
+  if(id==='screen-organizer-home')renderOrganizerHome();
+  if(id==='screen-catalog')renderCatalog();
+  if(id==='screen-venues')renderVenues();
+  if(id==='screen-calendar'){renderCalendar();const e=document.getElementById('screen-calendar');if(e)e.scrollTop=0;}
+  if(id==='screen-profile')renderProfile();
+  if(id==='screen-venue-profile')renderVenueProfile();
 }
 
-function showToast(msg){
-  const t=document.getElementById('toast');
-  t.innerText=msg; t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),2500);
-}
-function openModal(html){ document.getElementById('modal-content').innerHTML=html; document.getElementById('modal-overlay').classList.add('open'); }
-function closeModal(){ document.getElementById('modal-overlay').classList.remove('open'); }
+function showToast(msg){const t=document.getElementById('toast');t.innerText=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
+function openModal(html){document.getElementById('modal-content').innerHTML=html;document.getElementById('modal-overlay').classList.add('open');}
+function closeModal(){document.getElementById('modal-overlay').classList.remove('open');}
 
-/* ============ ROLE SWITCH ============ */
 function openRolePicker(){
-  if(!currentPerson){ showToast('Откройте через Telegram'); return; }
-  const roles = currentPerson.roles || ['organizer','artist','venue'];
-  let html = '<h3>Выберите роль</h3>';
-  roles.forEach(r => {
-    const role = USER_ROLES[r]; if(!role) return;
-    const isActive = r === activeRole;
-    html += `<div class="role-option ${isActive?'active':''}" onclick="switchRole('${r}')">
-      <i class="fa-solid ${role.icon}"></i>
-      <div><div class="ro-name">${role.name} ${isActive?'✓':''}</div><div class="ro-desc">${role.desc}</div></div>
-    </div>`;
-  });
+  if(!currentPerson){showToast('Откройте через Telegram');return;}
+  const roles=currentPerson.roles||['organizer','artist','venue'];
+  let html='<h3>Выберите роль</h3>';
+  roles.forEach(r=>{const role=USER_ROLES[r];if(!role)return;const isActive=r===activeRole;html+=`<div class="role-option ${isActive?'active':''}" onclick="switchRole('${r}')"><i class="fa-solid ${role.icon}"></i><div><div class="ro-name">${role.name} ${isActive?'✓':''}</div><div class="ro-desc">${role.desc}</div></div></div>`;});
   openModal(html);
 }
 
 async function switchRole(newRole){
-  activeRole = newRole;
-  localStorage.setItem('activeRole', newRole);
-  closeModal();
-  updateRoleUI();
-  if(newRole === 'organizer') navigateTo('screen-organizer-home');
-  else if(newRole === 'venue') openVenueProfileOrCreate();
+  activeRole=newRole;localStorage.setItem('activeRole',newRole);closeModal();updateRoleUI();
+  if(newRole==='organizer')navigateTo('screen-organizer-home');
+  else if(newRole==='venue')openVenueProfileOrCreate();
   else navigateTo('screen-home');
-  if(tgUser){
-    try {
-      await fetch(SHEET_API_URL, { method:'POST', body:JSON.stringify({
-        action:'setActiveRole', telegramId: String(tgUser.id), activeRole: newRole
-      }) });
-    } catch(e){}
-  }
-  showToast('Роль: ' + (USER_ROLES[newRole]?.name || newRole));
+  if(tgUser){try{await fetch(SHEET_API_URL,{method:'POST',body:JSON.stringify({action:'setActiveRole',telegramId:String(tgUser.id),activeRole:newRole})});}catch(e){}}
+  showToast('Роль: '+(USER_ROLES[newRole]?.name||newRole));
 }
 
-/* ============ PHOTO MODAL ============ */
-function openPhotoModal(url){
-  if(!url) return;
-  document.getElementById('photo-modal-img').src = url;
-  document.getElementById('photo-modal').classList.add('open');
-}
-function closePhotoModal(){
-  document.getElementById('photo-modal').classList.remove('open');
-}
+function openPhotoModal(url){if(!url)return;document.getElementById('photo-modal-img').src=url;document.getElementById('photo-modal').classList.add('open');}
+function closePhotoModal(){document.getElementById('photo-modal').classList.remove('open');}
 
-/* ============ HOME ============ */
 function renderHome(){
-  const blk = document.getElementById('user-id-block');
-  if(tgUser && tgUser.first_name){
-    blk.innerHTML = `<div class="avatar">${(tgUser.first_name[0]||'?').toUpperCase()}</div>${tgUser.first_name}<span>${USER_ROLES[activeRole].name}</span>`;
-  } else {
-    blk.innerHTML = `<div class="avatar">T</div>TourBuilder<span>Маркетплейс</span>`;
-  }
-  const c = document.getElementById('users-container'); c.innerHTML = '';
-  const positions = [
-    {x:-100,y:-165},{x:0,y:-190},{x:100,y:-165},
-    {x:-130,y:-15},{x:130,y:-15},
-    {x:-100,y:150},{x:0,y:170},{x:100,y:150}
-  ];
+  const blk=document.getElementById('user-id-block');
+  if(tgUser&&tgUser.first_name){blk.innerHTML=`<div class="avatar">${(tgUser.first_name[0]||'?').toUpperCase()}</div>${tgUser.first_name}<span>${USER_ROLES[activeRole].name}</span>`;}
+  else{blk.innerHTML=`<div class="avatar">T</div>TourBuilder<span>Маркетплейс</span>`;}
+  const c=document.getElementById('users-container');c.innerHTML='';
+  const positions=[{x:-100,y:-165},{x:0,y:-190},{x:100,y:-165},{x:-130,y:-15},{x:130,y:-15},{x:-100,y:150},{x:0,y:170},{x:100,y:150}];
   artists.slice(0,8).forEach((a,i)=>{
-    if(!positions[i]) return;
-    const cell = document.createElement('div');
-    cell.className = 'user-cell';
-    cell.style.left = `calc(50% + ${positions[i].x}px)`;
-    cell.style.top = `calc(50% + ${positions[i].y}px)`;
-    if(a.img) cell.style.backgroundImage = `url('${a.img}')`;
-    const roleIcon = ROLE_ICONS[a.role] || 'fa-star';
-    cell.innerHTML = `<i class="fa-solid ${roleIcon} role-icon"></i>`;
-    if(a.needsVisaSupport) cell.innerHTML += `<div class="visa-badge">VISA</div>`;
-    const pct = Math.round(((a.rating||5)/5)*100);
-    const sw = document.createElement('div');
-    sw.className = 'star-wrapper';
-    sw.innerHTML = `<i class="fa-solid fa-star star-bg"></i><div class="star-fill" style="width:${pct}%"><i class="fa-solid fa-star"></i></div>`;
+    if(!positions[i])return;
+    const cell=document.createElement('div');cell.className='user-cell';
+    cell.style.left=`calc(50% + ${positions[i].x}px)`;cell.style.top=`calc(50% + ${positions[i].y}px)`;
+    if(a.img)cell.style.backgroundImage=`url('${a.img}')`;
+    const roleIcon=ROLE_ICONS[a.role]||'fa-star';
+    cell.innerHTML=`<i class="fa-solid ${roleIcon} role-icon"></i>`;
+    if(a.needsVisaSupport)cell.innerHTML+=`<div class="visa-badge">VISA</div>`;
+    const pct=Math.round(((a.rating||5)/5)*100);
+    const sw=document.createElement('div');sw.className='star-wrapper';
+    sw.innerHTML=`<i class="fa-solid fa-star star-bg"></i><div class="star-fill" style="width:${pct}%"><i class="fa-solid fa-star"></i></div>`;
     cell.appendChild(sw);
-    cell.onclick = ()=>openArtist(a.id);
+    cell.onclick=()=>openArtist(a.id);
     c.appendChild(cell);
   });
 }
 
-/* ============ ORGANIZER ============ */
 function renderOrganizerHome(){
-  const list = document.getElementById('organizer-events');
-  const pjList = document.getElementById('organizer-projects');
-  const appList = document.getElementById('organizer-applications');
-  if(!list) return;
-
-  const myEvents = tgUser ? events.filter(e => String(e.organizerId) === String(tgUser.id)) : [];
-  if(!myEvents.length){
-    list.innerHTML = '<p style="color:#6E6E73;text-align:center;padding:20px;font-size:13px">Пока нет мероприятий</p>';
-  } else {
-    list.innerHTML = '';
-    myEvents.forEach(ev => {
-      const card = document.createElement('div');
-      card.className = 'event-card';
-      card.innerHTML = `
-        <div class="ec-date">${ev.date || ''}</div>
-        <div class="ec-title">${ev.title || ev.type || 'Мероприятие'}</div>
-        <div class="ec-sub">${ev.venue || ''} ${ev.time ? '· ' + ev.time : ''}</div>`;
-      list.appendChild(card);
-    });
-  }
-
-  const myProjects = tgUser ? projects.filter(p => String(p.organizerId) === String(tgUser.id)) : [];
-  if(!myProjects.length){
-    pjList.innerHTML = '<p style="color:#6E6E73;text-align:center;padding:20px;font-size:13px">Пока нет проектов</p>';
-  } else {
-    pjList.innerHTML = '';
-    myProjects.slice().reverse().forEach(p => {
-      const card = document.createElement('div');
-      card.className = 'project-card' + (p.isOpen ? ' open-type' : '');
-      card.innerHTML = `
-        <div class="pc-type ${p.isOpen?'open-type':'closed-type'}">${p.isOpen?'Открытый проект':'Закрытый проект'} · ${p.type||''}</div>
-        <div class="pc-title">${p.title||''}</div>
-        <div class="pc-meta">📅 ${p.startDate||''} ${p.endDate?'— '+p.endDate:''}</div>
-        ${p.cities?`<div class="pc-meta">📍 ${p.cities}</div>`:''}
-        ${p.budget?`<div class="pc-meta">💰 до ${Number(p.budget).toLocaleString()} ₽</div>`:''}`;
-      card.onclick = () => openProjectCard(p.id);
-      pjList.appendChild(card);
-    });
-  }
-
-  const myApps = tgUser ? applications.filter(a => String(a.organizerId) === String(tgUser.id)) : [];
-  if(!myApps.length){
-    appList.innerHTML = '<p style="color:#6E6E73;text-align:center;padding:20px;font-size:13px">Нет отправленных заявок</p>';
-  } else {
-    appList.innerHTML = '';
-    myApps.slice().reverse().forEach(app => {
-      const card = document.createElement('div');
-      card.className = 'app-card';
-      const status = app.status || 'new';
-      const statusLabel = { new:'Отправлена', accepted:'Принята', declined:'Отклонена', counter:'Встречное предложение' }[status] || status;
-      card.innerHTML = `
-        <div class="ac-status ${status}">${statusLabel}</div>
-        <div class="ac-title">${app.artistName || app.venueId ? 'Заявка площадке' : 'Артист'}</div>
-        <div class="ac-meta">${EVENT_TYPE_NAMES[app.eventType]||app.eventType||''} · ${app.date||''} · ${app.city||''}</div>
-        ${app.venueResponse === 'counter' && app.venuePrice ? `<div class="ac-meta" style="color:#FF9800;font-weight:700">Ответ площадки: ${Number(app.venuePrice).toLocaleString()} ₽</div>` : ''}
-        ${app.venueResponse === 'accepted' ? `<div class="ac-meta" style="color:#4CAF50;font-weight:700">Площадка приняла заявку</div>` : ''}
-        ${app.venueResponse === 'declined' ? `<div class="ac-meta" style="color:#F44336;font-weight:700">Площадка отклонила</div>` : ''}`;
-      appList.appendChild(card);
-    });
-  }
+  const list=document.getElementById('organizer-events');
+  const pjList=document.getElementById('organizer-projects');
+  const appList=document.getElementById('organizer-applications');
+  if(!list)return;
+  const myEvents=tgUser?events.filter(e=>String(e.organizerId)===String(tgUser.id)):[];
+  if(!myEvents.length){list.innerHTML='<p style="color:#6E6E73;text-align:center;padding:20px;font-size:13px">Пока нет мероприятий</p>';}
+  else{list.innerHTML='';myEvents.forEach(ev=>{const card=document.createElement('div');card.className='event-card';card.innerHTML=`<div class="ec-date">${ev.date||''}</div><div class="ec-title">${ev.title||ev.type||'Мероприятие'}</div><div class="ec-sub">${ev.venue||''} ${ev.time?'· '+ev.time:''}</div>`;list.appendChild(card);});}
+  const myProjects=tgUser?projects.filter(p=>String(p.organizerId)===String(tgUser.id)):[];
+  if(!myProjects.length){pjList.innerHTML='<p style="color:#6E6E73;text-align:center;padding:20px;font-size:13px">Пока нет проектов</p>';}
+  else{pjList.innerHTML='';myProjects.slice().reverse().forEach(p=>{const card=document.createElement('div');card.className='project-card'+(p.isOpen?' open-type':'');card.innerHTML=`<div class="pc-type ${p.isOpen?'open-type':'closed-type'}">${p.isOpen?'Открытый проект':'Закрытый проект'} · ${p.type||''}</div><div class="pc-title">${p.title||''}</div><div class="pc-meta">📅 ${p.startDate||''} ${p.endDate?'— '+p.endDate:''}</div>${p.cities?`<div class="pc-meta">📍 ${p.cities}</div>`:''}${p.budget?`<div class="pc-meta">💰 до ${Number(p.budget).toLocaleString()} ₽</div>`:''}`;card.onclick=()=>openProjectCard(p.id);pjList.appendChild(card);});}
+  const myApps=tgUser?applications.filter(a=>String(a.organizerId)===String(tgUser.id)):[];
+  if(!myApps.length){appList.innerHTML='<p style="color:#6E6E73;text-align:center;padding:20px;font-size:13px">Нет отправленных заявок</p>';}
+  else{appList.innerHTML='';myApps.slice().reverse().forEach(app=>{const card=document.createElement('div');card.className='app-card';const status=app.status||'new';const statusLabel={new:'Отправлена',accepted:'Принята',declined:'Отклонена',counter:'Встречное предложение'}[status]||status;card.innerHTML=`<div class="ac-status ${status}">${statusLabel}</div><div class="ac-title">${app.artistName||(app.venueId?'Заявка площадке':'Артист')}</div><div class="ac-meta">${EVENT_TYPE_NAMES[app.eventType]||app.eventType||''} · ${app.date||''} · ${app.city||''}</div>${app.venueResponse==='counter'&&app.venuePrice?`<div class="ac-meta" style="color:#FF9800;font-weight:700">Ответ площадки: ${Number(app.venuePrice).toLocaleString()} ₽</div>`:''}${app.venueResponse==='accepted'?'<div class="ac-meta" style="color:#4CAF50;font-weight:700">Площадка приняла заявку</div>':''}${app.venueResponse==='declined'?'<div class="ac-meta" style="color:#F44336;font-weight:700">Площадка отклонила</div>':''}`;appList.appendChild(card);});}
 }
 
-/* ============ CATALOG ============ */
-function filterArtists(q){ renderCatalog(q); }
+function filterArtists(q){renderCatalog(q);}
 function renderCatalog(q=''){
-  const g=document.getElementById('artists-grid'); g.innerHTML='';
-  let list = artists;
-  if(q) list = list.filter(a=>(a.name||'').toLowerCase().includes(q.toLowerCase()));
-  list.forEach(a=>{
-    const c=document.createElement('div'); c.className='catalog-cell';
-    if(a.img) c.style.backgroundImage=`url('${a.img}')`;
-    c.innerHTML = `<div class="label">${a.name||'—'}</div><i class="fa-solid ${ROLE_ICONS[a.role]||'fa-star'} role-icon"></i>`;
-    c.onclick=()=>openArtist(a.id);
-    g.appendChild(c);
-  });
-  if(!list.length) g.innerHTML='<p style="color:#6E6E73;grid-column:1/-1;text-align:center">Никого не найдено</p>';
+  const g=document.getElementById('artists-grid');g.innerHTML='';
+  let list=artists;
+  if(q)list=list.filter(a=>(a.name||'').toLowerCase().includes(q.toLowerCase()));
+  list.forEach(a=>{const c=document.createElement('div');c.className='catalog-cell';if(a.img)c.style.backgroundImage=`url('${a.img}')`;c.innerHTML=`<div class="label">${a.name||'—'}</div><i class="fa-solid ${ROLE_ICONS[a.role]||'fa-star'} role-icon"></i>`;c.onclick=()=>openArtist(a.id);g.appendChild(c);});
+  if(!list.length)g.innerHTML='<p style="color:#6E6E73;grid-column:1/-1;text-align:center">Никого не найдено</p>';
 }
 
 function openArtist(id){
-  const a = artists.find(x=>x.id===id); if(!a) return;
-  const c = document.getElementById('artist-detail-content');
-  let daysHTML = '';
-  const dim = new Date(state.year, state.monthIndex+1, 0).getDate();
-  for(let d=1; d<=dim; d++){
-    const ds = `${state.year}-${String(state.monthIndex+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-    const ev = events.find(e=>e.date===ds && String(e.artistId)===String(a.id));
-    let st = 'free';
-    if(ev && ev.status) st = ev.status;
-    const icon = STATUS_ICONS[st] || STATUS_ICONS.free;
-    daysHTML += `<div class="day"><span style="font-size:11px">${d}</span><i class="fa-solid ${icon.icon}" style="font-size:8px;color:${icon.color}"></i></div>`;
+  const a=artists.find(x=>x.id===id);if(!a)return;
+  const c=document.getElementById('artist-detail-content');
+  let daysHTML='';
+  const dim=new Date(state.year,state.monthIndex+1,0).getDate();
+  for(let d=1;d<=dim;d++){
+    const ds=`${state.year}-${String(state.monthIndex+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const ev=events.find(e=>e.date===ds&&String(e.artistId)===String(a.id));
+    let st='free';
+    if(ev&&ev.status)st=ev.status;
+    const icon=STATUS_ICONS[st]||STATUS_ICONS.free;
+    daysHTML+=`<div class="day"><span style="font-size:11px">${d}</span><i class="fa-solid ${icon.icon}" style="font-size:8px;color:${icon.color}"></i></div>`;
   }
-  const inProj = userProject.some(p=>p.id===a.id && p.type==='artist');
-  const roleIcon = ROLE_ICONS[a.role]||'fa-star';
-
-  let visaHTML = '';
-  if(a.travelScope || a.visaType || a.needsVisaSupport){
-    visaHTML = `<div style="width:100%;background:#FFF;border-radius:15px;padding:15px;margin-bottom:20px;box-shadow:0 4px 10px rgba(0,0,0,.03);box-sizing:border-box">
-      ${a.travelScope ? `<div class="field-row"><span class="lbl">Готов к выезду</span><span class="val">${TRAVEL_NAMES[a.travelScope]||a.travelScope}</span></div>` : ''}
-      ${a.visaType && a.visaType !== 'none' ? `<div class="field-row"><span class="lbl">Виза</span><span class="val">${VISA_NAMES[a.visaType]||a.visaType}</span></div>` : ''}
-      ${a.visaValidUntil ? `<div class="field-row"><span class="lbl">Действует до</span><span class="val">${a.visaValidUntil}</span></div>` : ''}
-      ${a.needsVisaSupport ? `<div style="background:#FFF5F9;color:#EC4899;padding:10px;border-radius:10px;font-size:12px;font-weight:600;text-align:center;margin-top:8px">⚠️ Нужна помощь с визой</div>` : ''}
-    </div>`;
+  const inProj=userProject.some(p=>p.id===a.id&&p.type==='artist');
+  const roleIcon=ROLE_ICONS[a.role]||'fa-star';
+  let visaHTML='';
+  if(a.travelScope||a.visaType||a.needsVisaSupport){
+    visaHTML=`<div style="width:100%;background:#FFF;border-radius:15px;padding:15px;margin-bottom:20px;box-shadow:0 4px 10px rgba(0,0,0,.03);box-sizing:border-box">${a.travelScope?`<div class="field-row"><span class="lbl">Готов к выезду</span><span class="val">${TRAVEL_NAMES[a.travelScope]||a.travelScope}</span></div>`:''}${a.visaType&&a.visaType!=='none'?`<div class="field-row"><span class="lbl">Виза</span><span class="val">${VISA_NAMES[a.visaType]||a.visaType}</span></div>`:''}${a.visaValidUntil?`<div class="field-row"><span class="lbl">Действует до</span><span class="val">${a.visaValidUntil}</span></div>`:''}${a.needsVisaSupport?'<div style="background:#FFF5F9;color:#EC4899;padding:10px;border-radius:10px;font-size:12px;font-weight:600;text-align:center;margin-top:8px">⚠️ Нужна помощь с визой</div>':''}</div>`;
   }
-
-  const photoAttrs = a.img
-    ? `style="background-image:url('${a.img}');cursor:pointer" onclick="openPhotoModal('${a.img}')"`
-    : `style="cursor:default"`;
-
-  c.innerHTML = `
-    <div class="detail-photo" ${photoAttrs}>
-      <i class="fa-solid ${roleIcon} role-icon"></i>
-    </div>
-    <div class="detail-name">${a.name||''}</div>
-    <div class="detail-spec">${ROLE_NAMES[a.role]||a.spec||''} · ${a.city||''}</div>
-    <div style="margin-bottom:20px;color:#6E6E73;text-align:center">⭐ ${a.rating||0} · от ${(a.price||0).toLocaleString()} ₽</div>
-    ${visaHTML}
-    <h3 style="color:#1A1A1A;font-size:15px;text-align:center">Занятость</h3>
-    <div class="mini-calendar"><div class="days-grid">${daysHTML}</div></div>
-    <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
-      <button onclick="openWizardWithArtist(${a.id})">Пригласить</button>
-      <button class="${inProj?'btn-secondary':''}" onclick='toggleProject(${JSON.stringify(a).replace(/'/g,"&#39;")},"artist",this)'>${inProj?'✓ В проекте':'+ В проект'}</button>
-    </div>`;
+  const photoAttrs=a.img?`style="background-image:url('${a.img}');cursor:pointer" onclick="openPhotoModal('${a.img}')"`:`style="cursor:default"`;
+  c.innerHTML=`<div class="detail-photo" ${photoAttrs}><i class="fa-solid ${roleIcon} role-icon"></i></div><div class="detail-name">${a.name||''}</div><div class="detail-spec">${ROLE_NAMES[a.role]||a.spec||''} · ${a.city||''}</div><div style="margin-bottom:20px;color:#6E6E73;text-align:center">⭐ ${a.rating||0} · от ${(a.price||0).toLocaleString()} ₽</div>${visaHTML}<h3 style="color:#1A1A1A;font-size:15px;text-align:center">Занятость</h3><div class="mini-calendar"><div class="days-grid">${daysHTML}</div></div><div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center"><button onclick="openWizardWithArtist(${a.id})">Пригласить</button><button class="${inProj?'btn-secondary':''}" onclick='toggleProject(${JSON.stringify(a).replace(/'/g,"&#39;")},"artist",this)'>${inProj?'✓ В проекте':'+ В проект'}</button></div>`;
   navigateTo('screen-artist');
 }
 
-function openWizardWithArtist(artistId){ openWizard(); }
+function openWizardWithArtist(artistId){openWizard();}
 
 function toggleProject(item,type,btn){
-  const i = userProject.findIndex(p=>p.id===item.id&&p.type===type);
-  if(i>-1){
-    userProject.splice(i,1); btn.innerText='+ В проект'; btn.classList.remove('btn-secondary');
-    showToast('Удалён из проекта');
-  } else {
-    userProject.push({...item,type}); btn.innerText='✓ В проекте'; btn.classList.add('btn-secondary');
-    showToast(`"${item.name}" добавлен!`);
-  }
-  localStorage.setItem('userProject', JSON.stringify(userProject));
+  const i=userProject.findIndex(p=>p.id===item.id&&p.type===type);
+  if(i>-1){userProject.splice(i,1);btn.innerText='+ В проект';btn.classList.remove('btn-secondary');showToast('Удалён из проекта');}
+  else{userProject.push({...item,type});btn.innerText='✓ В проекте';btn.classList.add('btn-secondary');showToast(`"${item.name}" добавлен!`);}
+  localStorage.setItem('userProject',JSON.stringify(userProject));
 }
 
-/* ============ VENUES ============ */
-function filterVenues(q){ renderVenues(q); }
+function filterVenues(q){renderVenues(q);}
 function renderVenues(q=''){
-  const g=document.getElementById('venues-grid'); g.innerHTML='';
-  let list = venues;
-  if(q) list = list.filter(v=>(v.name||'').toLowerCase().includes(q.toLowerCase()));
-  list.forEach(v=>{
-    const c=document.createElement('div'); c.className='catalog-cell';
-    if(v.img) c.style.backgroundImage=`url('${v.img}')`;
-    c.innerHTML=`<div class="label">${v.name||'—'}</div>`;
-    c.onclick=()=>openVenue(v.id);
-    g.appendChild(c);
-  });
-  if(!list.length) g.innerHTML='<p style="color:#6E6E73;grid-column:1/-1;text-align:center">Пока нет площадок</p>';
+  const g=document.getElementById('venues-grid');g.innerHTML='';
+  let list=venues;
+  if(q)list=list.filter(v=>(v.name||'').toLowerCase().includes(q.toLowerCase()));
+  list.forEach(v=>{const c=document.createElement('div');c.className='catalog-cell';if(v.img)c.style.backgroundImage=`url('${v.img}')`;c.innerHTML=`<div class="label">${v.name||'—'}</div>`;c.onclick=()=>openVenue(v.id);g.appendChild(c);});
+  if(!list.length)g.innerHTML='<p style="color:#6E6E73;grid-column:1/-1;text-align:center">Пока нет площадок</p>';
 }
 
-function calculateVenuePrice(venue, dateStr, eventType){
-  const basePrice = Number(venue.basePrice) || Number(venue.price) || 0;
-  let seasonM = Number(venue.seasonMultiplier) || 1;
-  let weekendM = Number(venue.weekendMultiplier) || 1;
-  if(seasonM < 0.1 || seasonM > 10) seasonM = 1;
-  if(weekendM < 0.1 || weekendM > 10) weekendM = 1;
-
-  const date = dateStr ? new Date(dateStr) : new Date();
-  const isHighSeason = (date.getMonth() >= 5 && date.getMonth() <= 8);
-  const isWeekend = [0,6].includes(date.getDay());
-
-  let price = basePrice * (isHighSeason ? seasonM : 1) * (isWeekend ? weekendM : 1);
-
-  // Периодные цены (перебивают коэффициенты)
-  const periodPrices = venuePricing.filter(p => String(p.venueId) === String(venue.id));
+function calculateVenuePrice(venue,dateStr,eventType){
+  const basePrice=Number(venue.basePrice)||Number(venue.price)||0;
+  let seasonM=Number(venue.seasonMultiplier)||1;
+  let weekendM=Number(venue.weekendMultiplier)||1;
+  if(seasonM<0.1||seasonM>10)seasonM=1;
+  if(weekendM<0.1||weekendM>10)weekendM=1;
+  const date=dateStr?new Date(dateStr):new Date();
+  const isHighSeason=(date.getMonth()>=5&&date.getMonth()<=8);
+  const isWeekend=[0,6].includes(date.getDay());
+  let price=basePrice*(isHighSeason?seasonM:1)*(isWeekend?weekendM:1);
+  const periodPrices=venuePricing.filter(p=>String(p.venueId)===String(venue.id));
   for(const p of periodPrices){
-    if(dateStr && p.dateFrom && p.dateTo && dateStr >= p.dateFrom && dateStr <= p.dateTo){
-      price = Number(p.price) || price;
-      break;
-    }
+    if(dateStr&&p.dateFrom&&p.dateTo&&dateStr>=p.dateFrom&&dateStr<=p.dateTo){price=Number(p.price)||price;break;}
   }
-
-  // Категорийные множители (накладываются сверху)
   if(eventType){
-    const catPrice = venueCategoryPricing.find(c => String(c.venueId) === String(venue.id) && c.eventType === eventType);
-    if(catPrice && catPrice.multiplier){
-      price *= Number(catPrice.multiplier);
-    }
+    const catPrice=venueCategoryPricing.find(c=>String(c.venueId)===String(venue.id)&&c.eventType===eventType);
+    if(catPrice&&catPrice.multiplier)price*=Number(catPrice.multiplier);
   }
-
   return Math.round(price);
 }
 
 function openVenue(id){
-  const v=venues.find(x=>x.id===id); if(!v) return;
+  const v=venues.find(x=>x.id===id);if(!v)return;
   const c=document.getElementById('venue-detail-content');
-  const finalPrice = calculateVenuePrice(v, null, null);
-  const noBargain = !!v.noBargain;
-  const photoAttrs = v.img
-    ? `style="background-image:url('${v.img}');cursor:pointer" onclick="openPhotoModal('${v.img}')"`
-    : '';
-  c.innerHTML=`
-    <div class="detail-photo" ${photoAttrs}></div>
-    <div class="detail-name">${v.name||''}</div>
-    <div class="detail-spec">${v.type||''} · ${v.city||''}</div>
-    <div style="margin-bottom:10px;color:#6E6E73;text-align:center">Вместимость: ${v.capacity||'—'} чел</div>
-    <div style="background:#FFF5F9;border-radius:12px;padding:12px;margin-bottom:20px;max-width:400px;width:100%;box-sizing:border-box">
-      <div style="font-size:11px;color:#6E6E73;margin-bottom:6px">Цена аренды:</div>
-      <div style="font-size:20px;font-weight:800;color:#EC4899">${finalPrice.toLocaleString()} ₽</div>
-      ${noBargain?'<div style="font-size:10px;color:#999;margin-top:4px">Цена фиксированная, торги не предусмотрены</div>':''}
-    </div>
-    <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;width:100%;max-width:400px">
-      <button onclick="requestVenueBooking(${v.id})" style="flex:1">Забронировать</button>
-      ${!noBargain?`<button class="btn-secondary" onclick="offerVenuePrice(${v.id})" style="flex:1">Предложить цену</button>`:''}
-    </div>`;
+  const finalPrice=calculateVenuePrice(v,null,null);
+  const noBargain=!!v.noBargain;
+  const photoAttrs=v.img?`style="background-image:url('${v.img}');cursor:pointer" onclick="openPhotoModal('${v.img}')"`:'';
+  c.innerHTML=`<div class="detail-photo" ${photoAttrs}></div><div class="detail-name">${v.name||''}</div><div class="detail-spec">${v.type||''} · ${v.city||''}</div><div style="margin-bottom:10px;color:#6E6E73;text-align:center">Вместимость: ${v.capacity||'—'} чел</div><div style="background:#FFF5F9;border-radius:12px;padding:12px;margin-bottom:20px;max-width:400px;width:100%;box-sizing:border-box"><div style="font-size:11px;color:#6E6E73;margin-bottom:6px">Цена аренды:</div><div style="font-size:20px;font-weight:800;color:#EC4899">${finalPrice.toLocaleString()} ₽</div>${noBargain?'<div style="font-size:10px;color:#999;margin-top:4px">Цена фиксированная, торги не предусмотрены</div>':''}</div><div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;width:100%;max-width:400px"><button onclick="requestVenueBooking(${v.id})" style="flex:1">Забронировать</button>${!noBargain?`<button class="btn-secondary" onclick="offerVenuePrice(${v.id})" style="flex:1">Предложить цену</button>`:''}</div>`;
   navigateTo('screen-venue');
 }
 
 function requestVenueBooking(venueId){
-  if(!tgUser){ showToast('Откройте через Telegram'); return; }
-  const v = venues.find(x => x.id === venueId);
-  openModal(`
-    <h3>Заявка площадке: ${v.name}</h3>
-    <div class="form-group"><label>Тип события</label>
-      <select id="vb-type">
-        ${Object.keys(EVENT_TYPE_NAMES).map(k=>`<option value="${k}">${EVENT_TYPE_NAMES[k]}</option>`).join('')}
-      </select>
-    </div>
-    <div class="form-group"><label>Дата</label><input type="date" id="vb-date"></div>
-    <div class="form-group"><label>Количество гостей</label><input type="number" id="vb-guests" value="100"></div>
-    <div class="form-group"><label>Комментарий</label><textarea id="vb-note" placeholder="Особые пожелания..."></textarea></div>
-    <button onclick="submitVenueBooking(${venueId})" style="width:100%">Отправить заявку</button>
-  `);
+  if(!tgUser){showToast('Откройте через Telegram');return;}
+  const v=venues.find(x=>x.id===venueId);
+  openModal(`<h3>Заявка: ${v.name}</h3><div class="form-group"><label>Тип события</label><select id="vb-type">${Object.keys(EVENT_TYPE_NAMES).map(k=>`<option value="${k}">${EVENT_TYPE_NAMES[k]}</option>`).join('')}</select></div><div class="form-group"><label>Дата</label><input type="date" id="vb-date"></div><div class="form-group"><label>Гостей</label><input type="number" id="vb-guests" value="100"></div><div class="form-group"><label>Комментарий</label><textarea id="vb-note"></textarea></div><button onclick="submitVenueBooking(${venueId})" style="width:100%">Отправить</button>`);
 }
 
 async function submitVenueBooking(venueId){
-  const v = venues.find(x => x.id === venueId);
-  const body = {
-    action: 'submitApplication',
-    organizerId: String(tgUser.id),
-    organizerName: (tgUser.first_name||'') + (tgUser.last_name ? ' '+tgUser.last_name : ''),
-    venueId: String(venueId),
-    artistId: '',
-    artistName: '',
-    eventType: document.getElementById('vb-type').value,
-    date: document.getElementById('vb-date').value,
-    city: v.city,
-    guests: document.getElementById('vb-guests').value,
-    equipment: '',
-    budget: 0,
-    type: 'venue'
-  };
-  try {
-    const r = await fetch(SHEET_API_URL, { method:'POST', body:JSON.stringify(body) });
-    const res = await r.json();
-    if(res.success){ showToast('Заявка отправлена!'); closeModal(); await loadData(); }
-    else showToast('Ошибка');
-  } catch(e){ showToast('Ошибка сети'); }
+  const v=venues.find(x=>x.id===venueId);
+  const body={action:'submitApplication',organizerId:String(tgUser.id),organizerName:(tgUser.first_name||'')+(tgUser.last_name?' '+tgUser.last_name:''),venueId:String(venueId),artistId:'',artistName:'',eventType:document.getElementById('vb-type').value,date:document.getElementById('vb-date').value,city:v.city,guests:document.getElementById('vb-guests').value,equipment:'',budget:0,type:'venue'};
+  try{const r=await fetch(SHEET_API_URL,{method:'POST',body:JSON.stringify(body)});const res=await r.json();if(res.success){showToast('Заявка отправлена!');closeModal();await loadData();}else showToast('Ошибка');}catch(e){showToast('Ошибка сети');}
 }
 
 function offerVenuePrice(venueId){
-  if(!tgUser){ showToast('Откройте через Telegram'); return; }
-  const v = venues.find(x => x.id === venueId);
-  const basePrice = calculateVenuePrice(v, null, null);
-  openModal(`
-    <h3>Предложить цену</h3>
-    <div style="font-size:12px;color:#6E6E73;margin-bottom:10px">Базовая цена площадки: <b>${basePrice.toLocaleString()} ₽</b></div>
-    <div class="form-group"><label>Ваша цена, ₽</label><input type="number" id="vp-price" value="${basePrice}"></div>
-    <div class="form-group"><label>Дата</label><input type="date" id="vp-date"></div>
-    <div class="form-group"><label>Тип события</label>
-      <select id="vp-type">
-        ${Object.keys(EVENT_TYPE_NAMES).map(k=>`<option value="${k}">${EVENT_TYPE_NAMES[k]}</option>`).join('')}
-      </select>
-    </div>
-    <div class="form-group"><label>Комментарий</label><textarea id="vp-note" placeholder="Почему такая цена..."></textarea></div>
-    <button onclick="submitVenueOffer(${venueId})" style="width:100%">Отправить предложение</button>
-  `);
+  if(!tgUser){showToast('Откройте через Telegram');return;}
+  const v=venues.find(x=>x.id===venueId);
+  const basePrice=calculateVenuePrice(v,null,null);
+  openModal(`<h3>Предложить цену</h3><div style="font-size:12px;color:#6E6E73;margin-bottom:10px">Базовая: <b>${basePrice.toLocaleString()} ₽</b></div><div class="form-group"><label>Ваша цена, ₽</label><input type="number" id="vp-price" value="${basePrice}"></div><div class="form-group"><label>Дата</label><input type="date" id="vp-date"></div><div class="form-group"><label>Тип</label><select id="vp-type">${Object.keys(EVENT_TYPE_NAMES).map(k=>`<option value="${k}">${EVENT_TYPE_NAMES[k]}</option>`).join('')}</select></div><div class="form-group"><label>Комментарий</label><textarea id="vp-note"></textarea></div><button onclick="submitVenueOffer(${venueId})" style="width:100%">Отправить</button>`);
 }
 
 async function submitVenueOffer(venueId){
-  const v = venues.find(x => x.id === venueId);
-  const offerPrice = Number(document.getElementById('vp-price').value) || 0;
-  const body = {
-    action: 'submitApplication',
-    organizerId: String(tgUser.id),
-    organizerName: (tgUser.first_name||'') + (tgUser.last_name ? ' '+tgUser.last_name : ''),
-    venueId: String(venueId),
-    artistId: '',
-    artistName: '',
-    eventType: document.getElementById('vp-type').value,
-    date: document.getElementById('vp-date').value,
-    city: v.city,
-    guests: 0,
-    equipment: '',
-    budget: offerPrice,
-    type: 'venue-offer'
-  };
-  try {
-    const r = await fetch(SHEET_API_URL, { method:'POST', body:JSON.stringify(body) });
-    const res = await r.json();
-    if(res.success){ showToast('Предложение отправлено!'); closeModal(); await loadData(); }
-    else showToast('Ошибка');
-  } catch(e){ showToast('Ошибка сети'); }
+  const v=venues.find(x=>x.id===venueId);
+  const offerPrice=Number(document.getElementById('vp-price').value)||0;
+  const body={action:'submitApplication',organizerId:String(tgUser.id),organizerName:(tgUser.first_name||'')+(tgUser.last_name?' '+tgUser.last_name:''),venueId:String(venueId),artistId:'',artistName:'',eventType:document.getElementById('vp-type').value,date:document.getElementById('vp-date').value,city:v.city,guests:0,equipment:'',budget:offerPrice,type:'venue-offer'};
+  try{const r=await fetch(SHEET_API_URL,{method:'POST',body:JSON.stringify(body)});const res=await r.json();if(res.success){showToast('Предложение отправлено!');closeModal();await loadData();}else showToast('Ошибка');}catch(e){showToast('Ошибка сети');}
 }
 
-/* ============ CALENDAR ============ */
-const months = ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
-const daysOfWeek = ['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];
+const months=['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
+const daysOfWeek=['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];
 
 function changeMonth(delta){
-  state.monthIndex += delta;
-  if(state.monthIndex < 0){ state.monthIndex = 11; state.year--; }
-  if(state.monthIndex > 11){ state.monthIndex = 0; state.year++; }
+  state.monthIndex+=delta;
+  if(state.monthIndex<0){state.monthIndex=11;state.year--;}
+  if(state.monthIndex>11){state.monthIndex=0;state.year++;}
   renderCalendar();
 }
 function goToToday(){
-  const now = new Date();
-  state.year = now.getFullYear();
-  state.monthIndex = now.getMonth();
+  const now=new Date();
+  state.year=now.getFullYear();state.monthIndex=now.getMonth();
   renderCalendar();
-  const calEl = document.getElementById('screen-calendar');
-  if(calEl) calEl.scrollTop = 0;
+  const e=document.getElementById('screen-calendar');if(e)e.scrollTop=0;
 }
 
 function renderCalendar(){
-  const c = document.getElementById('month-cards');
-  c.innerHTML = '';
-  const baseMonth = state.monthIndex;
-  const showMonths = [baseMonth, baseMonth+1, baseMonth+2].map(m => {
-    let mm = m, yy = state.year;
-    if(mm > 11){ mm -= 12; yy++; }
-    return { m: mm, y: yy };
-  });
-  showMonths.forEach(({m, y}) => c.appendChild(buildMonthCard(m, y)));
-  let sx=0, sy=0;
-  c.ontouchstart = e => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; };
-  c.ontouchend = e => {
-    const dx = e.changedTouches[0].clientX - sx;
-    const dy = e.changedTouches[0].clientY - sy;
-    if(Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy)){
-      if(dx < 0) changeMonth(1); else changeMonth(-1);
-    }
-  };
+  const c=document.getElementById('month-cards');c.innerHTML='';
+  const baseMonth=state.monthIndex;
+  const showMonths=[baseMonth,baseMonth+1,baseMonth+2].map(m=>{let mm=m,yy=state.year;if(mm>11){mm-=12;yy++;}return{m:mm,y:yy};});
+  showMonths.forEach(({m,y})=>c.appendChild(buildMonthCard(m,y)));
+  let sx=0,sy=0;
+  c.ontouchstart=e=>{sx=e.touches[0].clientX;sy=e.touches[0].clientY;};
+  c.ontouchend=e=>{const dx=e.changedTouches[0].clientX-sx;const dy=e.changedTouches[0].clientY-sy;if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)){if(dx<0)changeMonth(1);else changeMonth(-1);}};
 }
 
-function buildMonthCard(m, y){
-  const wrap = document.createElement('div');
-  wrap.className = 'month-card';
-  const dim = new Date(y, m+1, 0).getDate();
-  const firstDow = (new Date(y, m, 1).getDay() + 6) % 7;
-  const todayStr = new Date().toISOString().split('T')[0];
-  let html = `<h3>${months[m]} ${y}</h3><div class="cal-grid">`;
-  daysOfWeek.forEach(d => html += `<div class="cal-dow">${d}</div>`);
-  for(let i=0; i<firstDow; i++) html += `<div class="cal-cell empty"></div>`;
-  for(let d=1; d<=dim; d++){
-    const ds = `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-    const ev = events.find(e => e.date === ds);
-    let st = 'free';
-    if(ev && ev.status) st = ev.status;
-    const icon = STATUS_ICONS[st] || STATUS_ICONS.free;
-    const isToday = ds === todayStr ? ' today' : '';
-    html += `<div class="cal-cell ${st}${isToday}" onclick="openDay('${ds}')">
-      <span>${d}</span>
-      <i class="fa-solid ${icon.icon} status-icon"></i>
-    </div>`;
+function buildMonthCard(m,y){
+  const wrap=document.createElement('div');wrap.className='month-card';
+  const dim=new Date(y,m+1,0).getDate();
+  const firstDow=(new Date(y,m,1).getDay()+6)%7;
+  const todayStr=new Date().toISOString().split('T')[0];
+  let html=`<h3>${months[m]} ${y}</h3><div class="cal-grid">`;
+  daysOfWeek.forEach(d=>html+=`<div class="cal-dow">${d}</div>`);
+  for(let i=0;i<firstDow;i++)html+=`<div class="cal-cell empty"></div>`;
+  for(let d=1;d<=dim;d++){
+    const ds=`${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const ev=events.find(e=>e.date===ds);
+    let st='free';
+    if(ev&&ev.status)st=ev.status;
+    const icon=STATUS_ICONS[st]||STATUS_ICONS.free;
+    const isToday=ds===todayStr?' today':'';
+    html+=`<div class="cal-cell ${st}${isToday}" onclick="openDay('${ds}')"><span>${d}</span><i class="fa-solid ${icon.icon} status-icon"></i></div>`;
   }
-  html += `</div>`;
-  wrap.innerHTML = html;
-  return wrap;
+  html+=`</div>`;wrap.innerHTML=html;return wrap;
 }
 
 function openDay(ds){
-  const list = events.filter(e => e.date === ds);
-  let body = '';
-  if(!list.length){
-    body = '<p style="color:#6E6E73">Свободен весь день</p>';
-  } else {
-    list.forEach(e => {
-      body += `<div class="list-item"><div class="li-title">${e.time||''} — ${e.type||e.title||'Событие'}</div><div class="li-sub">${e.venue||''}</div></div>`;
-    });
-  }
+  const list=events.filter(e=>e.date===ds);
+  let body='';
+  if(!list.length)body='<p style="color:#6E6E73">Свободен весь день</p>';
+  else list.forEach(e=>{body+=`<div class="list-item"><div class="li-title">${e.time||''} — ${e.type||e.title||'Событие'}</div><div class="li-sub">${e.venue||''}</div></div>`;});
   openModal(`<h3>${ds}</h3>${body}<button onclick="closeModal()" style="width:100%;margin-top:15px">Закрыть</button>`);
 }
 
-/* ============ QUICK MATCH ============ */
 function runAIMatch(){
   const date=document.getElementById('match-date').value;
   const genre=document.getElementById('match-genre').value;
@@ -1022,485 +690,225 @@ function runAIMatch(){
   const rc=document.getElementById('match-results');
   rc.innerHTML='<div style="text-align:center;padding:30px;color:#6E6E73">⏳ Анализируем...</div>';
   setTimeout(()=>{
-    const res = artists.map(a=>{
-      let s=0; const reasons=[];
+    const res=artists.map(a=>{
+      let s=0;const reasons=[];
       const fd=a.freeDates||[];
-      if(date && fd.length>0 && !fd.includes(date)) return null;
+      if(date&&fd.length>0&&!fd.includes(date))return null;
       if(genre==='any'||a.genre===genre){s+=30;reasons.push(`Жанр: ${a.genre||'—'}`);}
       if((a.city||'').toLowerCase().includes(city)){s+=25;reasons.push(`Город: ${a.city}`);}
-      if(budget>0 && a.price<=budget){s+=Math.round(20*(a.price/budget));reasons.push(`${(a.price||0).toLocaleString()} ₽`);}
+      if(budget>0&&a.price<=budget){s+=Math.round(20*(a.price/budget));reasons.push(`${(a.price||0).toLocaleString()} ₽`);}
       s+=Math.round(((a.rating||0)/5)*15);
       if(a.verified){s+=10;reasons.push('✓');}
-      return {...a,score:s,reasons};
+      return{...a,score:s,reasons};
     }).filter(a=>a&&a.score>0).sort((a,b)=>b.score-a.score).slice(0,10);
-    if(!res.length){ rc.innerHTML='<div style="text-align:center;padding:30px;color:#6E6E73">😔 Никого не найдено</div>'; return; }
+    if(!res.length){rc.innerHTML='<div style="text-align:center;padding:30px;color:#6E6E73">😔 Никого не найдено</div>';return;}
     rc.innerHTML=`<h3 style="margin-bottom:12px;font-size:16px">Найдено ${res.length}:</h3>`;
     res.forEach(a=>{
-      const card=document.createElement('div'); card.className='match-card';
-      card.innerHTML=`
-        <div class="avatar" ${a.img?`style="background-image:url('${a.img}')"`:''}></div>
-        <div class="info">
-          <div class="name">${a.name}</div>
-          <div class="spec">${ROLE_NAMES[a.role]||a.spec||''} · ${a.city||''}</div>
-          <div class="reason">${a.reasons.join(' · ')}</div>
-        </div>
-        <div class="score">${a.score}%</div>`;
-      card.onclick=()=>openArtist(a.id);
-      rc.appendChild(card);
+      const card=document.createElement('div');card.className='match-card';
+      card.innerHTML=`<div class="avatar" ${a.img?`style="background-image:url('${a.img}')"`:''}></div><div class="info"><div class="name">${a.name}</div><div class="spec">${ROLE_NAMES[a.role]||a.spec||''} · ${a.city||''}</div><div class="reason">${a.reasons.join(' · ')}</div></div><div class="score">${a.score}%</div>`;
+      card.onclick=()=>openArtist(a.id);rc.appendChild(card);
     });
   },600);
 }
 
-/* ============ WIZARD ============ */
-const WIZ_STEPS = ['event','date','place','details','result'];
-const EVENT_TYPES = [
-  { id:'wedding', name:'Свадьба', icon:'fa-ring' },
-  { id:'anniversary', name:'Юбилей', icon:'fa-cake-candles' },
-  { id:'corporate', name:'Корпоратив', icon:'fa-briefcase' },
-  { id:'concert', name:'Концерт', icon:'fa-music' },
-  { id:'ball', name:'Бал', icon:'fa-mask' },
-  { id:'kids', name:'Детский праздник', icon:'fa-child' },
-  { id:'other', name:'Другое', icon:'fa-star' }
-];
-const ARTIST_TYPES = [
-  { id:'any', name:'Любой' }, { id:'solo', name:'Сольный номер' },
-  { id:'duo', name:'Коллектив' }, { id:'band', name:'Группа' }
-];
-const EQUIPMENT_LIST = [
-  { id:'sound', name:'Звук', icon:'fa-volume-high' },
-  { id:'light', name:'Свет', icon:'fa-lightbulb' },
-  { id:'stage', name:'Сцена', icon:'fa-masks-theater' },
-  { id:'projector', name:'Проектор', icon:'fa-video' },
-  { id:'mics', name:'Микрофоны', icon:'fa-microphone' }
-];
-const GUEST_PRESETS = [50,100,300,500,1000];
+const WIZ_STEPS=['event','date','place','details','result'];
+const EVENT_TYPES=[{id:'wedding',name:'Свадьба',icon:'fa-ring'},{id:'anniversary',name:'Юбилей',icon:'fa-cake-candles'},{id:'corporate',name:'Корпоратив',icon:'fa-briefcase'},{id:'concert',name:'Концерт',icon:'fa-music'},{id:'ball',name:'Бал',icon:'fa-mask'},{id:'kids',name:'Детский праздник',icon:'fa-child'},{id:'other',name:'Другое',icon:'fa-star'}];
+const ARTIST_TYPES=[{id:'any',name:'Любой'},{id:'solo',name:'Сольный номер'},{id:'duo',name:'Коллектив'},{id:'band',name:'Группа'}];
+const EQUIPMENT_LIST=[{id:'sound',name:'Звук',icon:'fa-volume-high'},{id:'light',name:'Свет',icon:'fa-lightbulb'},{id:'stage',name:'Сцена',icon:'fa-masks-theater'},{id:'projector',name:'Проектор',icon:'fa-video'},{id:'mics',name:'Микрофоны',icon:'fa-microphone'}];
+const GUEST_PRESETS=[50,100,300,500,1000];
 
-let wizardState = { step:0, data:{ event:'', artistType:'any', date:'', city:'', guests:0, customGuests:'', equipment:[], budget:50000 } };
+let wizardState={step:0,data:{event:'',artistType:'any',date:'',city:'',guests:0,customGuests:'',equipment:[],budget:50000}};
 
 function openWizard(){
-  wizardState = { step:0, data:{ event:'', artistType:'any', date:'', city:'', guests:0, customGuests:'', equipment:[], budget:50000 } };
+  wizardState={step:0,data:{event:'',artistType:'any',date:'',city:'',guests:0,customGuests:'',equipment:[],budget:50000}};
   navigateTo('screen-wizard');
   renderWizard();
 }
-function closeWizard(){ navigateTo('screen-organizer-home'); }
+function closeWizard(){navigateTo('screen-organizer-home');}
 
 function renderWizard(){
-  const step = WIZ_STEPS[wizardState.step];
-  const pct = Math.round(((wizardState.step+1) / WIZ_STEPS.length) * 100);
-  document.getElementById('wiz-progress').style.width = pct + '%';
-  document.getElementById('wiz-step-label').innerText = `Шаг ${wizardState.step+1} из ${WIZ_STEPS.length}`;
-  const el = document.getElementById('wiz-step');
-  const prevBtn = document.getElementById('wiz-prev-btn');
-  const nextBtn = document.getElementById('wiz-next-btn');
-  prevBtn.disabled = wizardState.step === 0;
-  nextBtn.innerText = wizardState.step === WIZ_STEPS.length - 1 ? 'Отправить заявку' : 'Далее →';
-
-  let html = '';
-  if(step === 'event'){
-    html = `<h2>Какое событие?</h2><p class="wiz-sub">Выберите тип — подберём артистов</p>`;
-    html += '<div class="wizard-options">';
-    EVENT_TYPES.forEach(ev => {
-      const sel = wizardState.data.event === ev.id ? 'selected' : '';
-      html += `<div class="wizard-option ${sel}" onclick="wizSelect('event','${ev.id}')"><i class="fa-solid ${ev.icon}"></i>${ev.name}</div>`;
-    });
-    html += '</div><h3>Тип артиста</h3><div class="wizard-chips">';
-    ARTIST_TYPES.forEach(at => {
-      const sel = wizardState.data.artistType === at.id ? 'selected' : '';
-      html += `<div class="wizard-chip ${sel}" onclick="wizSelect('artistType','${at.id}')">${at.name}</div>`;
-    });
-    html += '</div>';
+  const step=WIZ_STEPS[wizardState.step];
+  const pct=Math.round(((wizardState.step+1)/WIZ_STEPS.length)*100);
+  document.getElementById('wiz-progress').style.width=pct+'%';
+  document.getElementById('wiz-step-label').innerText=`Шаг ${wizardState.step+1} из ${WIZ_STEPS.length}`;
+  const el=document.getElementById('wiz-step');
+  const prevBtn=document.getElementById('wiz-prev-btn');
+  const nextBtn=document.getElementById('wiz-next-btn');
+  prevBtn.disabled=wizardState.step===0;
+  nextBtn.innerText=wizardState.step===WIZ_STEPS.length-1?'Отправить заявку':'Далее →';
+  let html='';
+  if(step==='event'){
+    html=`<h2>Какое событие?</h2><p class="wiz-sub">Выберите тип — подберём артистов</p><div class="wizard-options">`;
+    EVENT_TYPES.forEach(ev=>{const sel=wizardState.data.event===ev.id?'selected':'';html+=`<div class="wizard-option ${sel}" onclick="wizSelect('event','${ev.id}')"><i class="fa-solid ${ev.icon}"></i>${ev.name}</div>`;});
+    html+=`</div><h3>Тип артиста</h3><div class="wizard-chips">`;
+    ARTIST_TYPES.forEach(at=>{const sel=wizardState.data.artistType===at.id?'selected':'';html+=`<div class="wizard-chip ${sel}" onclick="wizSelect('artistType','${at.id}')">${at.name}</div>`;});
+    html+=`</div>`;
   }
-  else if(step === 'date'){
-    html = `<h2>Когда?</h2><p class="wiz-sub">Выберите дату</p>`;
-    html += `<div class="wizard-custom-input"><input type="date" value="${wizardState.data.date||''}" onchange="wizSelect('date',this.value)"></div>`;
-    if(wizardState.data.date){
-      html += `<div style="margin-top:14px;background:#FFF5F9;padding:12px;border-radius:12px;font-size:13px;color:#EC4899;font-weight:600;text-align:center">📅 ${wizardState.data.date}</div>`;
-    }
+  else if(step==='date'){
+    html=`<h2>Когда?</h2><p class="wiz-sub">Выберите дату</p><div class="wizard-custom-input"><input type="date" value="${wizardState.data.date||''}" onchange="wizSelect('date',this.value)"></div>`;
+    if(wizardState.data.date)html+=`<div style="margin-top:14px;background:#FFF5F9;padding:12px;border-radius:12px;font-size:13px;color:#EC4899;font-weight:600;text-align:center">📅 ${wizardState.data.date}</div>`;
   }
-  else if(step === 'place'){
-    html = `<h2>Где провести?</h2><p class="wiz-sub">Укажите город</p>`;
-    html += '<div class="wizard-options">';
-    ['Москва','СПб','Казань','Сочи','Екатеринбург'].forEach(c => {
-      const sel = wizardState.data.city === c ? 'selected' : '';
-      html += `<div class="wizard-option ${sel}" onclick="wizSelect('city','${c}')"><i class="fa-solid fa-location-dot"></i>${c}</div>`;
-    });
-    html += '</div>';
-    html += `<div class="wizard-custom-input"><input type="text" placeholder="Другой город..." value="${wizardState.data.city && !['Москва','СПб','Казань','Сочи','Екатеринбург'].includes(wizardState.data.city) ? wizardState.data.city : ''}" onchange="wizSelect('city', this.value)"></div>`;
+  else if(step==='place'){
+    html=`<h2>Где?</h2><p class="wiz-sub">Укажите город</p><div class="wizard-options">`;
+    ['Москва','СПб','Казань','Сочи','Екатеринбург'].forEach(c=>{const sel=wizardState.data.city===c?'selected':'';html+=`<div class="wizard-option ${sel}" onclick="wizSelect('city','${c}')"><i class="fa-solid fa-location-dot"></i>${c}</div>`;});
+    html+=`</div><div class="wizard-custom-input"><input type="text" placeholder="Другой город..." value="${wizardState.data.city&&!['Москва','СПб','Казань','Сочи','Екатеринбург'].includes(wizardState.data.city)?wizardState.data.city:''}" onchange="wizSelect('city', this.value)"></div>`;
   }
-  else if(step === 'details'){
-    html = `<h2>Гости и оборудование</h2>`;
-    html += `<h3 style="margin-top:0">Количество гостей</h3><div class="wizard-chips">`;
-    GUEST_PRESETS.forEach(g => {
-      const sel = wizardState.data.guests === g && !wizardState.data.customGuests ? 'selected' : '';
-      html += `<div class="wizard-chip ${sel}" onclick="wizSelect('guests', ${g})">${g}</div>`;
-    });
-    html += `</div><div class="wizard-custom-input"><input type="number" placeholder="Своё число..." value="${wizardState.data.customGuests||''}" onchange="wizCustomGuests(this.value)"></div>`;
-    html += `<h3>Оборудование</h3><div class="wizard-chips">`;
-    EQUIPMENT_LIST.forEach(eq => {
-      const sel = wizardState.data.equipment.includes(eq.id) ? 'selected' : '';
-      html += `<div class="wizard-chip ${sel}" onclick="wizToggle('equipment','${eq.id}')"><i class="fa-solid ${eq.icon}" style="margin-right:5px"></i>${eq.name}</div>`;
-    });
-    html += '</div>';
+  else if(step==='details'){
+    html=`<h2>Гости и оборудование</h2><h3 style="margin-top:0">Количество гостей</h3><div class="wizard-chips">`;
+    GUEST_PRESETS.forEach(g=>{const sel=wizardState.data.guests===g&&!wizardState.data.customGuests?'selected':'';html+=`<div class="wizard-chip ${sel}" onclick="wizSelect('guests', ${g})">${g}</div>`;});
+    html+=`</div><div class="wizard-custom-input"><input type="number" placeholder="Своё число..." value="${wizardState.data.customGuests||''}" onchange="wizCustomGuests(this.value)"></div><h3>Оборудование</h3><div class="wizard-chips">`;
+    EQUIPMENT_LIST.forEach(eq=>{const sel=wizardState.data.equipment.includes(eq.id)?'selected':'';html+=`<div class="wizard-chip ${sel}" onclick="wizToggle('equipment','${eq.id}')"><i class="fa-solid ${eq.icon}" style="margin-right:5px"></i>${eq.name}</div>`;});
+    html+=`</div>`;
   }
-  else if(step === 'result'){
-    const matched = matchWizardArtists();
-    if(!matched.length){
-      html = `<h2>Пока никого не нашли</h2><p class="wiz-sub">Попробуйте изменить параметры</p>`;
-    } else {
-      html = `<h2>${matched.length} ${plural(matched.length,'вариант','варианта','вариантов')} для вас</h2><p class="wiz-sub">Отсортировано по совпадению</p>`;
-      html += '<div class="result-cards">';
-      matched.slice(0,5).forEach(a => {
-        html += `<div class="result-card">
-          <div class="rc-avatar" ${a.img?`style="background-image:url('${a.img}')"`:''}></div>
-          <div class="rc-info">
-            <div class="rc-name">${a.name}</div>
-            <div class="rc-spec">${ROLE_NAMES[a.role]||a.spec||''} · ${a.city||''}</div>
-            <div class="rc-meta"><span class="rc-price">от ${(a.price||0).toLocaleString()} ₽</span><span>⭐ ${a.rating||0}</span></div>
-          </div>
-          <button class="rc-quote" onclick='sendQuote(${JSON.stringify(a).replace(/'/g,"&#39;")}, this)'>Запросить цену</button>
-          <div class="rc-match">${a.matchScore}%</div>
-        </div>`;
+  else if(step==='result'){
+    const matched=matchWizardArtists();
+    if(!matched.length){html=`<h2>Пока никого не нашли</h2><p class="wiz-sub">Попробуйте изменить параметры</p>`;}
+    else{
+      html=`<h2>${matched.length} ${plural(matched.length,'вариант','варианта','вариантов')} для вас</h2><p class="wiz-sub">Отсортировано по совпадению</p><div class="result-cards">`;
+      matched.slice(0,5).forEach(a=>{
+        html+=`<div class="result-card"><div class="rc-avatar" ${a.img?`style="background-image:url('${a.img}')"`:''}></div><div class="rc-info"><div class="rc-name">${a.name}</div><div class="rc-spec">${ROLE_NAMES[a.role]||a.spec||''} · ${a.city||''}</div><div class="rc-meta"><span class="rc-price">от ${(a.price||0).toLocaleString()} ₽</span><span>⭐ ${a.rating||0}</span></div></div><button class="rc-quote" onclick='sendQuote(${JSON.stringify(a).replace(/'/g,"&#39;")}, this)'>Запросить цену</button><div class="rc-match">${a.matchScore}%</div></div>`;
       });
-      html += '</div>';
-      html += `<p style="font-size:11px;color:#6E6E73;text-align:center;margin-top:10px">Заявка отправится через ваш Telegram</p>`;
+      html+=`</div><p style="font-size:11px;color:#6E6E73;text-align:center;margin-top:10px">Заявка отправится через ваш Telegram</p>`;
     }
   }
-  el.innerHTML = html;
+  el.innerHTML=html;
 }
 
-function plural(n, one, few, many){
-  const m = n % 100;
-  if(m >= 11 && m <= 19) return many;
-  const k = m % 10;
-  if(k === 1) return one;
-  if(k >= 2 && k <= 4) return few;
-  return many;
-}
+function plural(n,one,few,many){const m=n%100;if(m>=11&&m<=19)return many;const k=m%10;if(k===1)return one;if(k>=2&&k<=4)return few;return many;}
 
-function wizCustomGuests(val){ wizardState.data.customGuests = val; if(val) wizardState.data.guests = 0; renderWizard(); }
-function wizSelect(key, val){ wizardState.data[key] = val; if(key === 'guests') wizardState.data.customGuests = ''; renderWizard(); }
-function wizToggle(key, val){ const arr = wizardState.data[key]; const i = arr.indexOf(val); if(i > -1) arr.splice(i,1); else arr.push(val); renderWizard(); }
+function wizCustomGuests(val){wizardState.data.customGuests=val;if(val)wizardState.data.guests=0;renderWizard();}
+function wizSelect(key,val){wizardState.data[key]=val;if(key==='guests')wizardState.data.customGuests='';renderWizard();}
+function wizToggle(key,val){const arr=wizardState.data[key];const i=arr.indexOf(val);if(i>-1)arr.splice(i,1);else arr.push(val);renderWizard();}
 
 function wizNext(){
-  if(wizardState.step < WIZ_STEPS.length - 1){
-    const step = WIZ_STEPS[wizardState.step];
-    if(step === 'event' && !wizardState.data.event){ showToast('Выберите тип события'); return; }
-    if(step === 'date' && !wizardState.data.date){ showToast('Выберите дату'); return; }
-    if(step === 'place' && !wizardState.data.city){ showToast('Укажите город'); return; }
-    wizardState.step++; renderWizard();
-  } else submitWizardApplication();
+  if(wizardState.step<WIZ_STEPS.length-1){
+    const step=WIZ_STEPS[wizardState.step];
+    if(step==='event'&&!wizardState.data.event){showToast('Выберите тип события');return;}
+    if(step==='date'&&!wizardState.data.date){showToast('Выберите дату');return;}
+    if(step==='place'&&!wizardState.data.city){showToast('Укажите город');return;}
+    wizardState.step++;renderWizard();
+  }else submitWizardApplication();
 }
-function wizPrev(){ if(wizardState.step > 0){ wizardState.step--; renderWizard(); } }
+function wizPrev(){if(wizardState.step>0){wizardState.step--;renderWizard();}}
 
 function matchWizardArtists(){
-  const d = wizardState.data;
-  return artists.map(a => {
-    let score = 0;
-    if(d.city && (a.city||'').toLowerCase().includes(d.city.toLowerCase())) score += 30;
-    if(d.artistType === 'any') score += 5;
-    else if((a.spec||'').toLowerCase().includes(d.artistType)) score += 10;
-    if(['wedding','anniversary','corporate'].includes(d.event)) score += 10;
-    score += Math.round((a.rating||5) * 6);
-    if(a.price <= d.budget) score += 15;
-    if(a.verified) score += 8;
-    return { ...a, matchScore: Math.min(score, 100) };
-  }).sort((a,b) => b.matchScore - a.matchScore).filter(a => a.matchScore >= 40);
+  const d=wizardState.data;
+  return artists.map(a=>{
+    let score=0;
+    if(d.city&&(a.city||'').toLowerCase().includes(d.city.toLowerCase()))score+=30;
+    if(d.artistType==='any')score+=5;
+    else if((a.spec||'').toLowerCase().includes(d.artistType))score+=10;
+    if(['wedding','anniversary','corporate'].includes(d.event))score+=10;
+    score+=Math.round((a.rating||5)*6);
+    if(a.price<=d.budget)score+=15;
+    if(a.verified)score+=8;
+    return{...a,matchScore:Math.min(score,100)};
+  }).sort((a,b)=>b.matchScore-a.matchScore).filter(a=>a.matchScore>=40);
 }
 
-async function sendQuote(artist, btn){
-  if(!tgUser){ showToast('Откройте через Telegram'); return; }
-  btn.disabled = true; btn.innerText = 'Отправка...';
-  const d = wizardState.data;
-  const guests = Number(d.customGuests) || d.guests || 0;
-  const body = {
-    action:'submitApplication',
-    organizerId: String(tgUser.id),
-    organizerName: (tgUser.first_name||'') + (tgUser.last_name ? ' '+tgUser.last_name : ''),
-    artistId: artist.id, artistName: artist.name,
-    eventType: d.event, date: d.date, city: d.city,
-    guests: guests, equipment: d.equipment.join(', '), budget: d.budget,
-    type: 'artist'
-  };
-  try {
-    const r = await fetch(SHEET_API_URL, { method:'POST', body:JSON.stringify(body) });
-    const res = await r.json();
-    if(res.success){
-      btn.classList.add('sent'); btn.innerText = '✓ Отправлено';
-      showToast(`Заявка для ${artist.name} отправлена!`);
-      await loadData();
-    } else { btn.disabled = false; btn.innerText = 'Запросить цену'; showToast('Ошибка'); }
-  } catch(e){ btn.disabled = false; btn.innerText = 'Запросить цену'; showToast('Ошибка сети'); }
+async function sendQuote(artist,btn){
+  if(!tgUser){showToast('Откройте через Telegram');return;}
+  btn.disabled=true;btn.innerText='Отправка...';
+  const d=wizardState.data;
+  const guests=Number(d.customGuests)||d.guests||0;
+  const body={action:'submitApplication',organizerId:String(tgUser.id),organizerName:(tgUser.first_name||'')+(tgUser.last_name?' '+tgUser.last_name:''),artistId:artist.id,artistName:artist.name,eventType:d.event,date:d.date,city:d.city,guests:guests,equipment:d.equipment.join(', '),budget:d.budget,type:'artist'};
+  try{const r=await fetch(SHEET_API_URL,{method:'POST',body:JSON.stringify(body)});const res=await r.json();if(res.success){btn.classList.add('sent');btn.innerText='✓ Отправлено';showToast(`Заявка для ${artist.name} отправлена!`);await loadData();}else{btn.disabled=false;btn.innerText='Запросить цену';showToast('Ошибка');}}catch(e){btn.disabled=false;btn.innerText='Запросить цену';showToast('Ошибка сети');}
 }
 
 async function submitWizardApplication(){
-  if(!tgUser){ showToast('Откройте через Telegram'); return; }
-  const d = wizardState.data;
-  const guests = Number(d.customGuests) || d.guests || 0;
-  const body = {
-    action:'submitApplication',
-    organizerId: String(tgUser.id),
-    organizerName: (tgUser.first_name||'') + (tgUser.last_name ? ' '+tgUser.last_name : ''),
-    artistId: 'any', artistName: 'Автоподбор',
-    eventType: d.event, date: d.date, city: d.city,
-    guests: guests, equipment: d.equipment.join(', '), budget: d.budget,
-    type: 'auto'
-  };
-  try {
-    const r = await fetch(SHEET_API_URL, { method:'POST', body:JSON.stringify(body) });
-    const res = await r.json();
-    if(res.success){ showToast('Заявка отправлена!'); await loadData(); closeWizard(); }
-    else showToast('Ошибка');
-  } catch(e){ showToast('Ошибка сети'); }
+  if(!tgUser){showToast('Откройте через Telegram');return;}
+  const d=wizardState.data;
+  const guests=Number(d.customGuests)||d.guests||0;
+  const body={action:'submitApplication',organizerId:String(tgUser.id),organizerName:(tgUser.first_name||'')+(tgUser.last_name?' '+tgUser.last_name:''),artistId:'any',artistName:'Автоподбор',eventType:d.event,date:d.date,city:d.city,guests:guests,equipment:d.equipment.join(', '),budget:d.budget,type:'auto'};
+  try{const r=await fetch(SHEET_API_URL,{method:'POST',body:JSON.stringify(body)});const res=await r.json();if(res.success){showToast('Заявка отправлена!');await loadData();closeWizard();}else showToast('Ошибка');}catch(e){showToast('Ошибка сети');}
 }
 
-/* ============ PROJECTS (создание) ============ */
 function openCreateProject(){
-  openModal(`
-    <h3>Новый проект</h3>
-    <div class="form-group"><label>Название проекта *</label><input id="pj-title" placeholder="Гастроли по городам России"></div>
-    <div class="form-group"><label>Тип проекта</label>
-      <select id="pj-type">
-        <option value="tour">Гастроли</option>
-        <option value="season">Сезон</option>
-        <option value="single">Одно мероприятие</option>
-        <option value="festival">Фестиваль</option>
-      </select>
-    </div>
-    <div class="form-group"><label>Дата начала</label><input type="date" id="pj-start"></div>
-    <div class="form-group"><label>Дата окончания</label><input type="date" id="pj-end"></div>
-    <div class="form-group"><label>Города (через запятую)</label><input id="pj-cities" placeholder="Москва, СПб, Казань"></div>
-    <div class="form-group"><label>Бюджет проекта, ₽</label><input type="number" id="pj-budget" value="500000"></div>
-    <div class="form-group"><label>Описание</label><textarea id="pj-desc" placeholder="Что за проект, какой формат, требования..."></textarea></div>
-    <div class="switch-row">
-      <div>
-        <div style="font-weight:700;font-size:14px">Открытый проект</div>
-        <div style="font-size:11px;color:#6E6E73">Артисты смогут сами откликнуться</div>
-      </div>
-      <label class="switch">
-        <input type="checkbox" id="pj-isopen" checked>
-        <span class="slider-sw"></span>
-      </label>
-    </div>
-    <button onclick="submitCreateProject()" style="width:100%;margin-top:15px">Создать проект</button>
-  `);
+  openModal(`<h3>Новый проект</h3><div class="form-group"><label>Название *</label><input id="pj-title" placeholder="Гастроли по городам России"></div><div class="form-group"><label>Тип</label><select id="pj-type"><option value="tour">Гастроли</option><option value="season">Сезон</option><option value="single">Одно мероприятие</option><option value="festival">Фестиваль</option></select></div><div class="form-group"><label>Дата начала</label><input type="date" id="pj-start"></div><div class="form-group"><label>Дата окончания</label><input type="date" id="pj-end"></div><div class="form-group"><label>Города</label><input id="pj-cities" placeholder="Москва, СПб, Казань"></div><div class="form-group"><label>Бюджет, ₽</label><input type="number" id="pj-budget" value="500000"></div><div class="form-group"><label>Описание</label><textarea id="pj-desc" placeholder="Формат, требования..."></textarea></div><div class="switch-row"><div><div style="font-weight:700;font-size:14px">Открытый проект</div><div style="font-size:11px;color:#6E6E73">Артисты смогут сами откликнуться</div></div><label class="switch"><input type="checkbox" id="pj-isopen" checked><span class="slider-sw"></span></label></div><button onclick="submitCreateProject()" style="width:100%;margin-top:15px">Создать проект</button>`);
 }
 
 async function submitCreateProject(){
-  const title = document.getElementById('pj-title').value;
-  if(!title){ showToast('Введите название'); return; }
-  const body = {
-    action: 'createProject',
-    organizerId: String(tgUser.id),
-    organizerName: (tgUser.first_name||'') + (tgUser.last_name ? ' '+tgUser.last_name : ''),
-    title: title,
-    type: document.getElementById('pj-type').value,
-    startDate: document.getElementById('pj-start').value,
-    endDate: document.getElementById('pj-end').value,
-    cities: document.getElementById('pj-cities').value,
-    budget: document.getElementById('pj-budget').value,
-    description: document.getElementById('pj-desc').value,
-    isOpen: document.getElementById('pj-isopen').checked,
-    artistIds: ''
-  };
-  try {
-    const r = await fetch(SHEET_API_URL, { method:'POST', body:JSON.stringify(body) });
-    const res = await r.json();
-    if(res.success){ showToast('Проект создан!'); closeModal(); await loadData(); }
-    else showToast('Ошибка');
-  } catch(e){ showToast('Ошибка сети'); }
+  const title=document.getElementById('pj-title').value;
+  if(!title){showToast('Введите название');return;}
+  const body={action:'createProject',organizerId:String(tgUser.id),organizerName:(tgUser.first_name||'')+(tgUser.last_name?' '+tgUser.last_name:''),title:title,type:document.getElementById('pj-type').value,startDate:document.getElementById('pj-start').value,endDate:document.getElementById('pj-end').value,cities:document.getElementById('pj-cities').value,budget:document.getElementById('pj-budget').value,description:document.getElementById('pj-desc').value,isOpen:document.getElementById('pj-isopen').checked,artistIds:''};
+  try{const r=await fetch(SHEET_API_URL,{method:'POST',body:JSON.stringify(body)});const res=await r.json();if(res.success){showToast('Проект создан!');closeModal();await loadData();}else showToast('Ошибка');}catch(e){showToast('Ошибка сети');}
 }
 
 function openProjectCard(projectId){
-  const p = projects.find(x => String(x.id) === String(projectId));
-  if(!p) return;
-  const responses = projectResponses.filter(r => String(r.projectId) === String(p.id));
-  let respHTML = '';
-  if(!responses.length){
-    respHTML = '<p style="color:#6E6E73;text-align:center;padding:15px;font-size:13px">Пока нет откликов</p>';
-  } else {
-    responses.forEach(r => {
-      const statusLabel = { pending:'На рассмотрении', accepted:'Принят', declined:'Отклонён' }[r.status] || r.status;
-      const color = { pending:'#FFC107', accepted:'#4CAF50', declined:'#F44336' }[r.status] || '#6E6E73';
-      respHTML += `<div class="app-card">
-        <div class="ac-status" style="color:${color}">${statusLabel}</div>
-        <div class="ac-title">${r.artistName||'Артист'}</div>
-        <div class="ac-meta">💰 ${(r.price||0).toLocaleString()} ₽</div>
-        ${r.comment?`<div class="ac-meta">${r.comment}</div>`:''}
-        ${r.status === 'pending' ? `
-          <div class="ac-actions">
-            <button class="btn-secondary" onclick="respondProject(${r.id},'declined')">Отклонить</button>
-            <button onclick="respondProject(${r.id},'accepted')">Принять</button>
-          </div>
-        ` : ''}
-      </div>`;
-    });
-  }
-  openModal(`
-    <h3>${p.title||'Проект'}</h3>
-    <div style="font-size:12px;color:#6E6E73;margin-bottom:8px">${p.type||''} · ${p.isOpen?'Открытый':'Закрытый'}</div>
-    <div style="font-size:13px;margin-bottom:6px">📅 ${p.startDate||''} ${p.endDate?'— '+p.endDate:''}</div>
-    ${p.cities?`<div style="font-size:13px;margin-bottom:6px">📍 ${p.cities}</div>`:''}
-    ${p.budget?`<div style="font-size:13px;margin-bottom:6px">💰 до ${Number(p.budget).toLocaleString()} ₽</div>`:''}
-    ${p.description?`<div style="font-size:13px;color:#6E6E73;margin-bottom:12px">${p.description}</div>`:''}
-    <h4 style="margin:15px 0 8px;font-size:14px">Отклики (${responses.length})</h4>
-    ${respHTML}
-    <button onclick="closeModal()" style="width:100%;margin-top:15px">Закрыть</button>
-  `);
-}
-
-async function respondProject(responseId, status){
-  try {
-    const r = await fetch(SHEET_API_URL, { method:'POST', body:JSON.stringify({
-      action:'updateProjectResponse', responseId, status
-    })});
-    const res = await r.json();
-    if(res.success){
-      const resp = projectResponses.find(x => Number(x.id) === responseId);
-      if(resp) resp.status = status;
-      showToast(status === 'accepted' ? 'Принят' : 'Отклонён');
-      closeModal();
-      await loadData();
-      openProjectCard(resp.projectId);
-    }
-  } catch(e){ showToast('Ошибка сети'); }
-}
-
-/* ============ ARTIST PROFILE ============ */
-async function openProfileOrCreate(){
-  if(!tgUser){ showToast('Откройте через Telegram'); return; }
-  if(!currentArtist){ openCreateForm(); return; }
-  navigateTo('screen-profile');
-  ['applications','projects','portfolio','expedu','params','busy','reviews'].forEach(t=>{
-    const el = document.getElementById('tab-'+t);
-    if(el) el.innerHTML = '<div class="skeleton"></div><div class="skeleton"></div>';
+  const p=projects.find(x=>String(x.id)===String(projectId));if(!p)return;
+  const responses=projectResponses.filter(r=>String(r.projectId)===String(p.id));
+  let respHTML='';
+  if(!responses.length)respHTML='<p style="color:#6E6E73;text-align:center;padding:15px;font-size:13px">Пока нет откликов</p>';
+  else responses.forEach(r=>{
+    const statusLabel={pending:'На рассмотрении',accepted:'Принят',declined:'Отклонён'}[r.status]||r.status;
+    const color={pending:'#FFC107',accepted:'#4CAF50',declined:'#F44336'}[r.status]||'#6E6E73';
+    respHTML+=`<div class="app-card"><div class="ac-status" style="color:${color}">${statusLabel}</div><div class="ac-title">${r.artistName||'Артист'}</div><div class="ac-meta">💰 ${(r.price||0).toLocaleString()} ₽</div>${r.comment?`<div class="ac-meta">${r.comment}</div>`:''}${r.status==='pending'?`<div class="ac-actions"><button class="btn-secondary" onclick="respondProject(${r.id},'declined')">Отклонить</button><button onclick="respondProject(${r.id},'accepted')">Принять</button></div>`:''}</div>`;
   });
-  profileLoading = true;
+  openModal(`<h3>${p.title||'Проект'}</h3><div style="font-size:12px;color:#6E6E73;margin-bottom:8px">${p.type||''} · ${p.isOpen?'Открытый':'Закрытый'}</div><div style="font-size:13px;margin-bottom:6px">📅 ${p.startDate||''} ${p.endDate?'— '+p.endDate:''}</div>${p.cities?`<div style="font-size:13px;margin-bottom:6px">📍 ${p.cities}</div>`:''}${p.budget?`<div style="font-size:13px;margin-bottom:6px">💰 до ${Number(p.budget).toLocaleString()} ₽</div>`:''}${p.description?`<div style="font-size:13px;color:#6E6E73;margin-bottom:12px">${p.description}</div>`:''}<h4 style="margin:15px 0 8px;font-size:14px">Отклики (${responses.length})</h4>${respHTML}<button onclick="closeModal()" style="width:100%;margin-top:15px">Закрыть</button>`);
+}
+
+async function respondProject(responseId,status){
+  try{const r=await fetch(SHEET_API_URL,{method:'POST',body:JSON.stringify({action:'updateProjectResponse',responseId,status})});const res=await r.json();if(res.success){const resp=projectResponses.find(x=>Number(x.id)===responseId);if(resp)resp.status=status;showToast(status==='accepted'?'Принят':'Отклонён');closeModal();await loadData();openProjectCard(resp.projectId);}}catch(e){showToast('Ошибка сети');}
+}
+
+async function openProfileOrCreate(){
+  if(!tgUser){showToast('Откройте через Telegram');return;}
+  if(!currentArtist){openCreateForm();return;}
+  navigateTo('screen-profile');
+  ['applications','projects','portfolio','expedu','params','busy','reviews'].forEach(t=>{const el=document.getElementById('tab-'+t);if(el)el.innerHTML='<div class="skeleton"></div><div class="skeleton"></div>';});
+  profileLoading=true;
   await loadProfileExtras();
-  profileLoading = false;
+  profileLoading=false;
   renderProfile();
 }
 
 async function loadProfileExtras(){
-  if(!currentArtist) return;
-  try {
-    const [m,e,ed,inv,cost] = await Promise.all([
+  if(!currentArtist)return;
+  try{
+    const [m,e,ed,inv,cost]=await Promise.all([
       fetch(SHEET_API_URL+'?action=media').then(r=>r.json()).catch(()=>[]),
       fetch(SHEET_API_URL+'?action=experience').then(r=>r.json()).catch(()=>[]),
       fetch(SHEET_API_URL+'?action=education').then(r=>r.json()).catch(()=>[]),
       fetch(SHEET_API_URL+'?action=inventory').then(r=>r.json()).catch(()=>[]),
       fetch(SHEET_API_URL+'?action=costumes').then(r=>r.json()).catch(()=>[])
     ]);
-    const id = String(currentArtist.id);
-    profileData.media = (Array.isArray(m)?m:[]).filter(x=>String(x.artistId)===id);
-    profileData.experience = (Array.isArray(e)?e:[]).filter(x=>String(x.artistId)===id);
-    profileData.education = (Array.isArray(ed)?ed:[]).filter(x=>String(x.artistId)===id);
-    profileData.inventory = (Array.isArray(inv)?inv:[]).filter(x=>String(x.artistId)===id);
-    profileData.costumes = (Array.isArray(cost)?cost:[]).filter(x=>String(x.artistId)===id);
-  } catch(err){ console.log(err); }
+    const id=String(currentArtist.id);
+    profileData.media=(Array.isArray(m)?m:[]).filter(x=>String(x.artistId)===id);
+    profileData.experience=(Array.isArray(e)?e:[]).filter(x=>String(x.artistId)===id);
+    profileData.education=(Array.isArray(ed)?ed:[]).filter(x=>String(x.artistId)===id);
+    profileData.inventory=(Array.isArray(inv)?inv:[]).filter(x=>String(x.artistId)===id);
+    profileData.costumes=(Array.isArray(cost)?cost:[]).filter(x=>String(x.artistId)===id);
+  }catch(err){console.log(err);}
 }
 
 function openCreateForm(){
-  openModal(`
-    <h3>Создать профиль артиста</h3>
-    <div class="form-group"><label>Имя *</label><input id="cf-name" value="${tgUser.first_name||''}"></div>
-    <div class="form-group">
-      <label>Фото профиля</label>
-      <div style="display:flex;align-items:center;gap:12px">
-        <div id="cf-photo-preview" style="width:64px;height:64px;background:#FCE7F3;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;color:#EC4899;font-size:11px;text-align:center;flex-shrink:0">Нет</div>
-        <input id="cf-img" type="url" placeholder="Ссылка на фото" style="flex:1;padding:12px;border:1px solid #E5E5EA;border-radius:12px;font-size:14px;outline:none;font-family:inherit;box-sizing:border-box" oninput="previewPhoto(this.value)">
-      </div>
-      <div style="font-size:11px;color:#6E6E73;margin-top:5px">Загрузите на <a href="https://imgur.com" target="_blank" style="color:#EC4899">Imgur</a> и вставьте ссылку</div>
-    </div>
-    <div class="form-group"><label>Роль *</label><select id="cf-role">${Object.keys(ROLE_NAMES).map(k=>`<option value="${k}">${ROLE_NAMES[k]}</option>`).join('')}</select></div>
-    <div class="form-group"><label>Специализация</label><input id="cf-spec" placeholder="Фламенко, Балет, Фольклор"></div>
-    <div class="form-group"><label>Город *</label><input id="cf-city" placeholder="Москва"></div>
-    <div class="form-group"><label>Учебное заведение</label><input id="cf-institution" placeholder="МГАХ, ГИТИС, консерватория">
-      <div style="font-size:11px;color:#6E6E73;margin-top:4px">Подтверждает квалификацию</div>
-    </div>
-    <div class="form-group"><label>Год окончания</label><input id="cf-year" type="number" placeholder="2020" min="1950" max="2030"></div>
-    <div class="form-group"><label>Специальность</label><input id="cf-specialty" placeholder="Артист балета"></div>
-    <div class="form-group"><label>Гонорар, ₽</label><input id="cf-price" type="number" value="15000"></div>
-    <div class="form-group"><label>Контакты</label><input id="cf-contacts" placeholder="@username"></div>
-    <div class="form-group"><label>Выезд</label><select id="cf-travel">
-      <option value="russia">Россия</option><option value="cis">СНГ</option>
-      <option value="europe">Европа</option><option value="world">Мир</option><option value="none">Не выезжаю</option>
-    </select></div>
-    <div class="form-group"><label>Виза</label><select id="cf-visa">
-      <option value="none">Нет</option><option value="schengen">Шенген</option>
-      <option value="usa">США</option><option value="uk">Великобритания</option>
-      <option value="uae">ОАЭ</option><option value="multiple">Мультивиза</option>
-    </select></div>
-    <div class="form-group"><label>Действует до</label><input id="cf-visaUntil" placeholder="2027-12-31"></div>
-    <div class="form-group"><label>Помощь с визой</label><select id="cf-visaHelp"><option value="false">Нет</option><option value="true">Да</option></select></div>
-    <button onclick="submitCreateProfile()" style="width:100%">Создать</button>
-  `);
+  openModal(`<h3>Создать профиль артиста</h3><div class="form-group"><label>Имя *</label><input id="cf-name" value="${tgUser.first_name||''}"></div><div class="form-group"><label>Фото профиля</label><div style="display:flex;align-items:center;gap:12px"><div id="cf-photo-preview" style="width:64px;height:64px;background:#FCE7F3;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;color:#EC4899;font-size:11px;text-align:center;flex-shrink:0">Нет</div><input id="cf-img" type="url" placeholder="Ссылка на фото" style="flex:1;padding:12px;border:1px solid #E5E5EA;border-radius:12px;font-size:14px;outline:none;font-family:inherit;box-sizing:border-box" oninput="previewPhoto(this.value)"></div></div><div class="form-group"><label>Роль *</label><select id="cf-role">${Object.keys(ROLE_NAMES).map(k=>`<option value="${k}">${ROLE_NAMES[k]}</option>`).join('')}</select></div><div class="form-group"><label>Специализация</label><input id="cf-spec" placeholder="Фламенко, Балет, Фольклор"></div><div class="form-group"><label>Город *</label><input id="cf-city" placeholder="Москва"></div><div class="form-group"><label>Учебное заведение</label><input id="cf-institution" placeholder="МГАХ, ГИТИС"><div style="font-size:11px;color:#6E6E73;margin-top:4px">Подтверждает квалификацию</div></div><div class="form-group"><label>Год окончания</label><input id="cf-year" type="number" placeholder="2020" min="1950" max="2030"></div><div class="form-group"><label>Специальность</label><input id="cf-specialty" placeholder="Артист балета"></div><div class="form-group"><label>Гонорар, ₽</label><input id="cf-price" type="number" value="15000"></div><div class="form-group"><label>Контакты</label><input id="cf-contacts" placeholder="@username"></div><div class="form-group"><label>Выезд</label><select id="cf-travel"><option value="russia">Россия</option><option value="cis">СНГ</option><option value="europe">Европа</option><option value="world">Мир</option><option value="none">Не выезжаю</option></select></div><div class="form-group"><label>Виза</label><select id="cf-visa"><option value="none">Нет</option><option value="schengen">Шенген</option><option value="usa">США</option><option value="uk">Великобритания</option><option value="uae">ОАЭ</option><option value="multiple">Мультивиза</option></select></div><div class="form-group"><label>Действует до</label><input id="cf-visaUntil" placeholder="2027-12-31"></div><div class="form-group"><label>Помощь с визой</label><select id="cf-visaHelp"><option value="false">Нет</option><option value="true">Да</option></select></div><button onclick="submitCreateProfile()" style="width:100%">Создать</button>`);
 }
 
 function previewPhoto(url){
-  const el = document.getElementById('cf-photo-preview');
-  if(!el) return;
-  if(url && url.startsWith('http')){ el.style.backgroundImage = `url('${url}')`; el.innerText = ''; }
-  else { el.style.backgroundImage = ''; el.innerText = 'Нет'; }
+  const el=document.getElementById('cf-photo-preview');if(!el)return;
+  if(url&&url.startsWith('http')){el.style.backgroundImage=`url('${url}')`;el.innerText='';}
+  else{el.style.backgroundImage='';el.innerText='Нет';}
 }
 
 async function submitCreateProfile(){
-  const role = document.getElementById('cf-role').value;
-  const name = document.getElementById('cf-name').value;
-  const city = document.getElementById('cf-city').value;
-  if(!name){ showToast('Введите имя'); return; }
-  if(!city){ showToast('Укажите город'); return; }
-  const body = {
-    action:'createArtist', telegramId: String(tgUser.id),
-    name, role, city,
-    spec: document.getElementById('cf-spec').value || ROLE_NAMES[role],
-    price: document.getElementById('cf-price').value,
-    contacts: document.getElementById('cf-contacts').value,
-    img: document.getElementById('cf-img').value || '',
-    specialty:'dance', genre:'dance',
-    readyToTravel:false, countries:'',
-    travelScope: document.getElementById('cf-travel').value,
-    visaType: document.getElementById('cf-visa').value,
-    visaValidUntil: document.getElementById('cf-visaUntil').value,
-    needsVisaSupport: document.getElementById('cf-visaHelp').value === 'true',
-    institution: document.getElementById('cf-institution').value || '',
-    educationYear: document.getElementById('cf-year').value || '',
-    educationSpecialty: document.getElementById('cf-specialty').value || ''
-  };
-  try {
-    const r = await fetch(SHEET_API_URL, { method:'POST', body:JSON.stringify(body) });
-    const res = await r.json();
-    if(res.success){ showToast('Профиль создан. Добавьте фото для лучшего отклика'); closeModal(); await loadData(); }
-    else showToast('Ошибка: '+(res.error||''));
-  } catch(e){ showToast('Ошибка сети'); }
+  const role=document.getElementById('cf-role').value;
+  const name=document.getElementById('cf-name').value;
+  const city=document.getElementById('cf-city').value;
+  if(!name){showToast('Введите имя');return;}
+  if(!city){showToast('Укажите город');return;}
+  const body={action:'createArtist',telegramId:String(tgUser.id),name,role,city,spec:document.getElementById('cf-spec').value||ROLE_NAMES[role],price:document.getElementById('cf-price').value,contacts:document.getElementById('cf-contacts').value,img:document.getElementById('cf-img').value||'',specialty:'dance',genre:'dance',readyToTravel:false,countries:'',travelScope:document.getElementById('cf-travel').value,visaType:document.getElementById('cf-visa').value,visaValidUntil:document.getElementById('cf-visaUntil').value,needsVisaSupport:document.getElementById('cf-visaHelp').value==='true',institution:document.getElementById('cf-institution').value||'',educationYear:document.getElementById('cf-year').value||'',educationSpecialty:document.getElementById('cf-specialty').value||''};
+  try{const r=await fetch(SHEET_API_URL,{method:'POST',body:JSON.stringify(body)});const res=await r.json();if(res.success){showToast('Профиль создан. Добавьте фото!');closeModal();await loadData();}else showToast('Ошибка: '+(res.error||''));}catch(e){showToast('Ошибка сети');}
 }
 
 function renderProfile(){
-  if(!currentArtist) return;
-  const a = currentArtist;
-  const icon = ROLE_ICONS[a.role]||'fa-star';
-  const initial = (a.name||'?')[0].toUpperCase();
-  const photoStyle = a.img
-    ? `style="background-image:url('${a.img}');cursor:pointer" onclick="openPhotoModal('${a.img}')"`
-    : '';
-  document.getElementById('profile-header').innerHTML = `
-    <div class="avatar-lg" ${photoStyle}>${a.img?'':initial}</div>
-    <div class="name">${a.name||''}</div>
-    <div class="role"><i class="fa-solid ${icon}"></i> ${ROLE_NAMES[a.role]||a.spec||''} · ${a.city||''}</div>`;
-
-  document.getElementById('tab-main').innerHTML = `
-    ${a.bio ? `<div style="background:#FFF;border-radius:12px;padding:12px;margin-bottom:12px;font-size:13px;color:#6E6E73">${a.bio}</div>` : ''}
-    <div class="field-row"><span class="lbl">Имя</span><span class="val">${a.name||'—'}</span></div>
-    <div class="field-row"><span class="lbl">Роль</span><span class="val">${ROLE_NAMES[a.role]||'—'}</span></div>
-    <div class="field-row"><span class="lbl">Специализация</span><span class="val">${a.spec||'—'}</span></div>
-    <div class="field-row"><span class="lbl">Город</span><span class="val">${a.city||'—'}</span></div>
-    <div class="field-row"><span class="lbl">Контакты</span><span class="val">${a.contacts||'—'}</span></div>
-    <div class="field-row"><span class="lbl">Выезд</span><span class="val">${TRAVEL_NAMES[a.travelScope]||'—'}</span></div>
-    <div class="field-row"><span class="lbl">Виза</span><span class="val">${VISA_NAMES[a.visaType]||'—'}${a.visaValidUntil?' до '+a.visaValidUntil:''}</span></div>
-    ${a.needsVisaSupport?'<div style="background:#FFF5F9;color:#EC4899;padding:10px;border-radius:10px;font-size:12px;font-weight:600;text-align:center;margin-top:10px">⚠️ Нужна помощь с визой</div>':''}
-    <div style="display:flex;gap:8px;justify-content:center;margin-top:15px">
-      <button class="btn-ghost" onclick="editMain()">Редактировать</button>
-    </div>`;
-
+  if(!currentArtist)return;
+  const a=currentArtist;
+  const icon=ROLE_ICONS[a.role]||'fa-star';
+  const initial=(a.name||'?')[0].toUpperCase();
+  const photoStyle=a.img?`style="background-image:url('${a.img}');cursor:pointer" onclick="openPhotoModal('${a.img}')"`:'';
+  document.getElementById('profile-header').innerHTML=`<div class="avatar-lg" ${photoStyle}>${a.img?'':initial}</div><div class="name">${a.name||''}</div><div class="role"><i class="fa-solid ${icon}"></i> ${ROLE_NAMES[a.role]||a.spec||''} · ${a.city||''}</div>`;
+  document.getElementById('tab-main').innerHTML=`${a.bio?`<div style="background:#FFF;border-radius:12px;padding:12px;margin-bottom:12px;font-size:13px;color:#6E6E73">${a.bio}</div>`:''}<div class="field-row"><span class="lbl">Имя</span><span class="val">${a.name||'—'}</span></div><div class="field-row"><span class="lbl">Роль</span><span class="val">${ROLE_NAMES[a.role]||'—'}</span></div><div class="field-row"><span class="lbl">Специализация</span><span class="val">${a.spec||'—'}</span></div><div class="field-row"><span class="lbl">Город</span><span class="val">${a.city||'—'}</span></div><div class="field-row"><span class="lbl">Контакты</span><span class="val">${a.contacts||'—'}</span></div><div class="field-row"><span class="lbl">Выезд</span><span class="val">${TRAVEL_NAMES[a.travelScope]||'—'}</span></div><div class="field-row"><span class="lbl">Виза</span><span class="val">${VISA_NAMES[a.visaType]||'—'}${a.visaValidUntil?' до '+a.visaValidUntil:''}</span></div>${a.needsVisaSupport?'<div style="background:#FFF5F9;color:#EC4899;padding:10px;border-radius:10px;font-size:12px;font-weight:600;text-align:center;margin-top:10px">⚠️ Нужна помощь с визой</div>':''}<div style="display:flex;gap:8px;justify-content:center;margin-top:15px"><button class="btn-ghost" onclick="editMain()">Редактировать</button></div>`;
   renderApplicationsTab();
   renderArtistProjectsTab();
   renderPortfolio();
@@ -1511,242 +919,128 @@ function renderProfile(){
 }
 
 function renderApplicationsTab(){
-  const el = document.getElementById('tab-applications');
-  if(!el) return;
-  const my = applications.filter(a => String(a.artistId) === String(currentArtist.id));
-  if(!my.length){
-    el.innerHTML = '<div class="list-item"><div class="li-title">Пока нет заявок</div><div class="li-sub">Организаторы найдут вас через каталог или ИИ-подбор</div></div>';
-    return;
-  }
-  let html = '';
-  my.slice().reverse().forEach(app => {
-    const status = app.status || 'new';
-    const statusLabel = { new:'Новая', accepted:'Принята', declined:'Отклонена' }[status] || status;
-    const statusColor = { new:'#EC4899', accepted:'#4CAF50', declined:'#F44336' }[status] || '#6E6E73';
-    html += `<div class="app-card">
-      <div class="ac-status" style="color:${statusColor}">${statusLabel}</div>
-      <div class="ac-title">${EVENT_TYPE_NAMES[app.eventType]||app.eventType||'Мероприятие'}</div>
-      <div class="ac-meta">📅 ${app.date||''} · 📍 ${app.city||''}</div>
-      ${app.guests?`<div class="ac-meta">👥 ${app.guests} гостей</div>`:''}
-      ${app.equipment?`<div class="ac-meta">🎛️ ${app.equipment}</div>`:''}
-      ${app.budget?`<div class="ac-meta">💰 ${Number(app.budget).toLocaleString()} ₽</div>`:''}
-      <div class="ac-meta" style="margin-top:6px;color:#999">От: ${app.organizerName||'Организатор'}</div>
-      ${status === 'new' ? `
-        <div class="ac-actions">
-          <button class="btn-secondary" onclick="updateAppStatus(${app.id},'declined',this)">Отклонить</button>
-          <button onclick="updateAppStatus(${app.id},'accepted',this)">Принять</button>
-        </div>` : ''}
-    </div>`;
+  const el=document.getElementById('tab-applications');if(!el)return;
+  const my=applications.filter(a=>String(a.artistId)===String(currentArtist.id));
+  if(!my.length){el.innerHTML='<div class="list-item"><div class="li-title">Пока нет заявок</div><div class="li-sub">Организаторы найдут вас через каталог или ИИ-подбор</div></div>';return;}
+  let html='';
+  my.slice().reverse().forEach(app=>{
+    const status=app.status||'new';
+    const statusLabel={new:'Новая',accepted:'Принята',declined:'Отклонена'}[status]||status;
+    const statusColor={new:'#EC4899',accepted:'#4CAF50',declined:'#F44336'}[status]||'#6E6E73';
+    html+=`<div class="app-card"><div class="ac-status" style="color:${statusColor}">${statusLabel}</div><div class="ac-title">${EVENT_TYPE_NAMES[app.eventType]||app.eventType||'Мероприятие'}</div><div class="ac-meta">📅 ${app.date||''} · 📍 ${app.city||''}</div>${app.guests?`<div class="ac-meta">👥 ${app.guests} гостей</div>`:''}${app.equipment?`<div class="ac-meta">🎛️ ${app.equipment}</div>`:''}${app.budget?`<div class="ac-meta">💰 ${Number(app.budget).toLocaleString()} ₽</div>`:''}<div class="ac-meta" style="margin-top:6px;color:#999">От: ${app.organizerName||'Организатор'}</div>${status==='new'?`<div class="ac-actions"><button class="btn-secondary" onclick="updateAppStatus(${app.id},'declined',this)">Отклонить</button><button onclick="updateAppStatus(${app.id},'accepted',this)">Принять</button></div>`:''}</div>`;
   });
-  el.innerHTML = html;
+  el.innerHTML=html;
 }
 
-async function updateAppStatus(appId, status, btn){
-  try {
-    const r = await fetch(SHEET_API_URL, { method:'POST', body:JSON.stringify({
-      action:'updateApplicationStatus', applicationId: appId, status
-    })});
-    const res = await r.json();
-    if(res.success){
-      showToast(status === 'accepted' ? 'Заявка принята' : 'Заявка отклонена');
-      const app = applications.find(a => Number(a.id) === appId);
-      if(app) app.status = status;
-      renderApplicationsTab();
-    } else showToast('Ошибка');
-  } catch(e){ showToast('Ошибка сети'); }
+async function updateAppStatus(appId,status,btn){
+  try{const r=await fetch(SHEET_API_URL,{method:'POST',body:JSON.stringify({action:'updateApplicationStatus',applicationId:appId,status})});const res=await r.json();if(res.success){showToast(status==='accepted'?'Заявка принята':'Заявка отклонена');const app=applications.find(a=>Number(a.id)===appId);if(app)app.status=status;renderApplicationsTab();}else showToast('Ошибка');}catch(e){showToast('Ошибка сети');}
 }
 
 function renderArtistProjectsTab(){
-  const el = document.getElementById('tab-projects');
-  const openProjects = projects.filter(p => p.isOpen && p.status === 'open');
-  const myResponses = projectResponses.filter(r => String(r.artistId) === String(currentArtist.id));
-  let html = '<h4 style="font-size:13px;color:#6E6E73;margin-bottom:8px">Открытые проекты</h4>';
-  if(!openProjects.length){
-    html += '<p style="color:#6E6E73;font-size:13px">Нет открытых проектов</p>';
-  } else {
-    openProjects.forEach(p => {
-      const alreadyResponded = myResponses.some(r => String(r.projectId) === String(p.id));
-      html += `<div class="project-card open-type" onclick="openProjectDetailsForArtist(${p.id})">
-        <div class="pc-type open-type">Открытый проект</div>
-        <div class="pc-title">${p.title}</div>
-        <div class="pc-meta">📅 ${p.startDate||''} ${p.endDate?'— '+p.endDate:''}</div>
-        ${p.cities?`<div class="pc-meta">📍 ${p.cities}</div>`:''}
-        ${p.budget?`<div class="pc-meta">💰 до ${Number(p.budget).toLocaleString()} ₽</div>`:''}
-        ${alreadyResponded?'<div style="margin-top:8px;font-size:11px;color:#4CAF50;font-weight:700">✓ Вы откликнулись</div>':''}
-      </div>`;
-    });
-  }
-  html += '<h4 style="font-size:13px;color:#6E6E73;margin:15px 0 8px">Мои отклики</h4>';
-  if(!myResponses.length){
-    html += '<p style="color:#6E6E73;font-size:13px">Пока нет откликов</p>';
-  } else {
-    myResponses.forEach(r => {
-      const p = projects.find(x => String(x.id) === String(r.projectId));
-      const statusLabel = { pending:'На рассмотрении', accepted:'Принят', declined:'Отклонён' }[r.status] || r.status;
-      const color = { pending:'#FFC107', accepted:'#4CAF50', declined:'#F44336' }[r.status] || '#6E6E73';
-      html += `<div class="app-card">
-        <div class="ac-status" style="color:${color}">${statusLabel}</div>
-        <div class="ac-title">${p ? p.title : 'Проект'}</div>
-        <div class="ac-meta">💰 ${(r.price||0).toLocaleString()} ₽</div>
-      </div>`;
-    });
-  }
-  el.innerHTML = html;
+  const el=document.getElementById('tab-projects');
+  const openProjects=projects.filter(p=>p.isOpen&&p.status==='open');
+  const myResponses=projectResponses.filter(r=>String(r.artistId)===String(currentArtist.id));
+  let html='<h4 style="font-size:13px;color:#6E6E73;margin-bottom:8px">Открытые проекты</h4>';
+  if(!openProjects.length)html+='<p style="color:#6E6E73;font-size:13px">Нет открытых проектов</p>';
+  else openProjects.forEach(p=>{
+    const alreadyResponded=myResponses.some(r=>String(r.projectId)===String(p.id));
+    html+=`<div class="project-card open-type" onclick="openProjectDetailsForArtist(${p.id})"><div class="pc-type open-type">Открытый проект</div><div class="pc-title">${p.title}</div><div class="pc-meta">📅 ${p.startDate||''} ${p.endDate?'— '+p.endDate:''}</div>${p.cities?`<div class="pc-meta">📍 ${p.cities}</div>`:''}${p.budget?`<div class="pc-meta">💰 до ${Number(p.budget).toLocaleString()} ₽</div>`:''}${alreadyResponded?'<div style="margin-top:8px;font-size:11px;color:#4CAF50;font-weight:700">✓ Вы откликнулись</div>':''}</div>`;
+  });
+  html+='<h4 style="font-size:13px;color:#6E6E73;margin:15px 0 8px">Мои отклики</h4>';
+  if(!myResponses.length)html+='<p style="color:#6E6E73;font-size:13px">Пока нет откликов</p>';
+  else myResponses.forEach(r=>{
+    const p=projects.find(x=>String(x.id)===String(r.projectId));
+    const statusLabel={pending:'На рассмотрении',accepted:'Принят',declined:'Отклонён'}[r.status]||r.status;
+    const color={pending:'#FFC107',accepted:'#4CAF50',declined:'#F44336'}[r.status]||'#6E6E73';
+    html+=`<div class="app-card"><div class="ac-status" style="color:${color}">${statusLabel}</div><div class="ac-title">${p?p.title:'Проект'}</div><div class="ac-meta">💰 ${(r.price||0).toLocaleString()} ₽</div></div>`;
+  });
+  el.innerHTML=html;
 }
 
 function openProjectDetailsForArtist(projectId){
-  const p = projects.find(x => String(x.id) === String(projectId));
-  if(!p) return;
-  const alreadyResponded = projectResponses.some(r => String(r.projectId) === String(p.id) && String(r.artistId) === String(currentArtist.id));
-  let respondHTML = alreadyResponded
-    ? '<div style="text-align:center;color:#4CAF50;font-weight:700;padding:10px">Вы уже откликнулись</div>'
-    : `
-      <div class="form-group"><label>Ваша цена, ₽</label><input type="number" id="pr-price" value="${currentArtist.price||50000}"></div>
-      <div class="form-group"><label>Комментарий</label><textarea id="pr-comment" placeholder="Что можете предложить..."></textarea></div>
-      <button onclick="submitProjectResponse(${p.id})" style="width:100%">Откликнуться</button>
-    `;
-  openModal(`
-    <h3>${p.title}</h3>
-    <div style="font-size:12px;color:#6E6E73;margin-bottom:8px">${p.type||''}</div>
-    <div style="font-size:13px;margin-bottom:6px">📅 ${p.startDate||''} ${p.endDate?'— '+p.endDate:''}</div>
-    ${p.cities?`<div style="font-size:13px;margin-bottom:6px">📍 ${p.cities}</div>`:''}
-    ${p.budget?`<div style="font-size:13px;margin-bottom:6px">💰 до ${Number(p.budget).toLocaleString()} ₽</div>`:''}
-    ${p.description?`<div style="font-size:13px;color:#6E6E73;margin:12px 0">${p.description}</div>`:''}
-    <div style="margin-top:15px">${respondHTML}</div>
-    <button onclick="closeModal()" class="btn-ghost" style="width:100%;margin-top:10px">Закрыть</button>
-  `);
+  const p=projects.find(x=>String(x.id)===String(projectId));if(!p)return;
+  const alreadyResponded=projectResponses.some(r=>String(r.projectId)===String(p.id)&&String(r.artistId)===String(currentArtist.id));
+  let respondHTML=alreadyResponded?'<div style="text-align:center;color:#4CAF50;font-weight:700;padding:10px">Вы уже откликнулись</div>':`<div class="form-group"><label>Ваша цена, ₽</label><input type="number" id="pr-price" value="${currentArtist.price||50000}"></div><div class="form-group"><label>Комментарий</label><textarea id="pr-comment" placeholder="Что можете предложить..."></textarea></div><button onclick="submitProjectResponse(${p.id})" style="width:100%">Откликнуться</button>`;
+  openModal(`<h3>${p.title}</h3><div style="font-size:12px;color:#6E6E73;margin-bottom:8px">${p.type||''}</div><div style="font-size:13px;margin-bottom:6px">📅 ${p.startDate||''} ${p.endDate?'— '+p.endDate:''}</div>${p.cities?`<div style="font-size:13px;margin-bottom:6px">📍 ${p.cities}</div>`:''}${p.budget?`<div style="font-size:13px;margin-bottom:6px">💰 до ${Number(p.budget).toLocaleString()} ₽</div>`:''}${p.description?`<div style="font-size:13px;color:#6E6E73;margin:12px 0">${p.description}</div>`:''}<div style="margin-top:15px">${respondHTML}</div><button onclick="closeModal()" class="btn-ghost" style="width:100%;margin-top:10px">Закрыть</button>`);
 }
 
 async function submitProjectResponse(projectId){
-  const price = Number(document.getElementById('pr-price').value) || 0;
-  const comment = document.getElementById('pr-comment').value;
-  const body = {
-    action: 'respondToProject',
-    projectId: projectId,
-    artistId: currentArtist.id,
-    artistName: currentArtist.name,
-    price: price,
-    comment: comment
-  };
-  try {
-    const r = await fetch(SHEET_API_URL, { method:'POST', body:JSON.stringify(body) });
-    const res = await r.json();
-    if(res.success){ showToast('Отклик отправлен!'); closeModal(); await loadData(); renderProfile(); }
-    else showToast('Ошибка');
-  } catch(e){ showToast('Ошибка сети'); }
+  const price=Number(document.getElementById('pr-price').value)||0;
+  const comment=document.getElementById('pr-comment').value;
+  const body={action:'respondToProject',projectId:projectId,artistId:currentArtist.id,artistName:currentArtist.name,price:price,comment:comment};
+  try{const r=await fetch(SHEET_API_URL,{method:'POST',body:JSON.stringify(body)});const res=await r.json();if(res.success){showToast('Отклик отправлен!');closeModal();await loadData();renderProfile();}else showToast('Ошибка');}catch(e){showToast('Ошибка сети');}
 }
 
 function renderPortfolio(){
-  const el = document.getElementById('tab-portfolio');
-  const arr = profileData.media||[];
-  let html = '';
+  const el=document.getElementById('tab-portfolio');
+  const arr=profileData.media||[];
+  let html='';
   if(arr.length){
-    html += '<div class="portfolio-grid">';
-    arr.forEach(m => {
-      const isVideo = m.type === 'video' || (m.url||'').match(/youtube|vk\.com|vimeo/i);
-      html += `<div class="pg-item ${isVideo?'video':''}" style="${!isVideo&&m.url?`background-image:url('${m.url}')`:''}" onclick="window.open('${m.url||''}','_blank')"></div>`;
+    html+='<div class="portfolio-grid">';
+    arr.forEach(m=>{
+      const isVideo=m.type==='video'||(m.url||'').match(/youtube|vk\.com|vimeo/i);
+      html+=`<div class="pg-item ${isVideo?'video':''}" style="${!isVideo&&m.url?`background-image:url('${m.url}')`:''}" onclick="window.open('${m.url||''}','_blank')"></div>`;
     });
-    html += '</div>';
-  } else html = '<p style="color:#6E6E73;text-align:center;padding:20px">Пока нет фото и видео</p>';
-  html += '<button class="add-btn-full" onclick="addItem(\'media\')">+ Добавить фото/видео</button>';
-  el.innerHTML = html;
+    html+='</div>';
+  }else html='<p style="color:#6E6E73;text-align:center;padding:20px">Пока нет фото и видео</p>';
+  html+='<button class="add-btn-full" onclick="addItem(\'media\')">+ Добавить фото/видео</button>';
+  el.innerHTML=html;
 }
 
 function renderExpEdu(){
-  const el = document.getElementById('tab-expedu');
-  let html = '<h4 style="font-size:13px;color:#6E6E73;margin-bottom:8px">Опыт</h4>';
-  const exp = (profileData.experience||[]).sort((a,b)=>(b.year||0)-(a.year||0));
-  if(exp.length) exp.forEach(x => { html += `<div class="list-item"><div class="li-title">${x.year||''} · ${x.project||'—'}</div><div class="li-sub">${x.role||''} ${x.venue?'· '+x.venue:''} ${x.city?'· '+x.city:''}</div></div>`; });
-  else html += '<p style="color:#6E6E73;font-size:13px">Нет данных</p>';
-  html += '<button class="add-btn-full" onclick="addItem(\'experience\')">+ Добавить опыт</button>';
-  html += '<h4 style="font-size:13px;color:#6E6E73;margin:15px 0 8px">Образование</h4>';
-  const edu = (profileData.education||[]).sort((a,b)=>(b.year||0)-(a.year||0));
-  if(edu.length) edu.forEach(x => { html += `<div class="list-item"><div class="li-title">${x.year||''} · ${x.institution||'—'}</div><div class="li-sub">${x.specialty||''}</div></div>`; });
-  else html += '<p style="color:#6E6E73;font-size:13px">Нет данных</p>';
-  html += '<button class="add-btn-full" onclick="addItem(\'education\')">+ Добавить образование</button>';
-  el.innerHTML = html;
+  const el=document.getElementById('tab-expedu');
+  let html='<h4 style="font-size:13px;color:#6E6E73;margin-bottom:8px">Опыт</h4>';
+  const exp=(profileData.experience||[]).sort((a,b)=>(b.year||0)-(a.year||0));
+  if(exp.length)exp.forEach(x=>{html+=`<div class="list-item"><div class="li-title">${x.year||''} · ${x.project||'—'}</div><div class="li-sub">${x.role||''} ${x.venue?'· '+x.venue:''} ${x.city?'· '+x.city:''}</div></div>`;});
+  else html+='<p style="color:#6E6E73;font-size:13px">Нет данных</p>';
+  html+='<button class="add-btn-full" onclick="addItem(\'experience\')">+ Добавить опыт</button>';
+  html+='<h4 style="font-size:13px;color:#6E6E73;margin:15px 0 8px">Образование</h4>';
+  const edu=(profileData.education||[]).sort((a,b)=>(b.year||0)-(a.year||0));
+  if(edu.length)edu.forEach(x=>{html+=`<div class="list-item"><div class="li-title">${x.year||''} · ${x.institution||'—'}</div><div class="li-sub">${x.specialty||''}</div></div>`;});
+  else html+='<p style="color:#6E6E73;font-size:13px">Нет данных</p>';
+  html+='<button class="add-btn-full" onclick="addItem(\'education\')">+ Добавить образование</button>';
+  el.innerHTML=html;
 }
 
 function renderParamsTab(){
-  const el = document.getElementById('tab-params');
-  const a = currentArtist;
-  el.innerHTML = `
-    <div class="field-row"><span class="lbl">Рост</span><span class="val">${a.height||'—'}</span></div>
-    <div class="field-row"><span class="lbl">Вес</span><span class="val">${a.weight||'—'}</span></div>
-    <div class="field-row"><span class="lbl">Размер одежды</span><span class="val">${a.clothingSize||'—'}</span></div>
-    <div class="field-row"><span class="lbl">Размер обуви</span><span class="val">${a.shoeSize||'—'}</span></div>
-    <div class="field-row"><span class="lbl">Цвет волос</span><span class="val">${a.hairColor||'—'}</span></div>
-    <div class="field-row"><span class="lbl">Цвет глаз</span><span class="val">${a.eyeColor||'—'}</span></div>
-    <h4 style="margin-top:15px;font-size:13px;color:#6E6E73">Инвентарь</h4>
-    ${(profileData.inventory||[]).map(x=>`<div class="list-item"><div class="li-title">${x.name||'—'}</div><div class="li-sub">${x.description||''}</div></div>`).join('')}
-    <button class="add-btn-full" onclick="addItem('inventory')">+ Добавить инвентарь</button>
-    <h4 style="margin-top:15px;font-size:13px;color:#6E6E73">Костюмы</h4>
-    ${(profileData.costumes||[]).map(x=>`<div class="list-item"><div class="li-title">${x.name||'—'}</div><div class="li-sub">${x.size||''} ${x.description||''}</div></div>`).join('')}
-    <button class="add-btn-full" onclick="addItem('costumes')">+ Добавить костюм</button>`;
+  const el=document.getElementById('tab-params');
+  const a=currentArtist;
+  el.innerHTML=`<div class="field-row"><span class="lbl">Рост</span><span class="val">${a.height||'—'}</span></div><div class="field-row"><span class="lbl">Вес</span><span class="val">${a.weight||'—'}</span></div><div class="field-row"><span class="lbl">Размер одежды</span><span class="val">${a.clothingSize||'—'}</span></div><div class="field-row"><span class="lbl">Размер обуви</span><span class="val">${a.shoeSize||'—'}</span></div><div class="field-row"><span class="lbl">Цвет волос</span><span class="val">${a.hairColor||'—'}</span></div><div class="field-row"><span class="lbl">Цвет глаз</span><span class="val">${a.eyeColor||'—'}</span></div><h4 style="margin-top:15px;font-size:13px;color:#6E6E73">Инвентарь</h4>${(profileData.inventory||[]).map(x=>`<div class="list-item"><div class="li-title">${x.name||'—'}</div><div class="li-sub">${x.description||''}</div></div>`).join('')}<button class="add-btn-full" onclick="addItem('inventory')">+ Добавить инвентарь</button><h4 style="margin-top:15px;font-size:13px;color:#6E6E73">Костюмы</h4>${(profileData.costumes||[]).map(x=>`<div class="list-item"><div class="li-title">${x.name||'—'}</div><div class="li-sub">${x.size||''} ${x.description||''}</div></div>`).join('')}<button class="add-btn-full" onclick="addItem('costumes')">+ Добавить костюм</button>`;
 }
 
 function renderBusyTab(){
-  const el = document.getElementById('tab-busy');
-  const a = currentArtist;
-  let daysHTML = '';
-  const dim = new Date(state.year, state.monthIndex+1, 0).getDate();
-  for(let d=1; d<=dim; d++){
-    const ds = `${state.year}-${String(state.monthIndex+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-    const ev = events.find(e=>e.date===ds && String(e.artistId)===String(a.id));
-    let st = 'free';
-    if(ev && ev.status) st = ev.status;
-    const icon = STATUS_ICONS[st] || STATUS_ICONS.free;
-    daysHTML += `<div class="day" onclick="openPricing('${ds}')" style="cursor:pointer;background:#FFF;border-radius:6px"><span style="font-size:11px">${d}</span><i class="fa-solid ${icon.icon}" style="font-size:8px;color:${icon.color}"></i></div>`;
+  const el=document.getElementById('tab-busy');
+  const a=currentArtist;
+  let daysHTML='';
+  const dim=new Date(state.year,state.monthIndex+1,0).getDate();
+  for(let d=1;d<=dim;d++){
+    const ds=`${state.year}-${String(state.monthIndex+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const ev=events.find(e=>e.date===ds&&String(e.artistId)===String(a.id));
+    let st='free';
+    if(ev&&ev.status)st=ev.status;
+    const icon=STATUS_ICONS[st]||STATUS_ICONS.free;
+    daysHTML+=`<div class="day" onclick="openPricing('${ds}')" style="cursor:pointer;background:#FFF;border-radius:6px"><span style="font-size:11px">${d}</span><i class="fa-solid ${icon.icon}" style="font-size:8px;color:${icon.color}"></i></div>`;
   }
-  el.innerHTML = `
-    <div style="text-align:center;margin-bottom:15px">
-      <div style="font-size:18px;font-weight:800;color:#1A1A1A">${months[state.monthIndex]} ${state.year}</div>
-      <div style="font-size:11px;color:#6E6E73;margin-top:2px">Занятость и управление ценой</div>
-    </div>
-    <div style="display:flex;gap:6px;justify-content:center;margin-bottom:10px">
-      <button class="btn-ghost" onclick="changeMonth(-1);renderBusyTab()">←</button>
-      <button class="btn-ghost" onclick="changeMonth(1);renderBusyTab()">→</button>
-    </div>
-    <div class="mini-calendar"><div class="days-grid">${daysHTML}</div></div>
-    <p style="font-size:11px;color:#6E6E73;text-align:center;margin-top:10px">Нажмите на день, чтобы изменить цену</p>`;
+  el.innerHTML=`<div style="text-align:center;margin-bottom:15px"><div style="font-size:18px;font-weight:800;color:#1A1A1A">${months[state.monthIndex]} ${state.year}</div><div style="font-size:11px;color:#6E6E73;margin-top:2px">Занятость и управление ценой</div></div><div style="display:flex;gap:6px;justify-content:center;margin-bottom:10px"><button class="btn-ghost" onclick="changeMonth(-1);renderBusyTab()">←</button><button class="btn-ghost" onclick="changeMonth(1);renderBusyTab()">→</button></div><div class="mini-calendar"><div class="days-grid">${daysHTML}</div></div><p style="font-size:11px;color:#6E6E73;text-align:center;margin-top:10px">Нажмите на день, чтобы изменить цену</p>`;
 }
 
 function openPricing(date){
-  openModal(`
-    <h3>Цена на ${date}</h3>
-    <div class="wizard-options">
-      ${[0.7,0.9,1.0,1.2,1.5].map(v => `
-        <div class="wizard-option" onclick="savePricing('${date}',${v})">
-          <i class="fa-solid fa-ruble-sign"></i>×${v} ${v<1?'(скидка)':v>1?'(наценка)':'(стандарт)'}
-        </div>`).join('')}
-    </div>
-    <button style="width:100%;margin-top:15px" onclick="closeModal()">Отмена</button>
-  `);
+  openModal(`<h3>Цена на ${date}</h3><div class="wizard-options">${[0.7,0.9,1.0,1.2,1.5].map(v=>`<div class="wizard-option" onclick="savePricing('${date}',${v})"><i class="fa-solid fa-ruble-sign"></i>×${v} ${v<1?'(скидка)':v>1?'(наценка)':'(стандарт)'}</div>`).join('')}</div><button style="width:100%;margin-top:15px" onclick="closeModal()">Отмена</button>`);
 }
 
-async function savePricing(date, modifier){
-  try {
-    const r = await fetch(SHEET_API_URL, { method:'POST', body:JSON.stringify({
-      action:'setPricing', artistId: currentArtist.id, date, priceModifier: modifier, note: ''
-    })});
-    const res = await r.json();
-    if(res.success){ showToast(`Цена на ${date}: ×${modifier}`); closeModal(); }
-    else showToast('Ошибка');
-  } catch(e){ showToast('Ошибка сети'); }
+async function savePricing(date,modifier){
+  try{const r=await fetch(SHEET_API_URL,{method:'POST',body:JSON.stringify({action:'setPricing',artistId:currentArtist.id,date,priceModifier:modifier,note:''})});const res=await r.json();if(res.success){showToast(`Цена на ${date}: ×${modifier}`);closeModal();}else showToast('Ошибка');}catch(e){showToast('Ошибка сети');}
 }
 
 function renderReviews(){
-  const el = document.getElementById('tab-reviews');
-  const a = currentArtist;
-  const my = reviews.filter(r => String(r.artistId) === String(a.id));
-  const avg = my.length ? (my.reduce((s,r)=>s+(Number(r.rating)||0),0)/my.length).toFixed(1) : '5.0';
-  let html = `
-    <div class="rating-big">${avg}</div>
-    <div class="rating-stars">${'★'.repeat(Math.round(avg))}${'☆'.repeat(5-Math.round(avg))}</div>
-    <p style="text-align:center;color:#6E6E73;font-size:12px;margin-bottom:15px">${my.length} отзывов</p>`;
-  if(my.length) my.forEach(r => { html += `<div class="list-item"><div class="li-title">${r.author||'Аноним'} · ${'★'.repeat(r.rating||5)}</div><div class="li-sub">${r.text||''}</div></div>`; });
-  else html += '<p style="text-align:center;color:#6E6E73;font-size:13px">Пока нет отзывов</p>';
-  el.innerHTML = html;
+  const el=document.getElementById('tab-reviews');
+  const a=currentArtist;
+  const my=reviews.filter(r=>String(r.artistId)===String(a.id));
+  const avg=my.length?(my.reduce((s,r)=>s+(Number(r.rating)||0),0)/my.length).toFixed(1):'5.0';
+  let html=`<div class="rating-big">${avg}</div><div class="rating-stars">${'★'.repeat(Math.round(avg))}${'☆'.repeat(5-Math.round(avg))}</div><p style="text-align:center;color:#6E6E73;font-size:12px;margin-bottom:15px">${my.length} отзывов</p>`;
+  if(my.length)my.forEach(r=>{html+=`<div class="list-item"><div class="li-title">${r.author||'Аноним'} · ${'★'.repeat(r.rating||5)}</div><div class="li-sub">${r.text||''}</div></div>`;});
+  else html+='<p style="text-align:center;color:#6E6E73;font-size:13px">Пока нет отзывов</p>';
+  el.innerHTML=html;
 }
 
 function switchTab(el,panel){
@@ -1754,263 +1048,94 @@ function switchTab(el,panel){
   document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
   el.classList.add('active');
   document.getElementById(panel).classList.add('active');
+  const tabsBar=el.parentElement;
+  if(tabsBar)tabsBar.scrollLeft=el.offsetLeft-(tabsBar.clientWidth/2)+(el.offsetWidth/2);
+  const scr=document.getElementById('screen-profile');
+  if(scr)scr.scrollTop=0;
 }
 
 function editMain(){
-  const a = currentArtist;
-  openModal(`
-    <h3>Редактировать основное</h3>
-    <div class="form-group"><label>Имя</label><input id="e-name" value="${a.name||''}"></div>
-    <div class="form-group"><label>Фото (URL)</label><input id="e-img" value="${a.img||''}" placeholder="https://..."></div>
-    <div class="form-group"><label>Bio</label><textarea id="e-bio" style="min-height:80px">${a.bio||''}</textarea></div>
-    <div class="form-group"><label>Роль</label><select id="e-role">${Object.keys(ROLE_NAMES).map(k=>`<option value="${k}" ${a.role===k?'selected':''}>${ROLE_NAMES[k]}</option>`).join('')}</select></div>
-    <div class="form-group"><label>Специализация</label><input id="e-spec" value="${a.spec||''}"></div>
-    <div class="form-group"><label>Город</label><input id="e-city" value="${a.city||''}"></div>
-    <div class="form-group"><label>Контакты</label><input id="e-contacts" value="${a.contacts||''}"></div>
-    <div class="form-group"><label>Гонорар, ₽</label><input id="e-price" type="number" value="${a.price||0}"></div>
-    <div class="form-group"><label>Выезд</label><select id="e-travel">
-      ${Object.keys(TRAVEL_NAMES).map(k=>`<option value="${k}" ${a.travelScope===k?'selected':''}>${TRAVEL_NAMES[k]}</option>`).join('')}
-    </select></div>
-    <div class="form-group"><label>Виза</label><select id="e-visa">
-      ${Object.keys(VISA_NAMES).map(k=>`<option value="${k}" ${a.visaType===k?'selected':''}>${VISA_NAMES[k]}</option>`).join('')}
-    </select></div>
-    <div class="form-group"><label>Действует до</label><input id="e-visaUntil" value="${a.visaValidUntil||''}"></div>
-    <div class="form-group"><label>Помощь с визой</label><select id="e-visaHelp"><option value="false" ${!a.needsVisaSupport?'selected':''}>Нет</option><option value="true" ${a.needsVisaSupport?'selected':''}>Да</option></select></div>
-    <button onclick="saveMain()" style="width:100%">Сохранить</button>
-  `);
+  const a=currentArtist;
+  openModal(`<h3>Редактировать</h3><div class="form-group"><label>Имя</label><input id="e-name" value="${a.name||''}"></div><div class="form-group"><label>Фото (URL)</label><input id="e-img" value="${a.img||''}"></div><div class="form-group"><label>Bio</label><textarea id="e-bio" style="min-height:80px">${a.bio||''}</textarea></div><div class="form-group"><label>Роль</label><select id="e-role">${Object.keys(ROLE_NAMES).map(k=>`<option value="${k}" ${a.role===k?'selected':''}>${ROLE_NAMES[k]}</option>`).join('')}</select></div><div class="form-group"><label>Специализация</label><input id="e-spec" value="${a.spec||''}"></div><div class="form-group"><label>Город</label><input id="e-city" value="${a.city||''}"></div><div class="form-group"><label>Контакты</label><input id="e-contacts" value="${a.contacts||''}"></div><div class="form-group"><label>Гонорар, ₽</label><input id="e-price" type="number" value="${a.price||0}"></div><div class="form-group"><label>Выезд</label><select id="e-travel">${Object.keys(TRAVEL_NAMES).map(k=>`<option value="${k}" ${a.travelScope===k?'selected':''}>${TRAVEL_NAMES[k]}</option>`).join('')}</select></div><div class="form-group"><label>Виза</label><select id="e-visa">${Object.keys(VISA_NAMES).map(k=>`<option value="${k}" ${a.visaType===k?'selected':''}>${VISA_NAMES[k]}</option>`).join('')}</select></div><div class="form-group"><label>Действует до</label><input id="e-visaUntil" value="${a.visaValidUntil||''}"></div><div class="form-group"><label>Помощь с визой</label><select id="e-visaHelp"><option value="false" ${!a.needsVisaSupport?'selected':''}>Нет</option><option value="true" ${a.needsVisaSupport?'selected':''}>Да</option></select></div><button onclick="saveMain()" style="width:100%">Сохранить</button>`);
 }
 
 async function saveMain(){
-  const fields = {
-    name: document.getElementById('e-name').value,
-    img: document.getElementById('e-img').value,
-    bio: document.getElementById('e-bio').value,
-    role: document.getElementById('e-role').value,
-    spec: document.getElementById('e-spec').value,
-    city: document.getElementById('e-city').value,
-    contacts: document.getElementById('e-contacts').value,
-    price: Number(document.getElementById('e-price').value) || 0,
-    travelScope: document.getElementById('e-travel').value,
-    visaType: document.getElementById('e-visa').value,
-    visaValidUntil: document.getElementById('e-visaUntil').value,
-    needsVisaSupport: document.getElementById('e-visaHelp').value === 'true'
-  };
-  try {
-    const r = await fetch(SHEET_API_URL, { method:'POST', body:JSON.stringify({action:'updateArtist',artistId:currentArtist.id,fields}) });
-    const res = await r.json();
-    if(res.success){ Object.assign(currentArtist, fields); showToast('Сохранено'); closeModal(); renderProfile(); loadData(); }
-    else showToast('Ошибка');
-  } catch(e){ showToast('Ошибка сети'); }
+  const fields={name:document.getElementById('e-name').value,img:document.getElementById('e-img').value,bio:document.getElementById('e-bio').value,role:document.getElementById('e-role').value,spec:document.getElementById('e-spec').value,city:document.getElementById('e-city').value,contacts:document.getElementById('e-contacts').value,price:Number(document.getElementById('e-price').value)||0,travelScope:document.getElementById('e-travel').value,visaType:document.getElementById('e-visa').value,visaValidUntil:document.getElementById('e-visaUntil').value,needsVisaSupport:document.getElementById('e-visaHelp').value==='true'};
+  try{const r=await fetch(SHEET_API_URL,{method:'POST',body:JSON.stringify({action:'updateArtist',artistId:currentArtist.id,fields})});const res=await r.json();if(res.success){Object.assign(currentArtist,fields);showToast('Сохранено');closeModal();renderProfile();loadData();}else showToast('Ошибка');}catch(e){showToast('Ошибка сети');}
 }
 
 function addItem(type){
-  const title = {media:'Медиа',experience:'Опыт',education:'Образование',inventory:'Инвентарь',costumes:'Костюмы'}[type]||type;
-  openModal(`<h3>Добавить: ${title}</h3>
-    <div class="form-group"><label>Название / ссылка</label><input id="add-val"></div>
-    <div class="form-group"><label>Описание</label><textarea id="add-desc"></textarea></div>
-    <button onclick="saveItem('${type}')" style="width:100%">Добавить</button>
-  `);
+  const title={media:'Медиа',experience:'Опыт',education:'Образование',inventory:'Инвентарь',costumes:'Костюмы'}[type]||type;
+  openModal(`<h3>Добавить: ${title}</h3><div class="form-group"><label>Название / ссылка</label><input id="add-val"></div><div class="form-group"><label>Описание</label><textarea id="add-desc"></textarea></div><button onclick="saveItem('${type}')" style="width:100%">Добавить</button>`);
 }
 async function saveItem(type){
-  const val = document.getElementById('add-val').value;
-  const desc = document.getElementById('add-desc').value;
-  if(!val) return showToast('Введите значение');
-  const map = {media:'addMedia',experience:'addExperience',education:'addEducation',inventory:'addInventory',costumes:'addCostume'};
-  try {
-    const r = await fetch(SHEET_API_URL, { method:'POST', body:JSON.stringify({action:map[type]||'addMedia',artistId:currentArtist.id,name:val,description:desc,url:val}) });
-    const res = await r.json();
-    if(res.success){ showToast('Добавлено'); closeModal(); await loadProfileExtras(); renderProfile(); }
-    else showToast('Ошибка');
-  } catch(e){ showToast('Ошибка сети'); }
+  const val=document.getElementById('add-val').value;
+  const desc=document.getElementById('add-desc').value;
+  if(!val)return showToast('Введите значение');
+  const map={media:'addMedia',experience:'addExperience',education:'addEducation',inventory:'addInventory',costumes:'addCostume'};
+  try{const r=await fetch(SHEET_API_URL,{method:'POST',body:JSON.stringify({action:map[type]||'addMedia',artistId:currentArtist.id,name:val,description:desc,url:val})});const res=await r.json();if(res.success){showToast('Добавлено');closeModal();await loadProfileExtras();renderProfile();}else showToast('Ошибка');}catch(e){showToast('Ошибка сети');}
 }
 
-/* ============ VENUE PROFILE (кабинет владельца) ============ */
 async function openVenueProfileOrCreate(){
-  if(!tgUser){ showToast('Откройте через Telegram'); return; }
-  const tgId = String(tgUser.id);
-  const myVenue = venues.find(v => String(v.ownerTelegramId) === tgId);
-  if(myVenue){ currentVenue = myVenue; navigateTo('screen-venue-profile'); renderVenueProfile(); }
+  if(!tgUser){showToast('Откройте через Telegram');return;}
+  const tgId=String(tgUser.id);
+  const myVenue=venues.find(v=>String(v.ownerTelegramId)===tgId);
+  if(myVenue){currentVenue=myVenue;navigateTo('screen-venue-profile');renderVenueProfile();}
   else openCreateVenueForm();
 }
 
 function openCreateVenueForm(){
-  openModal(`
-    <h3>Создать профиль площадки</h3>
-    <div class="form-group"><label>Название *</label><input id="cv-name" placeholder="Дом Музыки"></div>
-    <div class="form-group"><label>Город *</label><input id="cv-city" placeholder="Москва"></div>
-    <div class="form-group"><label>Тип</label><select id="cv-type">
-      <option value="Театр">Театр</option><option value="Клуб">Клуб</option>
-      <option value="ДК">ДК</option><option value="Отель">Отель</option>
-      <option value="Усадьба">Усадьба</option><option value="Лофт">Лофт</option>
-      <option value="Концертный зал">Концертный зал</option><option value="Другое">Другое</option>
-    </select></div>
-    <div class="form-group"><label>Вместимость, чел</label><input id="cv-capacity" type="number" value="200"></div>
-    <div class="form-group"><label>Базовая цена аренды, ₽</label><input id="cv-price" type="number" value="50000"></div>
-    <div class="form-group"><label>Фото (URL)</label><input id="cv-img" type="url" placeholder="https://..."></div>
-    <div class="form-group"><label>Контакты</label><input id="cv-contacts" placeholder="@username"></div>
-    <button onclick="submitCreateVenue()" style="width:100%">Создать площадку</button>
-  `);
+  openModal(`<h3>Создать площадку</h3><div class="form-group"><label>Название *</label><input id="cv-name"></div><div class="form-group"><label>Город *</label><input id="cv-city"></div><div class="form-group"><label>Тип</label><select id="cv-type"><option value="Театр">Театр</option><option value="Клуб">Клуб</option><option value="ДК">ДК</option><option value="Отель">Отель</option><option value="Усадьба">Усадьба</option><option value="Лофт">Лофт</option><option value="Концертный зал">Концертный зал</option><option value="Другое">Другое</option></select></div><div class="form-group"><label>Вместимость, чел</label><input id="cv-capacity" type="number" value="200"></div><div class="form-group"><label>Базовая цена, ₽</label><input id="cv-price" type="number" value="50000"></div><div class="form-group"><label>Фото (URL)</label><input id="cv-img" type="url"></div><div class="form-group"><label>Контакты</label><input id="cv-contacts"></div><button onclick="submitCreateVenue()" style="width:100%">Создать</button>`);
 }
 
 async function submitCreateVenue(){
-  const name = document.getElementById('cv-name').value;
-  const city = document.getElementById('cv-city').value;
-  if(!name){ showToast('Введите название'); return; }
-  if(!city){ showToast('Укажите город'); return; }
-  const body = {
-    action: 'createVenue', telegramId: String(tgUser.id),
-    name, city,
-    type: document.getElementById('cv-type').value,
-    capacity: document.getElementById('cv-capacity').value,
-    basePrice: document.getElementById('cv-price').value,
-    img: document.getElementById('cv-img').value,
-    contacts: document.getElementById('cv-contacts').value
-  };
-  try {
-    const r = await fetch(SHEET_API_URL, { method:'POST', body:JSON.stringify(body) });
-    const res = await r.json();
-    if(res.success){ showToast('Площадка создана!'); closeModal(); await loadData(); await openVenueProfileOrCreate(); }
-    else showToast('Ошибка: '+(res.error||''));
-  } catch(e){ showToast('Ошибка сети'); }
+  const name=document.getElementById('cv-name').value;
+  const city=document.getElementById('cv-city').value;
+  if(!name){showToast('Введите название');return;}
+  if(!city){showToast('Укажите город');return;}
+  const body={action:'createVenue',telegramId:String(tgUser.id),name,city,type:document.getElementById('cv-type').value,capacity:document.getElementById('cv-capacity').value,basePrice:document.getElementById('cv-price').value,img:document.getElementById('cv-img').value,contacts:document.getElementById('cv-contacts').value};
+  try{const r=await fetch(SHEET_API_URL,{method:'POST',body:JSON.stringify(body)});const res=await r.json();if(res.success){showToast('Площадка создана!');closeModal();await loadData();await openVenueProfileOrCreate();}else showToast('Ошибка: '+(res.error||''));}catch(e){showToast('Ошибка сети');}
 }
 
 function renderVenueProfile(){
-  if(!currentVenue) return;
-  const v = currentVenue;
-  const initial = (v.name||'?')[0].toUpperCase();
-  const photoStyle = v.img ? `style="background-image:url('${v.img}');cursor:pointer" onclick="openPhotoModal('${v.img}')"` : '';
-  document.getElementById('venue-profile-header').innerHTML = `
-    <div class="avatar-lg" ${photoStyle}>${v.img?'':initial}</div>
-    <div class="name">${v.name||''}</div>
-    <div class="role">${v.type||''} · ${v.city||''}</div>`;
-
-  document.getElementById('vt-main').innerHTML = `
-    <div class="field-row"><span class="lbl">Название</span><span class="val">${v.name||'—'}</span></div>
-    <div class="field-row"><span class="lbl">Тип</span><span class="val">${v.type||'—'}</span></div>
-    <div class="field-row"><span class="lbl">Город</span><span class="val">${v.city||'—'}</span></div>
-    <div class="field-row"><span class="lbl">Вместимость</span><span class="val">${v.capacity||'—'} чел</span></div>
-    <div class="field-row"><span class="lbl">Контакты</span><span class="val">${v.contacts||'—'}</span></div>
-    <div class="switch-row" style="margin-top:15px">
-      <div>
-        <div style="font-weight:700;font-size:14px">Запрет торгов</div>
-        <div style="font-size:11px;color:#6E6E73">Организаторы не смогут предложить свою цену</div>
-      </div>
-      <label class="switch">
-        <input type="checkbox" id="venue-nobargain" ${v.noBargain?'checked':''} onchange="toggleNoBargain(this.checked)">
-        <span class="slider-sw"></span>
-      </label>
-    </div>
-    <button class="btn-ghost" onclick="editVenueMain()" style="width:100%;margin-top:10px">Редактировать</button>`;
-
+  if(!currentVenue)return;
+  const v=currentVenue;
+  const initial=(v.name||'?')[0].toUpperCase();
+  const photoStyle=v.img?`style="background-image:url('${v.img}');cursor:pointer" onclick="openPhotoModal('${v.img}')"`:'';
+  document.getElementById('venue-profile-header').innerHTML=`<div class="avatar-lg" ${photoStyle}>${v.img?'':initial}</div><div class="name">${v.name||''}</div><div class="role">${v.type||''} · ${v.city||''}</div>`;
+  document.getElementById('vt-main').innerHTML=`<div class="field-row"><span class="lbl">Название</span><span class="val">${v.name||'—'}</span></div><div class="field-row"><span class="lbl">Тип</span><span class="val">${v.type||'—'}</span></div><div class="field-row"><span class="lbl">Город</span><span class="val">${v.city||'—'}</span></div><div class="field-row"><span class="lbl">Вместимость</span><span class="val">${v.capacity||'—'} чел</span></div><div class="field-row"><span class="lbl">Контакты</span><span class="val">${v.contacts||'—'}</span></div><div class="switch-row" style="margin-top:15px"><div><div style="font-weight:700;font-size:14px">Запрет торгов</div><div style="font-size:11px;color:#6E6E73">Организаторы не смогут предложить свою цену</div></div><label class="switch"><input type="checkbox" id="venue-nobargain" ${v.noBargain?'checked':''} onchange="toggleNoBargain(this.checked)"><span class="slider-sw"></span></label></div><button class="btn-ghost" onclick="editVenueMain()" style="width:100%;margin-top:10px">Редактировать</button>`;
   renderVenuePricingTab();
   renderVenueApplicationsTab();
 }
 
 function renderVenuePricingTab(){
-  const v = currentVenue;
-  const periods = venuePricing.filter(p => String(p.venueId) === String(v.id));
-  const cats = venueCategoryPricing.filter(c => String(c.venueId) === String(v.id));
-  const basePrice = Number(v.basePrice) || Number(v.price) || 0;
-  let periodsHTML = '';
-  if(periods.length){
-    periods.forEach(p => {
-      periodsHTML += `<div class="period-card">
-        <div class="pc-info">
-          <div class="pc-range">${p.dateFrom||''} — ${p.dateTo||''}</div>
-          ${p.note?`<div class="pc-range">${p.note}</div>`:''}
-        </div>
-        <div class="pc-price">${Number(p.price||0).toLocaleString()} ₽</div>
-        <div class="pc-close" onclick="deleteVenuePeriod(${p.id})">✕</div>
-      </div>`;
-    });
-  } else periodsHTML = '<p style="color:#6E6E73;font-size:13px;text-align:center;padding:10px">Нет периодных цен</p>';
-
-  let catsHTML = '';
-  if(cats.length){
-    cats.forEach(c => {
-      catsHTML += `<div class="period-card">
-        <div class="pc-info">
-          <div class="pc-range">${EVENT_TYPE_NAMES[c.eventType]||c.eventType}</div>
-          ${c.note?`<div class="pc-range">${c.note}</div>`:''}
-        </div>
-        <div class="pc-price">×${c.multiplier}</div>
-        <div class="pc-close" onclick="deleteVenueCategory(${c.id})">✕</div>
-      </div>`;
-    });
-  } else catsHTML = '<p style="color:#6E6E73;font-size:13px;text-align:center;padding:10px">Нет категорийных цен</p>';
-
-  document.getElementById('vt-pricing').innerHTML = `
-    <div style="background:#FFF;border-radius:14px;padding:16px;margin-bottom:12px">
-      <div style="font-weight:800;font-size:15px;margin-bottom:10px">Базовая цена</div>
-      <div style="font-size:24px;font-weight:900;color:#EC4899;margin-bottom:10px">${basePrice.toLocaleString()} ₽</div>
-      <button class="btn-ghost" onclick="editBasePrice()">Изменить</button>
-    </div>
-
-    <div style="background:#FFF;border-radius:14px;padding:16px;margin-bottom:12px">
-      <div style="font-weight:800;font-size:15px;margin-bottom:5px">Сезонный коэффициент</div>
-      <div style="font-size:12px;color:#6E6E73;margin-bottom:8px">Применяется в высокий сезон (июнь-август)</div>
-      <div class="price-slider">
-        <input type="range" id="venue-season" min="0.7" max="2" step="0.1" value="${Number(v.seasonMultiplier)||1}" oninput="document.getElementById('season-val').innerText='×'+this.value">
-      </div>
-      <div style="text-align:center;font-size:18px;font-weight:800;color:#EC4899" id="season-val">×${Number(v.seasonMultiplier)||1}</div>
-    </div>
-
-    <div style="background:#FFF;border-radius:14px;padding:16px;margin-bottom:12px">
-      <div style="font-weight:800;font-size:15px;margin-bottom:5px">Коэффициент выходных</div>
-      <div style="font-size:12px;color:#6E6E73;margin-bottom:8px">Применяется в субботу и воскресенье</div>
-      <div class="price-slider">
-        <input type="range" id="venue-weekend" min="0.7" max="2" step="0.1" value="${Number(v.weekendMultiplier)||1}" oninput="document.getElementById('weekend-val').innerText='×'+this.value">
-      </div>
-      <div style="text-align:center;font-size:18px;font-weight:800;color:#EC4899" id="weekend-val">×${Number(v.weekendMultiplier)||1}</div>
-    </div>
-
-    <button onclick="saveVenuePricing()" style="width:100%;margin-bottom:20px">Сохранить коэффициенты</button>
-
-    <div style="background:#FFF;border-radius:14px;padding:16px;margin-bottom:12px">
-      <div style="font-weight:800;font-size:15px;margin-bottom:10px">Цены под периоды</div>
-      <div style="font-size:12px;color:#6E6E73;margin-bottom:10px">Например: Новый год 25.12-10.01 → 250 000 ₽</div>
-      ${periodsHTML}
-      <button class="add-btn-full" onclick="addVenuePeriod()" style="margin-top:10px">+ Добавить период</button>
-    </div>
-
-    <div style="background:#FFF;border-radius:14px;padding:16px;margin-bottom:12px">
-      <div style="font-weight:800;font-size:15px;margin-bottom:10px">Супер-цены под тематику</div>
-      <div style="font-size:12px;color:#6E6E73;margin-bottom:10px">Например: Свадьба ×1.3, Детский ×0.8</div>
-      ${catsHTML}
-      <button class="add-btn-full" onclick="addVenueCategory()" style="margin-top:10px">+ Добавить категорию</button>
-    </div>`;
+  const v=currentVenue;
+  const periods=venuePricing.filter(p=>String(p.venueId)===String(v.id));
+  const cats=venueCategoryPricing.filter(c=>String(c.venueId)===String(v.id));
+  const basePrice=Number(v.basePrice)||Number(v.price)||0;
+  let periodsHTML='';
+  if(periods.length)periods.forEach(p=>{periodsHTML+=`<div class="period-card"><div class="pc-info"><div class="pc-range">${p.dateFrom||''} — ${p.dateTo||''}</div>${p.note?`<div class="pc-range">${p.note}</div>`:''}</div><div class="pc-price">${Number(p.price||0).toLocaleString()} ₽</div><div class="pc-close" onclick="deleteVenuePeriod(${p.id})">✕</div></div>`;});
+  else periodsHTML='<p style="color:#6E6E73;font-size:13px;text-align:center;padding:10px">Нет периодных цен</p>';
+  let catsHTML='';
+  if(cats.length)cats.forEach(c=>{catsHTML+=`<div class="period-card"><div class="pc-info"><div class="pc-range">${EVENT_TYPE_NAMES[c.eventType]||c.eventType}</div>${c.note?`<div class="pc-range">${c.note}</div>`:''}</div><div class="pc-price">×${c.multiplier}</div><div class="pc-close" onclick="deleteVenueCategory(${c.id})">✕</div></div>`;});
+  else catsHTML='<p style="color:#6E6E73;font-size:13px;text-align:center;padding:10px">Нет категорийных цен</p>';
+  document.getElementById('vt-pricing').innerHTML=`<div style="background:#FFF;border-radius:14px;padding:16px;margin-bottom:12px"><div style="font-weight:800;font-size:15px;margin-bottom:10px">Базовая цена</div><div style="font-size:24px;font-weight:900;color:#EC4899;margin-bottom:10px">${basePrice.toLocaleString()} ₽</div><button class="btn-ghost" onclick="editBasePrice()">Изменить</button></div><div style="background:#FFF;border-radius:14px;padding:16px;margin-bottom:12px"><div style="font-weight:800;font-size:15px;margin-bottom:5px">Сезонный коэффициент</div><div style="font-size:12px;color:#6E6E73;margin-bottom:8px">Высокий сезон (июнь-август)</div><div class="price-slider"><input type="range" id="venue-season" min="0.7" max="2" step="0.1" value="${Number(v.seasonMultiplier)||1}" oninput="document.getElementById('season-val').innerText='×'+this.value"></div><div style="text-align:center;font-size:18px;font-weight:800;color:#EC4899" id="season-val">×${Number(v.seasonMultiplier)||1}</div></div><div style="background:#FFF;border-radius:14px;padding:16px;margin-bottom:12px"><div style="font-weight:800;font-size:15px;margin-bottom:5px">Коэффициент выходных</div><div style="font-size:12px;color:#6E6E73;margin-bottom:8px">Суббота, воскресенье</div><div class="price-slider"><input type="range" id="venue-weekend" min="0.7" max="2" step="0.1" value="${Number(v.weekendMultiplier)||1}" oninput="document.getElementById('weekend-val').innerText='×'+this.value"></div><div style="text-align:center;font-size:18px;font-weight:800;color:#EC4899" id="weekend-val">×${Number(v.weekendMultiplier)||1}</div></div><button onclick="saveVenuePricing()" style="width:100%;margin-bottom:20px">Сохранить коэффициенты</button><div style="background:#FFF;border-radius:14px;padding:16px;margin-bottom:12px"><div style="font-weight:800;font-size:15px;margin-bottom:10px">Цены под периоды</div>${periodsHTML}<button class="add-btn-full" onclick="addVenuePeriod()" style="margin-top:10px">+ Добавить период</button></div><div style="background:#FFF;border-radius:14px;padding:16px;margin-bottom:12px"><div style="font-weight:800;font-size:15px;margin-bottom:10px">Супер-цены под тематику</div>${catsHTML}<button class="add-btn-full" onclick="addVenueCategory()" style="margin-top:10px">+ Добавить категорию</button></div>`;
 }
 
 function renderVenueApplicationsTab(){
-  const v = currentVenue;
-  const myApps = applications.filter(a => String(a.venueId) === String(v.id));
-  if(!myApps.length){
-    document.getElementById('vt-applications').innerHTML = '<div class="list-item"><div class="li-title">Пока нет заявок</div><div class="li-sub">Организаторы смогут запросить бронь через каталог</div></div>';
-    return;
-  }
-  let html = '';
-  myApps.slice().reverse().forEach(app => {
-    const venueResponse = app.venueResponse || '';
-    let statusHTML = '<div class="ac-status new" style="color:#EC4899">Новая заявка</div>';
-    if(venueResponse === 'accepted') statusHTML = '<div class="ac-status accepted">Принята</div>';
-    else if(venueResponse === 'declined') statusHTML = '<div class="ac-status declined">Отклонена</div>';
-    else if(venueResponse === 'counter') statusHTML = `<div class="ac-status counter">Встречное: ${Number(app.venuePrice).toLocaleString()} ₽</div>`;
-
-    html += `<div class="app-card">
-      ${statusHTML}
-      <div class="ac-title">${EVENT_TYPE_NAMES[app.eventType]||app.eventType||'Событие'}</div>
-      <div class="ac-meta">📅 ${app.date||''} · 👥 ${app.guests||'—'} гостей</div>
-      ${app.budget && app.type === 'venue-offer' ? `<div class="ac-meta" style="color:#FF9800;font-weight:700">Организатор предлагает: ${Number(app.budget).toLocaleString()} ₽</div>` : ''}
-      <div class="ac-meta" style="margin-top:6px;color:#999">От: ${app.organizerName||'Организатор'}</div>
-      ${!venueResponse || venueResponse === '' ? `
-        <div class="ac-actions">
-          <button class="btn-secondary" onclick="venueRespond(${app.id},'declined')">Отклонить</button>
-          <button class="btn-secondary" onclick="venueCounterOffer(${app.id})">Своя цена</button>
-          <button onclick="venueRespond(${app.id},'accepted')">Принять</button>
-        </div>` : ''}
-    </div>`;
+  const v=currentVenue;
+  const myApps=applications.filter(a=>String(a.venueId)===String(v.id));
+  if(!myApps.length){document.getElementById('vt-applications').innerHTML='<div class="list-item"><div class="li-title">Пока нет заявок</div><div class="li-sub">Организаторы смогут запросить бронь</div></div>';return;}
+  let html='';
+  myApps.slice().reverse().forEach(app=>{
+    const venueResponse=app.venueResponse||'';
+    let statusHTML='<div class="ac-status new" style="color:#EC4899">Новая заявка</div>';
+    if(venueResponse==='accepted')statusHTML='<div class="ac-status accepted">Принята</div>';
+    else if(venueResponse==='declined')statusHTML='<div class="ac-status declined">Отклонена</div>';
+    else if(venueResponse==='counter')statusHTML=`<div class="ac-status counter">Встречное: ${Number(app.venuePrice).toLocaleString()} ₽</div>`;
+    html+=`<div class="app-card">${statusHTML}<div class="ac-title">${EVENT_TYPE_NAMES[app.eventType]||app.eventType||'Событие'}</div><div class="ac-meta">📅 ${app.date||''} · 👥 ${app.guests||'—'} гостей</div>${app.budget&&app.type==='venue-offer'?`<div class="ac-meta" style="color:#FF9800;font-weight:700">Организатор предлагает: ${Number(app.budget).toLocaleString()} ₽</div>`:''}<div class="ac-meta" style="margin-top:6px;color:#999">От: ${app.organizerName||'Организатор'}</div>${!venueResponse?`<div class="ac-actions"><button class="btn-secondary" onclick="venueRespond(${app.id},'declined')">Отклонить</button><button class="btn-secondary" onclick="venueCounterOffer(${app.id})">Своя цена</button><button onclick="venueRespond(${app.id},'accepted')">Принять</button></div>`:''}</div>`;
   });
-  document.getElementById('vt-applications').innerHTML = html;
+  document.getElementById('vt-applications').innerHTML=html;
 }
 
 function switchVenueTab(el,panel){
@@ -2018,163 +1143,74 @@ function switchVenueTab(el,panel){
   document.querySelectorAll('#screen-venue-profile .tab-panel').forEach(p=>p.classList.remove('active'));
   el.classList.add('active');
   document.getElementById(panel).classList.add('active');
+  const tabsBar=el.parentElement;
+  if(tabsBar)tabsBar.scrollLeft=el.offsetLeft-(tabsBar.clientWidth/2)+(el.offsetWidth/2);
+  const scr=document.getElementById('screen-venue-profile');
+  if(scr)scr.scrollTop=0;
 }
 
-async function toggleNoBargain(checked){
-  await saveVenueField({ noBargain: checked });
-}
+async function toggleNoBargain(checked){await saveVenueField({noBargain:checked});}
 
 function editBasePrice(){
-  const v = currentVenue;
-  const current = Number(v.basePrice) || Number(v.price) || 0;
-  const val = prompt('Новая базовая цена, ₽:', current);
-  if(!val) return;
-  saveVenueField({ basePrice: Number(val) });
+  const v=currentVenue;
+  const current=Number(v.basePrice)||Number(v.price)||0;
+  const val=prompt('Новая базовая цена, ₽:',current);
+  if(!val)return;
+  saveVenueField({basePrice:Number(val)});
 }
+
 function editVenueMain(){
-  const v = currentVenue;
-  openModal(`
-    <h3>Редактировать площадку</h3>
-    <div class="form-group"><label>Название</label><input id="ev-name" value="${v.name||''}"></div>
-    <div class="form-group"><label>Город</label><input id="ev-city" value="${v.city||''}"></div>
-    <div class="form-group"><label>Вместимость</label><input id="ev-capacity" type="number" value="${v.capacity||''}"></div>
-    <div class="form-group"><label>Фото (URL)</label><input id="ev-img" value="${v.img||''}"></div>
-    <div class="form-group"><label>Контакты</label><input id="ev-contacts" value="${v.contacts||''}"></div>
-    <button onclick="saveVenueMain()" style="width:100%">Сохранить</button>
-  `);
+  const v=currentVenue;
+  openModal(`<h3>Редактировать</h3><div class="form-group"><label>Название</label><input id="ev-name" value="${v.name||''}"></div><div class="form-group"><label>Город</label><input id="ev-city" value="${v.city||''}"></div><div class="form-group"><label>Вместимость</label><input id="ev-capacity" type="number" value="${v.capacity||''}"></div><div class="form-group"><label>Фото (URL)</label><input id="ev-img" value="${v.img||''}"></div><div class="form-group"><label>Контакты</label><input id="ev-contacts" value="${v.contacts||''}"></div><button onclick="saveVenueMain()" style="width:100%">Сохранить</button>`);
 }
 async function saveVenueMain(){
-  const fields = {
-    name: document.getElementById('ev-name').value,
-    city: document.getElementById('ev-city').value,
-    capacity: document.getElementById('ev-capacity').value,
-    img: document.getElementById('ev-img').value,
-    contacts: document.getElementById('ev-contacts').value
-  };
-  await saveVenueField(fields);
-  closeModal();
+  const fields={name:document.getElementById('ev-name').value,city:document.getElementById('ev-city').value,capacity:document.getElementById('ev-capacity').value,img:document.getElementById('ev-img').value,contacts:document.getElementById('ev-contacts').value};
+  await saveVenueField(fields);closeModal();
 }
 async function saveVenuePricing(){
-  const season = Number(document.getElementById('venue-season').value) || 1;
-  const weekend = Number(document.getElementById('venue-weekend').value) || 1;
-  await saveVenueField({ seasonMultiplier: season, weekendMultiplier: weekend });
+  const season=Number(document.getElementById('venue-season').value)||1;
+  const weekend=Number(document.getElementById('venue-weekend').value)||1;
+  await saveVenueField({seasonMultiplier:season,weekendMultiplier:weekend});
 }
 async function saveVenueField(fields){
-  try {
-    const r = await fetch(SHEET_API_URL, { method:'POST', body:JSON.stringify({
-      action:'updateVenue', venueId: currentVenue.id, fields
-    })});
-    const res = await r.json();
-    if(res.success){
-      Object.assign(currentVenue, fields);
-      showToast('Сохранено');
-      await loadData();
-      currentVenue = venues.find(v => String(v.id) === String(currentVenue.id)) || currentVenue;
-      renderVenueProfile();
-    } else showToast('Ошибка');
-  } catch(e){ showToast('Ошибка сети'); }
+  try{const r=await fetch(SHEET_API_URL,{method:'POST',body:JSON.stringify({action:'updateVenue',venueId:currentVenue.id,fields})});const res=await r.json();if(res.success){Object.assign(currentVenue,fields);showToast('Сохранено');await loadData();currentVenue=venues.find(v=>String(v.id)===String(currentVenue.id))||currentVenue;renderVenueProfile();}else showToast('Ошибка');}catch(e){showToast('Ошибка сети');}
 }
 
 function addVenuePeriod(){
-  openModal(`
-    <h3>Добавить период</h3>
-    <div class="form-group"><label>Дата с</label><input type="date" id="vp-from"></div>
-    <div class="form-group"><label>Дата по</label><input type="date" id="vp-to"></div>
-    <div class="form-group"><label>Цена, ₽</label><input type="number" id="vp-price" value="100000"></div>
-    <div class="form-group"><label>Комментарий</label><input id="vp-note" placeholder="Новый год, лето и т.д."></div>
-    <button onclick="submitVenuePeriod()" style="width:100%">Добавить</button>
-  `);
+  openModal(`<h3>Добавить период</h3><div class="form-group"><label>Дата с</label><input type="date" id="vp-from"></div><div class="form-group"><label>Дата по</label><input type="date" id="vp-to"></div><div class="form-group"><label>Цена, ₽</label><input type="number" id="vp-price" value="100000"></div><div class="form-group"><label>Комментарий</label><input id="vp-note" placeholder="Новый год, лето..."></div><button onclick="submitVenuePeriod()" style="width:100%">Добавить</button>`);
 }
 async function submitVenuePeriod(){
-  const body = {
-    action: 'addVenuePeriodPrice',
-    venueId: currentVenue.id,
-    dateFrom: document.getElementById('vp-from').value,
-    dateTo: document.getElementById('vp-to').value,
-    price: document.getElementById('vp-price').value,
-    note: document.getElementById('vp-note').value
-  };
-  try {
-    const r = await fetch(SHEET_API_URL, { method:'POST', body:JSON.stringify(body) });
-    const res = await r.json();
-    if(res.success){ showToast('Добавлено'); closeModal(); await loadData(); currentVenue = venues.find(v => String(v.id) === String(currentVenue.id)); renderVenueProfile(); }
-    else showToast('Ошибка');
-  } catch(e){ showToast('Ошибка сети'); }
+  const body={action:'addVenuePeriodPrice',venueId:currentVenue.id,dateFrom:document.getElementById('vp-from').value,dateTo:document.getElementById('vp-to').value,price:document.getElementById('vp-price').value,note:document.getElementById('vp-note').value};
+  try{const r=await fetch(SHEET_API_URL,{method:'POST',body:JSON.stringify(body)});const res=await r.json();if(res.success){showToast('Добавлено');closeModal();await loadData();currentVenue=venues.find(v=>String(v.id)===String(currentVenue.id));renderVenueProfile();}else showToast('Ошибка');}catch(e){showToast('Ошибка сети');}
 }
 async function deleteVenuePeriod(id){
-  if(!confirm('Удалить период?')) return;
-  try {
-    const r = await fetch(SHEET_API_URL, { method:'POST', body:JSON.stringify({action:'deleteVenuePeriodPrice', id}) });
-    const res = await r.json();
-    if(res.success){ showToast('Удалено'); await loadData(); currentVenue = venues.find(v => String(v.id) === String(currentVenue.id)); renderVenueProfile(); }
-  } catch(e){ showToast('Ошибка сети'); }
+  if(!confirm('Удалить период?'))return;
+  try{const r=await fetch(SHEET_API_URL,{method:'POST',body:JSON.stringify({action:'deleteVenuePeriodPrice',id})});const res=await r.json();if(res.success){showToast('Удалено');await loadData();currentVenue=venues.find(v=>String(v.id)===String(currentVenue.id));renderVenueProfile();}}catch(e){showToast('Ошибка сети');}
 }
 
 function addVenueCategory(){
-  openModal(`
-    <h3>Добавить категорию</h3>
-    <div class="form-group"><label>Тип события</label><select id="vc-type">
-      ${Object.keys(EVENT_TYPE_NAMES).map(k=>`<option value="${k}">${EVENT_TYPE_NAMES[k]}</option>`).join('')}
-    </select></div>
-    <div class="form-group"><label>Множитель (0.5–2.0)</label><input type="number" id="vc-mult" value="1.3" step="0.1" min="0.5" max="2.0"></div>
-    <div class="form-group"><label>Комментарий</label><input id="vc-note" placeholder="Сезон свадеб и т.д."></div>
-    <button onclick="submitVenueCategory()" style="width:100%">Добавить</button>
-  `);
+  openModal(`<h3>Категория</h3><div class="form-group"><label>Тип события</label><select id="vc-type">${Object.keys(EVENT_TYPE_NAMES).map(k=>`<option value="${k}">${EVENT_TYPE_NAMES[k]}</option>`).join('')}</select></div><div class="form-group"><label>Множитель (0.5–2.0)</label><input type="number" id="vc-mult" value="1.3" step="0.1" min="0.5" max="2.0"></div><div class="form-group"><label>Комментарий</label><input id="vc-note"></div><button onclick="submitVenueCategory()" style="width:100%">Добавить</button>`);
 }
 async function submitVenueCategory(){
-  const body = {
-    action: 'addVenueCategoryPrice',
-    venueId: currentVenue.id,
-    eventType: document.getElementById('vc-type').value,
-    multiplier: document.getElementById('vc-mult').value,
-    note: document.getElementById('vc-note').value
-  };
-  try {
-    const r = await fetch(SHEET_API_URL, { method:'POST', body:JSON.stringify(body) });
-    const res = await r.json();
-    if(res.success){ showToast('Добавлено'); closeModal(); await loadData(); currentVenue = venues.find(v => String(v.id) === String(currentVenue.id)); renderVenueProfile(); }
-    else showToast('Ошибка');
-  } catch(e){ showToast('Ошибка сети'); }
+  const body={action:'addVenueCategoryPrice',venueId:currentVenue.id,eventType:document.getElementById('vc-type').value,multiplier:document.getElementById('vc-mult').value,note:document.getElementById('vc-note').value};
+  try{const r=await fetch(SHEET_API_URL,{method:'POST',body:JSON.stringify(body)});const res=await r.json();if(res.success){showToast('Добавлено');closeModal();await loadData();currentVenue=venues.find(v=>String(v.id)===String(currentVenue.id));renderVenueProfile();}else showToast('Ошибка');}catch(e){showToast('Ошибка сети');}
 }
 async function deleteVenueCategory(id){
-  if(!confirm('Удалить категорию?')) return;
-  try {
-    const r = await fetch(SHEET_API_URL, { method:'POST', body:JSON.stringify({action:'deleteVenueCategoryPrice', id}) });
-    const res = await r.json();
-    if(res.success){ showToast('Удалено'); await loadData(); currentVenue = venues.find(v => String(v.id) === String(currentVenue.id)); renderVenueProfile(); }
-  } catch(e){ showToast('Ошибка сети'); }
+  if(!confirm('Удалить категорию?'))return;
+  try{const r=await fetch(SHEET_API_URL,{method:'POST',body:JSON.stringify({action:'deleteVenueCategoryPrice',id})});const res=await r.json();if(res.success){showToast('Удалено');await loadData();currentVenue=venues.find(v=>String(v.id)===String(currentVenue.id));renderVenueProfile();}}catch(e){showToast('Ошибка сети');}
 }
 
-async function venueRespond(appId, response){
-  await sendVenueResponse(appId, response, '');
-}
+async function venueRespond(appId,response){await sendVenueResponse(appId,response,'','');}
 function venueCounterOffer(appId){
-  openModal(`
-    <h3>Встречное предложение</h3>
-    <div class="form-group"><label>Ваша цена, ₽</label><input type="number" id="counter-price" value="100000"></div>
-    <div class="form-group"><label>Комментарий</label><textarea id="counter-note" placeholder="При каких условиях..."></textarea></div>
-    <button onclick="submitCounterOffer(${appId})" style="width:100%">Отправить</button>
-  `);
+  openModal(`<h3>Встречное предложение</h3><div class="form-group"><label>Ваша цена, ₽</label><input type="number" id="counter-price" value="100000"></div><div class="form-group"><label>Комментарий</label><textarea id="counter-note" placeholder="При каких условиях..."></textarea></div><button onclick="submitCounterOffer(${appId})" style="width:100%">Отправить</button>`);
 }
 async function submitCounterOffer(appId){
-  const price = document.getElementById('counter-price').value;
-  const note = document.getElementById('counter-note').value;
-  await sendVenueResponse(appId, 'counter', price, note);
+  const price=document.getElementById('counter-price').value;
+  const note=document.getElementById('counter-note').value;
+  await sendVenueResponse(appId,'counter',price,note);
 }
-async function sendVenueResponse(appId, response, price, note){
-  try {
-    const r = await fetch(SHEET_API_URL, { method:'POST', body:JSON.stringify({
-      action:'venueRespondApplication', applicationId: appId, response, price, note
-    })});
-    const res = await r.json();
-    if(res.success){
-      showToast(response === 'accepted' ? 'Принято' : response === 'declined' ? 'Отклонено' : 'Встречное отправлено');
-      closeModal();
-      await loadData();
-      currentVenue = venues.find(v => String(v.id) === String(currentVenue.id));
-      renderVenueProfile();
-    } else showToast('Ошибка');
-  } catch(e){ showToast('Ошибка сети'); }
+async function sendVenueResponse(appId,response,price,note){
+  try{const r=await fetch(SHEET_API_URL,{method:'POST',body:JSON.stringify({action:'venueRespondApplication',applicationId:appId,response,price,note})});const res=await r.json();if(res.success){showToast(response==='accepted'?'Принято':response==='declined'?'Отклонено':'Встречное отправлено');closeModal();await loadData();currentVenue=venues.find(v=>String(v.id)===String(currentVenue.id));renderVenueProfile();}else showToast('Ошибка');}catch(e){showToast('Ошибка сети');}
 }
 
 loadData();
