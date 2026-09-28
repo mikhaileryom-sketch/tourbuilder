@@ -118,12 +118,13 @@ button:disabled{opacity:.5;cursor:not-allowed}
 .howto-content h3{margin:0 0 4px;font-size:16px;color:#1A1A1A}
 .howto-content p{margin:0;font-size:13px;color:#6E6E73;line-height:1.4}
 /* PROFILE */
-#screen-profile{background:#F5F5F7;padding:0;justify-content:flex-start !important;overflow-y:auto}
+#screen-profile{background:#F5F5F7;padding:0;overflow-y:auto;-webkit-overflow-scrolling:touch}
+#screen-profile.active{display:block !important}
 .profile-header{width:100%;background:#FFF;padding:20px;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;border-bottom:1px solid #E5E5EA}
 .profile-header .avatar-lg{width:90px;height:90px;background-color:#FCE7F3;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background-size:cover;background-position:center;border:3px solid #EC4899;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:900;margin-bottom:12px;color:#EC4899}
 .profile-header .name{font-size:22px;font-weight:800}
 .profile-header .role{font-size:13px;color:#6E6E73;margin-top:4px}
-.profile-tabs{display:flex;width:100%;overflow-x:auto;background:#FFF;border-bottom:1px solid #E5E5EA;position:sticky;top:0;z-index:100;-webkit-overflow-scrolling:touch}
+.profile-tabs{display:flex;width:100%;overflow-x:auto;background:#FFF;border-bottom:1px solid #E5E5EA;position:sticky;top:0;z-index:100;-webkit-overflow-scrolling:touch;scroll-behavior:smooth}
 .profile-tabs::-webkit-scrollbar{display:none}
 .profile-tab{padding:14px 14px;font-size:12px;color:#6E6E73;cursor:pointer;white-space:nowrap;border-bottom:3px solid transparent;flex-shrink:0}
 .profile-tab.active{color:#EC4899;border-bottom-color:#EC4899;font-weight:700}
@@ -188,8 +189,10 @@ button:disabled{opacity:.5;cursor:not-allowed}
 .project-card .pc-type.closed-type{color:#2196F3}
 .project-card .pc-meta{font-size:12px;color:#6E6E73;line-height:1.5}
 /* VENUE PROFILE / TABS */
-#screen-venue-profile{background:#F5F5F7;padding:0;justify-content:flex-start !important;overflow-y:auto}
-.venue-tabs{display:flex;width:100%;overflow-x:auto;background:#FFF;border-bottom:1px solid #E5E5EA;position:sticky;top:0;z-index:100}
+#screen-venue-profile{background:#F5F5F7;padding:0;overflow-y:auto;-webkit-overflow-scrolling:touch}
+#screen-venue-profile.active{display:block !important}
+.venue-tabs{display:flex;width:100%;overflow-x:auto;background:#FFF;border-bottom:1px solid #E5E5EA;position:sticky;top:0;z-index:100;-webkit-overflow-scrolling:touch;scroll-behavior:smooth}
+.venue-tabs::-webkit-scrollbar{display:none}
 .venue-tab{padding:14px 18px;font-size:13px;color:#6E6E73;cursor:pointer;white-space:nowrap;border-bottom:3px solid transparent;flex-shrink:0}
 .venue-tab.active{color:#EC4899;border-bottom-color:#EC4899;font-weight:700}
 .venue-content{width:100%;padding:16px;box-sizing:border-box}
@@ -407,7 +410,7 @@ if (window.Telegram && window.Telegram.WebApp) {
   tgUser = tg.initDataUnsafe && tg.initDataUnsafe.user ? tg.initDataUnsafe.user : null;
 }
 
-const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbzcxwuTSnxvkIb8ToPmThzW3Muj9c5yBCgvH46WEf8aVrxKLeAoEAaszNDo_pu4CGes/exec';
+const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbyU4gIFXop6c88N2tiLpYmXwh06ViZbtdS9RGZtKCWBL3L9i62cLps8V4P3ERycguah/exec';
 
 const ROLE_ICONS = {
   dancer:'fa-person-running', ballet:'fa-child-reaching', singer:'fa-microphone',
