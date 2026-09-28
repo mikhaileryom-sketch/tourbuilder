@@ -1779,4 +1779,402 @@ function editMain(){
 
 async function saveMain(){
   const fields = {
-    name: document.getElementById('e
+    name: document.getElementById('e-name').value,
+    img: document.getElementById('e-img').value,
+    bio: document.getElementById('e-bio').value,
+    role: document.getElementById('e-role').value,
+    spec: document.getElementById('e-spec').value,
+    city: document.getElementById('e-city').value,
+    contacts: document.getElementById('e-contacts').value,
+    price: Number(document.getElementById('e-price').value) || 0,
+    travelScope: document.getElementById('e-travel').value,
+    visaType: document.getElementById('e-visa').value,
+    visaValidUntil: document.getElementById('e-visaUntil').value,
+    needsVisaSupport: document.getElementById('e-visaHelp').value === 'true'
+  };
+  try {
+    const r = await fetch(SHEET_API_URL, { method:'POST', body:JSON.stringify({action:'updateArtist',artistId:currentArtist.id,fields}) });
+    const res = await r.json();
+    if(res.success){ Object.assign(currentArtist, fields); showToast('Сохранено'); closeModal(); renderProfile(); loadData(); }
+    else showToast('Ошибка');
+  } catch(e){ showToast('Ошибка сети'); }
+}
+
+function addItem(type){
+  const title = {media:'Медиа',experience:'Опыт',education:'Образование',inventory:'Инвентарь',costumes:'Костюмы'}[type]||type;
+  openModal(`<h3>Добавить: ${title}</h3>
+    <div class="form-group"><label>Название / ссылка</label><input id="add-val"></div>
+    <div class="form-group"><label>Описание</label><textarea id="add-desc"></textarea></div>
+    <button onclick="saveItem('${type}')" style="width:100%">Добавить</button>
+  `);
+}
+async function saveItem(type){
+  const val = document.getElementById('add-val').value;
+  const desc = document.getElementById('add-desc').value;
+  if(!val) return showToast('Введите значение');
+  const map = {media:'addMedia',experience:'addExperience',education:'addEducation',inventory:'addInventory',costumes:'addCostume'};
+  try {
+    const r = await fetch(SHEET_API_URL, { method:'POST', body:JSON.stringify({action:map[type]||'addMedia',artistId:currentArtist.id,name:val,description:desc,url:val}) });
+    const res = await r.json();
+    if(res.success){ showToast('Добавлено'); closeModal(); await loadProfileExtras(); renderProfile(); }
+    else showToast('Ошибка');
+  } catch(e){ showToast('Ошибка сети'); }
+}
+
+/* ============ VENUE PROFILE (кабинет владельца) ============ */
+async function openVenueProfileOrCreate(){
+  if(!tgUser){ showToast('Откройте через Telegram'); return; }
+  const tgId = String(tgUser.id);
+  const myVenue = venues.find(v => String(v.ownerTelegramId) === tgId);
+  if(myVenue){ currentVenue = myVenue; navigateTo('screen-venue-profile'); renderVenueProfile(); }
+  else openCreateVenueForm();
+}
+
+function openCreateVenueForm(){
+  openModal(`
+    <h3>Создать профиль площадки</h3>
+    <div class="form-group"><label>Название *</label><input id="cv-name" placeholder="Дом Музыки"></div>
+    <div class="form-group"><label>Город *</label><input id="cv-city" placeholder="Москва"></div>
+    <div class="form-group"><label>Тип</label><select id="cv-type">
+      <option value="Театр">Театр</option><option value="Клуб">Клуб</option>
+      <option value="ДК">ДК</option><option value="Отель">Отель</option>
+      <option value="Усадьба">Усадьба</option><option value="Лофт">Лофт</option>
+      <option value="Концертный зал">Концертный зал</option><option value="Другое">Другое</option>
+    </select></div>
+    <div class="form-group"><label>Вместимость, чел</label><input id="cv-capacity" type="number" value="200"></div>
+    <div class="form-group"><label>Базовая цена аренды, ₽</label><input id="cv-price" type="number" value="50000"></div>
+    <div class="form-group"><label>Фото (URL)</label><input id="cv-img" type="url" placeholder="https://..."></div>
+    <div class="form-group"><label>Контакты</label><input id="cv-contacts" placeholder="@username"></div>
+    <button onclick="submitCreateVenue()" style="width:100%">Создать площадку</button>
+  `);
+}
+
+async function submitCreateVenue(){
+  const name = document.getElementById('cv-name').value;
+  const city = document.getElementById('cv-city').value;
+  if(!name){ showToast('Введите название'); return; }
+  if(!city){ showToast('Укажите город'); return; }
+  const body = {
+    action: 'createVenue', telegramId: String(tgUser.id),
+    name, city,
+    type: document.getElementById('cv-type').value,
+    capacity: document.getElementById('cv-capacity').value,
+    basePrice: document.getElementById('cv-price').value,
+    img: document.getElementById('cv-img').value,
+    contacts: document.getElementById('cv-contacts').value
+  };
+  try {
+    const r = await fetch(SHEET_API_URL, { method:'POST', body:JSON.stringify(body) });
+    const res = await r.json();
+    if(res.success){ showToast('Площадка создана!'); closeModal(); await loadData(); await openVenueProfileOrCreate(); }
+    else showToast('Ошибка: '+(res.error||''));
+  } catch(e){ showToast('Ошибка сети'); }
+}
+
+function renderVenueProfile(){
+  if(!currentVenue) return;
+  const v = currentVenue;
+  const initial = (v.name||'?')[0].toUpperCase();
+  const photoStyle = v.img ? `style="background-image:url('${v.img}');cursor:pointer" onclick="openPhotoModal('${v.img}')"` : '';
+  document.getElementById('venue-profile-header').innerHTML = `
+    <div class="avatar-lg" ${photoStyle}>${v.img?'':initial}</div>
+    <div class="name">${v.name||''}</div>
+    <div class="role">${v.type||''} · ${v.city||''}</div>`;
+
+  document.getElementById('vt-main').innerHTML = `
+    <div class="field-row"><span class="lbl">Название</span><span class="val">${v.name||'—'}</span></div>
+    <div class="field-row"><span class="lbl">Тип</span><span class="val">${v.type||'—'}</span></div>
+    <div class="field-row"><span class="lbl">Город</span><span class="val">${v.city||'—'}</span></div>
+    <div class="field-row"><span class="lbl">Вместимость</span><span class="val">${v.capacity||'—'} чел</span></div>
+    <div class="field-row"><span class="lbl">Контакты</span><span class="val">${v.contacts||'—'}</span></div>
+    <div class="switch-row" style="margin-top:15px">
+      <div>
+        <div style="font-weight:700;font-size:14px">Запрет торгов</div>
+        <div style="font-size:11px;color:#6E6E73">Организаторы не смогут предложить свою цену</div>
+      </div>
+      <label class="switch">
+        <input type="checkbox" id="venue-nobargain" ${v.noBargain?'checked':''} onchange="toggleNoBargain(this.checked)">
+        <span class="slider-sw"></span>
+      </label>
+    </div>
+    <button class="btn-ghost" onclick="editVenueMain()" style="width:100%;margin-top:10px">Редактировать</button>`;
+
+  renderVenuePricingTab();
+  renderVenueApplicationsTab();
+}
+
+function renderVenuePricingTab(){
+  const v = currentVenue;
+  const periods = venuePricing.filter(p => String(p.venueId) === String(v.id));
+  const cats = venueCategoryPricing.filter(c => String(c.venueId) === String(v.id));
+  const basePrice = Number(v.basePrice) || Number(v.price) || 0;
+  let periodsHTML = '';
+  if(periods.length){
+    periods.forEach(p => {
+      periodsHTML += `<div class="period-card">
+        <div class="pc-info">
+          <div class="pc-range">${p.dateFrom||''} — ${p.dateTo||''}</div>
+          ${p.note?`<div class="pc-range">${p.note}</div>`:''}
+        </div>
+        <div class="pc-price">${Number(p.price||0).toLocaleString()} ₽</div>
+        <div class="pc-close" onclick="deleteVenuePeriod(${p.id})">✕</div>
+      </div>`;
+    });
+  } else periodsHTML = '<p style="color:#6E6E73;font-size:13px;text-align:center;padding:10px">Нет периодных цен</p>';
+
+  let catsHTML = '';
+  if(cats.length){
+    cats.forEach(c => {
+      catsHTML += `<div class="period-card">
+        <div class="pc-info">
+          <div class="pc-range">${EVENT_TYPE_NAMES[c.eventType]||c.eventType}</div>
+          ${c.note?`<div class="pc-range">${c.note}</div>`:''}
+        </div>
+        <div class="pc-price">×${c.multiplier}</div>
+        <div class="pc-close" onclick="deleteVenueCategory(${c.id})">✕</div>
+      </div>`;
+    });
+  } else catsHTML = '<p style="color:#6E6E73;font-size:13px;text-align:center;padding:10px">Нет категорийных цен</p>';
+
+  document.getElementById('vt-pricing').innerHTML = `
+    <div style="background:#FFF;border-radius:14px;padding:16px;margin-bottom:12px">
+      <div style="font-weight:800;font-size:15px;margin-bottom:10px">Базовая цена</div>
+      <div style="font-size:24px;font-weight:900;color:#EC4899;margin-bottom:10px">${basePrice.toLocaleString()} ₽</div>
+      <button class="btn-ghost" onclick="editBasePrice()">Изменить</button>
+    </div>
+
+    <div style="background:#FFF;border-radius:14px;padding:16px;margin-bottom:12px">
+      <div style="font-weight:800;font-size:15px;margin-bottom:5px">Сезонный коэффициент</div>
+      <div style="font-size:12px;color:#6E6E73;margin-bottom:8px">Применяется в высокий сезон (июнь-август)</div>
+      <div class="price-slider">
+        <input type="range" id="venue-season" min="0.7" max="2" step="0.1" value="${Number(v.seasonMultiplier)||1}" oninput="document.getElementById('season-val').innerText='×'+this.value">
+      </div>
+      <div style="text-align:center;font-size:18px;font-weight:800;color:#EC4899" id="season-val">×${Number(v.seasonMultiplier)||1}</div>
+    </div>
+
+    <div style="background:#FFF;border-radius:14px;padding:16px;margin-bottom:12px">
+      <div style="font-weight:800;font-size:15px;margin-bottom:5px">Коэффициент выходных</div>
+      <div style="font-size:12px;color:#6E6E73;margin-bottom:8px">Применяется в субботу и воскресенье</div>
+      <div class="price-slider">
+        <input type="range" id="venue-weekend" min="0.7" max="2" step="0.1" value="${Number(v.weekendMultiplier)||1}" oninput="document.getElementById('weekend-val').innerText='×'+this.value">
+      </div>
+      <div style="text-align:center;font-size:18px;font-weight:800;color:#EC4899" id="weekend-val">×${Number(v.weekendMultiplier)||1}</div>
+    </div>
+
+    <button onclick="saveVenuePricing()" style="width:100%;margin-bottom:20px">Сохранить коэффициенты</button>
+
+    <div style="background:#FFF;border-radius:14px;padding:16px;margin-bottom:12px">
+      <div style="font-weight:800;font-size:15px;margin-bottom:10px">Цены под периоды</div>
+      <div style="font-size:12px;color:#6E6E73;margin-bottom:10px">Например: Новый год 25.12-10.01 → 250 000 ₽</div>
+      ${periodsHTML}
+      <button class="add-btn-full" onclick="addVenuePeriod()" style="margin-top:10px">+ Добавить период</button>
+    </div>
+
+    <div style="background:#FFF;border-radius:14px;padding:16px;margin-bottom:12px">
+      <div style="font-weight:800;font-size:15px;margin-bottom:10px">Супер-цены под тематику</div>
+      <div style="font-size:12px;color:#6E6E73;margin-bottom:10px">Например: Свадьба ×1.3, Детский ×0.8</div>
+      ${catsHTML}
+      <button class="add-btn-full" onclick="addVenueCategory()" style="margin-top:10px">+ Добавить категорию</button>
+    </div>`;
+}
+
+function renderVenueApplicationsTab(){
+  const v = currentVenue;
+  const myApps = applications.filter(a => String(a.venueId) === String(v.id));
+  if(!myApps.length){
+    document.getElementById('vt-applications').innerHTML = '<div class="list-item"><div class="li-title">Пока нет заявок</div><div class="li-sub">Организаторы смогут запросить бронь через каталог</div></div>';
+    return;
+  }
+  let html = '';
+  myApps.slice().reverse().forEach(app => {
+    const venueResponse = app.venueResponse || '';
+    let statusHTML = '<div class="ac-status new" style="color:#EC4899">Новая заявка</div>';
+    if(venueResponse === 'accepted') statusHTML = '<div class="ac-status accepted">Принята</div>';
+    else if(venueResponse === 'declined') statusHTML = '<div class="ac-status declined">Отклонена</div>';
+    else if(venueResponse === 'counter') statusHTML = `<div class="ac-status counter">Встречное: ${Number(app.venuePrice).toLocaleString()} ₽</div>`;
+
+    html += `<div class="app-card">
+      ${statusHTML}
+      <div class="ac-title">${EVENT_TYPE_NAMES[app.eventType]||app.eventType||'Событие'}</div>
+      <div class="ac-meta">📅 ${app.date||''} · 👥 ${app.guests||'—'} гостей</div>
+      ${app.budget && app.type === 'venue-offer' ? `<div class="ac-meta" style="color:#FF9800;font-weight:700">Организатор предлагает: ${Number(app.budget).toLocaleString()} ₽</div>` : ''}
+      <div class="ac-meta" style="margin-top:6px;color:#999">От: ${app.organizerName||'Организатор'}</div>
+      ${!venueResponse || venueResponse === '' ? `
+        <div class="ac-actions">
+          <button class="btn-secondary" onclick="venueRespond(${app.id},'declined')">Отклонить</button>
+          <button class="btn-secondary" onclick="venueCounterOffer(${app.id})">Своя цена</button>
+          <button onclick="venueRespond(${app.id},'accepted')">Принять</button>
+        </div>` : ''}
+    </div>`;
+  });
+  document.getElementById('vt-applications').innerHTML = html;
+}
+
+function switchVenueTab(el,panel){
+  document.querySelectorAll('.venue-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('#screen-venue-profile .tab-panel').forEach(p=>p.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById(panel).classList.add('active');
+}
+
+async function toggleNoBargain(checked){
+  await saveVenueField({ noBargain: checked });
+}
+
+function editBasePrice(){
+  const v = currentVenue;
+  const current = Number(v.basePrice) || Number(v.price) || 0;
+  const val = prompt('Новая базовая цена, ₽:', current);
+  if(!val) return;
+  saveVenueField({ basePrice: Number(val) });
+}
+function editVenueMain(){
+  const v = currentVenue;
+  openModal(`
+    <h3>Редактировать площадку</h3>
+    <div class="form-group"><label>Название</label><input id="ev-name" value="${v.name||''}"></div>
+    <div class="form-group"><label>Город</label><input id="ev-city" value="${v.city||''}"></div>
+    <div class="form-group"><label>Вместимость</label><input id="ev-capacity" type="number" value="${v.capacity||''}"></div>
+    <div class="form-group"><label>Фото (URL)</label><input id="ev-img" value="${v.img||''}"></div>
+    <div class="form-group"><label>Контакты</label><input id="ev-contacts" value="${v.contacts||''}"></div>
+    <button onclick="saveVenueMain()" style="width:100%">Сохранить</button>
+  `);
+}
+async function saveVenueMain(){
+  const fields = {
+    name: document.getElementById('ev-name').value,
+    city: document.getElementById('ev-city').value,
+    capacity: document.getElementById('ev-capacity').value,
+    img: document.getElementById('ev-img').value,
+    contacts: document.getElementById('ev-contacts').value
+  };
+  await saveVenueField(fields);
+  closeModal();
+}
+async function saveVenuePricing(){
+  const season = Number(document.getElementById('venue-season').value) || 1;
+  const weekend = Number(document.getElementById('venue-weekend').value) || 1;
+  await saveVenueField({ seasonMultiplier: season, weekendMultiplier: weekend });
+}
+async function saveVenueField(fields){
+  try {
+    const r = await fetch(SHEET_API_URL, { method:'POST', body:JSON.stringify({
+      action:'updateVenue', venueId: currentVenue.id, fields
+    })});
+    const res = await r.json();
+    if(res.success){
+      Object.assign(currentVenue, fields);
+      showToast('Сохранено');
+      await loadData();
+      currentVenue = venues.find(v => String(v.id) === String(currentVenue.id)) || currentVenue;
+      renderVenueProfile();
+    } else showToast('Ошибка');
+  } catch(e){ showToast('Ошибка сети'); }
+}
+
+function addVenuePeriod(){
+  openModal(`
+    <h3>Добавить период</h3>
+    <div class="form-group"><label>Дата с</label><input type="date" id="vp-from"></div>
+    <div class="form-group"><label>Дата по</label><input type="date" id="vp-to"></div>
+    <div class="form-group"><label>Цена, ₽</label><input type="number" id="vp-price" value="100000"></div>
+    <div class="form-group"><label>Комментарий</label><input id="vp-note" placeholder="Новый год, лето и т.д."></div>
+    <button onclick="submitVenuePeriod()" style="width:100%">Добавить</button>
+  `);
+}
+async function submitVenuePeriod(){
+  const body = {
+    action: 'addVenuePeriodPrice',
+    venueId: currentVenue.id,
+    dateFrom: document.getElementById('vp-from').value,
+    dateTo: document.getElementById('vp-to').value,
+    price: document.getElementById('vp-price').value,
+    note: document.getElementById('vp-note').value
+  };
+  try {
+    const r = await fetch(SHEET_API_URL, { method:'POST', body:JSON.stringify(body) });
+    const res = await r.json();
+    if(res.success){ showToast('Добавлено'); closeModal(); await loadData(); currentVenue = venues.find(v => String(v.id) === String(currentVenue.id)); renderVenueProfile(); }
+    else showToast('Ошибка');
+  } catch(e){ showToast('Ошибка сети'); }
+}
+async function deleteVenuePeriod(id){
+  if(!confirm('Удалить период?')) return;
+  try {
+    const r = await fetch(SHEET_API_URL, { method:'POST', body:JSON.stringify({action:'deleteVenuePeriodPrice', id}) });
+    const res = await r.json();
+    if(res.success){ showToast('Удалено'); await loadData(); currentVenue = venues.find(v => String(v.id) === String(currentVenue.id)); renderVenueProfile(); }
+  } catch(e){ showToast('Ошибка сети'); }
+}
+
+function addVenueCategory(){
+  openModal(`
+    <h3>Добавить категорию</h3>
+    <div class="form-group"><label>Тип события</label><select id="vc-type">
+      ${Object.keys(EVENT_TYPE_NAMES).map(k=>`<option value="${k}">${EVENT_TYPE_NAMES[k]}</option>`).join('')}
+    </select></div>
+    <div class="form-group"><label>Множитель (0.5–2.0)</label><input type="number" id="vc-mult" value="1.3" step="0.1" min="0.5" max="2.0"></div>
+    <div class="form-group"><label>Комментарий</label><input id="vc-note" placeholder="Сезон свадеб и т.д."></div>
+    <button onclick="submitVenueCategory()" style="width:100%">Добавить</button>
+  `);
+}
+async function submitVenueCategory(){
+  const body = {
+    action: 'addVenueCategoryPrice',
+    venueId: currentVenue.id,
+    eventType: document.getElementById('vc-type').value,
+    multiplier: document.getElementById('vc-mult').value,
+    note: document.getElementById('vc-note').value
+  };
+  try {
+    const r = await fetch(SHEET_API_URL, { method:'POST', body:JSON.stringify(body) });
+    const res = await r.json();
+    if(res.success){ showToast('Добавлено'); closeModal(); await loadData(); currentVenue = venues.find(v => String(v.id) === String(currentVenue.id)); renderVenueProfile(); }
+    else showToast('Ошибка');
+  } catch(e){ showToast('Ошибка сети'); }
+}
+async function deleteVenueCategory(id){
+  if(!confirm('Удалить категорию?')) return;
+  try {
+    const r = await fetch(SHEET_API_URL, { method:'POST', body:JSON.stringify({action:'deleteVenueCategoryPrice', id}) });
+    const res = await r.json();
+    if(res.success){ showToast('Удалено'); await loadData(); currentVenue = venues.find(v => String(v.id) === String(currentVenue.id)); renderVenueProfile(); }
+  } catch(e){ showToast('Ошибка сети'); }
+}
+
+async function venueRespond(appId, response){
+  await sendVenueResponse(appId, response, '');
+}
+function venueCounterOffer(appId){
+  openModal(`
+    <h3>Встречное предложение</h3>
+    <div class="form-group"><label>Ваша цена, ₽</label><input type="number" id="counter-price" value="100000"></div>
+    <div class="form-group"><label>Комментарий</label><textarea id="counter-note" placeholder="При каких условиях..."></textarea></div>
+    <button onclick="submitCounterOffer(${appId})" style="width:100%">Отправить</button>
+  `);
+}
+async function submitCounterOffer(appId){
+  const price = document.getElementById('counter-price').value;
+  const note = document.getElementById('counter-note').value;
+  await sendVenueResponse(appId, 'counter', price, note);
+}
+async function sendVenueResponse(appId, response, price, note){
+  try {
+    const r = await fetch(SHEET_API_URL, { method:'POST', body:JSON.stringify({
+      action:'venueRespondApplication', applicationId: appId, response, price, note
+    })});
+    const res = await r.json();
+    if(res.success){
+      showToast(response === 'accepted' ? 'Принято' : response === 'declined' ? 'Отклонено' : 'Встречное отправлено');
+      closeModal();
+      await loadData();
+      currentVenue = venues.find(v => String(v.id) === String(currentVenue.id));
+      renderVenueProfile();
+    } else showToast('Ошибка');
+  } catch(e){ showToast('Ошибка сети'); }
+}
+
+loadData();
+</script>
+</body>
+</html>
