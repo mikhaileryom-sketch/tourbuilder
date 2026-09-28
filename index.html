@@ -72,9 +72,9 @@ button:disabled{opacity:.5;cursor:not-allowed}
 .sun-svg{width:32px;height:32px;display:block}
 .sun-ray{stroke-width:2;stroke-linecap:round}
 .sun-core-circle{transition:fill .3s}
-.rate-arrow{position:absolute;top:2px;right:2px;font-size:9px;font-weight:900;line-height:1}
-.rate-arrow.up{color:#F44336}
-.rate-arrow.down{color:#4CAF50}
+.rate-arrow{position:absolute;left:50%;transform:translateX(-50%);font-size:10px;font-weight:900;line-height:1;z-index:5;text-shadow:0 0 2px rgba(255,255,255,0.8)}
+.rate-arrow.up{color:#F44336;top:-2px}
+.rate-arrow.down{color:#4CAF50;bottom:-2px}
 .cal-legend{display:flex;flex-wrap:wrap;gap:8px;font-size:10px;color:#6E6E73;justify-content:center;margin-top:8px}
 .cal-legend span{display:flex;align-items:center;gap:4px}
 .cal-legend .mini-sun{width:16px;height:16px}
@@ -429,7 +429,7 @@ if (window.Telegram && window.Telegram.WebApp) {
   tgUser = tg.initDataUnsafe && tg.initDataUnsafe.user ? tg.initDataUnsafe.user : null;
 }
 
-const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbzxY91IxIfNqsMp1RQEmn7luvKMl4iG5_a06McGhaCeyw1Ds4BBOkqCVjOvHNQ7wA2S/exec';
+const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbyR9wfz_A-9341PW5zRIWle1PqVbtFesXBWZTFGUi6-p61NVihiKIbbTbHielqIASVZ/exec';
 
 const ROLE_ICONS = {
   dancer:'fa-person-running', ballet:'fa-child-reaching', singer:'fa-microphone',
@@ -538,12 +538,13 @@ function updateRoleUI(){
   document.getElementById('role-label').innerText = (USER_ROLES[activeRole] || USER_ROLES.artist).name;
   const nav = document.getElementById('bottom-nav');
   const homeScreen = activeRole === 'organizer' ? 'screen-organizer-home' : activeRole === 'venue' ? 'screen-venue-profile' : 'screen-home';
-  nav.innerHTML = `
-    <div class="nav-icon active" onclick="navigateTo('${homeScreen}',this)"><i class="fa-solid fa-house"></i></div>
-    <div class="nav-icon" onclick="navigateTo('screen-catalog',this)"><i class="fa-solid fa-users"></i></div>
-    <div class="nav-icon" onclick="navigateTo('screen-venues',this)"><i class="fa-solid fa-landmark"></i></div>
-    <div class="nav-icon" onclick="navigateTo('screen-calendar',this)"><i class="fa-solid fa-calendar"></i></div>
-    <div class="nav-icon" onclick="navigateTo('screen-howto',this)"><i class="fa-solid fa-circle-question"></i></div>`;
+  const calIcon = activeRole === 'organizer' ? `<div class="nav-icon" onclick="navigateTo('screen-calendar',this)"><i class="fa-solid fa-calendar"></i></div>` : '';
+nav.innerHTML = `
+  <div class="nav-icon active" onclick="navigateTo('${homeScreen}',this)"><i class="fa-solid fa-house"></i></div>
+  <div class="nav-icon" onclick="navigateTo('screen-catalog',this)"><i class="fa-solid fa-users"></i></div>
+  <div class="nav-icon" onclick="navigateTo('screen-venues',this)"><i class="fa-solid fa-landmark"></i></div>
+  ${calIcon}
+  <div class="nav-icon" onclick="navigateTo('screen-howto',this)"><i class="fa-solid fa-circle-question"></i></div>`;
 }
 
 function navigateTo(id, el) {
@@ -807,13 +808,16 @@ function renderSunIcon(artist, dateStr, size){
   svg += `</svg>`;
 
   let arrow = '';
-  const pr = pricing.find(x => String(x.artistId) === String(artist.id) && x.date === dateStr);
-  if(pr && pr.priceModifier){
-    if(Number(pr.priceModifier) > 1) arrow = '<span class="rate-arrow up">▲</span>';
-    else if(Number(pr.priceModifier) < 1) arrow = '<span class="rate-arrow down">▼</span>';
-  }
+const pr = pricing.find(x => String(x.artistId) === String(artist.id) && x.date === dateStr);
+if(pr && pr.priceModifier){
+  if(Number(pr.priceModifier) > 1) arrow = '<span class="rate-arrow up">▲</span>';
+  else if(Number(pr.priceModifier) < 1) arrow = '<span class="rate-arrow down">▼</span>';
+}
 
-  return `<div style="position:relative;display:inline-block">${arrow}${svg}</div>`;
+return `<div style="position:relative;display:inline-block;width:${size}px;height:${size}px">
+  ${svg}
+  ${arrow}
+</div>`;
 }
 
 function getScheduleForDate(artist, dateStr){
@@ -822,21 +826,38 @@ function getScheduleForDate(artist, dateStr){
     return { isWorking: true, isVacation: true, hours: [] };
   }
   const dateObj = new Date(dateStr);
-  const dow = (dateObj.getDay() + 6) % 7; // 0=Пн, 6=Вс
+  const dow = (dateObj.getDay() + 6) % 7;
   const sched = artistSchedules.find(s => String(s.artistId) === String(artist.id) && Number(s.dayOfWeek) === dow);
-  if(!sched || !sched.isWorking){
-    // Если нет расписания — по умолчанию все дни рабочие 9-21
-    if(!artistSchedules.some(s => String(s.artistId) === String(artist.id))){
-      return { isWorking: true, hours: [9,10,11,12,13,14,15,16,17,18,19,20] };
-    }
+  
+  // Если расписания у артиста вообще нет — по умолчанию все дни 9-21
+  const hasAnySchedule = artistSchedules.some(s => String(s.artistId) === String(artist.id));
+  if(!hasAnySchedule){
+    return { isWorking: true, hours: [9,10,11,12,13,14,15,16,17,18,19,20] };
+  }
+  // Если расписание есть, но на этот день нет записи — считаем выходным
+  if(!sched){
     return { isWorking: false, hours: [] };
   }
-  const start = Number(sched.startHour) || 9;
-  const end = Number(sched.endHour) || 21;
+  // Если день явно помечен как нерабочий
+  if(!sched.isWorking){
+    return { isWorking: false, hours: [] };
+  }
+  
+  // 🔧 ИЗВЛЕКАЕМ ЧАСЫ С ЗАЩИТОЙ ОТ DATE
+  let start = sched.startHour;
+  let end = sched.endHour;
+  if(start instanceof Date) start = start.getHours();
+  if(end instanceof Date) end = end.getHours();
+  start = Number(start);
+  end = Number(end);
+  if(!isFinite(start) || start < 0 || start > 23) start = 9;
+  if(!isFinite(end) || end < 1 || end > 24) end = 21;
+  if(end <= start) return { isWorking: false, hours: [] };
+  
   let hours = [];
-  for(let h = start; h < end && h < 22; h++) hours.push(h);
-  // Исключаем занятые часы (уроки)
-  const busy = (sched.busyHours || '').split(',').map(h=>Number(h.trim())).filter(h=>!isNaN(h));
+  for(let h = start; h < end; h++) hours.push(h);
+  
+  const busy = (sched.busyHours || '').toString().split(',').map(h=>Number(h.trim())).filter(h=>!isNaN(h) && h>0);
   hours = hours.filter(h => !busy.includes(h));
   return { isWorking: true, hours };
 }
@@ -1044,7 +1065,7 @@ function buildMonthCard(m, y, viewArtist){
   for(let d=1; d<=dim; d++){
     const ds = `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
     const isToday = ds === todayStr ? ' today' : '';
-    const sun = viewArtist ? renderSunIcon(viewArtist, ds, 28) : '<i class="fa-solid fa-sun" style="color:#FFC107"></i>';
+    const sun = viewArtist ? renderSunIcon(viewArtist, ds, 22) : '<i class="fa-solid fa-sun" style="color:#FFC107"></i>';
     html += `<div class="cal-cell${isToday}" onclick="openDay('${ds}', '${viewArtist ? viewArtist.id : ''}')">
       <div class="day-num">${d}</div>
       ${sun}
@@ -1055,7 +1076,14 @@ function buildMonthCard(m, y, viewArtist){
   return wrap;
 }
 
+// ==== Модалка дня для АРТИСТА (своё расписание) ====
 function openDay(ds, artistId){
+  // Если роль ОРГАНИЗАТОР — показываем список свободных артистов
+  if(activeRole === 'organizer'){
+    openOrganizerDayView(ds);
+    return;
+  }
+  // Иначе — своё расписание (артист)
   const a = artistId ? artists.find(x => String(x.id) === String(artistId)) : currentArtist;
   let body = '';
   if(a){
@@ -1097,6 +1125,201 @@ function openDay(ds, artistId){
   }
   if(!body) body = '<p style="color:#6E6E73;text-align:center">Нет данных</p>';
   openModal(`<h3>${ds}</h3>${body}<button onclick="closeModal()" style="width:100%;margin-top:15px">Закрыть</button>`);
+}
+
+// ==== Модалка дня для ОРГАНИЗАТОРА (список свободных артистов) ====
+let orgDayState = {
+  date: '',
+  filterCity: 'auto',
+  filterRating: 'any',
+  filterPrice: 'any',
+  onlyPromo: false,
+  slots: [],
+  shown: 15
+};
+
+function openOrganizerDayView(ds){
+  if(!getOrganizerCity()){
+    openModal(`
+      <h3>Ваш город</h3>
+      <p style="font-size:13px;color:#6E6E73;margin-bottom:15px">Укажите город — будем показывать артистов поблизости</p>
+      <div class="form-group">
+        <input id="org-city-input" placeholder="Москва" style="width:100%;padding:12px;border:1px solid #E5E5EA;border-radius:12px;font-size:15px;outline:none;font-family:inherit;box-sizing:border-box">
+      </div>
+      <button onclick="saveOrgCity('${ds}')" style="width:100%">Сохранить</button>
+    `);
+    return;
+  }
+  orgDayState = {
+    date: ds,
+    filterCity: 'auto',
+    filterRating: 'any',
+    filterPrice: 'any',
+    onlyPromo: false,
+    slots: [],
+    shown: 15
+  };
+  renderOrganizerDayModal();
+}
+async function saveOrgCity(ds){
+  const city = document.getElementById('org-city-input').value;
+  if(!city){ showToast('Укажите город'); return; }
+  if(!currentPerson) return;
+  try {
+    const r = await fetch(SHEET_API_URL, { method:'POST', body:JSON.stringify({
+      action:'updatePersonCity', telegramId: String(tgUser.id), city: city
+    })});
+    const res = await r.json();
+    if(res.success){
+      currentPerson.city = city;
+      showToast('Город сохранён: '+city);
+      closeModal();
+      openOrganizerDayView(ds);
+    }
+  } catch(e){ showToast('Ошибка сети'); }
+}
+function getOrganizerCity(){
+  return (currentPerson && currentPerson.city) ? currentPerson.city : '';
+}
+
+function buildOrganizerDayResults(){
+  const d = orgDayState.date;
+  const orgCity = getOrganizerCity();
+  const results = [];
+
+  artists.forEach(a => {
+    const sched = getScheduleForDate(a, d);
+    if(!sched.isWorking && !sched.isVacation) return; // выходной — не показываем
+
+    // Фильтр по городу
+    const aCity = (a.city||'').toLowerCase();
+    const oCity = orgCity.toLowerCase();
+    const isLocal = orgCity && aCity === oCity;
+    const isVacationHere = a.vacationUntil && a.vacationUntil >= new Date().toISOString().split('T')[0] && a.vacationCity && a.vacationCity.toLowerCase() === oCity;
+    if(orgDayState.filterCity === 'my' && !isLocal && !isVacationHere) return;
+    if(orgDayState.filterCity === 'other' && (isLocal || isVacationHere)) return;
+
+    // Фильтр по рейтингу
+    const r = Number(a.rating) || 0;
+    if(orgDayState.filterRating === '4.5' && r < 4.5) return;
+    if(orgDayState.filterRating === '4.0' && r < 4.0) return;
+
+    // Фильтр спецпредложения
+    const pr = pricing.find(x => String(x.artistId) === String(a.id) && x.date === d);
+    const mod = pr ? Number(pr.priceModifier) : 1;
+    if(orgDayState.onlyPromo && !(mod < 1)) return;
+
+    // Фильтр по слотам
+    if(orgDayState.slots.length && sched.hours && sched.hours.length){
+      const hasSlot = orgDayState.slots.some(sl => {
+        if(sl === 'morning') return sched.hours.some(h => h >= 9 && h <= 11);
+        if(sl === 'day') return sched.hours.some(h => h >= 12 && h <= 16);
+        if(sl === 'evening') return sched.hours.some(h => h >= 17 && h <= 20);
+        return false;
+      });
+      if(!hasSlot) return;
+    }
+
+    // Скор
+    let score = 0;
+    if(isLocal) score += 100;
+    if(isVacationHere) score += 50;
+    if(a.travelScope === 'russia') score += 40;
+    else if(['cis','europe','world'].includes(a.travelScope)) score += 25;
+    score += Math.round(r * 5);
+    if(mod < 1) score += 15;
+
+    results.push({ ...a, _score: score, _mod: mod, _hours: sched.hours });
+  });
+
+  results.sort((x,y) => y._score - x._score);
+  return results;
+}
+
+function renderOrganizerDayModal(){
+  const d = orgDayState.date;
+  const all = buildOrganizerDayResults();
+  const visible = all.slice(0, orgDayState.shown);
+  const orgCity = getOrganizerCity();
+
+  let cardsHTML = '';
+  if(!visible.length){
+    cardsHTML = '<div style="text-align:center;padding:30px;color:#6E6E73;font-size:13px">Никого не найдено. Попробуйте изменить фильтры.</div>';
+  } else {
+    visible.forEach(a => {
+      const hours = a._hours || [];
+      const rangeText = hours.length === 12 ? 'весь день' : (hours.length ? `${hours[0]}:00–${hours[hours.length-1]+1}:00` : '—');
+      const promoBadge = a._mod < 1 ? `<span style="background:#E8F5E9;color:#4CAF50;font-size:9px;padding:2px 6px;border-radius:8px;font-weight:700;margin-left:5px">▼ Скидка ×${a._mod}</span>` : '';
+      const localBadge = orgCity && (a.city||'').toLowerCase() === orgCity.toLowerCase() ? `<span style="background:#FFF5F9;color:#EC4899;font-size:9px;padding:2px 6px;border-radius:8px;font-weight:700;margin-left:5px">📍 ${orgCity}</span>` : '';
+      cardsHTML += `<div class="result-card" onclick="closeModal(); openArtist(${a.id});">
+        <div class="rc-avatar" ${a.img?`style="background-image:url('${a.img}')"`:''}></div>
+        <div class="rc-info">
+          <div class="rc-name">${a.name}${localBadge}${promoBadge}</div>
+          <div class="rc-spec">${ROLE_NAMES[a.role]||a.spec||''} · ${a.city||'—'}</div>
+          <div class="rc-meta">
+            <span class="rc-price">от ${(a.price||0).toLocaleString()} ₽</span>
+            <span>⭐ ${a.rating||0}</span>
+            <span>🕐 ${rangeText}</span>
+          </div>
+        </div>
+      </div>`;
+    });
+    if(all.length > orgDayState.shown){
+      cardsHTML += `<button class="btn-ghost" onclick="orgDayLoadMore()" style="width:100%;margin-top:10px">Показать ещё ${Math.min(15, all.length - orgDayState.shown)}</button>`;
+    }
+  }
+
+  const tabsHTML = `
+    <div style="display:flex;gap:6px;overflow-x:auto;margin-bottom:12px;padding-bottom:4px;-webkit-overflow-scrolling:touch">
+      <select onchange="orgDayState.filterCity=this.value;orgDayState.shown=15;renderOrganizerDayModal()" style="padding:8px 12px;border:1px solid #E5E5EA;border-radius:20px;font-size:12px;font-family:inherit;outline:none">
+        <option value="auto" ${orgDayState.filterCity==='auto'?'selected':''}>🌍 ${orgCity ? 'Мой город ('+orgCity+')' : 'Все города'}</option>
+        <option value="my" ${orgDayState.filterCity==='my'?'selected':''}>📍 Только ${orgCity||'мой город'}</option>
+        <option value="other" ${orgDayState.filterCity==='other'?'selected':''}>✈️ Другие города</option>
+      </select>
+      <select onchange="orgDayState.filterRating=this.value;orgDayState.shown=15;renderOrganizerDayModal()" style="padding:8px 12px;border:1px solid #E5E5EA;border-radius:20px;font-size:12px;font-family:inherit;outline:none">
+        <option value="any" ${orgDayState.filterRating==='any'?'selected':''}>⭐ Любой рейтинг</option>
+        <option value="4.5" ${orgDayState.filterRating==='4.5'?'selected':''}>⭐ 4.5+</option>
+        <option value="4.0" ${orgDayState.filterRating==='4.0'?'selected':''}>⭐ 4.0+</option>
+      </select>
+      <select onchange="orgDayState.filterPrice=this.value;orgDayState.shown=15;renderOrganizerDayModal()" style="padding:8px 12px;border:1px solid #E5E5EA;border-radius:20px;font-size:12px;font-family:inherit;outline:none">
+        <option value="any" ${orgDayState.filterPrice==='any'?'selected':''}>💰 Любая цена</option>
+        <option value="asc" ${orgDayState.filterPrice==='asc'?'selected':''}>↑ Дешевле</option>
+        <option value="desc" ${orgDayState.filterPrice==='desc'?'selected':''}>↓ Дороже</option>
+      </select>
+    </div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px">
+      <div class="wizard-chip ${orgDayState.onlyPromo?'selected':''}" onclick="orgDayState.onlyPromo=!orgDayState.onlyPromo;orgDayState.shown=15;renderOrganizerDayModal()" style="font-size:11px;padding:6px 12px">🔥 Спецпредложения</div>
+      <div class="wizard-chip ${orgDayState.slots.includes('morning')?'selected':''}" onclick="toggleOrgSlot('morning')" style="font-size:11px;padding:6px 12px">☀️ Утро</div>
+      <div class="wizard-chip ${orgDayState.slots.includes('day')?'selected':''}" onclick="toggleOrgSlot('day')" style="font-size:11px;padding:6px 12px">🌤 День</div>
+      <div class="wizard-chip ${orgDayState.slots.includes('evening')?'selected':''}" onclick="toggleOrgSlot('evening')" style="font-size:11px;padding:6px 12px">🌙 Вечер</div>
+    </div>
+    <div style="font-size:11px;color:#6E6E73;margin-bottom:10px">Найдено: ${all.length}${all.length > orgDayState.shown ? ' (показано '+orgDayState.shown+')' : ''}</div>
+  `;
+
+  // Применяем сортировку по цене
+  if(orgDayState.filterPrice === 'asc') visible.sort((a,b)=>(a.price||0)-(b.price||0));
+  if(orgDayState.filterPrice === 'desc') visible.sort((a,b)=>(b.price||0)-(a.price||0));
+
+  openModal(`
+    <h3>${d}</h3>
+    <p style="font-size:12px;color:#6E6E73;margin-bottom:12px">Свободные артисты</p>
+    ${tabsHTML}
+    <div class="result-cards">${cardsHTML}</div>
+    <button onclick="closeModal()" class="btn-ghost" style="width:100%;margin-top:10px">Закрыть</button>
+  `);
+}
+
+function toggleOrgSlot(slot){
+  const i = orgDayState.slots.indexOf(slot);
+  if(i > -1) orgDayState.slots.splice(i,1);
+  else orgDayState.slots.push(slot);
+  orgDayState.shown = 15;
+  renderOrganizerDayModal();
+}
+
+function orgDayLoadMore(){
+  orgDayState.shown += 15;
+  renderOrganizerDayModal();
 }
 
 /* ============ QUICK MATCH ============ */
@@ -1771,9 +1994,9 @@ function renderBusyTab(){
   for(let d=1; d<=dim; d++){
     const ds = `${state.year}-${String(state.monthIndex+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
     daysHTML += `<div class="day" onclick="openDaySettings('${ds}')" style="cursor:pointer;background:#FFF;border-radius:6px;flex-direction:column">
-      <span style="font-size:10px">${d}</span>
-      ${renderSunIcon(a, ds, 24)}
-    </div>`;
+  <span style="font-size:10px">${d}</span>
+  ${renderSunIcon(a, ds, 20)}
+</div>`;
   }
   const today = new Date().toISOString().split('T')[0];
   const onVac = a.vacationUntil && a.vacationUntil >= today;
