@@ -427,7 +427,7 @@ if (window.Telegram && window.Telegram.WebApp) {
   tgUser = tg.initDataUnsafe && tg.initDataUnsafe.user ? tg.initDataUnsafe.user : null;
 }
 
-const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbwhMm5ZSBbMmfkBmtWkBPqfc67lsjQiHBQt_i1UUE4zKp2khXNHx2TI3m8fJ7o651Y/exec';
+const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbwO-3IVP7VI4FT2R7q-haYcGjTWnQbJ-czVqjejNDdRlFYelWW28GGCBB-ldTD8yEc1/exec';
 
 const ROLE_ICONS = {
   dancer:'fa-person-running', ballet:'fa-child-reaching', singer:'fa-microphone',
@@ -2024,8 +2024,14 @@ function renderBusyTab(){
   const el = document.getElementById('tab-busy');
   const a = currentArtist;
   // DEBUG: сколько записей расписания пришло с сервера
-  const mySched = artistSchedules.filter(s => String(s.artistId) === String(a.id));
-  const debugText = mySched.length ? `Расписание: ${mySched.length} дней, Пн: ${mySched.find(s=>Math.floor(Number(s.dayOfWeek))===0)?.startHour||'—'}-${mySched.find(s=>Math.floor(Number(s.dayOfWeek))===0)?.endHour||'—'}` : 'Расписание НЕ ЗАГРУЖЕНО';
+  console.log('=== DEBUG SCHEDULE ===');
+console.log('artistSchedules:', artistSchedules);
+console.log('current artist id:', a.id, typeof a.id);
+console.log('schedule for me:', artistSchedules.filter(s => String(s.artistId).trim() === String(a.id).trim()));
+const mySched = artistSchedules.filter(s => String(s.artistId).trim() === String(a.id).trim());
+const debugText = mySched.length 
+  ? `✅ Расписание: ${mySched.length} дней | Пн ${mySched.find(s=>Number(s.dayOfWeek)===0)?.startHour||'—'}–${mySched.find(s=>Number(s.dayOfWeek)===0)?.endHour||'—'}`
+  : `❌ Пусто (всего: ${artistSchedules.length}, artistId="${a.id}")`;
   let daysHTML = '';
   const dim = new Date(state.year, state.monthIndex+1, 0).getDate();
   for(let d=1; d<=dim; d++){
