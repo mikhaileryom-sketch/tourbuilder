@@ -509,11 +509,22 @@ async function loadData() {
     if(currentPerson){
       activeRole = localStorage.getItem('activeRole') || currentPerson.activeRole || 'organizer';
     }
-    currentArtist = artists.find(a => String(a.telegramId) === tgId) || null;
+    currentArtist = pickCurrentArtist(artists, tgId);
     currentVenue = venues.find(v => String(v.ownerTelegramId) === tgId) || null;
   }
   updateRoleUI();
   renderHome();
+}
+
+// Детерминированный выбор профиля артиста по telegramId.
+// Нужен потому, что find() брал первую строку по порядку в листе Artists:
+// при дубле telegramId результат зависел от порядка строк (см. баг Задачи 2).
+function pickCurrentArtist(list, tgId){
+  const matches = (list || []).filter(a => String(a.telegramId) === String(tgId));
+  if(!matches.length) return null;
+  if(matches.length === 1) return matches[0];
+  console.warn('Duplicate telegramId:', tgId, matches);
+  return matches.find(a => a.name && String(a.name).trim() !== '') || matches[0];
 }
 
 async function createPersonRecord(){
