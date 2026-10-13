@@ -776,6 +776,62 @@ function openArtist(id){
   navigateTo('screen-artist');
 }
 
+// ==== Модалка дня для ОРГАНИЗАТОРА в карточке артиста (только просмотр) ====
+// Множитель цены здесь намеренно НЕ показывается — по решению от 0.4
+function openArtistDayView(artistId, date){
+  const a = artists.find(x => String(x.id) === String(artistId));
+  if(!a) return;
+
+  const sched = getScheduleForDate(a, date);
+  let statusText = '';
+  if(sched.isVacation){
+    statusText = '🌴 Отпуск';
+  } else if(!sched.isWorking){
+    statusText = 'Выходной / не работает';
+  } else {
+    const hours = (sched.hours || []).slice().sort((x,y) => x-y);
+    if(!hours.length){
+      statusText = 'Свободен (часы не указаны)';
+    } else {
+      const ranges = [];
+      let start = hours[0], prev = hours[0];
+      for(let i=1; i<=hours.length; i++){
+        if(hours[i] !== prev+1){
+          ranges.push(`${start}:00–${prev+1}:00`);
+          start = hours[i];
+        }
+        prev = hours[i];
+      }
+      statusText = `Свободен с ${ranges.join(', ')}`;
+    }
+  }
+
+  const dayEvents = events.filter(e => String(e.artistId) === String(artistId) && e.date === date);
+  const apps = applications.filter(x => String(x.artistId) === String(artistId) && x.date === date);
+  console.log('apps for day:', apps);
+
+  let html = `<h3>${a.name||'Артист'}, ${date}</h3>`;
+  html += `<div style="text-align:center;font-size:13px;font-weight:600;color:#6E6E73;margin:10px 0">${statusText}</div>`;
+
+  if(dayEvents.length){
+    html += `<h4 style="font-size:13px;color:#6E6E73;margin:15px 0 8px">События</h4>`;
+    dayEvents.forEach(e => {
+      html += `<div class="list-item"><div class="li-title">${e.time||''} — ${e.title||e.type||'Событие'}</div><div class="li-sub">${e.venue||''}</div></div>`;
+    });
+  }
+
+  if(apps.length){
+    html += `<div style="background:#FFF5F9;color:#EC4899;padding:10px;border-radius:10px;font-size:12px;font-weight:600;text-align:center;margin-top:12px">Под запросом (${apps.length})</div>`;
+  }
+
+  if(sched.isWorking && !sched.isVacation){
+    html += `<button onclick="closeModal();showToast('Запрос отправлен')" style="width:100%;margin-top:15px">Пригласить на эту дату</button>`;
+  }
+  html += `<button class="btn-secondary" onclick="closeModal()" style="width:100%;margin-top:8px">Закрыть</button>`;
+
+  openModal(html);
+}
+
 /* ============ SUN SVG ============ */
 function renderSunIcon(artist, dateStr, size){
   size = size || 32;
