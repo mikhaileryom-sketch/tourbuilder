@@ -427,7 +427,7 @@ if (window.Telegram && window.Telegram.WebApp) {
   tgUser = tg.initDataUnsafe && tg.initDataUnsafe.user ? tg.initDataUnsafe.user : null;
 }
 
-const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbzJjf3KE5NWjaCL4kJjXVHD3XnrGXNCmeeLWn3demskfyeCciVQvlDDuMG6Ix159E2K/exec';
+const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbzNwUSEDd0AJAHtGKnYxCuYHGj_Zj-9ZBzb_nM2ANLbUX3YTv9oG-u-KojkRxQOW05n/exec';
 
 const ROLE_ICONS = {
   dancer:'fa-person-running', ballet:'fa-child-reaching', singer:'fa-microphone',
@@ -509,11 +509,22 @@ async function loadData() {
     if(currentPerson){
       activeRole = localStorage.getItem('activeRole') || currentPerson.activeRole || 'organizer';
     }
-    currentArtist = artists.find(a => String(a.telegramId) === tgId) || null;
+    currentArtist = pickCurrentArtist(artists, tgId);
     currentVenue = venues.find(v => String(v.ownerTelegramId) === tgId) || null;
   }
   updateRoleUI();
   renderHome();
+}
+
+// Детерминированный выбор профиля артиста по telegramId.
+// Нужен потому, что find() брал первую строку по порядку в листе Artists:
+// при дубле telegramId результат зависел от порядка строк (см. баг Задачи 2).
+function pickCurrentArtist(list, tgId){
+  const matches = (list || []).filter(a => String(a.telegramId) === String(tgId));
+  if(!matches.length) return null;
+  if(matches.length === 1) return matches[0];
+  console.warn('Duplicate telegramId:', tgId, matches);
+  return matches.find(a => a.name && String(a.name).trim() !== '') || matches[0];
 }
 
 async function createPersonRecord(){
@@ -722,15 +733,20 @@ function renderCatalog(q=''){
 
 /* ============ ARTIST DETAIL ============ */
 function openArtist(id){
-  const a = artists.find(x=>x.id===id); if(!a) return;
+  const a = artists.find(x=>String(x.id)===String(id)); if(!a) return;
+  // Сбрасываем месяц на текущий, чтобы карточка артиста не открывалась
+  // на месяце, куда пользователь случайно ушёл в общем календаре
+  const _today = new Date();
+  state.year = _today.getFullYear();
+  state.monthIndex = _today.getMonth();
   const c = document.getElementById('artist-detail-content');
   let daysHTML = '';
   const dim = new Date(state.year, state.monthIndex+1, 0).getDate();
   for(let d=1; d<=dim; d++){
     const ds = `${state.year}-${String(state.monthIndex+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-    daysHTML += `<div class="day" style="cursor:default">${renderSunIcon(a, ds, 28)}</div>`;
+    daysHTML += `<div class="day" style="cursor:pointer" onclick="openArtistDayView('${String(a.id).replace(/'/g,"&#39;")}','${ds}')">${renderSunIcon(a, ds, 28)}</div>`;
   }
-  const inProj = userProject.some(p=>p.id===a.id && p.type==='artist');
+  const inProj = userProject.some(p=>String(p.id)===String(a.id) && p.type==='artist');
   const roleIcon = ROLE_ICONS[a.role]||'fa-star';
 
   let visaHTML = '';
@@ -769,6 +785,62 @@ function openArtist(id){
       <button class="${inProj?'btn-secondary':''}" onclick='toggleProject(${JSON.stringify(a).replace(/'/g,"&#39;")},"artist",this)'>${inProj?'✓ В проекте':'+ В проект'}</button>
     </div>`;
   navigateTo('screen-artist');
+}
+
+// ==== Модалка дня для ОРГАНИЗАТОРА в карточке артиста (только просмотр) ====
+// Множитель цены здесь намеренно НЕ показывается — по решению от 0.4
+function openArtistDayView(artistId, date){
+  const a = artists.find(x => String(x.id) === String(artistId));
+  if(!a) return;
+
+  const sched = getScheduleForDate(a, date);
+  let statusText = '';
+  if(sched.isVacation){
+    statusText = '🌴 Отпуск';
+  } else if(!sched.isWorking){
+    statusText = 'Выходной / не работает';
+  } else {
+    const hours = (sched.hours || []).slice().sort((x,y) => x-y);
+    if(!hours.length){
+      statusText = 'Свободен (часы не указаны)';
+    } else {
+      const ranges = [];
+      let start = hours[0], prev = hours[0];
+      for(let i=1; i<=hours.length; i++){
+        if(hours[i] !== prev+1){
+          ranges.push(`${start}:00–${prev+1}:00`);
+          start = hours[i];
+        }
+        prev = hours[i];
+      }
+      statusText = `Свободен с ${ranges.join(', ')}`;
+    }
+  }
+
+  const dayEvents = events.filter(e => String(e.artistId) === String(artistId) && e.date === date);
+  const apps = applications.filter(x => String(x.artistId) === String(artistId) && x.date === date);
+  console.log('apps for day:', apps);
+
+  let html = `<h3>${a.name||'Артист'}, ${date}</h3>`;
+  html += `<div style="text-align:center;font-size:13px;font-weight:600;color:#6E6E73;margin:10px 0">${statusText}</div>`;
+
+  if(dayEvents.length){
+    html += `<h4 style="font-size:13px;color:#6E6E73;margin:15px 0 8px">События</h4>`;
+    dayEvents.forEach(e => {
+      html += `<div class="list-item"><div class="li-title">${e.time||''} — ${e.title||e.type||'Событие'}</div><div class="li-sub">${e.venue||''}</div></div>`;
+    });
+  }
+
+  if(apps.length){
+    html += `<div style="background:#FFF5F9;color:#EC4899;padding:10px;border-radius:10px;font-size:12px;font-weight:600;text-align:center;margin-top:12px">Под запросом (${apps.length})</div>`;
+  }
+
+  if(sched.isWorking && !sched.isVacation){
+    html += `<button onclick="closeModal();showToast('Запрос отправлен')" style="width:100%;margin-top:15px">Пригласить на эту дату</button>`;
+  }
+  html += `<button class="btn-secondary" onclick="closeModal()" style="width:100%;margin-top:8px">Закрыть</button>`;
+
+  openModal(html);
 }
 
 /* ============ SUN SVG ============ */
@@ -918,7 +990,7 @@ function calculateVenuePrice(venue, dateStr, eventType){
 }
 
 function openVenue(id){
-  const v=venues.find(x=>x.id===id); if(!v) return;
+  const v=venues.find(x=>String(x.id)===String(id)); if(!v) return;
   const c=document.getElementById('venue-detail-content');
   const finalPrice = calculateVenuePrice(v, null, null);
   const noBargain = !!v.noBargain;
@@ -942,7 +1014,7 @@ function openVenue(id){
 
 function requestVenueBooking(venueId){
   if(!tgUser){ showToast('Откройте через Telegram'); return; }
-  const v = venues.find(x => x.id === venueId);
+  const v = venues.find(x => String(x.id) === String(venueId));
   openModal(`
     <h3>Заявка площадке: ${v.name}</h3>
     <div class="form-group"><label>Тип события</label><select id="vb-type">${Object.keys(EVENT_TYPE_NAMES).map(k=>`<option value="${k}">${EVENT_TYPE_NAMES[k]}</option>`).join('')}</select></div>
@@ -953,7 +1025,7 @@ function requestVenueBooking(venueId){
   `);
 }
 async function submitVenueBooking(venueId){
-  const v = venues.find(x => x.id === venueId);
+  const v = venues.find(x => String(x.id) === String(venueId));
   const body = {
     action: 'submitApplication',
     organizerId: String(tgUser.id),
@@ -974,7 +1046,7 @@ async function submitVenueBooking(venueId){
 
 function offerVenuePrice(venueId){
   if(!tgUser){ showToast('Откройте через Telegram'); return; }
-  const v = venues.find(x => x.id === venueId);
+  const v = venues.find(x => String(x.id) === String(venueId));
   const basePrice = calculateVenuePrice(v, null, null);
   openModal(`
     <h3>Предложить цену</h3>
@@ -987,7 +1059,7 @@ function offerVenuePrice(venueId){
   `);
 }
 async function submitVenueOffer(venueId){
-  const v = venues.find(x => x.id === venueId);
+  const v = venues.find(x => String(x.id) === String(venueId));
   const body = {
     action: 'submitApplication',
     organizerId: String(tgUser.id),
@@ -1153,10 +1225,6 @@ function openDay(ds, artistId){
     });
   }
   if(!body) body = '<p style="color:#6E6E73;text-align:center">Нет данных</p>';
-// DEBUG
-const dow = (new Date(ds).getDay() + 6) % 7;
-const rawSched = artistSchedules.find(s => String(s.artistId) === String(a.id) && Math.floor(Number(s.dayOfWeek)) === dow);
-body += `<div style="font-size:10px;color:#999;margin-top:10px;background:#F5F5F5;padding:6px;border-radius:6px;word-break:break-all">DEBUG: dow=${dow}, найдено=${rawSched?JSON.stringify(rawSched):'нет'}, всего записей=${artistSchedules.length}</div>`;
 openModal(`<h3>${ds}</h3>${body}<button onclick="closeModal()" style="width:100%;margin-top:15px">Закрыть</button>`);
 }
 
@@ -1727,9 +1795,13 @@ function openCreateForm(){
     <div class="form-group"><label>Фото профиля</label>
       <div style="display:flex;align-items:center;gap:12px">
         <div id="cf-photo-preview" style="width:64px;height:64px;background:#FCE7F3;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;color:#EC4899;font-size:11px;text-align:center;flex-shrink:0">Нет</div>
-        <input id="cf-img" type="url" placeholder="Ссылка на фото" style="flex:1;padding:12px;border:1px solid #E5E5EA;border-radius:12px;font-size:14px;outline:none;font-family:inherit;box-sizing:border-box" oninput="previewPhoto(this.value)">
+        <div style="flex:1">
+          <input type="file" id="cf-file" accept="image/*" onchange="handlePhotoPick(this,'cf-img','cf-photo-preview')" style="width:100%;padding:10px;border:1px dashed #E5E5EA;border-radius:12px;font-size:12px;box-sizing:border-box;font-family:inherit">
+          <input id="cf-img" type="url" placeholder="Ссылка на фото" value="" style="display:none;margin-top:6px;width:100%;padding:12px;border:1px solid #E5E5EA;border-radius:12px;font-size:14px;outline:none;font-family:inherit;box-sizing:border-box" oninput="showPhotoPreview('cf-photo-preview',this.value)">
+          <div id="cf-file-link" style="font-size:11px;margin-top:5px"><a href="#" onclick="togglePhotoUrl('cf-img','cf-file-link');return false" style="color:#EC4899">или вставить ссылку</a></div>
+        </div>
       </div>
-      <div style="font-size:11px;color:#6E6E73;margin-top:5px">Загрузите на <a href="https://imgur.com" target="_blank" style="color:#EC4899">Imgur</a> и вставьте ссылку</div>
+      <div style="font-size:11px;color:#6E6E73;margin-top:5px">Фото сожмётся до 800×800 и загрузится в Google Drive</div>
     </div>
     <div class="form-group"><label>Роль *</label><select id="cf-role">${Object.keys(ROLE_NAMES).map(k=>`<option value="${k}">${ROLE_NAMES[k]}</option>`).join('')}</select></div>
     <div class="form-group"><label>Специализация</label><input id="cf-spec" placeholder="Фламенко, Балет"></div>
@@ -1753,6 +1825,69 @@ function openCreateForm(){
     <button onclick="submitCreateProfile()" style="width:100%">Создать</button>
   `);
 }
+/* ============ PHOTO PICKER ============ */
+// Сжатие выбранного файла до 800x800 (вписывание, пропорции сохраняются) и в base64 jpeg 0.8
+function compressImageFile(file, cb){
+  const reader = new FileReader();
+  reader.onload = e => {
+    const img = new Image();
+    img.onload = () => {
+      const maxSide = 800;
+      const scale = Math.min(1, maxSide / Math.max(img.width, img.height));
+      const w = Math.max(1, Math.round(img.width * scale));
+      const h = Math.max(1, Math.round(img.height * scale));
+      const canvas = document.createElement('canvas');
+      canvas.width = w; canvas.height = h;
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fillRect(0, 0, w, h);
+      ctx.drawImage(img, 0, 0, w, h);
+      cb(canvas.toDataURL('image/jpeg', 0.8), w, h);
+    };
+    img.onerror = () => { showToast('Не удалось прочитать изображение'); };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function showPhotoPreview(previewId, src){
+  const el = document.getElementById(previewId);
+  if(!el) return;
+  if(src){ el.style.backgroundImage = `url('${src}')`; el.innerText = ''; }
+  else { el.style.backgroundImage = ''; el.innerText = 'Нет'; }
+}
+
+async function handlePhotoPick(input, hiddenId, previewId){
+  const file = input.files && input.files[0];
+  if(!file) return;
+  if(!/^image\//.test(file.type)){ showToast('Выберите изображение'); return; }
+  showToast('Сжимаем фото...');
+  compressImageFile(file, async (dataUrl, w, h) => {
+    showPhotoPreview(previewId, dataUrl);
+    try {
+      const r = await fetch(SHEET_API_URL, { method:'POST', body:JSON.stringify({
+        action:'uploadPhoto', base64:dataUrl, filename:file.name || 'photo.jpg'
+      })});
+      const res = await r.json();
+      if(res.success && res.url){
+        const hidden = document.getElementById(hiddenId);
+        if(hidden) hidden.value = res.url;
+        showPhotoPreview(previewId, res.url);
+        showToast(`Фото загружено (${w}×${h})`);
+      } else {
+        showToast('Ошибка загрузки: ' + (res.error || 'неизвестно'));
+      }
+    } catch(e){ showToast('Ошибка сети'); }
+  });
+}
+
+function togglePhotoUrl(hiddenId, linkId){
+  const inp = document.getElementById(hiddenId);
+  if(inp){ inp.style.display = 'block'; inp.focus(); }
+  const l = document.getElementById(linkId);
+  if(l) l.style.display = 'none';
+}
+
 function previewPhoto(url){
   const el = document.getElementById('cf-photo-preview');
   if(!el) return;
@@ -2023,15 +2158,6 @@ async function saveParams(){
 function renderBusyTab(){
   const el = document.getElementById('tab-busy');
   const a = currentArtist;
-  // DEBUG: сколько записей расписания пришло с сервера
-  console.log('=== DEBUG SCHEDULE ===');
-console.log('artistSchedules:', artistSchedules);
-console.log('current artist id:', a.id, typeof a.id);
-console.log('schedule for me:', artistSchedules.filter(s => String(s.artistId).trim() === String(a.id).trim()));
-const mySched = artistSchedules.filter(s => String(s.artistId).trim() === String(a.id).trim());
-const debugText = mySched.length 
-  ? `✅ Расписание: ${mySched.length} дней | Пн ${mySched.find(s=>Number(s.dayOfWeek)===0)?.startHour||'—'}–${mySched.find(s=>Number(s.dayOfWeek)===0)?.endHour||'—'}`
-  : `❌ Пусто (всего: ${artistSchedules.length}, artistId="${a.id}")`;
   let daysHTML = '';
   const dim = new Date(state.year, state.monthIndex+1, 0).getDate();
   for(let d=1; d<=dim; d++){
@@ -2048,7 +2174,6 @@ const debugText = mySched.length
       <div style="font-size:18px;font-weight:800;color:#1A1A1A">${months[state.monthIndex]} ${state.year}</div>
       <div style="font-size:11px;color:#6E6E73;margin-top:2px">Занятость и управление ценой</div>
       ${onVac?`<div class="vacation-badge">🌴 Отпуск${a.vacationCity?' в '+a.vacationCity:''} до ${a.vacationUntil}</div>`:''}
-<div style="font-size:10px;color:#999;background:#F0F0F0;padding:6px;border-radius:6px;margin-top:6px">${debugText}</div>
 </div>
     <div style="display:flex;gap:6px;justify-content:center;margin-bottom:10px">
       <button class="btn-ghost" onclick="changeMonth(-1);renderBusyTab()">←</button>
@@ -2269,7 +2394,12 @@ function editMain(){
   openModal(`
     <h3>Редактировать основное</h3>
     <div class="form-group"><label>Имя</label><input id="e-name" value="${a.name||''}"></div>
-    <div class="form-group"><label>Фото (URL)</label><input id="e-img" value="${a.img||''}"></div>
+    <div class="form-group"><label>Фото</label>
+      <div id="e-photo-preview" style="width:64px;height:64px;background:#FCE7F3;border-radius:12px;background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;color:#EC4899;font-size:11px;margin-bottom:6px">Нет</div>
+      <input type="file" id="e-file" accept="image/*" onchange="handlePhotoPick(this,'e-img','e-photo-preview')" style="width:100%;padding:10px;border:1px dashed #E5E5EA;border-radius:12px;font-size:12px;box-sizing:border-box;font-family:inherit">
+      <input id="e-img" value="${a.img||''}" style="display:none;margin-top:6px;width:100%;padding:12px;border:1px solid #E5E5EA;border-radius:12px;font-size:14px;outline:none;font-family:inherit;box-sizing:border-box" oninput="showPhotoPreview('e-photo-preview',this.value)">
+      <div id="e-file-link" style="font-size:11px;margin-top:5px"><a href="#" onclick="togglePhotoUrl('e-img','e-file-link');return false" style="color:#EC4899">или вставить ссылку</a></div>
+    </div>
     <div class="form-group"><label>Bio</label><textarea id="e-bio" style="min-height:80px">${a.bio||''}</textarea></div>
     <div class="form-group"><label>Роль</label><select id="e-role">${Object.keys(ROLE_NAMES).map(k=>`<option value="${k}" ${a.role===k?'selected':''}>${ROLE_NAMES[k]}</option>`).join('')}</select></div>
     <div class="form-group"><label>Специализация</label><input id="e-spec" value="${a.spec||''}"></div>
@@ -2311,6 +2441,19 @@ async function saveMain(){
 
 function addItem(type){
   const title = {media:'Медиа',experience:'Опыт',education:'Образование',inventory:'Инвентарь',costumes:'Костюмы'}[type]||type;
+  if(type === 'media'){
+    openModal(`<h3>Добавить: ${title}</h3>
+      <div class="form-group"><label>Фото</label>
+        <div id="add-media-preview" style="width:64px;height:64px;background:#FCE7F3;border-radius:12px;background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;color:#EC4899;font-size:11px;margin-bottom:6px">Нет</div>
+        <input type="file" id="add-media-file" accept="image/*" onchange="handlePhotoPick(this,'add-val','add-media-preview')" style="width:100%;padding:10px;border:1px dashed #E5E5EA;border-radius:12px;font-size:12px;box-sizing:border-box;font-family:inherit">
+        <input id="add-val" placeholder="Ссылка на фото/видео" style="display:none;margin-top:6px;width:100%;padding:12px;border:1px solid #E5E5EA;border-radius:12px;font-size:14px;outline:none;font-family:inherit;box-sizing:border-box" oninput="showPhotoPreview('add-media-preview',this.value)">
+        <div id="add-media-link" style="font-size:11px;margin-top:5px"><a href="#" onclick="togglePhotoUrl('add-val','add-media-link');return false" style="color:#EC4899">или вставить ссылку</a></div>
+      </div>
+      <div class="form-group"><label>Описание</label><textarea id="add-desc"></textarea></div>
+      <button onclick="saveItem('${type}')" style="width:100%">Добавить</button>
+    `);
+    return;
+  }
   openModal(`<h3>Добавить: ${title}</h3>
     <div class="form-group"><label>Название / ссылка</label><input id="add-val"></div>
     <div class="form-group"><label>Описание</label><textarea id="add-desc"></textarea></div>
