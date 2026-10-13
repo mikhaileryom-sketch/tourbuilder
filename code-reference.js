@@ -1,4 +1,6 @@
 const SPREADSHEET_ID = '1AqKb6AyaIrHC4Qrc_m7QT98L1EOetHlw';
+// Папка Google Drive для фото профилей (создать вручную, вставить ID из URL папки)
+const DRIVE_FOLDER_ID = 'ВСТАВЬТЕ_ID_ПАПКИ';
 
 function doGet(e){
   try {
@@ -30,6 +32,22 @@ function doPost(e){
   try {
     const body = JSON.parse(e.postData.contents);
     const action = body.action;
+
+    // Загрузка фото в Drive. Обрабатывается до openById: на этом шаге лист не нужен
+    if(action === 'uploadPhoto'){
+      if(!DRIVE_FOLDER_ID || DRIVE_FOLDER_ID === 'ВСТАВЬТЕ_ID_ПАПКИ'){
+        return jsonResponse({error:'DRIVE_FOLDER_ID is not configured'});
+      }
+      if(!body.base64) return jsonResponse({error:'base64 is empty'});
+      try {
+        const url = uploadPhoto(body.base64, body.filename || 'photo.jpg');
+        return jsonResponse({success:true, url:url});
+      } catch(err){
+        console.error('uploadPhoto failed: ' + err);
+        return jsonResponse({error:err.toString()});
+      }
+    }
+
     const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
 
     if(action === 'updateArtist'){
@@ -737,4 +755,29 @@ function updateRow(ss, sheetName, id, fields){
 
 function jsonResponse(data){
   return ContentService.createTextOutput(JSON.stringify(data)).setMimeType(ContentService.MimeType.JSON);
+}
+
+// Чистим префикс data:image/...;base64, если он пришёл с фронта
+function extractBase64(base64){
+  const s = String(base64 || '');
+  const comma = s.indexOf(',');
+  return (s.indexOf('base64,') > -1 && comma > -1) ? s.slice(comma + 1) : s;
+}
+
+// Сохраняет фото в папку Drive и возвращает публичную ссылку для Artists.img
+function uploadPhoto(base64, filename){
+  const raw = extractBase64(base64);
+  const safeName = String(filename || 'photo.jpg').replace(/[^\w.\-]/g, '_');
+  const bytes = Utilities.base64Decode(raw);
+  const blob = Utilities.newBlob(bytes, 'image/jpeg', safeName);
+  const folder = DriveApp.getFolderById(DRIVE_FOLDER_ID);
+  const file = folder.createFile(blob);
+  try {
+    file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+  } catch(err){
+    console.error('setSharing failed: ' + err);
+    throw new Error('Sharing disabled on account');
+  }
+  console.log('uploadPhoto: ' + safeName + ' -> ' + file.getId());
+  return 'https://drive.google.com/thumbnail?id=' + file.getId() + '&sz=w800';
 }

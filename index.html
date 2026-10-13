@@ -1795,9 +1795,13 @@ function openCreateForm(){
     <div class="form-group"><label>Фото профиля</label>
       <div style="display:flex;align-items:center;gap:12px">
         <div id="cf-photo-preview" style="width:64px;height:64px;background:#FCE7F3;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;color:#EC4899;font-size:11px;text-align:center;flex-shrink:0">Нет</div>
-        <input id="cf-img" type="url" placeholder="Ссылка на фото" style="flex:1;padding:12px;border:1px solid #E5E5EA;border-radius:12px;font-size:14px;outline:none;font-family:inherit;box-sizing:border-box" oninput="previewPhoto(this.value)">
+        <div style="flex:1">
+          <input type="file" id="cf-file" accept="image/*" onchange="handlePhotoPick(this,'cf-img','cf-photo-preview')" style="width:100%;padding:10px;border:1px dashed #E5E5EA;border-radius:12px;font-size:12px;box-sizing:border-box;font-family:inherit">
+          <input id="cf-img" type="url" placeholder="Ссылка на фото" value="" style="display:none;margin-top:6px;width:100%;padding:12px;border:1px solid #E5E5EA;border-radius:12px;font-size:14px;outline:none;font-family:inherit;box-sizing:border-box" oninput="showPhotoPreview('cf-photo-preview',this.value)">
+          <div id="cf-file-link" style="font-size:11px;margin-top:5px"><a href="#" onclick="togglePhotoUrl('cf-img','cf-file-link');return false" style="color:#EC4899">или вставить ссылку</a></div>
+        </div>
       </div>
-      <div style="font-size:11px;color:#6E6E73;margin-top:5px">Загрузите на <a href="https://imgur.com" target="_blank" style="color:#EC4899">Imgur</a> и вставьте ссылку</div>
+      <div style="font-size:11px;color:#6E6E73;margin-top:5px">Фото сожмётся до 800×800 и загрузится в Google Drive</div>
     </div>
     <div class="form-group"><label>Роль *</label><select id="cf-role">${Object.keys(ROLE_NAMES).map(k=>`<option value="${k}">${ROLE_NAMES[k]}</option>`).join('')}</select></div>
     <div class="form-group"><label>Специализация</label><input id="cf-spec" placeholder="Фламенко, Балет"></div>
@@ -1821,6 +1825,69 @@ function openCreateForm(){
     <button onclick="submitCreateProfile()" style="width:100%">Создать</button>
   `);
 }
+/* ============ PHOTO PICKER ============ */
+// Сжатие выбранного файла до 800x800 (вписывание, пропорции сохраняются) и в base64 jpeg 0.8
+function compressImageFile(file, cb){
+  const reader = new FileReader();
+  reader.onload = e => {
+    const img = new Image();
+    img.onload = () => {
+      const maxSide = 800;
+      const scale = Math.min(1, maxSide / Math.max(img.width, img.height));
+      const w = Math.max(1, Math.round(img.width * scale));
+      const h = Math.max(1, Math.round(img.height * scale));
+      const canvas = document.createElement('canvas');
+      canvas.width = w; canvas.height = h;
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fillRect(0, 0, w, h);
+      ctx.drawImage(img, 0, 0, w, h);
+      cb(canvas.toDataURL('image/jpeg', 0.8), w, h);
+    };
+    img.onerror = () => { showToast('Не удалось прочитать изображение'); };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function showPhotoPreview(previewId, src){
+  const el = document.getElementById(previewId);
+  if(!el) return;
+  if(src){ el.style.backgroundImage = `url('${src}')`; el.innerText = ''; }
+  else { el.style.backgroundImage = ''; el.innerText = 'Нет'; }
+}
+
+async function handlePhotoPick(input, hiddenId, previewId){
+  const file = input.files && input.files[0];
+  if(!file) return;
+  if(!/^image\//.test(file.type)){ showToast('Выберите изображение'); return; }
+  showToast('Сжимаем фото...');
+  compressImageFile(file, async (dataUrl, w, h) => {
+    showPhotoPreview(previewId, dataUrl);
+    try {
+      const r = await fetch(SHEET_API_URL, { method:'POST', body:JSON.stringify({
+        action:'uploadPhoto', base64:dataUrl, filename:file.name || 'photo.jpg'
+      })});
+      const res = await r.json();
+      if(res.success && res.url){
+        const hidden = document.getElementById(hiddenId);
+        if(hidden) hidden.value = res.url;
+        showPhotoPreview(previewId, res.url);
+        showToast(`Фото загружено (${w}×${h})`);
+      } else {
+        showToast('Ошибка загрузки: ' + (res.error || 'неизвестно'));
+      }
+    } catch(e){ showToast('Ошибка сети'); }
+  });
+}
+
+function togglePhotoUrl(hiddenId, linkId){
+  const inp = document.getElementById(hiddenId);
+  if(inp){ inp.style.display = 'block'; inp.focus(); }
+  const l = document.getElementById(linkId);
+  if(l) l.style.display = 'none';
+}
+
 function previewPhoto(url){
   const el = document.getElementById('cf-photo-preview');
   if(!el) return;
@@ -2327,7 +2394,12 @@ function editMain(){
   openModal(`
     <h3>Редактировать основное</h3>
     <div class="form-group"><label>Имя</label><input id="e-name" value="${a.name||''}"></div>
-    <div class="form-group"><label>Фото (URL)</label><input id="e-img" value="${a.img||''}"></div>
+    <div class="form-group"><label>Фото</label>
+      <div id="e-photo-preview" style="width:64px;height:64px;background:#FCE7F3;border-radius:12px;background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;color:#EC4899;font-size:11px;margin-bottom:6px">Нет</div>
+      <input type="file" id="e-file" accept="image/*" onchange="handlePhotoPick(this,'e-img','e-photo-preview')" style="width:100%;padding:10px;border:1px dashed #E5E5EA;border-radius:12px;font-size:12px;box-sizing:border-box;font-family:inherit">
+      <input id="e-img" value="${a.img||''}" style="display:none;margin-top:6px;width:100%;padding:12px;border:1px solid #E5E5EA;border-radius:12px;font-size:14px;outline:none;font-family:inherit;box-sizing:border-box" oninput="showPhotoPreview('e-photo-preview',this.value)">
+      <div id="e-file-link" style="font-size:11px;margin-top:5px"><a href="#" onclick="togglePhotoUrl('e-img','e-file-link');return false" style="color:#EC4899">или вставить ссылку</a></div>
+    </div>
     <div class="form-group"><label>Bio</label><textarea id="e-bio" style="min-height:80px">${a.bio||''}</textarea></div>
     <div class="form-group"><label>Роль</label><select id="e-role">${Object.keys(ROLE_NAMES).map(k=>`<option value="${k}" ${a.role===k?'selected':''}>${ROLE_NAMES[k]}</option>`).join('')}</select></div>
     <div class="form-group"><label>Специализация</label><input id="e-spec" value="${a.spec||''}"></div>
@@ -2369,6 +2441,19 @@ async function saveMain(){
 
 function addItem(type){
   const title = {media:'Медиа',experience:'Опыт',education:'Образование',inventory:'Инвентарь',costumes:'Костюмы'}[type]||type;
+  if(type === 'media'){
+    openModal(`<h3>Добавить: ${title}</h3>
+      <div class="form-group"><label>Фото</label>
+        <div id="add-media-preview" style="width:64px;height:64px;background:#FCE7F3;border-radius:12px;background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;color:#EC4899;font-size:11px;margin-bottom:6px">Нет</div>
+        <input type="file" id="add-media-file" accept="image/*" onchange="handlePhotoPick(this,'add-val','add-media-preview')" style="width:100%;padding:10px;border:1px dashed #E5E5EA;border-radius:12px;font-size:12px;box-sizing:border-box;font-family:inherit">
+        <input id="add-val" placeholder="Ссылка на фото/видео" style="display:none;margin-top:6px;width:100%;padding:12px;border:1px solid #E5E5EA;border-radius:12px;font-size:14px;outline:none;font-family:inherit;box-sizing:border-box" oninput="showPhotoPreview('add-media-preview',this.value)">
+        <div id="add-media-link" style="font-size:11px;margin-top:5px"><a href="#" onclick="togglePhotoUrl('add-val','add-media-link');return false" style="color:#EC4899">или вставить ссылку</a></div>
+      </div>
+      <div class="form-group"><label>Описание</label><textarea id="add-desc"></textarea></div>
+      <button onclick="saveItem('${type}')" style="width:100%">Добавить</button>
+    `);
+    return;
+  }
   openModal(`<h3>Добавить: ${title}</h3>
     <div class="form-group"><label>Название / ссылка</label><input id="add-val"></div>
     <div class="form-group"><label>Описание</label><textarea id="add-desc"></textarea></div>
