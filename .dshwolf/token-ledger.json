@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "lifetime": {
+    "total_sessions": 2
+  },
+  "sessions": [
+    {
+      "session_id": "session-84c73dce-407a-4387-8a28-a221b64f9733",
+      "agent": "deepseek-flash",
+      "measured_tokens": 21665,
+      "at": "2026-10-13T19:30:55.998Z"
+    },
+    {
+      "session_id": "session-0eb4cc2a-1945-41e7-aa42-e7d6d12387b0",
+      "agent": "deepseek-flash",
+      "measured_tokens": 20848,
+      "at": "2026-10-13T19:33:08.680Z"
+    }
+  ]
+}
