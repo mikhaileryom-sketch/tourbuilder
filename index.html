@@ -1225,10 +1225,6 @@ function openDay(ds, artistId){
     });
   }
   if(!body) body = '<p style="color:#6E6E73;text-align:center">Нет данных</p>';
-// DEBUG
-const dow = (new Date(ds).getDay() + 6) % 7;
-const rawSched = artistSchedules.find(s => String(s.artistId) === String(a.id) && Math.floor(Number(s.dayOfWeek)) === dow);
-body += `<div style="font-size:10px;color:#999;margin-top:10px;background:#F5F5F5;padding:6px;border-radius:6px;word-break:break-all">DEBUG: dow=${dow}, найдено=${rawSched?JSON.stringify(rawSched):'нет'}, всего записей=${artistSchedules.length}</div>`;
 openModal(`<h3>${ds}</h3>${body}<button onclick="closeModal()" style="width:100%;margin-top:15px">Закрыть</button>`);
 }
 
@@ -2095,15 +2091,6 @@ async function saveParams(){
 function renderBusyTab(){
   const el = document.getElementById('tab-busy');
   const a = currentArtist;
-  // DEBUG: сколько записей расписания пришло с сервера
-  console.log('=== DEBUG SCHEDULE ===');
-console.log('artistSchedules:', artistSchedules);
-console.log('current artist id:', a.id, typeof a.id);
-console.log('schedule for me:', artistSchedules.filter(s => String(s.artistId).trim() === String(a.id).trim()));
-const mySched = artistSchedules.filter(s => String(s.artistId).trim() === String(a.id).trim());
-const debugText = mySched.length 
-  ? `✅ Расписание: ${mySched.length} дней | Пн ${mySched.find(s=>Number(s.dayOfWeek)===0)?.startHour||'—'}–${mySched.find(s=>Number(s.dayOfWeek)===0)?.endHour||'—'}`
-  : `❌ Пусто (всего: ${artistSchedules.length}, artistId="${a.id}")`;
   let daysHTML = '';
   const dim = new Date(state.year, state.monthIndex+1, 0).getDate();
   for(let d=1; d<=dim; d++){
@@ -2120,7 +2107,6 @@ const debugText = mySched.length
       <div style="font-size:18px;font-weight:800;color:#1A1A1A">${months[state.monthIndex]} ${state.year}</div>
       <div style="font-size:11px;color:#6E6E73;margin-top:2px">Занятость и управление ценой</div>
       ${onVac?`<div class="vacation-badge">🌴 Отпуск${a.vacationCity?' в '+a.vacationCity:''} до ${a.vacationUntil}</div>`:''}
-<div style="font-size:10px;color:#999;background:#F0F0F0;padding:6px;border-radius:6px;margin-top:6px">${debugText}</div>
 </div>
     <div style="display:flex;gap:6px;justify-content:center;margin-bottom:10px">
       <button class="btn-ghost" onclick="changeMonth(-1);renderBusyTab()">←</button>
