@@ -5,6 +5,7 @@ const DRIVE_FOLDER_ID = '1zkAIOO3EembU5lEil0gIfJdx5TG3iN-j';
 function doGet(e){
   try {
     const action = (e.parameter.action || 'artists').toLowerCase();
+    const callback = e.parameter.callback;
     let data = [];
     if(action === 'artists')            data = getSheetData('Artists', 'artist');
     else if(action === 'venues')        data = getSheetDataAny(['Venues','Площадки'], 'venue');
@@ -23,9 +24,9 @@ function doGet(e){
     else if(action === 'education')     data = getSheetData('ArtistEducation', 'education');
     else if(action === 'inventory')     data = getSheetData('ArtistInventory', 'inventory');
     else if(action === 'costumes')      data = getSheetData('ArtistCostumes', 'costume');
-    else return jsonResponse({error:'Unknown action: '+action});
-    return jsonResponse(data);
-  } catch(err){ return jsonResponse({error:err.toString()}); }
+    else return jsonpResponse({error:'Unknown action: '+action}, callback);
+    return jsonpResponse(data, callback);
+  } catch(err){ return jsonpResponse({error:err.toString()}, e.parameter.callback); }
 }
 
 function doPost(e){
@@ -35,8 +36,8 @@ function doPost(e){
 
     // Загрузка фото в Drive. Обрабатывается до openById: на этом шаге лист не нужен
     if(action === 'uploadPhoto'){
-      if(!DRIVE_FOLDER_ID || DRIVE_FOLDER_ID === '1zkAIOO3EembU5lEil0gIfJdx5TG3iN-j'){
-        return jsonResponse({error:'DRIVE_FOLDER_ID is not configured'});
+      if(!DRIVE_FOLDER_ID){
+  return jsonResponse({error:'DRIVE_FOLDER_ID is not configured'});
       }
       if(!body.base64) return jsonResponse({error:'base64 is empty'});
       try {
@@ -757,6 +758,13 @@ function updateRow(ss, sheetName, id, fields){
 
 function jsonResponse(data){
   return ContentService.createTextOutput(JSON.stringify(data)).setMimeType(ContentService.MimeType.JSON);
+}
+
+// JSONP: если передан ?callback=..., отдаём JS-обёртку вместо JSON
+function jsonpResponse(data, callback){
+  if(!callback) return jsonResponse(data);
+  return ContentService.createTextOutput(String(callback) + '(' + JSON.stringify(data) + ');')
+    .setMimeType(ContentService.MimeType.JAVASCRIPT);
 }
 
 // Чистим префикс data:image/...;base64, если он пришёл с фронта

@@ -535,6 +535,9 @@ async function loadData() {
   }
   updateRoleUI();
   renderHome();
+  // Восстанавливаем последний основной экран (профиль и карточку артиста не восстанавливаем)
+  const savedScreen = localStorage.getItem('lastScreen');
+  if(savedScreen && document.getElementById(savedScreen)) navigateTo(savedScreen);
 }
 
 // Детерминированный выбор профиля артиста по telegramId.
@@ -582,6 +585,10 @@ function navigateTo(id, el) {
   document.getElementById(id).classList.add('active');
   document.querySelectorAll('.nav-icon').forEach(n=>n.classList.remove('active'));
   if(el) el.classList.add('active');
+  // Запоминаем только основные экраны, чтобы не возвращаться в профиль/карточку артиста
+  if(['screen-home','screen-organizer-home','screen-catalog','screen-venues','screen-calendar','screen-match'].includes(id)){
+    localStorage.setItem('lastScreen', id);
+  }
   if(id==='screen-home') renderHome();
   if(id==='screen-organizer-home') renderOrganizerHome();
   if(id==='screen-catalog') renderCatalog();
@@ -765,7 +772,14 @@ function openArtist(id){
   const dim = new Date(state.year, state.monthIndex+1, 0).getDate();
   for(let d=1; d<=dim; d++){
     const ds = `${state.year}-${String(state.monthIndex+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-    daysHTML += `<div class="day" style="cursor:pointer;position:relative" onclick="openArtistDayView('${String(a.id).replace(/'/g,"&#39;")}','${ds}')">${renderSunIcon(a, ds, 28)}<span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:11px;font-weight:700;color:#1A1A1A;z-index:2">${d}</span></div>`;
+    const sched = getScheduleForDate(a, ds);
+    const hrs = sched.hours || [];
+    const span = hrs.length ? (hrs[hrs.length-1] + 1 - hrs[0]) : 0;
+    let sunOp = '.7', numColor = '#1A1A1A';
+    if(!sched.isWorking || sched.isVacation){ sunOp = '.15'; numColor = '#B0B0B5'; }
+    else if(span <= 6){ sunOp = '.4'; }
+    const sun = renderSunIcon(a, ds, 28).replace('<svg class="sun-svg"', `<svg style="--sun-op:${sunOp}" class="sun-svg"`);
+    daysHTML += `<div class="day" style="cursor:pointer;position:relative" onclick="openArtistDayView('${String(a.id).replace(/'/g,"&#39;")}','${ds}')">${sun}<span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:11px;font-weight:700;color:${numColor};z-index:2">${d}</span></div>`;
   }
   const inProj = userProject.some(p=>String(p.id)===String(a.id) && p.type==='artist');
   const roleIcon = ROLE_ICONS[a.role]||'fa-star';
@@ -2344,9 +2358,10 @@ function openScheduleEditor(){
       Number(s.artistId) === Number(a.id) &&
       Number(s.dayOfWeek) === i
     );
-    const isWork = sched ? (sched.isWorking === true || String(sched.isWorking).toUpperCase() === 'TRUE') : true;
-    const startH = sched ? (Number(sched.startHour) || 9) : 9;
-    const endH = sched ? (Number(sched.endHour) || 21) : 21;
+    const isWorkRaw = sched ? (sched.isWorking === true || String(sched.isWorking).toUpperCase() === 'TRUE' || String(sched.isWorking).toUpperCase() === 'ИСТИНА' || Number(sched.isWorking) === 1) : true;
+    const startH = sched && sched.startHour !== null && sched.startHour !== undefined && sched.startHour !== '' ? Number(sched.startHour) : 9;
+    const endH = sched && sched.endHour !== null && sched.endHour !== undefined && sched.endHour !== '' ? Number(sched.endHour) : 21;
+    const isWork = isWorkRaw && !(Number(endH) === 0 || Number(endH) < Number(startH));
     const label = isWork
       ? `<span style="color:#4CAF50;font-size:11px;margin-left:6px">работает</span>`
       : `<span style="color:#B0B0B5;font-size:11px;margin-left:6px">выходной</span>`;
