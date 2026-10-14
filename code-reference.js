@@ -1,6 +1,6 @@
 const SPREADSHEET_ID = '1AqKb6AyaIrHC4Qrc_m7QT98L1EOetHlw';
 // Папка Google Drive для фото профилей (создать вручную, вставить ID из URL папки)
-const DRIVE_FOLDER_ID = 'ВСТАВЬТЕ_ID_ПАПКИ';
+const DRIVE_FOLDER_ID = '1zkAIOO3EembU5lEil0gIfJdx5TG3iN-j';
 
 function doGet(e){
   try {
@@ -35,7 +35,7 @@ function doPost(e){
 
     // Загрузка фото в Drive. Обрабатывается до openById: на этом шаге лист не нужен
     if(action === 'uploadPhoto'){
-      if(!DRIVE_FOLDER_ID || DRIVE_FOLDER_ID === 'ВСТАВЬТЕ_ID_ПАПКИ'){
+      if(!DRIVE_FOLDER_ID || DRIVE_FOLDER_ID === '1zkAIOO3EembU5lEil0gIfJdx5TG3iN-j'){
         return jsonResponse({error:'DRIVE_FOLDER_ID is not configured'});
       }
       if(!body.base64) return jsonResponse({error:'base64 is empty'});
