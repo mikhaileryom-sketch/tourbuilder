@@ -22,12 +22,12 @@ button:disabled{opacity:.5;cursor:not-allowed}
 .role-switch{position:fixed;top:15px;right:15px;z-index:1500;background:#FFF;border:2px solid #EC4899;border-radius:30px;padding:8px 16px;display:flex;align-items:center;gap:8px;cursor:pointer;box-shadow:0 4px 12px rgba(236,72,153,.25);font-weight:700;font-size:13px;color:#EC4899}
 /* HOME */
 #screen-home .honeycomb-frame{position:relative;width:96vw;height:88dvh;clip-path:polygon(25% 0%,75% 0%,100% 25%,100% 75%,75% 100%,25% 100%,0% 75%,0% 25%);background:#FFF;border:2px solid rgba(236,72,153,.2);box-shadow:0 10px 30px rgba(0,0,0,.05);display:flex;justify-content:center;align-items:center}
-#screen-home .center-id{width:110px;height:110px;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background:transparent;border:2px dashed rgba(212,175,55,.5);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;font-weight:800;font-size:13px;color:#1A1A1A;z-index:15;cursor:pointer;padding:8px;box-sizing:border-box;overflow:hidden;position:relative}
+#screen-home .center-id{width:110px;height:110px;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background:transparent;border:2px dashed rgba(212,175,55,.6);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;font-weight:800;font-size:13px;color:#1A1A1A;z-index:15;cursor:pointer;padding:8px;box-sizing:border-box;overflow:hidden;position:relative}
 #screen-home .center-id .avatar{width:34px;height:34px;border-radius:50%;background:#EC4899;color:#FFF;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:900;margin-bottom:4px}
 #screen-home .center-id span{font-size:9px;font-weight:400;color:#6E6E73;margin-top:2px}
 .user-cell{position:absolute;width:62px;height:62px;background-color:#F5E6B8;background-image:linear-gradient(135deg,#F5E6B8 0%,#E8CE8F 100%);clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background-size:cover;background-position:center;border:2px solid #D4AF37;box-shadow:0 4px 10px rgba(0,0,0,.08);cursor:pointer;transition:transform .2s,border-color .2s;z-index:5;transform:translate(-50%,-50%)}
-.user-cell:hover{transform:translate(-50%,-50%) scale(1.15);border-color:#B8860B;z-index:50}
-.role-icon{position:absolute;bottom:8px;left:8px;font-size:12px;color:#FFF;background:rgba(26,26,26,.75);border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;z-index:3;line-height:1}
+.user-cell:hover{transform:translate(-50%,-50%) scale(1.15);background-image:linear-gradient(135deg,#D4AF37 0%,#B8860B 100%);border-color:#8B6914;z-index:50}
+.role-icon{position:absolute;bottom:8px;left:8px;font-size:12px;color:#FFF;background:rgba(139,105,20,.85);border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;z-index:3;line-height:1}
 .star-wrapper{position:absolute;top:8px;right:8px;width:16px;height:16px;z-index:3}
 .star-bg{position:absolute;inset:0;color:rgba(255,255,255,.55);font-size:14px}
 .star-fill{position:absolute;inset:0;color:#FFC107;font-size:14px;overflow:hidden;text-shadow:0 0 3px rgba(0,0,0,.8)}
@@ -37,12 +37,12 @@ button:disabled{opacity:.5;cursor:not-allowed}
 .catalog-screen h1{font-size:24px;margin-bottom:20px;color:#1A1A1A}
 .search-bar{width:90%;max-width:400px;padding:15px;border:2px solid #E5E5EA;border-radius:30px;font-size:16px;margin-bottom:15px;background:#FFF;outline:none;text-align:center;box-sizing:border-box;font-family:inherit}
 .catalog-grid{display:grid;grid-template-columns:repeat(3,100px);gap:15px;justify-content:center}
-.catalog-cell{position:relative;width:100px;height:100px;background-color:#FCE7F3;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background-size:cover;background-position:center;border:2px solid #E5E5EA;cursor:pointer;transition:transform .2s}
-.catalog-cell .label{position:absolute;top:42px;left:0;right:0;background:rgba(184,134,11,.9);color:#FFF;font-size:10px;text-align:center;padding:3px 2px;font-weight:600}
+.catalog-cell{position:relative;width:100px;height:100px;background-color:#F5E6B8;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background-size:cover;background-position:center;border:2px solid #E5E5EA;cursor:pointer;transition:transform .2s}
+.catalog-cell .label{position:absolute;top:42px;left:0;right:0;background:rgba(139,105,20,.9);color:#FFF;font-size:10px;text-align:center;padding:3px 2px;font-weight:600}
 .catalog-cell .role-icon{position:absolute;top:12px;left:12px;bottom:auto;width:22px;height:22px;font-size:13px}
-.catalog-cell:hover{transform:scale(1.05);border-color:#EC4899}
+.catalog-cell:hover{transform:scale(1.05);border-color:#D4AF37}
 .detail-screen{background:#F5F5F7;padding:20px;justify-content:flex-start !important}
-.detail-photo{width:180px;height:180px;background-color:#FCE7F3;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background-size:cover;background-position:center;border:4px solid #EC4899;margin-bottom:20px;position:relative;transition:transform .2s}
+.detail-photo{width:180px;height:180px;background-color:#F5E6B8;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background-size:cover;background-position:center;border:4px solid #D4AF37;margin-bottom:20px;position:relative;transition:transform .2s}
 .detail-photo:hover{transform:scale(1.03)}
 .detail-photo .role-icon{bottom:20px;left:20px;width:28px;height:28px;font-size:16px}
 .detail-name{font-size:26px;font-weight:800;color:#1A1A1A;text-align:center}
@@ -63,8 +63,8 @@ button:disabled{opacity:.5;cursor:not-allowed}
 .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:10px}
 .cal-dow{text-align:center;font-size:10px;color:#6E6E73;font-weight:600;padding:4px 0}
 .cal-cell{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:8px;font-size:11px;font-weight:600;color:#1A1A1A;cursor:pointer;position:relative;user-select:none;min-height:42px;padding:3px 2px;box-sizing:border-box;overflow:hidden}
-.cal-cell .day-num{position:relative;font-size:14px;line-height:1;font-weight:600}
-.cal-cell .sun-svg{position:absolute;width:22px;height:22px;max-width:70%;max-height:60%;opacity:.35;z-index:0}
+.cal-cell .day-num{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:13px;font-weight:700;line-height:1;z-index:2;color:#1A1A1A}
+.cal-cell .sun-svg{position:relative;width:26px;height:26px;max-width:70%;max-height:60%;opacity:.5;z-index:0}
 .cal-cell .star{font-size:9px;color:#D4AF37;position:absolute;top:-3px;right:-7px;line-height:1}
 .cal-cell .status-dot{position:absolute;bottom:3px;right:4px;width:9px;height:9px;border-radius:50%;z-index:4}
 .cal-cell .status-dot.busy{background:#F44336}
@@ -107,7 +107,7 @@ button:disabled{opacity:.5;cursor:not-allowed}
 .result-cards{display:flex;flex-direction:column;gap:12px;margin-bottom:15px}
 .result-card{background:#FFF;border-radius:16px;padding:14px;box-shadow:0 4px 14px rgba(0,0,0,.06);display:flex;gap:12px;align-items:center;border:1px solid #F0F0F0;position:relative}
 .result-card:hover{box-shadow:0 6px 20px rgba(236,72,153,.15);border-color:#EC4899}
-.result-card .rc-avatar{width:60px;height:60px;flex-shrink:0;background-color:#FCE7F3;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background-size:cover;background-position:center;border:2px solid #EC4899}
+.result-card .rc-avatar{width:60px;height:60px;flex-shrink:0;background-color:#F5E6B8;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background-size:cover;background-position:center;border:2px solid #D4AF37}
 .result-card .rc-info{flex:1;min-width:0}
 .result-card .rc-name{font-weight:800;font-size:15px;margin-bottom:3px;color:#1A1A1A}
 .result-card .rc-spec{font-size:12px;color:#6E6E73;margin-bottom:4px}
@@ -128,7 +128,7 @@ button:disabled{opacity:.5;cursor:not-allowed}
 #screen-venue-profile{background:#F5F5F7;padding:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;height:calc(100vh - 80px)}
 #screen-venue-profile.active{display:block !important}
 .profile-header{width:100%;background:#FFF;padding:20px;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;border-bottom:1px solid #E5E5EA}
-.profile-header .avatar-lg{width:90px;height:90px;background-color:#FCE7F3;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background-size:cover;background-position:center;border:3px solid #EC4899;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:900;margin-bottom:12px;color:#EC4899}
+.profile-header .avatar-lg{width:90px;height:90px;background-color:#F5E6B8;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background-size:cover;background-position:center;border:3px solid #D4AF37;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:900;margin-bottom:12px;color:#8B6914}
 .profile-header .name{font-size:22px;font-weight:800}
 .profile-header .role{font-size:13px;color:#6E6E73;margin-top:4px}
 .vacation-badge{display:inline-block;background:#E3F2FD;color:#1976D2;font-size:11px;font-weight:700;padding:3px 10px;border-radius:12px;margin-top:6px}
@@ -147,7 +147,7 @@ button:disabled{opacity:.5;cursor:not-allowed}
 .list-item .li-sub{font-size:12px;color:#6E6E73}
 .add-btn-full{width:100%;background:#FFF;color:#EC4899;border:2px dashed #EC4899;padding:12px;border-radius:12px;font-weight:700;margin-top:10px;cursor:pointer;font-family:inherit;font-size:14px}
 .portfolio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
-.portfolio-grid .pg-item{aspect-ratio:1;background-size:cover;background-position:center;border-radius:8px;background-color:#FCE7F3;cursor:pointer;position:relative}
+.portfolio-grid .pg-item{aspect-ratio:1;background-size:cover;background-position:center;border-radius:8px;background-color:#F5E6B8;cursor:pointer;position:relative}
 .portfolio-grid .pg-item.video::after{content:'▶';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#FFF;font-size:20px;text-shadow:0 0 6px #000;background:rgba(0,0,0,.3)}
 .rating-big{font-size:40px;font-weight:900;color:#EC4899;text-align:center}
 .rating-stars{color:#FFC107;font-size:20px;text-align:center;margin-bottom:15px}
@@ -175,7 +175,7 @@ button:disabled{opacity:.5;cursor:not-allowed}
 .form-group input,.form-group select,.form-group textarea{width:100%;padding:12px;border:1px solid #E5E5EA;border-radius:12px;font-size:15px;box-sizing:border-box;background:#FFF;outline:none;font-family:inherit}
 #match-results{width:100%;max-width:400px;margin-top:25px}
 .match-card{background:#FFF;border-radius:15px;padding:12px;margin-bottom:12px;box-shadow:0 4px 10px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px;border-left:4px solid #EC4899}
-.match-card .avatar{width:50px;height:50px;flex-shrink:0;background-color:#FCE7F3;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background-size:cover;background-position:center;border:2px solid #EC4899}
+.match-card .avatar{width:50px;height:50px;flex-shrink:0;background-color:#F5E6B8;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background-size:cover;background-position:center;border:2px solid #D4AF37}
 .match-card .info{flex-grow:1;text-align:left;min-width:0}
 .match-card .name{font-weight:800;font-size:15px;margin-bottom:3px}
 .match-card .spec{font-size:11px;color:#6E6E73;margin-bottom:3px}
@@ -220,7 +220,7 @@ button:disabled{opacity:.5;cursor:not-allowed}
 .mini-calendar{width:100%;background:#FFF;border-radius:15px;padding:15px;margin-bottom:20px;box-shadow:0 4px 10px rgba(0,0,0,.03);box-sizing:border-box}
 .days-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
 .day{height:32px;display:flex;justify-content:center;align-items:center;font-size:10px;flex-direction:column;gap:1px}
-.period-card{background:#FFF5F9;border:1px solid #FCE7F3;border-radius:12px;padding:12px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
+.period-card{background:#FBF3DC;border:1px solid #EFDFAE;border-radius:12px;padding:12px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
 .period-card .pc-info{flex:1}
 .period-card .pc-range{font-size:12px;color:#6E6E73}
 .period-card .pc-price{font-weight:800;color:#EC4899;font-size:15px}
@@ -912,8 +912,9 @@ function getScheduleForDate(artist, dateStr){
   if(!sched){
     return { isWorking: false, hours: [] };
   }
-  // Если день явно помечен как нерабочий
-  if(!sched.isWorking){
+  // Если день явно помечен как нерабочий.
+  // isWorking может прийти булевым или строкой из Sheets — нормализуем
+  if(!(sched.isWorking === true || String(sched.isWorking).toUpperCase() === 'TRUE' || String(sched.isWorking).toUpperCase() === 'ИСТИНА')){
     return { isWorking: false, hours: [] };
   }
   
@@ -1004,7 +1005,7 @@ function openVenue(id){
     <div class="detail-name">${v.name||''}</div>
     <div class="detail-spec">${v.type||''} · ${v.city||''}</div>
     <div style="margin-bottom:10px;color:#6E6E73;text-align:center">Вместимость: ${v.capacity||'—'} чел</div>
-    <div style="background:#FFF5F9;border-radius:12px;padding:12px;margin-bottom:20px;max-width:400px;width:100%;box-sizing:border-box">
+    <div style="background:#FBF3DC;border-radius:12px;padding:12px;margin-bottom:20px;max-width:400px;width:100%;box-sizing:border-box">
       <div style="font-size:11px;color:#6E6E73;margin-bottom:6px">Цена аренды:</div>
       <div style="font-size:20px;font-weight:800;color:#EC4899">${finalPrice.toLocaleString()} ₽</div>
       ${noBargain?'<div style="font-size:10px;color:#999;margin-top:4px">Фиксированная, торги не предусмотрены</div>':''}
@@ -1530,7 +1531,7 @@ function renderWizard(){
     html = `<h2>Когда?</h2><p class="wiz-sub">Выберите дату</p>`;
     html += `<div class="wizard-custom-input"><input type="date" value="${wizardState.data.date||''}" onchange="wizSelect('date',this.value)"></div>`;
     if(wizardState.data.date){
-      html += `<div style="margin-top:14px;background:#FFF5F9;padding:12px;border-radius:12px;font-size:13px;color:#EC4899;font-weight:600;text-align:center">📅 ${wizardState.data.date}</div>`;
+      html += `<div style="margin-top:14px;background:#FBF3DC;padding:12px;border-radius:12px;font-size:13px;color:#8B6914;font-weight:600;text-align:center">📅 ${wizardState.data.date}</div>`;
     }
   }
   else if(step === 'place'){
@@ -1803,7 +1804,7 @@ function openCreateForm(){
     <div class="form-group"><label>Имя *</label><input id="cf-name" value="${tgUser.first_name||''}"></div>
     <div class="form-group"><label>Фото профиля</label>
       <div style="display:flex;align-items:center;gap:12px">
-        <div id="cf-photo-preview" style="width:64px;height:64px;background:#FCE7F3;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;color:#EC4899;font-size:11px;text-align:center;flex-shrink:0">Нет</div>
+        <div id="cf-photo-preview" style="width:64px;height:64px;background:#F5E6B8;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;color:#8B6914;font-size:11px;text-align:center;flex-shrink:0">Нет</div>
         <div style="flex:1">
           <input type="file" id="cf-file" accept="image/*" onchange="handlePhotoPick(this,'cf-img','cf-photo-preview')" style="width:100%;padding:10px;border:1px dashed #E5E5EA;border-radius:12px;font-size:12px;box-sizing:border-box;font-family:inherit">
           <input id="cf-img" type="url" placeholder="Ссылка на фото" value="" style="display:none;margin-top:6px;width:100%;padding:12px;border:1px solid #E5E5EA;border-radius:12px;font-size:14px;outline:none;font-family:inherit;box-sizing:border-box" oninput="showPhotoPreview('cf-photo-preview',this.value)">
@@ -2299,7 +2300,7 @@ async function saveSchedule(){
       action:'saveArtistSchedule', artistId: currentArtist.id, rows
     })});
     const res = await r.json();
-    if(res.success){ showToast('Расписание сохранено'); closeModal(); await loadData(); renderBusyTab(); }
+    if(res.success){ showToast('Расписание сохранено'); await loadData(); renderBusyTab(); closeModal(); }
     else showToast('Ошибка');
   } catch(e){ showToast('Ошибка сети'); }
 }
