@@ -72,7 +72,7 @@ button:disabled{opacity:.5;cursor:not-allowed}
 .cal-cell .status-dot.free{background:#4CAF50}
 .cal-cell.faded{opacity:0.3}
 /* SUN SVG */
-.sun-svg{width:32px;height:32px;display:block}
+.sun-svg{width:32px;height:32px;display:block;opacity:var(--sun-op,1)}
 .sun-ray{stroke-width:2;stroke-linecap:round}
 .sun-core-circle{transition:fill .3s}
 .rate-arrow{position:absolute;left:50%;transform:translateX(-50%);font-size:10px;font-weight:900;line-height:1;z-index:5;text-shadow:0 0 2px rgba(255,255,255,0.8)}
@@ -1123,7 +1123,10 @@ function renderCalendar(){
   // Кто артист для отрисовки солнышек? Если артист — себя, если организатор — первого артиста.
   let viewArtist = currentArtist;
   if(activeRole === 'organizer' && !viewArtist && artists.length) viewArtist = artists[0];
-  showMonths.forEach(({m, y}) => c.appendChild(buildMonthCard(m, y, viewArtist)));
+  // Солнышко рисуем от первого артиста, но статус-точки — только для выбранного,
+  // иначе организатор видит зелёные точки артиста, которого он не выбирал
+  const sunArtist = viewArtist || (activeRole === 'organizer' ? artists[0] : null);
+  showMonths.forEach(({m, y}) => c.appendChild(buildMonthCard(m, y, sunArtist, viewArtist)));
   let sx=0, sy=0;
   c.ontouchstart = e => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; };
   c.ontouchend = e => {
@@ -1135,9 +1138,11 @@ function renderCalendar(){
   };
 }
 
-function buildMonthCard(m, y, viewArtist){
+function buildMonthCard(m, y, viewArtist, selectedArtist){
   const wrap = document.createElement('div');
   wrap.className = 'month-card';
+  // Артист выбран явно? Если нет — статус-точки не показываем вообще
+  const statusArtist = selectedArtist || null;
   const dim = new Date(y, m+1, 0).getDate();
   const firstDow = (new Date(y, m, 1).getDay() + 6) % 7;
   const todayStr = new Date().toISOString().split('T')[0];
@@ -1180,8 +1185,9 @@ function buildMonthCard(m, y, viewArtist){
       sunStyle = '--sun-op:.7';
     }
     const sunRaw = viewArtist ? renderSunIcon(viewArtist, ds, 20) : '<i class="fa-solid fa-sun" style="color:#FFC107"></i>';
-    const sun = sunStyle ? sunRaw.replace('<svg', `<svg style="${sunStyle}"`) : sunRaw;
-    const dot = sched ? `<div class="status-dot ${sched.isWorking ? 'free' : 'busy'}"></div>` : '';
+    // renderSunIcon возвращает обёртку <div>, поэтому переменную ставим на сам <svg>
+    const sun = sunStyle ? sunRaw.replace('<svg class="sun-svg"', `<svg style="${sunStyle}" class="sun-svg"`) : sunRaw;
+    const dot = (sched && statusArtist) ? `<div class="status-dot ${sched.isWorking ? 'free' : 'busy'}"></div>` : '';
     const pr = viewArtist ? pricing.find(x => String(x.artistId) === String(viewArtist.id) && x.date === ds) : null;
     const star = (pr && Number(pr.priceModifier) !== 1 && pr.priceModifier) ? '<span class="star">*</span>' : '';
     html += `<div class="cal-cell${isToday}" onclick="openDay('${ds}', '${viewArtist ? viewArtist.id : ''}')">
@@ -1368,6 +1374,15 @@ function buildOrganizerDayResults(){
   return results;
 }
 
+// Плашка статуса артиста на конкретный день для списка организатора
+function artistDayBadge(artist, date){
+  const sched = getScheduleForDate(artist, date);
+  const hasEvent = events.some(e => String(e.artistId) === String(artist.id) && e.date === date);
+  if(hasEvent) return '<span style="background:#F44336;color:#FFF;font-size:9px;padding:2px 6px;border-radius:8px;font-weight:700;margin-left:5px">занят</span>';
+  if(!sched.isWorking || sched.isVacation) return '<span style="background:#F0F0F0;color:#6E6E73;font-size:9px;padding:2px 6px;border-radius:8px;font-weight:700;margin-left:5px">выходной</span>';
+  return '<span style="background:#E8F5E9;color:#4CAF50;font-size:9px;padding:2px 6px;border-radius:8px;font-weight:700;margin-left:5px">свободен</span>';
+}
+
 function renderOrganizerDayModal(){
   const d = orgDayState.date;
   const all = buildOrganizerDayResults();
@@ -1383,10 +1398,11 @@ function renderOrganizerDayModal(){
       const rangeText = hours.length === 12 ? 'весь день' : (hours.length ? `${hours[0]}:00–${hours[hours.length-1]+1}:00` : '—');
       const promoBadge = a._mod < 1 ? `<span style="background:#E8F5E9;color:#4CAF50;font-size:9px;padding:2px 6px;border-radius:8px;font-weight:700;margin-left:5px">▼ Скидка ×${a._mod}</span>` : '';
       const localBadge = orgCity && (a.city||'').toLowerCase() === orgCity.toLowerCase() ? `<span style="background:#FBF3DC;color:#8B6914;font-size:9px;padding:2px 6px;border-radius:8px;font-weight:700;margin-left:5px">📍 ${orgCity}</span>` : '';
+      const dayBadge = artistDayBadge(a, d);
       cardsHTML += `<div class="result-card" onclick="closeModal(); openArtist(${a.id});">
         <div class="rc-avatar" ${a.img?`style="background-image:url('${a.img}')"`:''}></div>
         <div class="rc-info">
-          <div class="rc-name">${a.name}${localBadge}${promoBadge}</div>
+          <div class="rc-name">${a.name}${localBadge}${promoBadge}${dayBadge}</div>
           <div class="rc-spec">${ROLE_NAMES[a.role]||a.spec||''} · ${a.city||'—'}</div>
           <div class="rc-meta">
             <span class="rc-price">от ${(a.price||0).toLocaleString()} ₽</span>
@@ -2192,9 +2208,17 @@ function renderBusyTab(){
   const dim = new Date(state.year, state.monthIndex+1, 0).getDate();
   for(let d=1; d<=dim; d++){
     const ds = `${state.year}-${String(state.monthIndex+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-    daysHTML += `<div class="day" onclick="openDaySettings('${ds}')" style="cursor:pointer;background:#FFF;border-radius:6px;flex-direction:column">
-  ${renderSunIcon(a, ds, 18)}
-  <span style="font-size:10px;margin-top:2px">${d}</span>
+    const sched = getScheduleForDate(a, ds);
+    const hours = sched.hours ? sched.hours.length : 0;
+    let sunOp = '.7', numColor = '#1A1A1A';
+    if(!sched.isWorking || sched.isVacation){ sunOp = '.15'; numColor = '#B0B0B5'; }
+    else if(hours <= 6){ sunOp = '.4'; }
+    const sun = renderSunIcon(a, ds, 18).replace('<svg class="sun-svg"', `<svg style="--sun-op:${sunOp}" class="sun-svg"`);
+    const dot = `<div class="status-dot ${sched.isWorking ? 'free' : 'busy'}"></div>`;
+    daysHTML += `<div class="day" onclick="openDaySettings('${ds}')" style="cursor:pointer;background:#FFF;border-radius:6px;flex-direction:column;position:relative">
+  ${sun}
+  <span style="font-size:10px;margin-top:2px;color:${numColor}">${d}</span>
+  ${dot}
 </div>`;
   }
   const today = new Date().toISOString().split('T')[0];
@@ -2291,8 +2315,8 @@ function openScheduleEditor(){
     const startH = sched ? (Number(sched.startHour) || 9) : 9;
     const endH = sched ? (Number(sched.endHour) || 21) : 21;
     const label = isWork
-      ? `<span style="color:#4CAF50;font-size:11px">работает</span>`
-      : `<span style="color:#B0B0B5;font-size:11px">выходной</span>`;
+      ? `<span style="color:#4CAF50;font-size:11px;margin-left:6px">работает</span>`
+      : `<span style="color:#B0B0B5;font-size:11px;margin-left:6px">выходной</span>`;
     html += `<div class="week-day-row ${isWork?'active':''}" id="wd-row-${i}">
       <div class="wd-name">${dowNames[i]}</div>
       <label class="switch wd-toggle">
