@@ -749,7 +749,7 @@ function openArtist(id){
   const dim = new Date(state.year, state.monthIndex+1, 0).getDate();
   for(let d=1; d<=dim; d++){
     const ds = `${state.year}-${String(state.monthIndex+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-    daysHTML += `<div class="day" style="cursor:pointer" onclick="openArtistDayView('${String(a.id).replace(/'/g,"&#39;")}','${ds}')">${renderSunIcon(a, ds, 28)}</div>`;
+    daysHTML += `<div class="day" style="cursor:pointer;position:relative" onclick="openArtistDayView('${String(a.id).replace(/'/g,"&#39;")}','${ds}')">${renderSunIcon(a, ds, 28)}<span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:11px;font-weight:700;color:#1A1A1A;z-index:2">${d}</span></div>`;
   }
   const inProj = userProject.some(p=>String(p.id)===String(a.id) && p.type==='artist');
   const roleIcon = ROLE_ICONS[a.role]||'fa-star';
@@ -895,15 +895,19 @@ return `<div style="position:relative;display:inline-block;width:${size}px;heigh
 </div>`;
 }
 
+// Локальный парсинг YYYY-MM-DD: new Date(str) трактует строку как UTC
+// и для МСК+ даёт сдвиг на день, из-за чего getDay() уезжает
+function parseLocalDate(str){
+  const p = String(str).split('-');
+  return new Date(Number(p[0]), Number(p[1]) - 1, Number(p[2]));
+}
+
 function getScheduleForDate(artist, dateStr){
   const today = new Date().toISOString().split('T')[0];
   if(artist.vacationUntil && artist.vacationUntil >= today){
     return { isWorking: true, isVacation: true, hours: [] };
   }
-  // Парсим YYYY-MM-DD как локальную дату: new Date(str) трактует её как UTC
-  // и для МСК+ даёт сдвиг на день, из-за чего dow уезжает
-  const _p = String(dateStr).split('-');
-  const dateObj = new Date(Number(_p[0]), Number(_p[1]) - 1, Number(_p[2]));
+  const dateObj = parseLocalDate(dateStr);
   const dow = (dateObj.getDay() + 6) % 7;
   const sched = artistSchedules.find(s =>
     Number(s.artistId) === Number(artist.id) &&
@@ -981,7 +985,7 @@ function calculateVenuePrice(venue, dateStr, eventType){
   if(seasonM < 0.1 || seasonM > 10) seasonM = 1;
   if(weekendM < 0.1 || weekendM > 10) weekendM = 1;
 
-  const date = dateStr ? new Date(dateStr) : new Date();
+  const date = dateStr ? parseLocalDate(dateStr) : new Date();
   const isHighSeason = (date.getMonth() >= 5 && date.getMonth() <= 8);
   const isWeekend = [0,6].includes(date.getDay());
 
@@ -1157,7 +1161,9 @@ function buildMonthCard(m, y, viewArtist, selectedArtist){
     prevDays.push({ d: dPrev, m: pm, y: py });
   }
   
-  let html = `<h3>${months[m]} ${y}</h3><div class="cal-grid">`;
+  let html = `<h3>${months[m]} ${y}</h3><div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:6px;font-size:11px;color:#6E6E73;font-weight:600;text-align:center">
+  <div>Пн</div><div>Вт</div><div>Ср</div><div>Чт</div><div>Пт</div><div>Сб</div><div>Вс</div>
+</div><div class="cal-grid">`;
   daysOfWeek.forEach(d => html += `<div class="cal-dow">${d}</div>`);
   
   // Отрисовка дней предыдущего месяца (тусклые)
@@ -1172,14 +1178,15 @@ function buildMonthCard(m, y, viewArtist, selectedArtist){
     const ds = `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
     const isToday = ds === todayStr ? ' today' : '';
     const sched = viewArtist ? getScheduleForDate(viewArtist, ds) : null;
-    const hours = sched && sched.hours ? sched.hours.length : 0;
+    const hrs = ( sched && sched.hours ) || [];
+    const span = hrs.length ? (hrs[hrs.length-1] + 1 - hrs[0]) : 0;
     // Насыщенность солнца и цвет числа зависят от реального расписания
     let sunStyle = '';
     let numColor = '#1A1A1A';
     if(sched && !sched.isWorking){
       sunStyle = '--sun-op:.15';
       numColor = '#B0B0B5';
-    } else if(sched && hours <= 6){
+    } else if(sched && span <= 6){
       sunStyle = '--sun-op:.4';
     } else if(sched){
       sunStyle = '--sun-op:.7';
@@ -2203,16 +2210,20 @@ async function saveParams(){
 /* ============ BUSY (занятость) ============ */
 function renderBusyTab(){
   const el = document.getElementById('tab-busy');
-  const a = currentArtist;
+  // currentArtist может быть устаревшим после loadData() — берём свежую запись
+  const a = (currentArtist && artists.find(x => String(x.id) === String(currentArtist.id))) || currentArtist;
+  if(a) currentArtist = a;
   let daysHTML = '';
   const dim = new Date(state.year, state.monthIndex+1, 0).getDate();
   for(let d=1; d<=dim; d++){
     const ds = `${state.year}-${String(state.monthIndex+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
     const sched = getScheduleForDate(a, ds);
     const hours = sched.hours ? sched.hours.length : 0;
+    const hrs = sched.hours || [];
+    const span = hrs.length ? (hrs[hrs.length-1] + 1 - hrs[0]) : 0;
     let sunOp = '.7', numColor = '#1A1A1A';
     if(!sched.isWorking || sched.isVacation){ sunOp = '.15'; numColor = '#B0B0B5'; }
-    else if(hours <= 6){ sunOp = '.4'; }
+    else if(span <= 6){ sunOp = '.4'; }
     const sun = renderSunIcon(a, ds, 18).replace('<svg class="sun-svg"', `<svg style="--sun-op:${sunOp}" class="sun-svg"`);
     const dot = `<div class="status-dot ${sched.isWorking ? 'free' : 'busy'}"></div>`;
     daysHTML += `<div class="day" onclick="openDaySettings('${ds}')" style="cursor:pointer;background:#FFF;border-radius:6px;flex-direction:column;position:relative">
@@ -2222,7 +2233,11 @@ function renderBusyTab(){
 </div>`;
   }
   const today = new Date().toISOString().split('T')[0];
-  const onVac = a.vacationUntil && a.vacationUntil >= today;
+  // Бейдж отпуска показываем только если отпуск пересекается с отображаемым месяцем,
+  // иначе при переключении месяцев он висит на любом месяце
+  const monthStart = `${state.year}-${String(state.monthIndex+1).padStart(2,'0')}-01`;
+  const monthEnd = `${state.year}-${String(state.monthIndex+1).padStart(2,'0')}-${String(dim).padStart(2,'0')}`;
+  const onVac = a.vacationUntil && a.vacationUntil >= today && a.vacationUntil >= monthStart && monthEnd >= today;
   el.innerHTML = `
     <div style="text-align:center;margin-bottom:15px">
       <div style="font-size:18px;font-weight:800;color:#1A1A1A">${months[state.monthIndex]} ${state.year}</div>
@@ -2237,7 +2252,9 @@ function renderBusyTab(){
       <button class="btn-ghost" onclick="openScheduleEditor()">📅 Расписание</button>
       <button class="btn-ghost" onclick="openVacationModal()">🌴 Отпуск</button>
     </div>
-    <div class="mini-calendar"><div class="days-grid">${daysHTML}</div></div>
+    <div class="mini-calendar"><div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:6px;font-size:11px;color:#6E6E73;font-weight:600;text-align:center">
+  <div>Пн</div><div>Вт</div><div>Ср</div><div>Чт</div><div>Пт</div><div>Сб</div><div>Вс</div>
+</div><div class="days-grid">${daysHTML}</div></div>
     <p style="font-size:11px;color:#6E6E73;text-align:center;margin-top:10px">Нажмите на день, чтобы изменить цену или статус</p>`;
 }
 
@@ -2290,7 +2307,7 @@ async function setDayPricing(dateStr, modifier){
 }
 
 async function setDayStatus(dateStr, status){
-  const dateObj = new Date(dateStr);
+  const dateObj = parseLocalDate(dateStr);
   const dow = (dateObj.getDay() + 6) % 7;
   try {
     const r = await fetch(SHEET_API_URL, { method:'POST', body:JSON.stringify({
