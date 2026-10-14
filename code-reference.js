@@ -550,24 +550,35 @@ function getRawSchedule(){
   const bCol = headers.indexOf('busyHours');
 
   const result = [];
+  // Нормализация значений, пришедших из Sheets как Date (колонка отформатирована как дата/время)
+  const numOf = (v, fallback) => {
+    const n = Number(v);
+    return isFinite(n) ? Math.floor(n) : fallback;
+  };
+  const hourOf = (v, fallback) => {
+    if(v instanceof Date){
+      const h = v.getHours();
+      return (h >= 0 && h <= 24) ? h : fallback;
+    }
+    return numOf(v, fallback);
+  };
+  const dowOf = (v, fallback) => {
+    if(v instanceof Date){
+      // Date приходит, если колонка отформатирована как дата/время
+      const d = v.getDay();
+      return d === 0 ? 6 : d - 1;
+    }
+    return numOf(v, fallback);
+  };
   for(let i=1; i<values.length; i++){
     const r = values[i];
     if(!r[aCol]) continue;
-    const toNum = (v, fallback) => {
-      // Date здесь означает, что колонка отформатирована как дата/время в Sheets —
-      // getHours() вернул бы час, а не день недели или час начала
-      if(v instanceof Date){
-        return fallback;
-      }
-      const n = Number(v);
-      return isFinite(n) ? Math.floor(n) : fallback;
-    };
     result.push({
       artistId: String(r[aCol]).trim(),
-      dayOfWeek: toNum(r[dCol], 0),
+      dayOfWeek: dowOf(r[dCol], 0),
       isWorking: String(r[wCol]).toLowerCase() === 'true',
-      startHour: toNum(r[sCol], 9),
-      endHour: toNum(r[eCol], 21),
+      startHour: hourOf(r[sCol], 9),
+      endHour: hourOf(r[eCol], 21),
       busyHours: String(r[bCol] || '')
     });
   }
