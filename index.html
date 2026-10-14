@@ -65,7 +65,7 @@ button:disabled{opacity:.5;cursor:not-allowed}
 .cal-dow{text-align:center;font-size:10px;color:#6E6E73;font-weight:600;padding:4px 0}
 .cal-cell{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:8px;font-size:11px;font-weight:600;color:#1A1A1A;cursor:pointer;position:relative;user-select:none;min-height:42px;padding:3px 2px;box-sizing:border-box;overflow:hidden}
 .cal-cell .day-num{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:13px;font-weight:700;line-height:1;z-index:2;color:#1A1A1A}
-.cal-cell .sun-svg{position:absolute;width:26px;height:26px;max-width:70%;max-height:60%;opacity:.5;z-index:0}
+.cal-cell .sun-svg{position:absolute;width:26px;height:26px;max-width:70%;max-height:60%;opacity:var(--sun-op,.5);z-index:0}
 .cal-cell .star{font-size:9px;color:#D4AF37;position:absolute;top:-3px;right:-7px;line-height:1}
 .cal-cell .status-dot{position:absolute;bottom:3px;right:4px;width:9px;height:9px;border-radius:50%;z-index:4}
 .cal-cell .status-dot.busy{background:#F44336}
@@ -1166,14 +1166,27 @@ function buildMonthCard(m, y, viewArtist){
   for(let d=1; d<=dim; d++){
     const ds = `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
     const isToday = ds === todayStr ? ' today' : '';
-    const sun = viewArtist ? renderSunIcon(viewArtist, ds, 20) : '<i class="fa-solid fa-sun" style="color:#FFC107"></i>';
     const sched = viewArtist ? getScheduleForDate(viewArtist, ds) : null;
+    const hours = sched && sched.hours ? sched.hours.length : 0;
+    // Насыщенность солнца и цвет числа зависят от реального расписания
+    let sunStyle = '';
+    let numColor = '#1A1A1A';
+    if(sched && !sched.isWorking){
+      sunStyle = '--sun-op:.15';
+      numColor = '#B0B0B5';
+    } else if(sched && hours <= 6){
+      sunStyle = '--sun-op:.4';
+    } else if(sched){
+      sunStyle = '--sun-op:.7';
+    }
+    const sunRaw = viewArtist ? renderSunIcon(viewArtist, ds, 20) : '<i class="fa-solid fa-sun" style="color:#FFC107"></i>';
+    const sun = sunStyle ? sunRaw.replace('<svg', `<svg style="${sunStyle}"`) : sunRaw;
     const dot = sched ? `<div class="status-dot ${sched.isWorking ? 'free' : 'busy'}"></div>` : '';
     const pr = viewArtist ? pricing.find(x => String(x.artistId) === String(viewArtist.id) && x.date === ds) : null;
     const star = (pr && Number(pr.priceModifier) !== 1 && pr.priceModifier) ? '<span class="star">*</span>' : '';
     html += `<div class="cal-cell${isToday}" onclick="openDay('${ds}', '${viewArtist ? viewArtist.id : ''}')">
       ${sun}
-      <div class="day-num">${d}${star}</div>
+      <div class="day-num" style="color:${numColor}">${d}${star}</div>
       ${dot}
     </div>`;
   }
@@ -2270,13 +2283,16 @@ function openScheduleEditor(){
   const dowNames = ['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];
   let html = '<h3>Расписание по дням</h3><p style="font-size:12px;color:#6E6E73;margin-bottom:12px">Выберите рабочие часы для каждого дня недели</p>';
   for(let i=0; i<7; i++){
-    const sched = artistSchedules.find(s => 
-  String(s.artistId) === String(artist.id) && 
-  Math.floor(Number(s.dayOfWeek)) === dow
-);
-    const isWork = sched ? sched.isWorking : true;
+    const sched = artistSchedules.find(s =>
+      Number(s.artistId) === Number(a.id) &&
+      Number(s.dayOfWeek) === i
+    );
+    const isWork = sched ? (sched.isWorking === true || String(sched.isWorking).toUpperCase() === 'TRUE') : true;
     const startH = sched ? (Number(sched.startHour) || 9) : 9;
     const endH = sched ? (Number(sched.endHour) || 21) : 21;
+    const label = isWork
+      ? `<span style="color:#4CAF50;font-size:11px">работает</span>`
+      : `<span style="color:#B0B0B5;font-size:11px">выходной</span>`;
     html += `<div class="week-day-row ${isWork?'active':''}" id="wd-row-${i}">
       <div class="wd-name">${dowNames[i]}</div>
       <label class="switch wd-toggle">
@@ -2288,6 +2304,7 @@ function openScheduleEditor(){
         <span style="font-size:12px;color:#6E6E73">до</span>
         <input type="number" id="wd-e-${i}" value="${endH}" min="1" max="23" placeholder="по">
       </div>
+      ${label}
     </div>`;
   }
   html += '<button onclick="saveSchedule()" style="width:100%;margin-top:15px">Сохранить</button>';
