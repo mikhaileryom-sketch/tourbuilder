@@ -432,7 +432,7 @@ if (window.Telegram && window.Telegram.WebApp) {
   tgUser = tg.initDataUnsafe && tg.initDataUnsafe.user ? tg.initDataUnsafe.user : null;
 }
 
-const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbxjjfz67UWDcDtlxbjYKWp_XKYvawMgGap9f0zKUgskb8e0jDKA2NTrmVJgLzrYsFeQl/exec';
+const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbwQ80I94o2HHU3rs48-3mWX4e-wtIeaEkHMWHYFt6jZdPFyu7LbRQg6H0GVcpPzhwws/exec';
 
 const ROLE_ICONS = {
   dancer:'fa-person-running', ballet:'fa-child-reaching', singer:'fa-microphone',
@@ -476,22 +476,38 @@ let userProject = JSON.parse(localStorage.getItem('userProject')||'[]');
 const _now = new Date();
 let state = { year: _now.getFullYear(), monthIndex: _now.getMonth() };
 
+/* ============ JSONP ============ */
+// Все GET-чтения идут через <script>, чтобы обойти CORS Apps Script
+let _jsonpTimeout = null;
+function jsonp(action){
+  return new Promise((resolve, reject) => {
+    const cb = 'cb_' + Math.random().toString(36).slice(2);
+    window[cb] = (data) => { resolve(data); delete window[cb]; };
+    const s = document.createElement('script');
+    s.src = SHEET_API_URL + '?action=' + action + '&callback=' + cb;
+    s.onerror = () => { delete window[cb]; reject(new Error('jsonp error: ' + action)); };
+    document.body.appendChild(s);
+    clearTimeout(_jsonpTimeout);
+    _jsonpTimeout = setTimeout(() => reject(new Error('jsonp timeout: ' + action)), 10000);
+  });
+}
+
 /* ============ DATA LOAD ============ */
 async function loadData() {
   try {
     const [a,v,e,p,pr,rv,ap,pj,prR,vp,vcp,sch] = await Promise.all([
-      fetch(SHEET_API_URL+'?action=artists').then(r=>r.json()).catch(()=>null),
-      fetch(SHEET_API_URL+'?action=venues').then(r=>r.json()).catch(()=>null),
-      fetch(SHEET_API_URL+'?action=events').then(r=>r.json()).catch(()=>null),
-      fetch(SHEET_API_URL+'?action=persons').then(r=>r.json()).catch(()=>null),
-      fetch(SHEET_API_URL+'?action=pricing').then(r=>r.json()).catch(()=>null),
-      fetch(SHEET_API_URL+'?action=reviews').then(r=>r.json()).catch(()=>null),
-      fetch(SHEET_API_URL+'?action=applications').then(r=>r.json()).catch(()=>null),
-      fetch(SHEET_API_URL+'?action=projects').then(r=>r.json()).catch(()=>null),
-      fetch(SHEET_API_URL+'?action=projectResponses').then(r=>r.json()).catch(()=>null),
-      fetch(SHEET_API_URL+'?action=venuePricing').then(r=>r.json()).catch(()=>null),
-      fetch(SHEET_API_URL+'?action=venueCategoryPricing').then(r=>r.json()).catch(()=>null),
-      fetch(SHEET_API_URL+'?action=artistSchedule').then(r=>r.json()).catch(()=>null)
+      jsonp('artists').catch(()=>null),
+      jsonp('venues').catch(()=>null),
+      jsonp('events').catch(()=>null),
+      jsonp('persons').catch(()=>null),
+      jsonp('pricing').catch(()=>null),
+      jsonp('reviews').catch(()=>null),
+      jsonp('applications').catch(()=>null),
+      jsonp('projects').catch(()=>null),
+      jsonp('projectResponses').catch(()=>null),
+      jsonp('venuePricing').catch(()=>null),
+      jsonp('venueCategoryPricing').catch(()=>null),
+      jsonp('artistSchedule').catch(()=>null)
     ]);
     artists = Array.isArray(a) ? a : [];
     venues = Array.isArray(v) ? v : [];
@@ -1826,11 +1842,11 @@ async function loadProfileExtras(){
   if(!currentArtist) return;
   try {
     const [m,e,ed,inv,cost] = await Promise.all([
-      fetch(SHEET_API_URL+'?action=media').then(r=>r.json()).catch(()=>[]),
-      fetch(SHEET_API_URL+'?action=experience').then(r=>r.json()).catch(()=>[]),
-      fetch(SHEET_API_URL+'?action=education').then(r=>r.json()).catch(()=>[]),
-      fetch(SHEET_API_URL+'?action=inventory').then(r=>r.json()).catch(()=>[]),
-      fetch(SHEET_API_URL+'?action=costumes').then(r=>r.json()).catch(()=>[])
+      jsonp('media').catch(()=>[]),
+      jsonp('experience').catch(()=>[]),
+      jsonp('education').catch(()=>[]),
+      jsonp('inventory').catch(()=>[]),
+      jsonp('costumes').catch(()=>[])
     ]);
     const id = String(currentArtist.id);
     profileData.media = (Array.isArray(m)?m:[]).filter(x=>String(x.artistId)===id);
