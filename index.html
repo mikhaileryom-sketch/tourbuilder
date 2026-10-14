@@ -10,20 +10,21 @@
 body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#F5F5F7;color:#1A1A1A;overflow:hidden;height:100dvh;user-select:none;display:flex;flex-direction:column}
 .bottom-nav{position:fixed;bottom:15px;left:50%;transform:translateX(-50%);display:flex;gap:12px;background:rgba(255,255,255,.95);backdrop-filter:blur(10px);padding:10px 18px;border-radius:40px;z-index:1000;box-shadow:0 5px 20px rgba(0,0,0,.08);border:1px solid rgba(0,0,0,.05)}
 .nav-icon{font-size:22px;color:#6E6E73;cursor:pointer;transition:color .3s,transform .2s}
-.nav-icon.active{color:#EC4899;transform:translateY(-3px)}
+.nav-icon.active{color:#1F6E7A;transform:translateY(-3px)}
 .screen{display:none;width:100%;height:calc(100vh - 80px);position:absolute;top:0;left:0;overflow-y:auto;padding-bottom:80px;box-sizing:border-box}
 .screen.active{display:flex;justify-content:center;align-items:center;flex-direction:column}
-button{background:#EC4899;color:#FFF;border:none;padding:12px 30px;border-radius:30px;font-weight:bold;font-size:16px;cursor:pointer;box-shadow:0 4px 15px rgba(236,72,153,.3);transition:transform .2s;font-family:inherit}
+button{background:#E8A317;color:#0F3D4A;border:none;padding:12px 30px;border-radius:30px;font-weight:bold;font-size:16px;cursor:pointer;box-shadow:0 4px 15px rgba(232,163,23,.3);transition:transform .2s,background .2s;font-family:inherit}
+button:hover{background:#D45A0A}
 button:active{transform:scale(.95)}
 button:disabled{opacity:.5;cursor:not-allowed}
-.btn-secondary{background:#FFF;color:#EC4899;border:2px solid #EC4899;box-shadow:none}
-.btn-ghost{background:transparent;color:#EC4899;border:1px solid #EC4899;box-shadow:none;padding:8px 16px;font-size:13px}
+.btn-secondary{background:#FFF;color:#0F3D4A;border:2px solid #E8A317;box-shadow:none}
+.btn-ghost{background:transparent;color:#1F6E7A;border:1px solid #1F6E7A;box-shadow:none;padding:8px 16px;font-size:13px}
 .btn-danger{background:#F44336;box-shadow:0 4px 15px rgba(244,67,54,.3)}
-.role-switch{position:fixed;top:15px;right:15px;z-index:1500;background:#FFF;border:2px solid #EC4899;border-radius:30px;padding:8px 16px;display:flex;align-items:center;gap:8px;cursor:pointer;box-shadow:0 4px 12px rgba(236,72,153,.25);font-weight:700;font-size:13px;color:#EC4899}
+.role-switch{position:fixed;top:15px;right:15px;z-index:1500;background:#FFF;border:2px solid #E8A317;border-radius:30px;padding:8px 16px;display:flex;align-items:center;gap:8px;cursor:pointer;box-shadow:0 4px 12px rgba(232,163,23,.25);font-weight:700;font-size:13px;color:#0F3D4A}
 /* HOME */
-#screen-home .honeycomb-frame{position:relative;width:96vw;height:88dvh;clip-path:polygon(25% 0%,75% 0%,100% 25%,100% 75%,75% 100%,25% 100%,0% 75%,0% 25%);background:#FFF;border:2px solid rgba(236,72,153,.2);box-shadow:0 10px 30px rgba(0,0,0,.05);display:flex;justify-content:center;align-items:center}
+#screen-home .honeycomb-frame{position:relative;width:96vw;height:88dvh;clip-path:polygon(25% 0%,75% 0%,100% 25%,100% 75%,75% 100%,25% 100%,0% 75%,0% 25%);background:#FFF;border:2px solid rgba(212,175,55,.3);box-shadow:0 10px 30px rgba(0,0,0,.05);display:flex;justify-content:center;align-items:center}
 #screen-home .center-id{width:110px;height:110px;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background:transparent;border:2px dashed rgba(212,175,55,.6);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;font-weight:800;font-size:13px;color:#1A1A1A;z-index:15;cursor:pointer;padding:8px;box-sizing:border-box;overflow:hidden;position:relative}
-#screen-home .center-id .avatar{width:34px;height:34px;border-radius:50%;background:#EC4899;color:#FFF;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:900;margin-bottom:4px}
+#screen-home .center-id .avatar{width:34px;height:34px;border-radius:50%;background:#D4AF37;color:#FFF;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:900;margin-bottom:4px}
 #screen-home .center-id span{font-size:9px;font-weight:400;color:#6E6E73;margin-top:2px}
 .user-cell{position:absolute;width:62px;height:62px;background-color:#F5E6B8;background-image:linear-gradient(135deg,#F5E6B8 0%,#E8CE8F 100%);clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background-size:cover;background-position:center;border:2px solid #D4AF37;box-shadow:0 4px 10px rgba(0,0,0,.08);cursor:pointer;transition:transform .2s,border-color .2s;z-index:5;transform:translate(-50%,-50%)}
 .user-cell:hover{transform:translate(-50%,-50%) scale(1.15);background-image:linear-gradient(135deg,#D4AF37 0%,#B8860B 100%);border-color:#8B6914;z-index:50}
@@ -59,12 +60,12 @@ button:disabled{opacity:.5;cursor:not-allowed}
 .year-nav{display:flex;gap:12px;margin-bottom:15px;align-items:center;justify-content:center}
 .month-cards{display:flex;flex-direction:column;gap:16px;width:100%;box-sizing:border-box;padding:0 4px}
 .month-card{background:#FFF;border-radius:16px;padding:10px 6px;box-shadow:0 4px 12px rgba(0,0,0,.05);box-sizing:border-box;width:100%;max-width:100%;overflow:hidden}
-.month-card h3{text-align:center;color:#EC4899;font-size:16px;margin-bottom:12px;font-weight:800}
+.month-card h3{text-align:center;color:#1F6E7A;font-size:16px;margin-bottom:12px;font-weight:800}
 .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:10px}
 .cal-dow{text-align:center;font-size:10px;color:#6E6E73;font-weight:600;padding:4px 0}
 .cal-cell{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:8px;font-size:11px;font-weight:600;color:#1A1A1A;cursor:pointer;position:relative;user-select:none;min-height:42px;padding:3px 2px;box-sizing:border-box;overflow:hidden}
 .cal-cell .day-num{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:13px;font-weight:700;line-height:1;z-index:2;color:#1A1A1A}
-.cal-cell .sun-svg{position:relative;width:26px;height:26px;max-width:70%;max-height:60%;opacity:.5;z-index:0}
+.cal-cell .sun-svg{position:absolute;width:26px;height:26px;max-width:70%;max-height:60%;opacity:.5;z-index:0}
 .cal-cell .star{font-size:9px;color:#D4AF37;position:absolute;top:-3px;right:-7px;line-height:1}
 .cal-cell .status-dot{position:absolute;bottom:3px;right:4px;width:9px;height:9px;border-radius:50%;z-index:4}
 .cal-cell .status-dot.busy{background:#F44336}
@@ -83,7 +84,7 @@ button:disabled{opacity:.5;cursor:not-allowed}
 /* WIZARD */
 #screen-wizard{background:#F5F5F7;padding:20px;justify-content:flex-start !important;overflow-y:auto}
 .wizard-progress{width:100%;max-width:400px;background:#E5E5EA;border-radius:30px;height:8px;margin-bottom:10px;overflow:hidden}
-.wizard-progress-bar{background:linear-gradient(90deg,#EC4899,#F472B6);height:100%;transition:width .4s ease;border-radius:30px}
+.wizard-progress-bar{background:linear-gradient(90deg,#E8A317,#F0C24B);height:100%;transition:width .4s ease;border-radius:30px}
 .wizard-step-label{font-size:11px;color:#6E6E73;margin-bottom:15px;text-align:center;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
 .wizard-step{width:100%;max-width:400px;background:#FFF;border-radius:20px;padding:22px;box-shadow:0 6px 20px rgba(0,0,0,.05);box-sizing:border-box}
 .wizard-step h2{color:#1A1A1A;font-size:19px;margin:0 0 6px;font-weight:800}
@@ -92,34 +93,34 @@ button:disabled{opacity:.5;cursor:not-allowed}
 .wizard-options{display:flex;flex-direction:column;gap:8px}
 .wizard-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
 .wizard-chip{padding:10px 16px;border:2px solid #E5E5EA;border-radius:24px;background:#FFF;font-size:13px;font-weight:600;color:#6E6E73;cursor:pointer;transition:all .2s}
-.wizard-chip:hover{border-color:#EC4899}
-.wizard-chip.selected{background:#EC4899;border-color:#EC4899;color:#FFF}
+.wizard-chip:hover{border-color:#E8A317}
+.wizard-chip.selected{background:#E8A317;border-color:#E8A317;color:#0F3D4A}
 .wizard-option{padding:14px;border:2px solid #E5E5EA;border-radius:14px;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:12px;font-weight:600;font-size:14px;background:#FFF}
-.wizard-option:hover{border-color:#EC4899;background:#FFF5F9}
-.wizard-option.selected{border-color:#EC4899;background:#FFF5F9}
-.wizard-option i{color:#EC4899;font-size:18px;width:26px;text-align:center}
+.wizard-option:hover{border-color:#E8A317;background:#FBF3DC}
+.wizard-option.selected{border-color:#E8A317;background:#FBF3DC}
+.wizard-option i{color:#1F6E7A;font-size:18px;width:26px;text-align:center}
 .wizard-custom-input{margin-top:10px;display:flex;gap:8px}
 .wizard-custom-input input{flex:1;padding:12px 16px;border:2px solid #E5E5EA;border-radius:12px;font-size:15px;outline:none;font-family:inherit;box-sizing:border-box}
-.wizard-custom-input input:focus{border-color:#EC4899}
+.wizard-custom-input input:focus{border-color:#E8A317}
 .wizard-nav{display:flex;justify-content:space-between;margin-top:20px;max-width:400px;width:100%;gap:10px}
 .wizard-nav button{flex:1;padding:14px 20px;font-size:15px}
 /* RESULT CARDS */
 .result-cards{display:flex;flex-direction:column;gap:12px;margin-bottom:15px}
 .result-card{background:#FFF;border-radius:16px;padding:14px;box-shadow:0 4px 14px rgba(0,0,0,.06);display:flex;gap:12px;align-items:center;border:1px solid #F0F0F0;position:relative}
-.result-card:hover{box-shadow:0 6px 20px rgba(236,72,153,.15);border-color:#EC4899}
+.result-card:hover{box-shadow:0 6px 20px rgba(232,163,23,.15);border-color:#E8A317}
 .result-card .rc-avatar{width:60px;height:60px;flex-shrink:0;background-color:#F5E6B8;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background-size:cover;background-position:center;border:2px solid #D4AF37}
 .result-card .rc-info{flex:1;min-width:0}
 .result-card .rc-name{font-weight:800;font-size:15px;margin-bottom:3px;color:#1A1A1A}
 .result-card .rc-spec{font-size:12px;color:#6E6E73;margin-bottom:4px}
 .result-card .rc-meta{font-size:11px;color:#6E6E73;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-.result-card .rc-meta .rc-price{color:#EC4899;font-weight:800;font-size:13px}
-.result-card .rc-match{position:absolute;top:8px;right:8px;background:#EC4899;color:#FFF;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:700}
-.result-card .rc-quote{background:#EC4899;color:#FFF;border:none;padding:8px 12px;border-radius:20px;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;box-shadow:none}
+.result-card .rc-meta .rc-price{color:#8B6914;font-weight:800;font-size:13px}
+.result-card .rc-match{position:absolute;top:8px;right:8px;background:#1F6E7A;color:#FFF;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:700}
+.result-card .rc-quote{background:#E8A317;color:#0F3D4A;border:none;padding:8px 12px;border-radius:20px;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;box-shadow:none}
 .result-card .rc-quote.sent{background:#4CAF50}
 /* HOW IT WORKS */
 #screen-howto{background:#F5F5F7;padding:20px;justify-content:flex-start !important;overflow-y:auto}
 .howto-card{width:100%;max-width:400px;background:#FFF;border-radius:20px;padding:20px;margin-bottom:12px;box-shadow:0 4px 12px rgba(0,0,0,.04);display:flex;align-items:flex-start;gap:14px}
-.howto-num{width:36px;height:36px;background:#EC4899;color:#FFF;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0;font-size:16px}
+.howto-num{width:36px;height:36px;background:#1F6E7A;color:#FFF;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0;font-size:16px}
 .howto-content h3{margin:0 0 4px;font-size:16px;color:#1A1A1A}
 .howto-content p{margin:0;font-size:13px;color:#6E6E73;line-height:1.4}
 /* PROFILE */
@@ -135,7 +136,7 @@ button:disabled{opacity:.5;cursor:not-allowed}
 .profile-tabs{display:flex;width:100%;overflow-x:auto;background:#FFF;border-bottom:1px solid #E5E5EA;position:sticky;top:0;z-index:200;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .profile-tabs::-webkit-scrollbar{display:none}
 .profile-tab{padding:14px 14px;font-size:12px;color:#6E6E73;cursor:pointer;white-space:nowrap;border-bottom:3px solid transparent;flex-shrink:0}
-.profile-tab.active{color:#EC4899;border-bottom-color:#EC4899;font-weight:700}
+.profile-tab.active{color:#1F6E7A;border-bottom-color:#1F6E7A;font-weight:700}
 .profile-content{width:100%;padding:16px 16px 100px 16px;box-sizing:border-box}
 .tab-panel{display:none}
 .tab-panel.active{display:block}
@@ -145,18 +146,18 @@ button:disabled{opacity:.5;cursor:not-allowed}
 .list-item{background:#FFF;border-radius:12px;padding:12px;margin-bottom:10px;box-shadow:0 2px 8px rgba(0,0,0,.03)}
 .list-item .li-title{font-weight:700;font-size:14px;margin-bottom:4px}
 .list-item .li-sub{font-size:12px;color:#6E6E73}
-.add-btn-full{width:100%;background:#FFF;color:#EC4899;border:2px dashed #EC4899;padding:12px;border-radius:12px;font-weight:700;margin-top:10px;cursor:pointer;font-family:inherit;font-size:14px}
+.add-btn-full{width:100%;background:#FFF;color:#0F3D4A;border:2px dashed #E8A317;padding:12px;border-radius:12px;font-weight:700;margin-top:10px;cursor:pointer;font-family:inherit;font-size:14px}
 .portfolio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
 .portfolio-grid .pg-item{aspect-ratio:1;background-size:cover;background-position:center;border-radius:8px;background-color:#F5E6B8;cursor:pointer;position:relative}
 .portfolio-grid .pg-item.video::after{content:'▶';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#FFF;font-size:20px;text-shadow:0 0 6px #000;background:rgba(0,0,0,.3)}
-.rating-big{font-size:40px;font-weight:900;color:#EC4899;text-align:center}
+.rating-big{font-size:40px;font-weight:900;color:#8B6914;text-align:center}
 .rating-stars{color:#FFC107;font-size:20px;text-align:center;margin-bottom:15px}
 .skeleton{background:linear-gradient(90deg,#F0F0F0 25%,#E0E0E0 50%,#F0F0F0 75%);background-size:200% 100%;animation:skel 1.5s infinite;border-radius:12px;height:60px;margin-bottom:10px}
 @keyframes skel{0%{background-position:200% 0}100%{background-position:-200% 0}}
 /* APPLICATIONS */
-.app-card{background:#FFF;border-radius:14px;padding:14px;margin-bottom:10px;box-shadow:0 4px 12px rgba(0,0,0,.05);border-left:4px solid #EC4899}
+.app-card{background:#FFF;border-radius:14px;padding:14px;margin-bottom:10px;box-shadow:0 4px 12px rgba(0,0,0,.05);border-left:4px solid #1F6E7A}
 .app-card .ac-status{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
-.app-card .ac-status.new{color:#EC4899}
+.app-card .ac-status.new{color:#1F6E7A}
 .app-card .ac-status.accepted{color:#4CAF50}
 .app-card .ac-status.declined{color:#F44336}
 .app-card .ac-status.counter{color:#FF9800}
@@ -174,18 +175,18 @@ button:disabled{opacity:.5;cursor:not-allowed}
 .form-group label{display:block;font-size:11px;color:#6E6E73;margin-bottom:5px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
 .form-group input,.form-group select,.form-group textarea{width:100%;padding:12px;border:1px solid #E5E5EA;border-radius:12px;font-size:15px;box-sizing:border-box;background:#FFF;outline:none;font-family:inherit}
 #match-results{width:100%;max-width:400px;margin-top:25px}
-.match-card{background:#FFF;border-radius:15px;padding:12px;margin-bottom:12px;box-shadow:0 4px 10px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px;border-left:4px solid #EC4899}
+.match-card{background:#FFF;border-radius:15px;padding:12px;margin-bottom:12px;box-shadow:0 4px 10px rgba(0,0,0,.04);display:flex;align-items:center;gap:10px;border-left:4px solid #1F6E7A}
 .match-card .avatar{width:50px;height:50px;flex-shrink:0;background-color:#F5E6B8;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background-size:cover;background-position:center;border:2px solid #D4AF37}
 .match-card .info{flex-grow:1;text-align:left;min-width:0}
 .match-card .name{font-weight:800;font-size:15px;margin-bottom:3px}
 .match-card .spec{font-size:11px;color:#6E6E73;margin-bottom:3px}
 .match-card .reason{font-size:10px;color:#999}
-.match-card .score{font-weight:900;font-size:18px;color:#EC4899;text-align:center;min-width:45px}
+.match-card .score{font-weight:900;font-size:18px;color:#1F6E7A;text-align:center;min-width:45px}
 /* ORGANIZER */
 #screen-organizer-home{background:#F5F5F7;justify-content:flex-start !important;padding:20px;overflow-y:auto}
 .events-list{width:100%;max-width:400px}
-.event-card{background:#FFF;border-radius:14px;padding:14px;margin-bottom:12px;box-shadow:0 4px 10px rgba(0,0,0,.04);border-left:4px solid #EC4899}
-.event-card .ec-date{font-size:11px;color:#EC4899;font-weight:700;text-transform:uppercase;margin-bottom:4px}
+.event-card{background:#FFF;border-radius:14px;padding:14px;margin-bottom:12px;box-shadow:0 4px 10px rgba(0,0,0,.04);border-left:4px solid #1F6E7A}
+.event-card .ec-date{font-size:11px;color:#1F6E7A;font-weight:700;text-transform:uppercase;margin-bottom:4px}
 .event-card .ec-title{font-weight:800;font-size:16px;margin-bottom:6px}
 .event-card .ec-sub{font-size:12px;color:#6E6E73}
 .project-card{background:#FFF;border-radius:14px;padding:14px;margin-bottom:12px;box-shadow:0 4px 10px rgba(0,0,0,.04);border-left:4px solid #2196F3;cursor:pointer}
@@ -199,11 +200,11 @@ button:disabled{opacity:.5;cursor:not-allowed}
 .venue-tabs{display:flex;width:100%;overflow-x:auto;background:#FFF;border-bottom:1px solid #E5E5EA;position:sticky;top:0;z-index:200;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .venue-tabs::-webkit-scrollbar{display:none}
 .venue-tab{padding:14px 18px;font-size:13px;color:#6E6E73;cursor:pointer;white-space:nowrap;border-bottom:3px solid transparent;flex-shrink:0}
-.venue-tab.active{color:#EC4899;border-bottom-color:#EC4899;font-weight:700}
+.venue-tab.active{color:#1F6E7A;border-bottom-color:#1F6E7A;font-weight:700}
 .venue-content{width:100%;padding:16px 16px 100px 16px;box-sizing:border-box}
 .price-slider{width:100%;margin:10px 0}
 .price-slider input[type=range]{width:100%;-webkit-appearance:none;height:6px;border-radius:3px;background:#E5E5EA;outline:none}
-.price-slider input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:#EC4899;cursor:pointer;box-shadow:0 2px 8px rgba(236,72,153,.4)}
+.price-slider input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:#E8A317;cursor:pointer;box-shadow:0 2px 8px rgba(232,163,23,.4)}
 /* MISC */
 .toast{position:fixed;top:30px;left:50%;transform:translateX(-50%) translateY(-100px);background:#1A1A1A;color:#FFF;padding:12px 25px;border-radius:30px;font-size:14px;font-weight:600;z-index:9999;transition:transform .4s cubic-bezier(.175,.885,.32,1.275);box-shadow:0 10px 30px rgba(0,0,0,.2);max-width:90vw;text-align:center;box-sizing:border-box}
 .toast.show{transform:translateX(-50%) translateY(0)}
@@ -211,10 +212,10 @@ button:disabled{opacity:.5;cursor:not-allowed}
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:5000;justify-content:center;align-items:center;padding:20px;box-sizing:border-box}
 .modal-overlay.open{display:flex}
 .modal-content{background:#FFF;border-radius:20px;padding:20px;width:100%;max-width:400px;max-height:85vh;overflow-y:auto}
-.modal-content h3{margin:0 0 15px;color:#EC4899}
+.modal-content h3{margin:0 0 15px;color:#1F6E7A}
 .role-option{display:flex;align-items:center;gap:12px;padding:14px;border-radius:12px;border:2px solid #E5E5EA;margin-bottom:10px;cursor:pointer}
-.role-option.active{border-color:#EC4899;background:#FFF5F9}
-.role-option i{font-size:22px;color:#EC4899;width:30px;text-align:center}
+.role-option.active{border-color:#E8A317;background:#FBF3DC}
+.role-option i{font-size:22px;color:#1F6E7A;width:30px;text-align:center}
 .role-option .ro-name{font-weight:700;font-size:15px}
 .role-option .ro-desc{font-size:11px;color:#6E6E73;margin-top:2px}
 .mini-calendar{width:100%;background:#FFF;border-radius:15px;padding:15px;margin-bottom:20px;box-shadow:0 4px 10px rgba(0,0,0,.03);box-sizing:border-box}
@@ -223,19 +224,19 @@ button:disabled{opacity:.5;cursor:not-allowed}
 .period-card{background:#FBF3DC;border:1px solid #EFDFAE;border-radius:12px;padding:12px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
 .period-card .pc-info{flex:1}
 .period-card .pc-range{font-size:12px;color:#6E6E73}
-.period-card .pc-price{font-weight:800;color:#EC4899;font-size:15px}
+.period-card .pc-price{font-weight:800;color:#8B6914;font-size:15px}
 .period-card .pc-close{color:#F44336;cursor:pointer;padding:8px;font-size:18px}
 .switch-row{display:flex;align-items:center;justify-content:space-between;padding:12px;background:#FFF;border-radius:12px;margin-bottom:12px}
 .switch{position:relative;display:inline-block;width:50px;height:28px}
 .switch input{opacity:0;width:0;height:0}
 .slider-sw{position:absolute;cursor:pointer;top:0;left:0;right:0;bottom:0;background:#E5E5EA;transition:.3s;border-radius:28px}
 .slider-sw:before{position:absolute;content:"";height:22px;width:22px;left:3px;bottom:3px;background:#FFF;transition:.3s;border-radius:50%}
-input:checked + .slider-sw{background:#EC4899}
+input:checked + .slider-sw{background:#E8A317}
 input:checked + .slider-sw:before{transform:translateX(22px)}
 /* ONBOARDING */
 .onboard-step{padding:14px;border:2px solid #E5E5EA;border-radius:14px;margin-bottom:10px;cursor:pointer;display:flex;gap:12px;align-items:center;background:#FFF}
-.onboard-step:hover{border-color:#EC4899;background:#FFF5F9}
-.onboard-step i{font-size:22px;color:#EC4899;width:30px;text-align:center}
+.onboard-step:hover{border-color:#E8A317;background:#FBF3DC}
+.onboard-step i{font-size:22px;color:#1F6E7A;width:30px;text-align:center}
 .onboard-step .os-title{font-weight:700;font-size:14px}
 .onboard-step .os-sub{font-size:11px;color:#6E6E73;margin-top:2px}
 .week-day-row{display:flex;align-items:center;gap:10px;padding:10px;background:#FFF;border-radius:10px;margin-bottom:6px}
@@ -759,7 +760,7 @@ function openArtist(id){
       ${a.travelScope ? `<div class="field-row"><span class="lbl">Готов к выезду</span><span class="val">${TRAVEL_NAMES[a.travelScope]||a.travelScope}</span></div>` : ''}
       ${a.visaType && a.visaType !== 'none' ? `<div class="field-row"><span class="lbl">Виза</span><span class="val">${VISA_NAMES[a.visaType]||a.visaType}</span></div>` : ''}
       ${a.visaValidUntil ? `<div class="field-row"><span class="lbl">Действует до</span><span class="val">${a.visaValidUntil}</span></div>` : ''}
-      ${a.needsVisaSupport ? `<div style="background:#FFF5F9;color:#EC4899;padding:10px;border-radius:10px;font-size:12px;font-weight:600;text-align:center;margin-top:8px">⚠️ Нужна помощь с визой</div>` : ''}
+      ${a.needsVisaSupport ? `<div style="background:#FBF3DC;color:#8B6914;padding:10px;border-radius:10px;font-size:12px;font-weight:600;text-align:center;margin-top:8px">⚠️ Нужна помощь с визой</div>` : ''}
     </div>`;
   }
 
@@ -836,7 +837,7 @@ function openArtistDayView(artistId, date){
   }
 
   if(apps.length){
-    html += `<div style="background:#FFF5F9;color:#EC4899;padding:10px;border-radius:10px;font-size:12px;font-weight:600;text-align:center;margin-top:12px">Под запросом (${apps.length})</div>`;
+    html += `<div style="background:#E8A317;color:#0F3D4A;padding:10px;border-radius:10px;font-size:12px;font-weight:600;text-align:center;margin-top:12px">Под запросом (${apps.length})</div>`;
   }
 
   if(sched.isWorking && !sched.isVacation){
@@ -899,12 +900,18 @@ function getScheduleForDate(artist, dateStr){
   if(artist.vacationUntil && artist.vacationUntil >= today){
     return { isWorking: true, isVacation: true, hours: [] };
   }
-  const dateObj = new Date(dateStr);
+  // Парсим YYYY-MM-DD как локальную дату: new Date(str) трактует её как UTC
+  // и для МСК+ даёт сдвиг на день, из-за чего dow уезжает
+  const _p = String(dateStr).split('-');
+  const dateObj = new Date(Number(_p[0]), Number(_p[1]) - 1, Number(_p[2]));
   const dow = (dateObj.getDay() + 6) % 7;
-  const sched = artistSchedules.find(s => String(s.artistId) === String(artist.id) && Number(s.dayOfWeek) === dow);
+  const sched = artistSchedules.find(s =>
+    Number(s.artistId) === Number(artist.id) &&
+    Number(s.dayOfWeek) === Number(dow)
+  );
   
   // Если расписания у артиста вообще нет — по умолчанию все дни 9-21
-  const hasAnySchedule = artistSchedules.some(s => String(s.artistId) === String(artist.id));
+  const hasAnySchedule = artistSchedules.some(s => Number(s.artistId) === Number(artist.id));
   if(!hasAnySchedule){
     return { isWorking: true, hours: [9,10,11,12,13,14,15,16,17,18,19,20] };
   }
@@ -1007,7 +1014,7 @@ function openVenue(id){
     <div style="margin-bottom:10px;color:#6E6E73;text-align:center">Вместимость: ${v.capacity||'—'} чел</div>
     <div style="background:#FBF3DC;border-radius:12px;padding:12px;margin-bottom:20px;max-width:400px;width:100%;box-sizing:border-box">
       <div style="font-size:11px;color:#6E6E73;margin-bottom:6px">Цена аренды:</div>
-      <div style="font-size:20px;font-weight:800;color:#EC4899">${finalPrice.toLocaleString()} ₽</div>
+      <div style="font-size:20px;font-weight:800;color:#8B6914">${finalPrice.toLocaleString()} ₽</div>
       ${noBargain?'<div style="font-size:10px;color:#999;margin-top:4px">Фиксированная, торги не предусмотрены</div>':''}
     </div>
     <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;width:100%;max-width:400px">
@@ -1362,7 +1369,7 @@ function renderOrganizerDayModal(){
       const hours = a._hours || [];
       const rangeText = hours.length === 12 ? 'весь день' : (hours.length ? `${hours[0]}:00–${hours[hours.length-1]+1}:00` : '—');
       const promoBadge = a._mod < 1 ? `<span style="background:#E8F5E9;color:#4CAF50;font-size:9px;padding:2px 6px;border-radius:8px;font-weight:700;margin-left:5px">▼ Скидка ×${a._mod}</span>` : '';
-      const localBadge = orgCity && (a.city||'').toLowerCase() === orgCity.toLowerCase() ? `<span style="background:#FFF5F9;color:#EC4899;font-size:9px;padding:2px 6px;border-radius:8px;font-weight:700;margin-left:5px">📍 ${orgCity}</span>` : '';
+      const localBadge = orgCity && (a.city||'').toLowerCase() === orgCity.toLowerCase() ? `<span style="background:#FBF3DC;color:#8B6914;font-size:9px;padding:2px 6px;border-radius:8px;font-weight:700;margin-left:5px">📍 ${orgCity}</span>` : '';
       cardsHTML += `<div class="result-card" onclick="closeModal(); openArtist(${a.id});">
         <div class="rc-avatar" ${a.img?`style="background-image:url('${a.img}')"`:''}></div>
         <div class="rc-info">
@@ -1808,7 +1815,7 @@ function openCreateForm(){
         <div style="flex:1">
           <input type="file" id="cf-file" accept="image/*" onchange="handlePhotoPick(this,'cf-img','cf-photo-preview')" style="width:100%;padding:10px;border:1px dashed #E5E5EA;border-radius:12px;font-size:12px;box-sizing:border-box;font-family:inherit">
           <input id="cf-img" type="url" placeholder="Ссылка на фото" value="" style="display:none;margin-top:6px;width:100%;padding:12px;border:1px solid #E5E5EA;border-radius:12px;font-size:14px;outline:none;font-family:inherit;box-sizing:border-box" oninput="showPhotoPreview('cf-photo-preview',this.value)">
-          <div id="cf-file-link" style="font-size:11px;margin-top:5px"><a href="#" onclick="togglePhotoUrl('cf-img','cf-file-link');return false" style="color:#EC4899">или вставить ссылку</a></div>
+          <div id="cf-file-link" style="font-size:11px;margin-top:5px"><a href="#" onclick="togglePhotoUrl('cf-img','cf-file-link');return false" style="color:#1F6E7A">или вставить ссылку</a></div>
         </div>
       </div>
       <div style="font-size:11px;color:#6E6E73;margin-top:5px">Фото сожмётся до 800×800 и загрузится в Google Drive</div>
@@ -1983,7 +1990,7 @@ function renderApplicationsTab(){
   my.slice().reverse().forEach(app => {
     const status = app.status || 'new';
     const statusLabel = { new:'Новая', accepted:'Принята', declined:'Отклонена' }[status] || status;
-    const statusColor = { new:'#EC4899', accepted:'#4CAF50', declined:'#F44336' }[status] || '#6E6E73';
+    const statusColor = { new:'#1F6E7A', accepted:'#4CAF50', declined:'#F44336' }[status] || '#6E6E73';
     html += `<div class="app-card">
       <div class="ac-status" style="color:${statusColor}">${statusLabel}</div>
       <div class="ac-title">${EVENT_TYPE_NAMES[app.eventType]||app.eventType||'Мероприятие'}</div>
@@ -2405,10 +2412,10 @@ function editMain(){
     <h3>Редактировать основное</h3>
     <div class="form-group"><label>Имя</label><input id="e-name" value="${a.name||''}"></div>
     <div class="form-group"><label>Фото</label>
-      <div id="e-photo-preview" style="width:64px;height:64px;background:#FCE7F3;border-radius:12px;background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;color:#EC4899;font-size:11px;margin-bottom:6px">Нет</div>
+      <div id="e-photo-preview" style="width:64px;height:64px;background:#F5E6B8;border-radius:12px;background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;color:#8B6914;font-size:11px;margin-bottom:6px">Нет</div>
       <input type="file" id="e-file" accept="image/*" onchange="handlePhotoPick(this,'e-img','e-photo-preview')" style="width:100%;padding:10px;border:1px dashed #E5E5EA;border-radius:12px;font-size:12px;box-sizing:border-box;font-family:inherit">
       <input id="e-img" value="${a.img||''}" style="display:none;margin-top:6px;width:100%;padding:12px;border:1px solid #E5E5EA;border-radius:12px;font-size:14px;outline:none;font-family:inherit;box-sizing:border-box" oninput="showPhotoPreview('e-photo-preview',this.value)">
-      <div id="e-file-link" style="font-size:11px;margin-top:5px"><a href="#" onclick="togglePhotoUrl('e-img','e-file-link');return false" style="color:#EC4899">или вставить ссылку</a></div>
+      <div id="e-file-link" style="font-size:11px;margin-top:5px"><a href="#" onclick="togglePhotoUrl('e-img','e-file-link');return false" style="color:#1F6E7A">или вставить ссылку</a></div>
     </div>
     <div class="form-group"><label>Bio</label><textarea id="e-bio" style="min-height:80px">${a.bio||''}</textarea></div>
     <div class="form-group"><label>Роль</label><select id="e-role">${Object.keys(ROLE_NAMES).map(k=>`<option value="${k}" ${a.role===k?'selected':''}>${ROLE_NAMES[k]}</option>`).join('')}</select></div>
@@ -2454,10 +2461,10 @@ function addItem(type){
   if(type === 'media'){
     openModal(`<h3>Добавить: ${title}</h3>
       <div class="form-group"><label>Фото</label>
-        <div id="add-media-preview" style="width:64px;height:64px;background:#FCE7F3;border-radius:12px;background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;color:#EC4899;font-size:11px;margin-bottom:6px">Нет</div>
+        <div id="add-media-preview" style="width:64px;height:64px;background:#F5E6B8;border-radius:12px;background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;color:#8B6914;font-size:11px;margin-bottom:6px">Нет</div>
         <input type="file" id="add-media-file" accept="image/*" onchange="handlePhotoPick(this,'add-val','add-media-preview')" style="width:100%;padding:10px;border:1px dashed #E5E5EA;border-radius:12px;font-size:12px;box-sizing:border-box;font-family:inherit">
         <input id="add-val" placeholder="Ссылка на фото/видео" style="display:none;margin-top:6px;width:100%;padding:12px;border:1px solid #E5E5EA;border-radius:12px;font-size:14px;outline:none;font-family:inherit;box-sizing:border-box" oninput="showPhotoPreview('add-media-preview',this.value)">
-        <div id="add-media-link" style="font-size:11px;margin-top:5px"><a href="#" onclick="togglePhotoUrl('add-val','add-media-link');return false" style="color:#EC4899">или вставить ссылку</a></div>
+        <div id="add-media-link" style="font-size:11px;margin-top:5px"><a href="#" onclick="togglePhotoUrl('add-val','add-media-link');return false" style="color:#1F6E7A">или вставить ссылку</a></div>
       </div>
       <div class="form-group"><label>Описание</label><textarea id="add-desc"></textarea></div>
       <button onclick="saveItem('${type}')" style="width:100%">Добавить</button>
@@ -2576,19 +2583,19 @@ function renderVenuePricingTab(){
   document.getElementById('vt-pricing').innerHTML = `
     <div style="background:#FFF;border-radius:14px;padding:16px;margin-bottom:12px">
       <div style="font-weight:800;font-size:15px;margin-bottom:10px">Базовая цена</div>
-      <div style="font-size:24px;font-weight:900;color:#EC4899;margin-bottom:10px">${basePrice.toLocaleString()} ₽</div>
+      <div style="font-size:24px;font-weight:900;color:#8B6914;margin-bottom:10px">${basePrice.toLocaleString()} ₽</div>
       <button class="btn-ghost" onclick="editBasePrice()">Изменить</button>
     </div>
     <div style="background:#FFF;border-radius:14px;padding:16px;margin-bottom:12px">
       <div style="font-weight:800;font-size:15px;margin-bottom:5px">Сезонный коэффициент</div>
       <div style="font-size:12px;color:#6E6E73;margin-bottom:8px">Июнь–август</div>
       <div class="price-slider"><input type="range" id="venue-season" min="0.7" max="2" step="0.1" value="${Number(v.seasonMultiplier)||1}" oninput="document.getElementById('season-val').innerText='×'+this.value"></div>
-      <div style="text-align:center;font-size:18px;font-weight:800;color:#EC4899" id="season-val">×${Number(v.seasonMultiplier)||1}</div>
+      <div style="text-align:center;font-size:18px;font-weight:800;color:#8B6914" id="season-val">×${Number(v.seasonMultiplier)||1}</div>
     </div>
     <div style="background:#FFF;border-radius:14px;padding:16px;margin-bottom:12px">
       <div style="font-weight:800;font-size:15px;margin-bottom:5px">Коэффициент выходных</div>
       <div class="price-slider"><input type="range" id="venue-weekend" min="0.7" max="2" step="0.1" value="${Number(v.weekendMultiplier)||1}" oninput="document.getElementById('weekend-val').innerText='×'+this.value"></div>
-      <div style="text-align:center;font-size:18px;font-weight:800;color:#EC4899" id="weekend-val">×${Number(v.weekendMultiplier)||1}</div>
+      <div style="text-align:center;font-size:18px;font-weight:800;color:#8B6914" id="weekend-val">×${Number(v.weekendMultiplier)||1}</div>
     </div>
     <button onclick="saveVenuePricing()" style="width:100%;margin-bottom:20px">Сохранить коэффициенты</button>
     <div style="background:#FFF;border-radius:14px;padding:16px;margin-bottom:12px">
@@ -2609,7 +2616,7 @@ function renderVenueApplicationsTab(){
   let html = '';
   myApps.slice().reverse().forEach(app => {
     const vr = app.venueResponse || '';
-    let statusHTML = '<div class="ac-status new" style="color:#EC4899">Новая заявка</div>';
+    let statusHTML = '<div class="ac-status new" style="color:#1F6E7A">Новая заявка</div>';
     if(vr === 'accepted') statusHTML = '<div class="ac-status accepted">Принята</div>';
     else if(vr === 'declined') statusHTML = '<div class="ac-status declined">Отклонена</div>';
     else if(vr === 'counter') statusHTML = `<div class="ac-status counter">Встречное: ${Number(app.venuePrice).toLocaleString()} ₽</div>`;

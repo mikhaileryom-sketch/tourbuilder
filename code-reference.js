@@ -553,8 +553,10 @@ function getRawSchedule(){
     const r = values[i];
     if(!r[aCol]) continue;
     const toNum = (v, fallback) => {
+      // Date здесь означает, что колонка отформатирована как дата/время в Sheets —
+      // getHours() вернул бы час, а не день недели или час начала
       if(v instanceof Date){
-        return v.getHours();
+        return fallback;
       }
       const n = Number(v);
       return isFinite(n) ? Math.floor(n) : fallback;
